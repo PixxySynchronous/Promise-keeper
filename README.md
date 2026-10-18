@@ -27,14 +27,18 @@ Requires **Android 13 or newer**.
      3. Install the APK.
      4. **Turn Play Protect back on.** If it later flags Promise Keeper, choose **Keep app**.
    - Alternatively, installing from a computer with `adb install PromiseKeeper-1.0.apk` is not blocked.
-4. Open **Promise Keeper**. A setup guide walks you through:
+4. **If Promise Keeper is greyed out in Accessibility** ("Restricted setting"), Android has locked it because it came from a downloaded file. Unlock it once:
+   1. In **Settings → Accessibility → Installed apps**, tap the greyed-out **Promise Keeper**, then tap **OK** on the popup. This first try is needed, or the option below doesn't appear.
+   2. Go to **Settings → Apps → Promise Keeper → ⋮ (top right) → Allow restricted settings**, and confirm with your PIN or fingerprint.
+   3. Go back to Accessibility and turn **Promise Keeper** on.
+5. Open **Promise Keeper**. A setup guide walks you through:
    - allowing notifications
    - turning on the accessibility service
    - allowing exact alarms
    - removing battery limits
    
    If the accessibility switch is greyed out ("Restricted setting"), the guide explains how to allow it.
-5. Test it: send yourself `kal bhej dunga` in WhatsApp. A *Reminder suggestion* notification should appear.
+6. Test it: send yourself `kal bhej dunga` in WhatsApp. A *Reminder suggestion* notification should appear.
 
 The app is about 130 MB, mostly the language model.
 

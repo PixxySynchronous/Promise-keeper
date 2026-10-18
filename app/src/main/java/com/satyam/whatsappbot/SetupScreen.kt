@@ -119,12 +119,13 @@ fun SetupGuide(status: SetupStatus, onFinish: () -> Unit) {
             )
             Button(onClick = { context.startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)) }) { Text("Open Accessibility settings") }
             HelpBox(
-                "Switch greyed out or \"Restricted setting\"?",
-                "Android blocks this for apps installed outside the Play Store until you allow it once:\n" +
-                    "1. Tap Open app info below.\n" +
-                    "2. Tap ⋮ (top-right corner) and choose Allow restricted settings.\n" +
-                    "3. Confirm with your PIN or fingerprint, then repeat the steps above.\n" +
-                    "No ⋮ menu? Try turning the switch on once first, then check again."
+                "Promise Keeper greyed out or \"Restricted setting\"?",
+                "Android locks this for apps installed from a downloaded file. Unlock it once:\n" +
+                    "1. In Accessibility → Installed apps, tap the greyed-out Promise Keeper and tap OK on the popup. " +
+                    "(This first try is needed, or the option in step 3 doesn't appear.)\n" +
+                    "2. Come back here and tap Open app info below.\n" +
+                    "3. Tap ⋮ (top-right corner) → Allow restricted settings, and confirm with your PIN or fingerprint.\n" +
+                    "4. Open Accessibility settings again and turn Promise Keeper on."
             )
             OutlinedButton(onClick = { context.startActivity(appInfoIntent(context)) }) { Text("Open app info") }
         }
