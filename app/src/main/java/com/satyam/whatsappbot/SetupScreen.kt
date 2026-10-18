@@ -115,7 +115,7 @@ fun SetupGuide(status: SetupStatus, onFinish: () -> Unit) {
                     else -> "Look for Installed apps, Downloaded apps or Installed services."
                 },
                 "Tap Promise Keeper, turn the switch on, then tap Allow.",
-                "Come back to this app. Step 2 turns green."
+                "Come back to this app. Step 2 shows ✓ Done."
             )
             Button(onClick = { context.startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)) }) { Text("Open Accessibility settings") }
             HelpBox(
