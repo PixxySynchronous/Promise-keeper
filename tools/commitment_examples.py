@@ -33,6 +33,9 @@ COMMITMENTS = {
         "I'll get it signed and send a scan", "I'll arrange the cab for the airport", "I will water the plants tomorrow",
         "I'll send you the address", "I'll share my location when I reach", "I'll update the sheet tonight",
         "I'll send the money right after this call", "will send the link in 10 mins", "I'll set up the meeting for Thursday",
+        "I'll tell you more about it next week", "will tell you the details tomorrow", "ill tell u later tonight",
+        "I'll inform you once it's confirmed", "will tell you after the meeting", "I'll tell you what he said",
+        "I'll tell you the plan by evening", "will inform you by Monday",
     ],
     "english_casual": [
         "ok will send", "sure, will do", "yes will do it", "yup sending in 5", "ya ya will share tmrw",
@@ -94,6 +97,7 @@ COMMITMENTS = {
         # split verb endings, a common typing habit
         "kal bhej ta hu", "abhi bhej ti hu", "bata ta hu thodi der me", "kal kar ta hu pakka", "send kar unga kal",
         "shaam ko bhej unga", "dekh ke bata ti hu", "5 min me bhej ta hoon",
+        "agle hafte bhej dunga", "agle week bata dungi", "next week tak kar dunga", "agle hafte call karta hu",
     ],
     "hindi": [
         "कल भेज दूंगा", "कल भेज दूंगी", "कल तक कर दूंगा", "कल तक कर दूंगी", "मैं भेज दूंगा", "मैं भेज दूंगी",
@@ -141,6 +145,7 @@ NON_COMMITMENTS = {
         "text me when you're free", "do send the photos", "will you be there by 8?", "can you pay me back today?",
         "remind me to call mom", "don't forget to bring the charger", "make sure you submit it by Sunday",
         "you have to finish this today", "please do it by tomorrow", "can u call me", "send asap",
+        "tell me more", "can you tell me the address?", "did she tell you?", "tell him to call me", "let me know next week",
     ],
     "already_done": [
         "I sent it already", "I already shared it", "I already let you know", "sent", "done", "received",

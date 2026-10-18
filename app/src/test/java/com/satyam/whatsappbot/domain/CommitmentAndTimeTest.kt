@@ -69,7 +69,7 @@ class CommitmentAndTimeTest {
         assertEquals(LocalTime.of(18, 0), parser.parse("share it in the evening", now)!!.dateTime.toLocalTime())
         // 09:30 has passed at 14:00, so "aaj" falls through to end of day.
         assertEquals(LocalDateTime.of(2026, 10, 18, 18, 0), parser.parse("bata dunga aaj", now)!!.dateTime)
-        assertEquals(LocalDateTime.of(2026, 10, 26, 10, 0), parser.parse("I'll let you know by next week", now)!!.dateTime)
+        assertEquals(LocalDateTime.of(2026, 10, 25, 10, 0), parser.parse("I'll let you know by next week", now)!!.dateTime)
         assertEquals(LocalDateTime.of(2026, 10, 21, 10, 0), parser.parse("will let u know by Wednesday", now)!!.dateTime)
         assertNotNull(detector.detect("I'll let you know by next week"))
         assertNotNull(detector.detect("will let u know by Wednesday"))
@@ -104,7 +104,7 @@ class CommitmentAndTimeTest {
     fun parsesWeekdaysAndNextWeek() {
         val parser = TimeParser()
         assertEquals(LocalDateTime.of(2026, 10, 19, 10, 0), parser.parse("Monday tak kar dunga", now)!!.dateTime)
-        assertEquals(LocalDateTime.of(2026, 10, 26, 10, 0), parser.parse("will share next week", now)!!.dateTime)
+        assertEquals(LocalDateTime.of(2026, 10, 25, 10, 0), parser.parse("will share next week", now)!!.dateTime)
         assertEquals(LocalDateTime.of(2026, 12, 5, 10, 0), parser.parse("send it on 5/12", now)!!.dateTime)
         assertEquals(LocalDateTime.of(2027, 1, 6, 10, 0), parser.parse("I'll send it on 6-1-2027", now)!!.dateTime)
     }
@@ -129,6 +129,31 @@ class CommitmentAndTimeTest {
     @Test
     fun questionsRequestsAndDoneMessagesAreNotCommitments() {
         listOf("did you send it", "please send it", "I already let you know", "do you share it?")
+            .forEach { assertNull("Expected no match: $it", detector.detect(it)) }
+    }
+
+    @Test
+    fun nextWeekIsTheSameDayNextWeekAndKeepsTheTime() {
+        val parser = TimeParser()
+        val sunday = LocalDateTime.of(2026, 10, 18, 17, 30)
+        val wednesday = LocalDateTime.of(2026, 10, 21, 9, 0)
+        assertEquals(LocalDateTime.of(2026, 10, 25, 10, 0), parser.parse("ill tell you more referneces next week", sunday)!!.dateTime)
+        assertEquals(LocalDateTime.of(2026, 10, 28, 10, 0), parser.parse("will send it next week", wednesday)!!.dateTime)
+        assertEquals(LocalDateTime.of(2026, 10, 25, 17, 0), parser.parse("will send next week by 5", sunday)!!.dateTime)
+        assertEquals(LocalDateTime.of(2026, 10, 25, 10, 0), parser.parse("I'll call you next week at 10", sunday)!!.dateTime)
+        assertEquals(LocalDateTime.of(2026, 10, 25, 9, 0), parser.parse("will call next week at 9 am", sunday)!!.dateTime)
+        assertEquals(LocalDateTime.of(2026, 10, 25, 10, 0), parser.parse("agle hafte bhej dunga", sunday)!!.dateTime)
+        assertEquals(LocalDateTime.of(2026, 10, 25, 10, 0), parser.parse("अगले हफ्ते भेज दूंगा", sunday)!!.dateTime)
+        // A weekday picks that day in the week starting next Monday.
+        assertEquals(LocalDateTime.of(2026, 10, 30, 10, 0), parser.parse("will send it friday next week", wednesday)!!.dateTime)
+        assertEquals(LocalDateTime.of(2026, 10, 26, 10, 0), parser.parse("monday next week bhej dunga", wednesday)!!.dateTime)
+    }
+
+    @Test
+    fun tellYouPromisesAreDetected() {
+        listOf("ill tell you more referneces next week", "I'll tell you tomorrow", "will tell you the details later", "I'll inform you once it's done")
+            .forEach { assertNotNull("Expected match: $it", detector.detect(it)) }
+        listOf("he will tell you", "can you tell me?", "did she tell you", "you will tell me")
             .forEach { assertNull("Expected no match: $it", detector.detect(it)) }
     }
 

@@ -28,6 +28,7 @@ class TimeParser(private val defaults: DefaultTimes = DefaultTimes()) {
         val text = message.lowercase(Locale.ROOT).replace("’", "'").trim()
         parseRelativeDuration(text, now)?.let { return it }
         parseExplicitDate(text, now)?.let { return it }
+        parseNextWeek(text, now)?.let { return it }
         parseWeekday(text, now)?.let { return it }
         parseClock(text, now)?.let { return it }
         parseNamedDefault(text, now)?.let { return it }
@@ -60,23 +61,40 @@ class TimeParser(private val defaults: DefaultTimes = DefaultTimes()) {
         val futureDate = if (date.isBefore(now.toLocalDate())) date.plusYears(1) else date
         val withoutDate = text.replaceRange(match.range, " ")
         val clock = extractClock(withoutDate)
-        val time = clock?.first ?: LocalTime.of(10, 0)
+        val time = clock?.let(::futureDayTime) ?: LocalTime.of(10, 0)
         return ParsedTime(LocalDateTime.of(futureDate, time), match.value, clock == null)
     }
 
+    /**
+     * "next week" means the same weekday next week (today + 7 days); with a weekday ("monday next week") it is that
+     * day in the week starting next Monday. A clock time in the message is kept; otherwise the next-week default.
+     */
+    private fun parseNextWeek(text: String, now: LocalDateTime): ParsedTime? {
+        val marker = NEXT_WEEK.find(text)?.value ?: NEXT_WEEK_DEVANAGARI.firstOrNull { text.contains(it) } ?: return null
+        val weekday = WEEKDAY.find(text)?.let { WEEKDAYS.getValue(it.groupValues[1]) }
+        val date = if (weekday == null) {
+            now.toLocalDate().plusWeeks(1)
+        } else {
+            now.toLocalDate().with(TemporalAdjusters.next(DayOfWeek.MONDAY)).with(TemporalAdjusters.nextOrSame(weekday))
+        }
+        val clock = extractClock(text.replace(marker, " "))
+        return ParsedTime(LocalDateTime.of(date, clock?.let(::futureDayTime) ?: defaults.nextWeek), marker, usedDefault = clock == null)
+    }
+
+    // On another day, "by 5" with no am/pm almost always means the afternoon or evening: read 1-7 as PM.
+    private fun futureDayTime(clock: Pair<LocalTime, String>): LocalTime {
+        val hasMeridiem = Regex("(?i)\\b(am|pm)\\b").containsMatchIn(clock.second)
+        return if (!hasMeridiem && clock.first.hour in 1..7) clock.first.plusHours(12) else clock.first
+    }
+
     private fun parseWeekday(text: String, now: LocalDateTime): ParsedTime? {
-        val names = mapOf(
-            "monday" to DayOfWeek.MONDAY, "tuesday" to DayOfWeek.TUESDAY, "wednesday" to DayOfWeek.WEDNESDAY,
-            "thursday" to DayOfWeek.THURSDAY, "friday" to DayOfWeek.FRIDAY, "saturday" to DayOfWeek.SATURDAY,
-            "sunday" to DayOfWeek.SUNDAY
-        )
-        val match = Regex("\\b(monday|tuesday|wednesday|thursday|friday|saturday|sunday)\\b").find(text) ?: return null
-        val day = names.getValue(match.groupValues[1])
+        val match = WEEKDAY.find(text) ?: return null
+        val day = WEEKDAYS.getValue(match.groupValues[1])
         val date = now.toLocalDate().with(TemporalAdjusters.nextOrSame(day)).let {
             if (it == now.toLocalDate() && !text.contains("today")) it.plusWeeks(1) else it
         }
         val clock = extractClock(text)
-        return ParsedTime(LocalDateTime.of(date, clock?.first ?: LocalTime.of(10, 0)), match.value, clock == null)
+        return ParsedTime(LocalDateTime.of(date, clock?.let(::futureDayTime) ?: LocalTime.of(10, 0)), match.value, clock == null)
     }
 
     private fun parseClock(text: String, now: LocalDateTime): ParsedTime? {
@@ -116,11 +134,18 @@ class TimeParser(private val defaults: DefaultTimes = DefaultTimes()) {
         if (evening != null) return ParsedTime(todayOrTomorrow(now, defaults.evening), evening.value, true)
         val today = Regex("\\b(today|aaj)\\b").find(text)
         if (today != null) return ParsedTime(laterToday(now), today.value, true)
-        if (Regex("\\bnext week\\b").containsMatchIn(text)) {
-            val nextMonday = now.toLocalDate().plusWeeks(1).with(TemporalAdjusters.nextOrSame(DayOfWeek.MONDAY))
-            return ParsedTime(LocalDateTime.of(nextMonday, defaults.nextWeek), "next week", true)
-        }
         return null
+    }
+
+    private companion object {
+        val WEEKDAYS = mapOf(
+            "monday" to DayOfWeek.MONDAY, "tuesday" to DayOfWeek.TUESDAY, "wednesday" to DayOfWeek.WEDNESDAY,
+            "thursday" to DayOfWeek.THURSDAY, "friday" to DayOfWeek.FRIDAY, "saturday" to DayOfWeek.SATURDAY,
+            "sunday" to DayOfWeek.SUNDAY
+        )
+        val WEEKDAY = Regex("\\b(monday|tuesday|wednesday|thursday|friday|saturday|sunday)\\b")
+        val NEXT_WEEK = Regex("\\b(next week|next wk|agle hafte|agle week|agle hafta)\\b")
+        val NEXT_WEEK_DEVANAGARI = listOf("अगले हफ्ते", "अगले हफ़्ते", "अगले सप्ताह")
     }
 
     private fun isFutureKal(text: String): Boolean = !Regex("\\b(kya hua|hua tha|tha|thi|the)\\b").containsMatchIn(text)

@@ -20,6 +20,8 @@ object CommitmentPhrases {
         "send it", "share it", "will revert", "revert back",
         // English short forms
         "ill send", "ill do", "ill call", "ill bring", "ill text", "ill share", "ill pay", "ill check",
+        "ill tell", "i'll tell", "i will tell", "will tell you", "will tell u", "ill inform", "i'll inform",
+        "i will inform", "will inform you",
         "will ping", "will handle", "will call", "will update", "will bring", "will pay", "will transfer",
         "sending now", "sending it", "sending in",
         // casual Hinglish spellings
