@@ -60,6 +60,15 @@ import com.satyam.whatsappbot.data.ReminderEntity
 import java.time.Instant
 import java.time.ZoneId
 import java.time.ZonedDateTime
+import java.time.LocalDate
+import java.time.LocalDateTime
+import java.time.LocalTime
+import java.time.ZoneOffset
+import androidx.compose.material3.DatePicker
+import androidx.compose.material3.DatePickerDialog
+import androidx.compose.material3.FilterChip
+import androidx.compose.material3.SelectableDates
+import androidx.compose.material3.rememberDatePickerState
 import java.time.format.DateTimeFormatter
 import java.util.Locale
 
@@ -132,19 +141,9 @@ class MainActivity : ComponentActivity() {
 
     private fun refreshReminders() = repository.getAll { runOnUiThread { reminders = it } }
 
-    // Keeps the reminder's date unless that would put it in the past, then uses the next day the time occurs.
-    private fun nextOccurrence(current: ZonedDateTime, hour: Int, minute: Int): ZonedDateTime {
-        val now = ZonedDateTime.now(current.zone)
-        var edited = current.withHour(hour).withMinute(minute).withSecond(0).withNano(0)
-        if (edited.isBefore(now)) edited = now.withHour(hour).withMinute(minute).withSecond(0).withNano(0)
-        if (edited.isBefore(now)) edited = edited.plusDays(1)
-        return edited
-    }
-
-    private fun applyTime(reminder: ReminderEntity, hour: Int, minute: Int) {
+    private fun applyTime(reminder: ReminderEntity, dateTime: LocalDateTime) {
         timeEditing = null
-        val current = Instant.ofEpochMilli(reminder.reminderAtEpochMillis).atZone(ZoneId.systemDefault())
-        val edited = nextOccurrence(current, hour, minute)
+        val edited = dateTime.atZone(ZoneId.systemDefault())
         val updated = reminder.copy(reminderAtEpochMillis = edited.toInstant().toEpochMilli(), status = ReminderEntity.STATUS_SCHEDULED)
         if (ReminderNotifications.schedule(this, updated)) {
             repository.updateTimeAndSchedule(reminder.id, updated.reminderAtEpochMillis)
@@ -200,7 +199,7 @@ private fun HomeScreen(
     refresh: () -> Unit,
     openSetup: () -> Unit,
     editTime: (ReminderEntity) -> Unit,
-    applyTime: (ReminderEntity, Int, Int) -> Unit,
+    applyTime: (ReminderEntity, LocalDateTime) -> Unit,
     cancelTimeEdit: () -> Unit,
     editTitle: (ReminderEntity, String) -> Unit,
     delete: (ReminderEntity) -> Unit
@@ -268,22 +267,67 @@ private fun HomeScreen(
             dismissButton = { TextButton(onClick = { pendingDelete = null }) { Text("Cancel") } }
         )
     }
-    timeEditing?.let { reminder -> DigitalTimeDialog(reminder, applyTime, cancelTimeEdit) }
+    timeEditing?.let { reminder -> DateTimeDialog(reminder, applyTime, cancelTimeEdit) }
 }
 
-// Typed hour and minute fields with an AM/PM toggle, instead of the analogue clock dial.
+// Date (Today / Tomorrow / calendar) plus typed hour and minute fields with an AM/PM toggle.
 @androidx.compose.runtime.Composable
 @OptIn(ExperimentalMaterial3Api::class)
-private fun DigitalTimeDialog(reminder: ReminderEntity, applyTime: (ReminderEntity, Int, Int) -> Unit, cancel: () -> Unit) {
-    val current = Instant.ofEpochMilli(reminder.reminderAtEpochMillis).atZone(ZoneId.systemDefault())
-    val state = rememberTimePickerState(initialHour = current.hour, initialMinute = current.minute, is24Hour = false)
+private fun DateTimeDialog(reminder: ReminderEntity, applyTime: (ReminderEntity, LocalDateTime) -> Unit, cancel: () -> Unit) {
+    val zone = ZoneId.systemDefault()
+    val current = Instant.ofEpochMilli(reminder.reminderAtEpochMillis).atZone(zone)
+    val today = LocalDate.now(zone)
+    var date by androidx.compose.runtime.remember { mutableStateOf(maxOf(current.toLocalDate(), today)) }
+    var pickingDate by androidx.compose.runtime.remember { mutableStateOf(false) }
+    val timeState = rememberTimePickerState(initialHour = current.hour, initialMinute = current.minute, is24Hour = false)
+    val chosen = LocalDateTime.of(date, LocalTime.of(timeState.hour, timeState.minute))
+    val inPast = !chosen.atZone(zone).isAfter(ZonedDateTime.now(zone))
+
     AlertDialog(
         onDismissRequest = cancel,
-        title = { Text("Change reminder time") },
-        text = { TimeInput(state = state) },
-        confirmButton = { TextButton(onClick = { applyTime(reminder, state.hour, state.minute) }) { Text("Save") } },
+        title = { Text("Change date & time") },
+        text = {
+            Column(verticalArrangement = Arrangement.spacedBy(10.dp)) {
+                Text("Date", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                    FilterChip(selected = date == today, onClick = { date = today }, label = { Text("Today") })
+                    FilterChip(selected = date == today.plusDays(1), onClick = { date = today.plusDays(1) }, label = { Text("Tomorrow") })
+                }
+                OutlinedButton(onClick = { pickingDate = true }, modifier = Modifier.fillMaxWidth()) {
+                    Text(DateTimeFormatter.ofPattern("EEE, d MMM yyyy", Locale.getDefault()).format(date))
+                }
+                Text("Time", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                TimeInput(state = timeState)
+                if (inPast) {
+                    Text("That time has already passed. Pick a later time or date.", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.error)
+                }
+            }
+        },
+        confirmButton = { TextButton(onClick = { applyTime(reminder, chosen) }, enabled = !inPast) { Text("Save") } },
         dismissButton = { TextButton(onClick = cancel) { Text("Cancel") } }
     )
+
+    if (pickingDate) {
+        // DatePicker works in UTC midnight millis; past days are not selectable.
+        val pickerState = rememberDatePickerState(
+            initialSelectedDateMillis = date.atStartOfDay(ZoneOffset.UTC).toInstant().toEpochMilli(),
+            selectableDates = object : SelectableDates {
+                override fun isSelectableDate(utcTimeMillis: Long) =
+                    !Instant.ofEpochMilli(utcTimeMillis).atZone(ZoneOffset.UTC).toLocalDate().isBefore(today)
+                override fun isSelectableYear(year: Int) = year >= today.year
+            }
+        )
+        DatePickerDialog(
+            onDismissRequest = { pickingDate = false },
+            confirmButton = {
+                TextButton(onClick = {
+                    pickerState.selectedDateMillis?.let { date = Instant.ofEpochMilli(it).atZone(ZoneOffset.UTC).toLocalDate() }
+                    pickingDate = false
+                }) { Text("OK") }
+            },
+            dismissButton = { TextButton(onClick = { pickingDate = false }) { Text("Cancel") } }
+        ) { DatePicker(state = pickerState) }
+    }
 }
 
 @androidx.compose.runtime.Composable
