@@ -19,7 +19,14 @@ Requires **Android 13 or newer**.
 
 1. Download `PromiseKeeper-1.0.apk` from the [Releases](../../releases) page.
 2. Open it. If asked, allow your browser or file manager to install unknown apps.
-3. **Google Play Protect may warn that the app is unsafe.** It does this for apps from outside the Play Store that use accessibility. Tap **More details → Install anyway**.
+3. **Google Play Protect may block or warn about the app.** Play Protect does this for apps downloaded outside the Play Store that use the accessibility service, which this app needs to see the messages you send.
+   - If you see **Install anyway**, tap it.
+   - If installation is **blocked** with a message like *"This app requests access to sensitive data"* and there is no Install anyway (common in India and some other countries):
+     1. Open the **Play Store**, tap your profile picture, then **Play Protect**.
+     2. Tap the **⚙️ gear** and turn off **Scan apps with Play Protect**.
+     3. Install the APK.
+     4. **Turn Play Protect back on.** If it later flags Promise Keeper, choose **Keep app**.
+   - Alternatively, installing from a computer with `adb install PromiseKeeper-1.0.apk` is not blocked.
 4. Open **Promise Keeper**. A setup guide walks you through:
    - allowing notifications
    - turning on the accessibility service
