@@ -12,7 +12,14 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.compose.setContent
+import androidx.activity.SystemBarStyle
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.width
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -84,7 +91,11 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // Transparent system bars, so the dark theme reaches the screen edges instead of a light navigation bar.
-        enableEdgeToEdge()
+        // The app is always dark, so force light status/navigation icons even when the phone is in light mode.
+        enableEdgeToEdge(
+            statusBarStyle = SystemBarStyle.dark(android.graphics.Color.TRANSPARENT),
+            navigationBarStyle = SystemBarStyle.dark(android.graphics.Color.TRANSPARENT)
+        )
         ReminderNotifications.createChannels(this)
         setupStatus = readSetupStatus(this)
         showSetup = !setupPrefs.getBoolean(KEY_SETUP_FINISHED, false)
@@ -104,7 +115,8 @@ class MainActivity : ComponentActivity() {
                         applyTime = ::applyTime,
                         cancelTimeEdit = { timeEditing = null },
                         editTitle = ::editTitle,
-                        delete = ::deleteReminder
+                        delete = ::deleteReminder,
+                        confirm = ::confirmReminder
                     )
                 }
             }
@@ -147,6 +159,19 @@ class MainActivity : ComponentActivity() {
         val updated = reminder.copy(reminderAtEpochMillis = edited.toInstant().toEpochMilli(), status = ReminderEntity.STATUS_SCHEDULED)
         if (ReminderNotifications.schedule(this, updated)) {
             repository.updateTimeAndSchedule(reminder.id, updated.reminderAtEpochMillis)
+            NotificationManagerCompat.from(this).cancel(ReminderNotifications.confirmationNotificationId(reminder.id))
+            refreshReminders()
+        }
+    }
+
+    // Same as the notification's "Set". If the suggested time has already passed, ask for a new one instead.
+    private fun confirmReminder(reminder: ReminderEntity) {
+        if (reminder.reminderAtEpochMillis <= System.currentTimeMillis()) {
+            timeEditing = reminder
+            return
+        }
+        if (ReminderNotifications.schedule(this, reminder)) {
+            repository.markScheduled(reminder.id)
             NotificationManagerCompat.from(this).cancel(ReminderNotifications.confirmationNotificationId(reminder.id))
             refreshReminders()
         }
@@ -202,7 +227,8 @@ private fun HomeScreen(
     applyTime: (ReminderEntity, LocalDateTime) -> Unit,
     cancelTimeEdit: () -> Unit,
     editTitle: (ReminderEntity, String) -> Unit,
-    delete: (ReminderEntity) -> Unit
+    delete: (ReminderEntity) -> Unit,
+    confirm: (ReminderEntity) -> Unit
 ) {
     var editingTitle by androidx.compose.runtime.remember { mutableStateOf<ReminderEntity?>(null) }
     var pendingDelete by androidx.compose.runtime.remember { mutableStateOf<ReminderEntity?>(null) }
@@ -215,7 +241,7 @@ private fun HomeScreen(
             TopAppBar(
                 title = {
                     Text(
-                        "WhatsApp Promise Keeper",
+                        "Promise Keeper",
                         style = MaterialTheme.typography.headlineSmall.copy(
                             fontFamily = FontFamily.Cursive,
                             fontWeight = androidx.compose.ui.text.font.FontWeight.Bold,
@@ -238,7 +264,7 @@ private fun HomeScreen(
             if (upcoming.isEmpty()) EmptyState()
             LazyColumn(modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(10.dp), contentPadding = androidx.compose.foundation.layout.PaddingValues(bottom = 20.dp)) {
                 items(upcoming, key = { it.id }) { reminder ->
-                    ReminderRow(reminder, editTime, { editingTitle = reminder }, { pendingDelete = reminder })
+                    ReminderRow(reminder, confirm, editTime, { editingTitle = reminder }, { pendingDelete = reminder })
                 }
             }
         }
@@ -331,23 +357,53 @@ private fun DateTimeDialog(reminder: ReminderEntity, applyTime: (ReminderEntity,
 }
 
 @androidx.compose.runtime.Composable
-private fun ReminderRow(reminder: ReminderEntity, editTime: (ReminderEntity) -> Unit, editTitle: () -> Unit, delete: (ReminderEntity) -> Unit) {
+@OptIn(ExperimentalLayoutApi::class)
+private fun ReminderRow(reminder: ReminderEntity, confirm: (ReminderEntity) -> Unit, editTime: (ReminderEntity) -> Unit, editTitle: () -> Unit, delete: (ReminderEntity) -> Unit) {
+    val pending = reminder.status == ReminderEntity.STATUS_PENDING_CONFIRMATION
+    // The title starts as the message itself; only show the message separately once it has been renamed.
+    val renamed = reminder.title.isNotBlank() && reminder.title != reminder.message
     Card(
         modifier = Modifier.fillMaxWidth(),
         shape = RoundedCornerShape(16.dp),
         colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface),
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
-        Column(modifier = Modifier.fillMaxWidth().padding(16.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
-            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-                Text(reminder.title, style = MaterialTheme.typography.titleMedium)
-                Text(if (reminder.status == ReminderEntity.STATUS_PENDING_CONFIRMATION) "Needs review" else formatReminderTime(reminder.reminderAtEpochMillis), style = MaterialTheme.typography.labelLarge, color = if (reminder.status == ReminderEntity.STATUS_PENDING_CONFIRMATION) MaterialTheme.colorScheme.secondary else MaterialTheme.colorScheme.primary)
+        Column(modifier = Modifier.fillMaxWidth().padding(16.dp), verticalArrangement = Arrangement.spacedBy(6.dp)) {
+            Row(modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.Top) {
+                Text(
+                    if (renamed) reminder.title else reminder.message,
+                    style = MaterialTheme.typography.titleMedium,
+                    maxLines = 3,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.weight(1f)
+                )
+                Spacer(Modifier.width(12.dp))
+                Text(
+                    when (reminder.status) {
+                        ReminderEntity.STATUS_PENDING_CONFIRMATION -> "Needs review"
+                        ReminderEntity.STATUS_SNOOZED -> "Snoozed"
+                        else -> "Set"
+                    },
+                    style = MaterialTheme.typography.labelLarge,
+                    color = if (pending) MaterialTheme.colorScheme.secondary else MaterialTheme.colorScheme.primary,
+                    maxLines = 1,
+                    softWrap = false
+                )
             }
+            Text(
+                (if (pending) "Suggested: " else "Reminds you: ") + formatReminderTime(reminder.reminderAtEpochMillis),
+                style = MaterialTheme.typography.bodyMedium,
+                color = if (pending) MaterialTheme.colorScheme.secondary else MaterialTheme.colorScheme.primary
+            )
             Text("To ${reminder.contact}", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
-            Surface(shape = RoundedCornerShape(10.dp), color = MaterialTheme.colorScheme.surfaceVariant) {
-                Text(reminder.message, modifier = Modifier.fillMaxWidth().padding(10.dp), style = MaterialTheme.typography.bodyMedium)
+            if (renamed) {
+                Surface(shape = RoundedCornerShape(10.dp), color = MaterialTheme.colorScheme.surfaceVariant) {
+                    Text(reminder.message, modifier = Modifier.fillMaxWidth().padding(10.dp), style = MaterialTheme.typography.bodyMedium)
+                }
             }
-            Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+            // Wraps onto a second line on narrow screens instead of squeezing the buttons.
+            FlowRow(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                if (pending) Button(onClick = { confirm(reminder) }) { Text("Set reminder") }
                 TextButton(onClick = { editTime(reminder) }) { Text("Change time") }
                 TextButton(onClick = editTitle) { Text("Rename") }
                 TextButton(onClick = { delete(reminder) }) { Text("Delete", color = MaterialTheme.colorScheme.error) }
