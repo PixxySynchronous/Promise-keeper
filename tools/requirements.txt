@@ -1,0 +1,5 @@
+# Development-machine tools only (training and test fixtures). Nothing here ships in the app.
+numpy==2.5.4
+onnxruntime==1.31.0
+tokenizers==0.23.3
+scikit-learn==1.9.1

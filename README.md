@@ -1,0 +1,89 @@
+# Promise Keeper
+
+Promise Keeper is an Android app that notices when you promise something in WhatsApp and offers to remind you.
+
+Send *"kal bhej dunga"*, *"I'll call you at 5"* or *"मैं कल भेज दूंगी"*, and a notification asks whether to set a reminder. It suggests a time from what you wrote ("tomorrow", "by EOD", "in 10 mins", "5 baje"). You can keep it, change the time or ignore it.
+
+It understands **English, Hinglish and Hindi (Devanagari)**.
+
+## Privacy
+
+- **No internet access.** The app does not request Android's `INTERNET` permission, so Android itself blocks it from connecting to anything. Your messages cannot leave the phone.
+- **On-device AI.** Detection runs entirely on the phone: a phrase list plus a small multilingual language model.
+- **WhatsApp only.** The accessibility service is limited to WhatsApp and WhatsApp Business. It reads the messages you type and send, plus the chat name.
+- **Stored locally.** Reminders are saved only in the app's private storage, which is excluded from backups. **Delete** removes the reminder and its message permanently.
+
+## Install
+
+Requires **Android 13 or newer**.
+
+1. Download `PromiseKeeper-1.0.apk` from the [Releases](../../releases) page.
+2. Open it. If asked, allow your browser or file manager to install unknown apps.
+3. **Google Play Protect may warn that the app is unsafe.** It does this for apps from outside the Play Store that use accessibility. Tap **More details → Install anyway**.
+4. Open **Promise Keeper**. A setup guide walks you through:
+   - allowing notifications
+   - turning on the accessibility service
+   - allowing exact alarms
+   - removing battery limits
+   
+   If the accessibility switch is greyed out ("Restricted setting"), the guide explains how to allow it.
+5. Test it: send yourself `kal bhej dunga` in WhatsApp. A *Reminder suggestion* notification should appear.
+
+The app is about 130 MB, mostly the language model.
+
+## How well it works
+
+Measured on 761 labelled example messages, scoring each with a model that had not been trained on that message:
+
+| | Promises caught | Ordinary messages wrongly flagged |
+|---|---|---|
+| English | 86% | 1% |
+| Hinglish | 95% | 5% |
+| Hindi | 100% | 2% |
+| Overall | 93% | 2% |
+
+These examples were written by hand, not taken from real chats, so real-world results will differ. Very short or unusual messages are the most likely to be missed.
+
+## Known limitations
+
+- **Contact names are guessed** from the WhatsApp screen and are sometimes wrong.
+- **Some brands kill background apps aggressively**, including Xiaomi, Oppo, Vivo, Realme and Huawei. Follow the battery step in the setup guide.
+- **Only messages you send are checked.** Messages you receive are not.
+
+## Building from source
+
+The model file is stored with [Git LFS](https://git-lfs.com). Install it before cloning:
+
+```sh
+git lfs install
+git clone <this repo>
+./gradlew assembleDebug                      # debug build
+./gradlew assembleRelease                    # needs a signing key, see below
+./gradlew testDebugUnitTest                  # unit tests, including accuracy checks
+```
+
+Requirements: JDK 17 and the Android SDK (compileSdk 36).
+
+**Release signing:** the build reads `~/.promise-keeper/keystore.properties`, or the path in `PROMISE_KEEPER_KEYSTORE`. The file sets `storeFile`, `storePassword`, `keyAlias` and `keyPassword`. Without that file, the release build is unsigned.
+
+### How detection works
+
+1. **Phrase list:** [CommitmentPhrases.kt](app/src/main/java/com/satyam/whatsappbot/domain/CommitmentPhrases.kt) plus rules that reject questions, requests, things already done, other people's promises, maybes and refusals ([CommitmentDetector.kt](app/src/main/java/com/satyam/whatsappbot/domain/CommitmentDetector.kt)).
+2. **Language model:** if no phrase matches, a multilingual sentence model (`assets/semantic/model_qint8_arm64.onnx`, run with ONNX Runtime) produces token vectors. A small logistic-regression classifier (`commitment_head.json`) then decides.
+3. **Tokenizer:** a pure-Kotlin port of the Hugging Face tokenizer, [SentencePieceTokenizer.kt](app/src/main/java/com/satyam/whatsappbot/domain/SentencePieceTokenizer.kt). It replaces the original library, which contains networking code. A unit test checks it token-for-token against the original on 3,800+ inputs.
+
+### Retraining
+
+Add messages to [tools/commitment_examples.py](tools/commitment_examples.py), then:
+
+```sh
+python -m venv .venv && .venv/bin/pip install -r tools/requirements.txt
+.venv/bin/python -I tools/train_semantic_head.py       # writes commitment_head.json, prints accuracy
+.venv/bin/python -I tools/make_tokenizer_reference.py  # refreshes the tokenizer test fixture
+```
+
+## Credits
+
+The bundled sentence model appears to be a quantised [paraphrase-multilingual-MiniLM-L12-v2](https://huggingface.co/sentence-transformers/paraphrase-multilingual-MiniLM-L12-v2) from Sentence Transformers, licensed Apache-2.0. *(Maintainer: confirm the source and keep its license notice.)* The app uses [ONNX Runtime](https://onnxruntime.ai) (MIT).
+
+WhatsApp is a trademark of Meta. This project is not affiliated with or endorsed by WhatsApp or Meta.

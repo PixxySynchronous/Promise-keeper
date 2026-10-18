@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">Promise Keeper</string>
+    <string name="accessibility_service_description">Promise Keeper watches only WhatsApp, and only the messages you type and send, to spot promises like \"I\'ll send it tomorrow\" and offer a reminder. Everything is processed on this phone: the app has no internet access, so your messages never leave the device.</string>
+</resources>

@@ -1,0 +1,22 @@
+# Build output and caches
+.gradle/
+.kotlin/
+build/
+app/build/
+local.properties
+*.apk
+*.aab
+
+# Python
+.venv/
+__pycache__/
+
+# Signing keys: never commit (the release key lives in ~/.promise-keeper/)
+*.jks
+*.keystore
+keystore.properties
+
+# OS / IDE
+.DS_Store
+.idea/
+*.iml
