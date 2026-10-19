@@ -170,6 +170,19 @@ class CommitmentAndTimeTest {
     }
 
     @Test
+    fun pastStoriesAndHabitsAreRejectedUnlessTheyAlsoPromise() {
+        val rules = RuleBasedCommitmentDetector()
+        listOf(
+            "Puri nahi hui cuz aaj mandir gaya tha toh bhagwan ne bachaliya", "aaj gym nahi gaya",
+            "main roz gym jaata hu", "jab bhi bahar jaata hu toh mask pehenta hu", "मैं कल मंदिर गया था"
+        ).forEach { assertEquals("Expected rejected: $it", true, rules.rejects(it)) }
+        listOf(
+            "aaj kaam tha isliye reply nahi kiya, kal bhej dunga", "late ho gaya sorry, abhi bhejta hu",
+            "main nikalta hu toh call karta hu", "kal bhool gaya tha, aaj pakka kar dunga", "kal bhej dunga"
+        ).forEach { assertEquals("Expected allowed: $it", false, rules.rejects(it)) }
+    }
+
+    @Test
     fun hinglishRequestsToOthersAreRejected() {
         val rules = RuleBasedCommitmentDetector()
         listOf("collar mic use nahi karrahe tph le ana", "kal file bhej dena", "notes bhej do", "charger le aao", "bread lao")

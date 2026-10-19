@@ -50,7 +50,19 @@ class RuleBasedCommitmentDetector(
         message.trimEnd().endsWith("?") || NEGATIVE_SIGNALS.any { it.containsMatchIn(normalized) } ||
             HINDI_NEGATIVE_SIGNALS.any { normalized.contains(it) } || hasOtherSubjectWill(message) ||
             // A request ("wait karo") only rejects when the sender isn't also promising ("main bhej dunga").
-            (HINGLISH_REQUEST.containsMatchIn(normalized) && !HINGLISH_OWN_FUTURE.containsMatchIn(normalized))
+            (HINGLISH_REQUEST.containsMatchIn(normalized) && !HINGLISH_OWN_FUTURE.containsMatchIn(normalized)) ||
+            // A story about the past ("aaj mandir gaya tha"), unless the message also promises something now or later
+            // ("aaj kaam tha isliye nahi kiya, kal bhej dunga").
+            (isPastTense(normalized) && !hasFuture(normalized) && !FIRST_PERSON_PRESENT.containsMatchIn(normalized)) ||
+            // A habit ("main roz gym jaata hu"): "-ta hu" here describes what usually happens, so only a real future counts.
+            (HABIT.containsMatchIn(normalized) && !hasFuture(normalized))
+
+    private fun isPastTense(normalized: String) =
+        HINGLISH_PAST.containsMatchIn(normalized) || DEVANAGARI_PAST.any { normalized.contains(it) }
+
+    private fun hasFuture(normalized: String) =
+        HINGLISH_OWN_FUTURE.containsMatchIn(normalized) || ENGLISH_FUTURE.containsMatchIn(normalized) ||
+            DEVANAGARI_FUTURE.any { normalized.contains(it) }
 
     // "Priya will send", "the bank will call": a word directly before "will" (no punctuation between) that is not
     // the sender or a filler like "ok"/"sure" means someone else is promising. "on it, will update" still counts.
@@ -122,6 +134,14 @@ class RuleBasedCommitmentDetector(
                 "|\\b\\w*(unga|ungi|oonga|oongi|lunga|lungi)\\b|\\b(hu|hoon|hun|main|mai)\\b"
         )
         val DEVANAGARI_CUES = listOf("ूंगा", "ूंगी", "ूँगा", "ूँगी", "ऊंगा", "ऊंगी", "ऊँगा", "ऊँगी", "हूं", "हूँ", "मैं")
+        // Hinglish past tense: "gaya tha", "nahi hui", "bacha liya", "kar diya".
+        val HINGLISH_PAST = Regex("\\b(tha|thi|thhe|hua|hui|huyi|huye|liya|liye|diya|diye|kiya|kiye|gaya|gayi|gaye|chuka|chuki|bachaliya)\\b")
+        val DEVANAGARI_PAST = listOf("था", "थी", "हुआ", "हुई", "लिया", "दिया", "किया", "गया", "गई", "चुका", "चुकी")
+        val ENGLISH_FUTURE = Regex("\\b(will|wil|i'll|ill|gonna|going to|i'm going to)\\b")
+        val DEVANAGARI_FUTURE = listOf("ूंगा", "ूंगी", "ूँगा", "ूँगी", "ऊंगा", "ऊंगी", "ऊँगा", "ऊँगी")
+        // "abhi bhejta hu", "karti hoon": in Hinglish this is often "I'll do it now".
+        val FIRST_PERSON_PRESENT = Regex("\\b\\w+(ta|ti) (hu|hoon|hun)\\b")
+        val HABIT = Regex("\\b(roz|rozana|daily|har din|har roz|hamesha|humesha|usually|always|generally|aksar|jab bhi|every day|everyday|every morning|every night)\\b")
         // First-person future verbs: "bhej dunga", "karungi", "le aaunga", "krunga".
         val HINGLISH_OWN_FUTURE = Regex("\\b\\w*(unga|ungi|oonga|oongi|ungaa)\\b")
         // Plain substrings: Java's \b treats Devanagari vowel signs as non-word characters.

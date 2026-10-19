@@ -105,6 +105,10 @@ COMMITMENTS = {
         # real chat
         "4 ki ill send, 5 ko raat mai", "5 sending raat mein", "2 abhi bhej raha hu baaki raat ko", "ek abhi bhejta hu ek kal",
         "raat ko bhej dunga", "dopahar tak kar dunga", "raat mai call karta hu",
+        # promises with "-ta hu toh" or mixed with a past story
+        "main nikalta hu toh call karta hu", "ghar pahunchta hu toh bhejta hu", "free hota hu toh dekh leta hu",
+        "aaj kaam tha isliye reply nahi kiya, kal bhej dunga", "kal bhool gaya tha, aaj pakka kar dunga",
+        "late ho gaya sorry, abhi bhejta hu", "meeting lambi chali, ab call karta hu",
         # split verb endings, a common typing habit
         "kal bhej ta hu", "abhi bhej ti hu", "bata ta hu thodi der me", "kal kar ta hu pakka", "send kar unga kal",
         "shaam ko bhej unga", "dekh ke bata ti hu", "5 min me bhej ta hoon",
@@ -230,6 +234,16 @@ NON_COMMITMENTS = {
         "main bas puch raha tha", "mai bol rha tha na", "maine pehle hi bola tha", "main soch raha tha", "hu bhai ghar pe",
         "ok pagal", "ok motu", "haa haa thik hai", "ok boss", "ok ji", "hn bhai", "ok cool", "acha ok", "ok fine",
         "chal theek hai fir", "haan wahi toh bol raha hu", "main aa gaya hu", "main office mein hu", "abhi free hu",
+        # stories about the past
+        "Puri nahi hui cuz aaj mandir gaya tha toh bhagwan ne bachaliya", "aaj office gaya tha bahut thak gaya",
+        "kal raat movie dekhi thi mast thi", "aaj gym nahi gaya", "subah late utha toh bus chhoot gayi",
+        "maine aaj khana bana liya tha", "aaj bahut kaam tha", "wo aaya tha par main ghar pe nahi tha",
+        "I went to the temple today", "yesterday I finished the whole thing", "today I met him at the mall",
+        # habits and descriptions ("-ta hu" that is not a promise)
+        "Shorts mei belt pehenta hu toh shorts neeche amd belt kamar par", "main roz gym jaata hu", "mai subah chai peeta hu",
+        "jab bhi bahar jaata hu toh mask pehenta hu", "main hamesha late sota hu", "weekend pe main ghar pe hi rehta hu",
+        "main bike se office jaata hu", "mai aksar raat ko padhta hu", "i usually sleep at 2", "i always forget my keys",
+        "main toh chai ke saath biscuit khata hu", "office mein main laptop use karta hu",
         # requests to the other person, often conditional
         "collar mic use nahi karrahe tph le ana", "agar free ho toh charger le aana", "use nahi kar rahe toh mujhe de dena",
         "jaate hue doodh le aana", "kal file bhej dena", "time mile toh call kar lena", "aate waqt bread le aao",

@@ -25,7 +25,7 @@ object CommitmentPhrases {
         "will ping", "will handle", "will call", "will update", "will bring", "will pay", "will transfer",
         "sending now", "sending it", "sending in",
         // casual Hinglish spellings
-        "kr dunga", "kr dungi", "krdunga", "krdungi", "kar deta hu", "kar deti hu", "kr deta hu",
+        "kr dunga", "kr dungi", "krdunga", "krdungi", "krunga", "krungi", "kar deta hu", "kar deti hu", "kr deta hu",
         "bhj dunga", "bhj dungi", "bhjta hu", "bhjti hu", "bta dunga", "bta dungi", "btata hu", "btati hu",
         "de dunga", "de dungi", "le aaunga", "le aaungi", "le aunga", "le aungi", "kar lunga", "kar lungi",
         "sambhal lunga", "sambhal lungi", "dekh leta hu", "dekh leti hu", "call karta hu", "call karti hu",
