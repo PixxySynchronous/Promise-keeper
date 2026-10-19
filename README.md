@@ -19,7 +19,7 @@ It understands **English, Hinglish and Hindi (Devanagari)**.
 
 Requires **Android 13 or newer**.
 
-1. Download `PromiseKeeper-1.0.apk` from the [Releases](../../releases) page.
+1. Download `PromiseKeeper-1.1.apk` from the [Releases](../../releases) page.
 2. Open it. If asked, allow your browser or file manager to install unknown apps.
 3. **Google Play Protect may block or warn about the app.** Play Protect does this for apps downloaded outside the Play Store that use the accessibility service, which this app needs to see the messages you send.
    - If you see **Install anyway**, tap it.
@@ -28,7 +28,7 @@ Requires **Android 13 or newer**.
      2. Tap the **⚙️ gear** and turn off **Scan apps with Play Protect**.
      3. Install the APK.
      4. **Turn Play Protect back on.** If it later flags Promise Keeper, choose **Keep app**.
-   - Alternatively, installing from a computer with `adb install PromiseKeeper-1.0.apk` is not blocked.
+   - Alternatively, installing from a computer with `adb install PromiseKeeper-1.1.apk` is not blocked.
 4. **If Promise Keeper is greyed out in Accessibility** ("Restricted setting"), Android has locked it because it came from a downloaded file. Unlock it once:
    1. In **Settings → Accessibility → Installed apps**, tap the greyed-out **Promise Keeper**, then tap **OK** on the popup. This first try is needed, or the option below doesn't appear.
    2. Go to **Settings → Apps → Promise Keeper → ⋮ (top right) → Allow restricted settings**, and confirm with your PIN or fingerprint.
