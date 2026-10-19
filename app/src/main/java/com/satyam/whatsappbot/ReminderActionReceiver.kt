@@ -25,6 +25,11 @@ class ReminderActionReceiver : BroadcastReceiver() {
                 cancelConfirmation(context, id)
                 pendingResult.finish()
             }
+            // Skip asks why in the same notification; Back returns to Set / Edit time / Skip.
+            ReminderNotifications.ACTION_SKIP, ReminderNotifications.ACTION_BACK -> repository.get(id) { reminder ->
+                if (reminder != null) ReminderNotifications.showConfirmation(context, reminder, askWhy = intent.action == ReminderNotifications.ACTION_SKIP)
+                pendingResult.finish()
+            }
             ReminderNotifications.ACTION_NOT_PROMISE -> {
                 repository.markFalseAlarm(id)
                 ReminderNotifications.cancel(context, id)
@@ -41,9 +46,11 @@ class ReminderActionReceiver : BroadcastReceiver() {
                 NotificationManagerCompat.from(context).cancel(ReminderNotifications.reminderNotificationId(id))
                 pendingResult.finish()
             }
-            ReminderNotifications.ACTION_SNOOZE -> repository.get(id) { reminder ->
+            ReminderNotifications.ACTION_SNOOZE, ReminderNotifications.ACTION_SNOOZE_SHORT -> repository.get(id) { reminder ->
                 if (reminder != null) {
-                    val snoozed = reminder.copy(reminderAtEpochMillis = System.currentTimeMillis() + 60 * 60 * 1000L)
+                    // Alarms snooze for 10 minutes, notifications for an hour.
+                    val minutes = if (intent.action == ReminderNotifications.ACTION_SNOOZE_SHORT) 10L else 60L
+                    val snoozed = reminder.copy(reminderAtEpochMillis = System.currentTimeMillis() + minutes * 60 * 1000L)
                     if (ReminderNotifications.schedule(context, snoozed)) {
                         repository.markSnoozed(id, snoozed.reminderAtEpochMillis)
                         NotificationManagerCompat.from(context).cancel(ReminderNotifications.reminderNotificationId(id))

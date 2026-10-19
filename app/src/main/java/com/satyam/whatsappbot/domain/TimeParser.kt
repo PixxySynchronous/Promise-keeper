@@ -30,6 +30,7 @@ class TimeParser(private val defaults: DefaultTimes = DefaultTimes()) {
         parseRelativeDuration(text, now)?.let { return it }
         parseRelativeDays(text, now)?.let { return it }
         parseExplicitDate(text, now)?.let { return it }
+        parseLongerRange(text, now)?.let { return it }
         parseNextWeek(text, now)?.let { return it }
         parseWeekday(text, now)?.let { return it }
         parseClock(text, now)?.let { return it }
@@ -137,6 +138,27 @@ class TimeParser(private val defaults: DefaultTimes = DefaultTimes()) {
         }
         val clock = extractClock(text.replace(marker, " "))
         return ParsedTime(LocalDateTime.of(date, clock?.let(::futureDayTime) ?: defaults.day), marker, usedDefault = clock == null)
+    }
+
+    /**
+     * "next month" / "agle mahine" (same date next month), "next year" / "agle saal", "this weekend" (coming Saturday),
+     * "next weekend" (the Saturday after), "end of the month" (last day). A time in the message is kept.
+     */
+    private fun parseLongerRange(text: String, now: LocalDateTime): ParsedTime? {
+        val today = now.toLocalDate()
+        val (date, matched) = when {
+            NEXT_MONTH.containsMatchIn(text) || NEXT_MONTH_DEVANAGARI.any { text.contains(it) } -> today.plusMonths(1) to "next month"
+            NEXT_YEAR.containsMatchIn(text) || NEXT_YEAR_DEVANAGARI.any { text.contains(it) } -> today.plusYears(1) to "next year"
+            MONTH_END.containsMatchIn(text) -> today.with(TemporalAdjusters.lastDayOfMonth()) to "end of month"
+            NEXT_WEEKEND.containsMatchIn(text) -> today.with(TemporalAdjusters.next(DayOfWeek.SATURDAY)).plusWeeks(1) to "next weekend"
+            WEEKEND.containsMatchIn(text) -> today.with(TemporalAdjusters.nextOrSame(DayOfWeek.SATURDAY)) to "weekend"
+            else -> return null
+        }
+        val clock = extractClock(text)
+        val dateTime = LocalDateTime.of(date, clock?.let(::futureDayTime) ?: defaults.day)
+        // "month end" said on the last day after the default time: fall back rather than set a past reminder.
+        if (!dateTime.isAfter(now)) return ParsedTime(laterOrNextMorning(now), matched, usedDefault = true)
+        return ParsedTime(dateTime, matched, clock == null)
     }
 
     // On another day, "by 5" with no am/pm almost always means the afternoon or evening: read 1-7 as PM.
@@ -258,6 +280,13 @@ class TimeParser(private val defaults: DefaultTimes = DefaultTimes()) {
             "शनिवार" to DayOfWeek.SATURDAY, "रविवार" to DayOfWeek.SUNDAY, "इतवार" to DayOfWeek.SUNDAY
         )
         val NEXT_WEEK = Regex("\\b(next week|next wk|agle hafte|agle week|agle hafta)\\b")
+        val NEXT_MONTH = Regex("\\b(next month|agle mahine|agle month|agle mahina|next mnth)\\b")
+        val NEXT_MONTH_DEVANAGARI = listOf("अगले महीने", "अगले माह")
+        val NEXT_YEAR = Regex("\\b(next year|agle saal|agle sal|next yr)\\b")
+        val NEXT_YEAR_DEVANAGARI = listOf("अगले साल", "अगले वर्ष")
+        val MONTH_END = Regex("\\b(end of (the )?month|month end|month ke end|mahine ke end|mahine ke aakhir)\\b")
+        val NEXT_WEEKEND = Regex("\\b(next weekend|agle weekend)\\b")
+        val WEEKEND = Regex("\\b(this weekend|weekend|weekend tak|weekend pe|weekend par)\\b")
         val NEXT_WEEK_DEVANAGARI = listOf("अगले हफ्ते", "अगले हफ़्ते", "अगले सप्ताह")
         val NUMBER_WORDS = mapOf(
             "a" to 1L, "an" to 1L, "one" to 1L, "two" to 2L, "three" to 3L, "four" to 4L, "five" to 5L, "six" to 6L,

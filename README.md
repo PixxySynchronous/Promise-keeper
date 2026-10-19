@@ -6,6 +6,8 @@ Send *"kal bhej dunga"*, *"I'll call you at 5"* or *"मैं कल भेज 
 
 It understands **English, Hinglish and Hindi (Devanagari)**.
 
+**Notification or alarm:** each reminder can go off as a normal notification or as an alarm that rings until you stop it, even on a locked phone. Choose the default under **Settings → Remind me with**, or switch any reminder on its card.
+
 **Set a reminder on purpose:** start any message with the word **reminder**, for example *"Reminder: pay rent on 1/11"* or *"reminder call mom at 5"*. You always get a reminder for it, with no detection involved. Send it to yourself (WhatsApp → *Message yourself*) to keep it private.
 
 ## Privacy
@@ -19,7 +21,7 @@ It understands **English, Hinglish and Hindi (Devanagari)**.
 
 Requires **Android 13 or newer**.
 
-1. Download `PromiseKeeper-1.2.2.apk` from the [Releases](../../releases) page.
+1. Download `PromiseKeeper-1.3.apk` from the [Releases](../../releases) page.
 2. Open it. If asked, allow your browser or file manager to install unknown apps.
 3. **Google Play Protect may block or warn about the app.** Play Protect does this for apps downloaded outside the Play Store that use the accessibility service, which this app needs to see the messages you send.
    - If you see **Install anyway**, tap it.
@@ -28,7 +30,7 @@ Requires **Android 13 or newer**.
      2. Tap the **⚙️ gear** and turn off **Scan apps with Play Protect**.
      3. Install the APK.
      4. **Turn Play Protect back on.** If it later flags Promise Keeper, choose **Keep app**.
-   - Alternatively, installing from a computer with `adb install PromiseKeeper-1.2.2.apk` is not blocked.
+   - Alternatively, installing from a computer with `adb install PromiseKeeper-1.3.apk` is not blocked.
 4. **If Promise Keeper is greyed out in Accessibility** ("Restricted setting"), Android has locked it because it came from a downloaded file. Unlock it once:
    1. In **Settings → Accessibility → Installed apps**, tap the greyed-out **Promise Keeper**, then tap **OK** on the popup. This first try is needed, or the option below doesn't appear.
    2. Go to **Settings → Apps → Promise Keeper → ⋮ (top right) → Allow restricted settings**, and confirm with your PIN or fingerprint.
@@ -59,7 +61,7 @@ These examples were written by hand, not taken from real chats, so real-world re
 
 ## Help improve detection
 
-When a suggestion isn't really a promise, tap **Not a promise** on the notification or the reminder card. It moves to the **False alarms** tab, where you can:
+When a suggestion isn't really a promise, tap **Skip → Not a promise** on the notification or the reminder card. It moves to the **False alarms** tab. (If it *was* a promise you just don't need reminding about, choose **No reminder needed** instead, so it isn't counted as a false alarm.) In the tab you can:
 - tap **It was a promise** to move it back
 - delete it
 - tap **Export** to share all your false alarms as a file

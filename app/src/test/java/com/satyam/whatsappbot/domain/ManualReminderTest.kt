@@ -102,6 +102,22 @@ class ManualReminderTest {
     }
 
     @Test
+    fun nextMonthYearWeekendAndMonthEnd() {
+        val parser = TimeParser()
+        val monday = LocalDateTime.of(2026, 10, 19, 23, 45)
+        fun at(text: String) = parser.parseOrDefault(text, monday).dateTime
+        assertEquals(LocalDateTime.of(2026, 11, 19, 10, 0), at("ill do it next month"))
+        assertEquals(LocalDateTime.of(2026, 11, 19, 10, 0), at("agle mahine bhej dunga"))
+        assertEquals(LocalDateTime.of(2026, 11, 19, 10, 0), at("अगले महीने कर दूंगा"))
+        assertEquals(LocalDateTime.of(2027, 10, 19, 10, 0), at("will plan it next year"))
+        assertEquals(LocalDateTime.of(2026, 10, 24, 10, 0), at("will finish it this weekend"))
+        assertEquals(LocalDateTime.of(2026, 10, 24, 10, 0), at("weekend tak kar dunga"))
+        assertEquals(LocalDateTime.of(2026, 10, 31, 10, 0), at("next weekend milte hain, will call"))
+        assertEquals(LocalDateTime.of(2026, 10, 31, 10, 0), at("will pay by end of the month"))
+        assertEquals(LocalDateTime.of(2026, 11, 19, 18, 0), at("will call next month at 6"))
+    }
+
+    @Test
     fun noTimeFallbackSkipsTheNight() {
         val parser = TimeParser()
         // 11:45 PM + 2 hours would be 1:45 AM: use the default time the next morning instead.

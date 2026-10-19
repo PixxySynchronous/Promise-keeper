@@ -9,14 +9,15 @@ class ReminderRepository(context: Context) {
     private val dao = ReminderDatabase.get(context).reminderDao()
     private val executor = Executors.newSingleThreadExecutor()
 
-    fun insertPending(message: String, contact: String, matchedPhrase: String, reminderAt: LocalDateTime, title: String = message, onComplete: (ReminderEntity) -> Unit) {
+    fun insertPending(message: String, contact: String, matchedPhrase: String, reminderAt: LocalDateTime, title: String = message, alarm: Boolean = false, onComplete: (ReminderEntity) -> Unit) {
         executor.execute {
             val reminder = ReminderEntity(
                 message = message,
                 title = title,
                 contact = contact,
                 matchedPhrase = matchedPhrase,
-                reminderAtEpochMillis = reminderAt.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli()
+                reminderAtEpochMillis = reminderAt.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli(),
+                alarm = alarm
             )
             val saved = reminder.copy(id = dao.insert(reminder))
             onComplete(saved)
@@ -28,6 +29,8 @@ class ReminderRepository(context: Context) {
     fun getAll(onComplete: (List<ReminderEntity>) -> Unit) = executor.execute { onComplete(dao.findAll()) }
 
     fun updateTitle(id: Long, title: String) = executor.execute { dao.updateTitle(id, title) }
+
+    fun setAlarm(id: Long, alarm: Boolean) = executor.execute { dao.updateAlarm(id, alarm) }
 
     fun delete(id: Long) = executor.execute { dao.delete(id) }
 

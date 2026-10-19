@@ -179,6 +179,15 @@ class CommitmentAndTimeTest {
     }
 
     @Test
+    fun englishNegationIsNotAPromiseUnlessItAlsoPromises() {
+        val rules = RuleBasedCommitmentDetector()
+        listOf("Sadly, i don't get aise messages", "i didn't see your message", "i never said that")
+            .forEach { assertEquals("Expected rejected: $it", true, rules.rejects(it)) }
+        listOf("don't worry, I'll send it tomorrow", "dont worry will send by 5")
+            .forEach { assertNotNull("Expected match: $it", rules.detect(it)) }
+    }
+
+    @Test
     fun pastStoriesAndHabitsAreRejectedUnlessTheyAlsoPromise() {
         val rules = RuleBasedCommitmentDetector()
         listOf(

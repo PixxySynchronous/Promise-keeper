@@ -237,6 +237,8 @@ NON_COMMITMENTS = {
         "ok pagal", "ok motu", "haa haa thik hai", "ok boss", "ok ji", "hn bhai", "ok cool", "acha ok", "ok fine",
         "chal theek hai fir", "haan wahi toh bol raha hu", "main aa gaya hu", "main office mein hu", "abhi free hu",
         # stories about the past
+        "Sadly, i don't get aise messages", "i don't get it", "i never said that", "i didn't see your message",
+        "he doesn't reply on time", "i haven't eaten yet", "i dont think so",
         "Puri nahi hui cuz aaj mandir gaya tha toh bhagwan ne bachaliya", "aaj office gaya tha bahut thak gaya",
         "kal raat movie dekhi thi mast thi", "aaj gym nahi gaya", "subah late utha toh bus chhoot gayi",
         "maine aaj khana bana liya tha", "aaj bahut kaam tha", "wo aaya tha par main ghar pe nahi tha",

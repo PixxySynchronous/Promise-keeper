@@ -57,7 +57,9 @@ class RuleBasedCommitmentDetector(
             // ("aaj kaam tha isliye nahi kiya, kal bhej dunga").
             (isPastTense(normalized) && !hasFuture(normalized) && !FIRST_PERSON_PRESENT.containsMatchIn(normalized)) ||
             // A habit ("main roz gym jaata hu"): "-ta hu" here describes what usually happens, so only a real future counts.
-            (HABIT.containsMatchIn(normalized) && !hasFuture(normalized))
+            (HABIT.containsMatchIn(normalized) && !hasFuture(normalized)) ||
+            // English negation ("i don't get aise messages") unless there's also a promise ("don't worry, I'll send it").
+            (ENGLISH_NEGATION.containsMatchIn(normalized) && !hasFuture(normalized))
 
     private fun isPastTense(normalized: String) =
         HINGLISH_PAST.containsMatchIn(normalized) || DEVANAGARI_PAST.any { normalized.contains(it) }
@@ -119,7 +121,7 @@ class RuleBasedCommitmentDetector(
         val SELF_OR_FILLER = setOf(
             "i", "we", "ok", "okay", "k", "kk", "sure", "yes", "yeah", "ya", "yup", "yep", "fine", "alright", "cool",
             "np", "bro", "bhai", "yaar", "yr", "brb", "haan", "han", "ha", "hn", "pakka", "and", "then", "also", "so",
-            "definitely", "surely", "really", "just", "def", "defo", "totally", "promise"
+            "definitely", "surely", "really", "just", "def", "defo", "totally", "promise", "worry", "tension"
         )
         // Hinglish requests to the other person ("le aana", "bhej dena", "kar do"). Whole words, so the sender's
         // own "bhej dunga" / "kar dunga" never match.
@@ -148,6 +150,7 @@ class RuleBasedCommitmentDetector(
             "\\b(kal|kl|tomorrow|tom|tmrw|aaj|abhi|parso|baad mein|baad me|baad mai|thodi der|thodi der mein|" +
                 "monday|tuesday|wednesday|thursday|friday|saturday|sunday|\\d+\\s*(min|mins|minute|minutes|ghante|hours?|baje|bje))\\b"
         )
+        val ENGLISH_NEGATION = Regex("\\b(don't|dont|do not|didn't|didnt|doesn't|doesnt|haven't|havent|hasn't|hasnt|never)\\b")
         val HABIT = Regex("\\b(roz|rozana|daily|har din|har roz|hamesha|humesha|usually|always|generally|aksar|jab bhi|every day|everyday|every morning|every night)\\b")
         // First-person future verbs: "bhej dunga", "karungi", "le aaunga", "krunga".
         val HINGLISH_OWN_FUTURE = Regex("\\b\\w*(unga|ungi|oonga|oongi|ungaa)\\b")

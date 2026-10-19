@@ -19,7 +19,7 @@ The file contains only the message text and what flagged it (a phrase, or the AI
 {
   "format": "promise-keeper-false-alarms",
   "version": 1,
-  "app_version": "1.2",
+  "app_version": "1.3",
   "exported_at": "2026-10-19T16:30:00",
   "label": "not_a_promise",
   "messages": [

@@ -24,6 +24,9 @@ interface ReminderDao {
     @Query("UPDATE reminders SET reminderAtEpochMillis = :timeMillis, status = 'SCHEDULED' WHERE id = :id")
     fun updateTimeAndSchedule(id: Long, timeMillis: Long)
 
+    @Query("UPDATE reminders SET alarm = :alarm WHERE id = :id")
+    fun updateAlarm(id: Long, alarm: Boolean)
+
     @Query("UPDATE reminders SET title = :title WHERE id = :id")
     fun updateTitle(id: Long, title: String)
 

@@ -28,6 +28,11 @@ class WhatsappAccessibilityService : AccessibilityService() {
     private var lastSendClickContact = ""
     private var fallbackCandidate: String? = null
     private var fallbackContact = ""
+    private var fallbackField = ""
+    // Text per editable field, so another field (e.g. the emoji search box) going empty isn't mistaken for a send.
+    private val fieldText = HashMap<String, String>()
+    // contact + message -> when it was last processed; the same message is handled at most once per 10 minutes.
+    private val recentlyProcessed = HashMap<String, Long>()
     private val detector = RuleBasedCommitmentDetector()
     private val semanticClassifier by lazy { OnDeviceSemanticClassifier(this) }
     // Built per message so a changed default time applies immediately.
@@ -44,6 +49,11 @@ class WhatsappAccessibilityService : AccessibilityService() {
     }
 
     private fun processCapturedMessage(message: String, contact: String) {
+        val now = System.currentTimeMillis()
+        recentlyProcessed.entries.removeAll { now - it.value > DUPLICATE_WINDOW_MS }
+        val key = contact + "\u0000" + message.trim()
+        if (key in recentlyProcessed) return
+        recentlyProcessed[key] = now
         detectionExecutor.execute { detectAndSuggest(message, contact) }
     }
 
@@ -51,7 +61,7 @@ class WhatsappAccessibilityService : AccessibilityService() {
         val safeContact = contact.ifBlank { "Unknown contact" }
         ManualReminder.extract(message)?.let { text ->
             val parsedTime = timeParser().parseOrDefault(text, LocalDateTime.now())
-            reminderRepository.insertPending(message, safeContact, ManualReminder.MATCHED_PHRASE, parsedTime.dateTime, title = text) { reminder ->
+            reminderRepository.insertPending(message, safeContact, ManualReminder.MATCHED_PHRASE, parsedTime.dateTime, title = text, alarm = ReminderSettings.alarmByDefault(this)) { reminder ->
                 ReminderNotifications.showConfirmation(this, reminder)
             }
             return
@@ -66,7 +76,7 @@ class WhatsappAccessibilityService : AccessibilityService() {
                 ?.let { CommitmentMatch(message, "semantic AI (${"%.2f".format(it.confidence)})") }
             ?: return
         val parsedTime = timeParser().parseOrDefault(message, LocalDateTime.now())
-        reminderRepository.insertPending(message, safeContact, match.matchedPhrase, parsedTime.dateTime) { reminder ->
+        reminderRepository.insertPending(message, safeContact, match.matchedPhrase, parsedTime.dateTime, alarm = ReminderSettings.alarmByDefault(this)) { reminder ->
             ReminderNotifications.showConfirmation(this, reminder)
         }
     }
@@ -89,17 +99,23 @@ class WhatsappAccessibilityService : AccessibilityService() {
     }
 
     private fun handleTextChanged(event: AccessibilityEvent) {
-        if (event.source?.isEditable != true) return
-        val text = event.text.joinToString("")
-        val previous = lastInputText
-        lastInputText = text
-        // The composer emptied: usually a send. Used if no send-button click is seen (see captureFallbackIfEligible).
+        val source = event.source ?: return
+        if (!source.isEditable) return
+        val field = fieldKey(source)
+        val text = if (source.isShowingHintText) "" else event.text.joinToString("")
+        val previous = fieldText[field].orEmpty()
+        fieldText[field] = text
+        if (text.isNotEmpty()) lastInputText = text
+        // This same field emptied: usually a send. Used if no send-button click is seen (see captureFallbackIfEligible).
         if (previous.isNotEmpty() && text.isEmpty()) {
             fallbackCandidate = previous
             fallbackContact = currentContact
+            fallbackField = field
             handler.postDelayed({ captureFallbackIfEligible() }, 1000L)
         }
     }
+
+    private fun fieldKey(node: AccessibilityNodeInfo) = node.viewIdResourceName ?: "${node.windowId}:${node.hashCode()}"
 
     private fun handleClicked(event: AccessibilityEvent) {
         val isSend = event.contentDescription?.toString().orEmpty().contains("send", ignoreCase = true)
@@ -117,9 +133,26 @@ class WhatsappAccessibilityService : AccessibilityService() {
         val elapsed = System.currentTimeMillis() - lastSendClickAt
         val sameContact = fallbackContact == currentContact
         val sendWasRecentForSameContact = elapsed <= 1000L && lastSendClickContact == fallbackContact
-        if (!sendWasRecentForSameContact && sameContact) processCapturedMessage(candidate, fallbackContact)
+        // Only a real send leaves the field empty a second later; opening the emoji panel or switching fields doesn't.
+        if (!sendWasRecentForSameContact && sameContact && fieldIsEmptyNow(fallbackField)) {
+            processCapturedMessage(candidate, fallbackContact)
+        }
         fallbackCandidate = null
         fallbackContact = ""
+    }
+
+    /** True only if the field can still be found on screen and holds no text (a placeholder like "Message" counts as empty). */
+    private fun fieldIsEmptyNow(field: String): Boolean {
+        val node = findField(rootInActiveWindow ?: return false, field) ?: return false
+        return node.isShowingHintText || node.text.isNullOrEmpty()
+    }
+
+    private fun findField(node: AccessibilityNodeInfo, field: String): AccessibilityNodeInfo? {
+        if (node.isEditable && fieldKey(node) == field) return node
+        for (index in 0 until node.childCount) {
+            findField(node.getChild(index) ?: continue, field)?.let { return it }
+        }
+        return null
     }
 
     // The chat title: the first short text near the top of the screen.
@@ -141,4 +174,8 @@ class WhatsappAccessibilityService : AccessibilityService() {
     }
 
     override fun onInterrupt() = Unit
+
+    private companion object {
+        const val DUPLICATE_WINDOW_MS = 10 * 60 * 1000L
+    }
 }

@@ -2,6 +2,7 @@ package com.satyam.whatsappbot
 
 import android.content.Intent
 import android.os.Bundle
+import android.widget.Toast
 import android.provider.Settings
 import androidx.core.app.NotificationManagerCompat
 import androidx.activity.ComponentActivity
@@ -113,6 +114,8 @@ class MainActivity : ComponentActivity() {
                         delete = ::deleteReminder,
                         confirm = ::confirmReminder,
                         notPromise = ::markNotPromise,
+                        noReminderNeeded = ::markNoReminderNeeded,
+                        toggleAlarm = ::setAlarm,
                         restoreFalseAlarm = ::restoreFalseAlarm,
                         deleteAllFalseAlarms = ::deleteAllFalseAlarms,
                         exportFalseAlarms = ::exportFalseAlarms
@@ -167,6 +170,23 @@ class MainActivity : ComponentActivity() {
         ReminderNotifications.cancel(this, reminder.id)
         NotificationManagerCompat.from(this).cancel(ReminderNotifications.confirmationNotificationId(reminder.id))
         repository.markFalseAlarm(reminder.id)
+        refreshReminders()
+    }
+
+    // The alarm flag is read when the reminder fires, so nothing needs rescheduling.
+    private fun setAlarm(reminder: ReminderEntity, alarm: Boolean) {
+        repository.setAlarm(reminder.id, alarm)
+        if (alarm && !ReminderNotifications.canShowFullScreenAlarms(this)) {
+            Toast.makeText(this, "It will ring as a pop-up. Allow full-screen alarms in Settings to take over the lock screen.", Toast.LENGTH_LONG).show()
+        }
+        refreshReminders()
+    }
+
+    // A real promise the user doesn't want a reminder for: dismissed, not counted as a false alarm.
+    private fun markNoReminderNeeded(reminder: ReminderEntity) {
+        ReminderNotifications.cancel(this, reminder.id)
+        NotificationManagerCompat.from(this).cancel(ReminderNotifications.confirmationNotificationId(reminder.id))
+        repository.markIgnored(reminder.id)
         refreshReminders()
     }
 
@@ -243,7 +263,7 @@ class MainActivity : ComponentActivity() {
 }
 
 @androidx.compose.runtime.Composable
-private fun PromiseKeeperTheme(content: @androidx.compose.runtime.Composable () -> Unit) {
+fun PromiseKeeperTheme(content: @androidx.compose.runtime.Composable () -> Unit) {
     val colors = darkColorScheme(
         primary = Color(0xFFFF4FA3),
         onPrimary = Color(0xFF210A2C),
@@ -274,6 +294,8 @@ private fun HomeScreen(
     delete: (ReminderEntity) -> Unit,
     confirm: (ReminderEntity) -> Unit,
     notPromise: (ReminderEntity) -> Unit,
+    noReminderNeeded: (ReminderEntity) -> Unit,
+    toggleAlarm: (ReminderEntity, Boolean) -> Unit,
     restoreFalseAlarm: (ReminderEntity) -> Unit,
     deleteAllFalseAlarms: () -> Unit,
     exportFalseAlarms: (List<ReminderEntity>) -> Unit
@@ -284,6 +306,7 @@ private fun HomeScreen(
     val pending = upcoming.count { it.status == ReminderEntity.STATUS_PENDING_CONFIRMATION }
     val falseAlarms = reminders.filter { it.status == ReminderEntity.STATUS_FALSE_ALARM }.sortedByDescending { it.createdAtEpochMillis }
     var tab by androidx.compose.runtime.remember { mutableStateOf(0) }
+    var skipping by androidx.compose.runtime.remember { mutableStateOf<ReminderEntity?>(null) }
 
     Scaffold(
         containerColor = MaterialTheme.colorScheme.background,
@@ -319,7 +342,7 @@ private fun HomeScreen(
                 if (upcoming.isEmpty()) EmptyState()
                 LazyColumn(modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(10.dp), contentPadding = androidx.compose.foundation.layout.PaddingValues(bottom = 20.dp)) {
                     items(upcoming, key = { it.id }) { reminder ->
-                        ReminderRow(reminder, confirm, editTime, { editingTitle = reminder }, { pendingDelete = reminder }, notPromise)
+                        ReminderRow(reminder, confirm, editTime, { editingTitle = reminder }, { pendingDelete = reminder }, { skipping = it }, toggleAlarm)
                     }
                 }
             } else {
@@ -352,6 +375,21 @@ private fun HomeScreen(
         )
     }
     timeEditing?.let { reminder -> DateTimeDialog(reminder, applyTime, cancelTimeEdit) }
+    // Same choice as the notification's Skip: only "Not a promise" counts as a false alarm.
+    skipping?.let { reminder ->
+        AlertDialog(
+            onDismissRequest = { skipping = null },
+            title = { Text("Why skip it?") },
+            text = { Text("Was this a promise? Your answer helps Promise Keeper learn.") },
+            confirmButton = {
+                Column(horizontalAlignment = Alignment.End) {
+                    TextButton(onClick = { notPromise(reminder); skipping = null }) { Text("Not a promise") }
+                    TextButton(onClick = { noReminderNeeded(reminder); skipping = null }) { Text("It was, but no reminder needed") }
+                    TextButton(onClick = { skipping = null }) { Text("Cancel") }
+                }
+            }
+        )
+    }
 }
 
 // Date (Today / Tomorrow / calendar) plus typed hour and minute fields with an AM/PM toggle.
@@ -416,7 +454,7 @@ private fun DateTimeDialog(reminder: ReminderEntity, applyTime: (ReminderEntity,
 
 @androidx.compose.runtime.Composable
 @OptIn(ExperimentalLayoutApi::class)
-private fun ReminderRow(reminder: ReminderEntity, confirm: (ReminderEntity) -> Unit, editTime: (ReminderEntity) -> Unit, editTitle: () -> Unit, delete: (ReminderEntity) -> Unit, notPromise: (ReminderEntity) -> Unit) {
+private fun ReminderRow(reminder: ReminderEntity, confirm: (ReminderEntity) -> Unit, editTime: (ReminderEntity) -> Unit, editTitle: () -> Unit, delete: (ReminderEntity) -> Unit, skip: (ReminderEntity) -> Unit, toggleAlarm: (ReminderEntity, Boolean) -> Unit) {
     val pending = reminder.status == ReminderEntity.STATUS_PENDING_CONFIRMATION
     // The title starts as the message itself; only show the message separately once it has been renamed.
     val renamed = reminder.title.isNotBlank() && reminder.title != reminder.message
@@ -454,6 +492,10 @@ private fun ReminderRow(reminder: ReminderEntity, confirm: (ReminderEntity) -> U
                 color = if (pending) MaterialTheme.colorScheme.secondary else MaterialTheme.colorScheme.primary
             )
             Text("To ${reminder.contact}", style = MaterialTheme.typography.labelMedium, color = MaterialTheme.colorScheme.onSurfaceVariant)
+            Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                FilterChip(selected = !reminder.alarm, onClick = { if (reminder.alarm) toggleAlarm(reminder, false) }, label = { Text("🔔 Notification") })
+                FilterChip(selected = reminder.alarm, onClick = { if (!reminder.alarm) toggleAlarm(reminder, true) }, label = { Text("⏰ Alarm") })
+            }
             if (renamed) {
                 Surface(shape = RoundedCornerShape(10.dp), color = MaterialTheme.colorScheme.surfaceVariant) {
                     Text(reminder.message, modifier = Modifier.fillMaxWidth().padding(10.dp), style = MaterialTheme.typography.bodyMedium)
@@ -466,7 +508,7 @@ private fun ReminderRow(reminder: ReminderEntity, confirm: (ReminderEntity) -> U
                 TextButton(onClick = editTitle) { Text("Rename") }
                 TextButton(onClick = { delete(reminder) }) { Text("Delete", color = MaterialTheme.colorScheme.error) }
                 if (pending && reminder.matchedPhrase != ManualReminder.MATCHED_PHRASE) {
-                    TextButton(onClick = { notPromise(reminder) }) { Text("Not a promise", color = MaterialTheme.colorScheme.onSurfaceVariant) }
+                    TextButton(onClick = { skip(reminder) }) { Text("Skip", color = MaterialTheme.colorScheme.onSurfaceVariant) }
                 }
             }
         }
@@ -502,7 +544,7 @@ private fun FalseAlarmsTab(
         if (items.isEmpty()) {
             item {
                 Text(
-                    "No false alarms yet. When a suggestion isn't really a promise, tap \"Not a promise\" on the notification or the reminder.",
+                    "No false alarms yet. When a suggestion isn't really a promise, tap Skip and then \"Not a promise\" on the notification or the reminder.",
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onSurfaceVariant
                 )

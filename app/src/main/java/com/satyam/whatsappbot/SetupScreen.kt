@@ -23,6 +23,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FilterChip
 import androidx.compose.material3.TimeInput
 import androidx.compose.material3.rememberTimePickerState
 import java.time.LocalTime
@@ -50,7 +51,9 @@ data class SetupStatus(
     val notifications: Boolean,
     val accessibility: Boolean,
     val exactAlarms: Boolean,
-    val battery: Boolean
+    val battery: Boolean,
+    /** Android 14+: whether alarms may take over the lock screen. Only matters when alarms are used. */
+    val fullScreenAlarms: Boolean = true
 ) {
     /** Without these two the app cannot detect promises or show suggestions. */
     val requiredDone get() = notifications && accessibility
@@ -62,7 +65,8 @@ fun readSetupStatus(context: Context) = SetupStatus(
     accessibility = Settings.Secure.getString(context.contentResolver, Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES)
         .orEmpty().contains("${context.packageName}/", ignoreCase = true),
     exactAlarms = Build.VERSION.SDK_INT < 31 || context.getSystemService(AlarmManager::class.java).canScheduleExactAlarms(),
-    battery = context.getSystemService(PowerManager::class.java).isIgnoringBatteryOptimizations(context.packageName)
+    battery = context.getSystemService(PowerManager::class.java).isIgnoringBatteryOptimizations(context.packageName),
+    fullScreenAlarms = ReminderNotifications.canShowFullScreenAlarms(context)
 )
 
 private val manufacturer = Build.MANUFACTURER.lowercase()
@@ -161,11 +165,13 @@ fun SetupGuide(status: SetupStatus, onFinish: () -> Unit) {
 
         DefaultTimeStep(number = 5)
 
-        SetupStep(number = 6, title = "Try it", done = null, required = false, why = "Check that everything works.") {
+        ReminderTypeStep(number = 6, fullScreenAllowed = status.fullScreenAlarms)
+
+        SetupStep(number = 7, title = "Try it", done = null, required = false, why = "Check that everything works.") {
             Instructions(
                 "Open WhatsApp and send a promise to any chat, for example to yourself: kal bhej dunga",
                 "Within a few seconds, a \"Reminder suggestion\" notification appears.",
-                "Tap Set to keep the reminder, Edit time to change when it rings, or Ignore.",
+                "Tap Set to keep the reminder, Edit time to change when it rings, or Skip if it wasn't a promise or you don't need a reminder.",
                 "Right after the phone restarts, the first suggestion can take about 15 seconds while the app gets ready."
             )
             HelpBox(
@@ -181,6 +187,36 @@ fun SetupGuide(status: SetupStatus, onFinish: () -> Unit) {
         }
         if (!status.requiredDone) {
             TextButton(onClick = onFinish, modifier = Modifier.fillMaxWidth()) { Text("I'll do it later") }
+        }
+    }
+}
+
+@Composable
+private fun ReminderTypeStep(number: Int, fullScreenAllowed: Boolean) {
+    val context = LocalContext.current
+    var alarm by remember { mutableStateOf(ReminderSettings.alarmByDefault(context)) }
+    SetupStep(
+        number = number, title = "Remind me with", done = null, required = false,
+        why = "How new reminders go off. You can still switch any single reminder on its card."
+    ) {
+        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+            FilterChip(selected = !alarm, onClick = { alarm = false; ReminderSettings.setAlarmByDefault(context, false) }, label = { Text("🔔 Notification") })
+            FilterChip(selected = alarm, onClick = { alarm = true; ReminderSettings.setAlarmByDefault(context, true) }, label = { Text("⏰ Alarm") })
+        }
+        Text(
+            if (alarm) "Alarms ring at alarm volume and keep ringing until you tap Stop or Snooze (up to 10 minutes)."
+            else "A normal notification with Done and Snooze buttons.",
+            style = MaterialTheme.typography.bodySmall,
+            color = MaterialTheme.colorScheme.onSurfaceVariant
+        )
+        if (!fullScreenAllowed) {
+            HelpBox(
+                "Let alarms fill the screen",
+                "Your phone asks separately before an app can show a full-screen alarm over the lock screen. Without it, alarms still ring, as a pop-up."
+            )
+            OutlinedButton(onClick = {
+                context.startActivity(Intent(Settings.ACTION_MANAGE_APP_USE_FULL_SCREEN_INTENT, Uri.parse("package:${context.packageName}")))
+            }) { Text("Allow full-screen alarms") }
         }
     }
 }

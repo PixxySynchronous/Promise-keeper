@@ -1,5 +1,6 @@
 package com.satyam.whatsappbot.data
 
+import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
@@ -12,7 +13,9 @@ data class ReminderEntity(
     val matchedPhrase: String,
     val reminderAtEpochMillis: Long,
     val status: String = STATUS_PENDING_CONFIRMATION,
-    val createdAtEpochMillis: Long = System.currentTimeMillis()
+    val createdAtEpochMillis: Long = System.currentTimeMillis(),
+    /** Ring as an alarm (loud, repeating, full screen) instead of a normal notification. */
+    @ColumnInfo(defaultValue = "0") val alarm: Boolean = false
 ) {
     companion object {
         const val STATUS_PENDING_CONFIRMATION = "PENDING_CONFIRMATION"
