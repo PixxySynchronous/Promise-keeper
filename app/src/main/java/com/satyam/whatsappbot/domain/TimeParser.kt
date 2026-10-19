@@ -25,7 +25,7 @@ data class ParsedTime(
 
 class TimeParser(private val defaults: DefaultTimes = DefaultTimes()) {
     fun parse(message: String, now: LocalDateTime): ParsedTime? {
-        val text = message.lowercase(Locale.ROOT).replace("’", "'").trim()
+        val text = canonicalDayWords(message)
         parseRelativeDuration(text, now)?.let { return it }
         parseExplicitDate(text, now)?.let { return it }
         parseNextWeek(text, now)?.let { return it }
@@ -33,6 +33,32 @@ class TimeParser(private val defaults: DefaultTimes = DefaultTimes()) {
         parseClock(text, now)?.let { return it }
         parseNamedDefault(text, now)?.let { return it }
         return null
+    }
+
+    /**
+     * Lowercases and rewrites day words to one spelling each: "tom"/"tmrw"/"2moro"/"tommorow" -> "tomorrow",
+     * "kl"/"कल" -> "kal", "day after tomorrow"/"परसों" -> "parso", "आज" -> "aaj".
+     * "tom" only counts in lowercase, because "Tom" is usually a name.
+     */
+    private fun canonicalDayWords(message: String): String {
+        val withTom = message.replace(Regex("\\btom\\b"), "tomorrow")
+        return withTom.lowercase(Locale.ROOT).replace("’", "'").trim()
+            .replace(TOMORROW_VARIANTS, "tomorrow")
+            .replace(Regex("\\bday after (tomorrow|kal)\\b"), "parso")
+            .replace(Regex("\\b(parson|parsoon)\\b"), "parso")
+            .replace(Regex("\\bkl\\b"), "kal")
+            .replace(devanagariWord("कल"), "kal")
+            .replace(devanagariWord("परसों"), "parso")
+            .replace(devanagariWord("आज"), "aaj")
+    }
+
+    /** 1 for tomorrow/kal (unless kal is about the past), 2 for parso, 0 for today/aaj, null if no day word. */
+    private fun dayOffset(text: String): Long? = when {
+        Regex("\\bparso\\b").containsMatchIn(text) -> 2
+        Regex("\\btomorrow\\b").containsMatchIn(text) -> 1
+        Regex("\\bkal\\b").containsMatchIn(text) && isFutureKal(text) -> 1
+        Regex("\\b(today|aaj)\\b").containsMatchIn(text) -> 0
+        else -> null
     }
 
     fun parseOrDefault(message: String, now: LocalDateTime): ParsedTime =
@@ -118,14 +144,12 @@ class TimeParser(private val defaults: DefaultTimes = DefaultTimes()) {
 
     private fun parseClock(text: String, now: LocalDateTime): ParsedTime? {
         val rawClock = extractClock(text) ?: return null
-        val clock = adjustAmbiguousClock(rawClock, now)
-        val date = when {
-            Regex("\\b(tomorrow|kal)\\b").containsMatchIn(text) -> now.toLocalDate().plusDays(1)
-            Regex("\\b(today|aaj)\\b").containsMatchIn(text) -> now.toLocalDate()
-            else -> now.toLocalDate()
-        }
-        val adjustedDate = if (date == now.toLocalDate() && clock.first.isBefore(now.toLocalTime())) date.plusDays(1) else date
-        return ParsedTime(LocalDateTime.of(adjustedDate, clock.first), clock.second, usedDefault = false)
+        val offset = dayOffset(text) ?: 0
+        val date = now.toLocalDate().plusDays(offset)
+        // "5" said at 2 PM today means 5 PM; on another day use the future-day rule instead ("kal 10 baje" is 10 AM).
+        val time = if (offset == 0L) adjustAmbiguousClock(rawClock, now).first else futureDayTime(rawClock)
+        val adjustedDate = if (date == now.toLocalDate() && time.isBefore(now.toLocalTime())) date.plusDays(1) else date
+        return ParsedTime(LocalDateTime.of(adjustedDate, time), rawClock.second, usedDefault = false)
     }
 
     private fun adjustAmbiguousClock(clock: Pair<LocalTime, String>, now: LocalDateTime): Pair<LocalTime, String> {
@@ -140,8 +164,18 @@ class TimeParser(private val defaults: DefaultTimes = DefaultTimes()) {
     }
 
     private fun parseNamedDefault(text: String, now: LocalDateTime): ParsedTime? {
-        val tomorrow = Regex("\\b(tomorrow|kal)\\b").find(text)
-        if (tomorrow != null && isFutureKal(text)) return ParsedTime(LocalDateTime.of(now.toLocalDate().plusDays(1), defaults.day), tomorrow.value, true)
+        // Tomorrow / day after: a part-of-day word sets the time ("kal subah", "tomorrow evening"), else the default.
+        val offset = dayOffset(text)
+        if (offset != null && offset > 0) {
+            val partOfDay = when {
+                Regex("\\b(tonight|night|raat)\\b").containsMatchIn(text) -> defaults.tonight
+                Regex("\\b(eod|end of day)\\b").containsMatchIn(text) -> defaults.eod
+                Regex("\\b(morning|subah|subha)\\b").containsMatchIn(text) -> defaults.morning
+                Regex("\\b(evening|shaam|sham)\\b").containsMatchIn(text) -> defaults.evening
+                else -> null
+            }
+            return ParsedTime(LocalDateTime.of(now.toLocalDate().plusDays(offset), partOfDay ?: defaults.day), if (offset == 2L) "parso" else "tomorrow", true)
+        }
         // Checked before "today" so "aaj raat" is not read as plain "aaj".
         val tonight = Regex("\\b(tonight|aaj raat)\\b").find(text)
         if (tonight != null) return ParsedTime(todayOrTomorrow(now, defaults.tonight), tonight.value, true)
@@ -190,9 +224,18 @@ class TimeParser(private val defaults: DefaultTimes = DefaultTimes()) {
         )
         val NEXT_WEEK = Regex("\\b(next week|next wk|agle hafte|agle week|agle hafta)\\b")
         val NEXT_WEEK_DEVANAGARI = listOf("अगले हफ्ते", "अगले हफ़्ते", "अगले सप्ताह")
+        val TOMORROW_VARIANTS = Regex(
+            "\\b(tmrw|tmr|tmw|tmrow|tmrrw|tmmrw|tommrw|2mrw|2mro|2moro|2morow|2morrow|tomo|tomm|tomorow|tommorow|tommorrow|tomorrw|tomoro|tomorro|tmorrow)\\b"
+        )
+
+        // Whole Devanagari word only, so "कल" does not match inside "कलम".
+        fun devanagariWord(word: String) = Regex("(?<![\\u0900-\\u097F])$word(?![\\u0900-\\u097F])")
     }
 
-    private fun isFutureKal(text: String): Boolean = !Regex("\\b(kya hua|hua tha|tha|thi|the)\\b").containsMatchIn(text)
+    // "kal" also means yesterday: past-tense words mark that. English "the" is deliberately not one of them.
+    private fun isFutureKal(text: String): Boolean =
+        !Regex("\\b(kya hua|hua tha|tha|thi|thhe|gaya tha|gayi thi)\\b").containsMatchIn(text) &&
+            listOf("था", "थी", "थे", "हुआ").none { text.contains(it) }
 
     private fun todayOrTomorrow(now: LocalDateTime, time: LocalTime): LocalDateTime {
         val today = LocalDateTime.of(now.toLocalDate(), time)

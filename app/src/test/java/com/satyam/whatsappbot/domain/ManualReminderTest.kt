@@ -45,6 +45,30 @@ class ManualReminderTest {
     }
 
     @Test
+    fun tomorrowSpellingsAndDayAfter() {
+        val parser = TimeParser()
+        val evening = LocalDateTime.of(2026, 10, 19, 18, 0)
+        fun at(text: String) = parser.parseOrDefault(text, evening).dateTime
+        val tomorrowDefault = LocalDateTime.of(2026, 10, 20, 10, 0)
+        listOf("ill do it tom", "will send tmrw", "kal tak 2moro", "send by tommorow", "tmr pakka", "kl bhej dunga", "कल भेज दूंगा")
+            .forEach { assertEquals(it, tomorrowDefault, at(it)) }
+        // "Tom" with a capital is a name, not tomorrow.
+        assertEquals(evening.plusHours(2), at("I'll call Tom"))
+        // English "the" no longer cancels "tomorrow".
+        assertEquals(tomorrowDefault, at("I'll send the file tomorrow"))
+        assertEquals(LocalDateTime.of(2026, 10, 21, 10, 0), at("parso bhej dunga"))
+        assertEquals(LocalDateTime.of(2026, 10, 21, 10, 0), at("will send day after tomorrow"))
+        assertEquals(LocalDateTime.of(2026, 10, 21, 10, 0), at("परसों कर दूंगा"))
+        // A tomorrow time is not pushed to PM just because it is earlier than the current hour.
+        assertEquals(LocalDateTime.of(2026, 10, 20, 10, 0), at("kal 10 baje call karta hu"))
+        assertEquals(LocalDateTime.of(2026, 10, 20, 9, 30), at("kal subah bhej dunga"))
+        assertEquals(LocalDateTime.of(2026, 10, 20, 18, 0), at("tom evening will call"))
+        // "kal" about the past is still not tomorrow, and "कलम" (pen) is not "कल".
+        assertNull(parser.parse("kal kya hua tha", evening))
+        assertEquals(evening.plusHours(2), at("कलम भेज दूंगा"))
+    }
+
+    @Test
     fun chosenDefaultTimeAppliesWheneverADayHasNoTime() {
         val parser = TimeParser(DefaultTimes(day = java.time.LocalTime.of(8, 30)))
         val monday = LocalDateTime.of(2026, 10, 19, 11, 0)
