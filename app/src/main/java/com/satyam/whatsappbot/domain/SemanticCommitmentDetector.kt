@@ -9,6 +9,7 @@ import ai.onnxruntime.OrtSession
 import java.io.File
 import java.io.InputStreamReader
 import java.util.Base64
+import java.util.Locale
 
 data class SemanticResult(val isCommitment: Boolean, val confidence: Float)
 
@@ -89,7 +90,8 @@ class OnDeviceSemanticClassifier(context: Context) {
 
     private fun hiddenStates(text: String): List<FloatArray>? {
         val activeSession = session ?: return null
-        val encoded = tokenizer?.encode(text) ?: return null
+        // Lowercased, as in training: the model is case-sensitive and keyboards capitalise the first word ("Kal karta hu").
+        val encoded = tokenizer?.encode(text.lowercase(Locale.ROOT)) ?: return null
         val ids = OnnxTensor.createTensor(environment, arrayOf(encoded.ids))
         val mask = OnnxTensor.createTensor(environment, arrayOf(encoded.mask))
         val types = OnnxTensor.createTensor(environment, arrayOf(encoded.types))

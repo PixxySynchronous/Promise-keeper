@@ -105,6 +105,8 @@ COMMITMENTS = {
         # real chat
         "4 ki ill send, 5 ko raat mai", "5 sending raat mein", "2 abhi bhej raha hu baaki raat ko", "ek abhi bhejta hu ek kal",
         "raat ko bhej dunga", "dopahar tak kar dunga", "raat mai call karta hu",
+        # present tense + time = near-future promise, often capitalised by the keyboard
+        "Kal karta hu", "kal karti hu", "Kal bhejti hu", "parso karta hu", "Shaam ko karta hu", "Abhi call karta hu",
         # promises with "-ta hu toh" or mixed with a past story
         "main nikalta hu toh call karta hu", "ghar pahunchta hu toh bhejta hu", "free hota hu toh dekh leta hu",
         "aaj kaam tha isliye reply nahi kiya, kal bhej dunga", "kal bhool gaya tha, aaj pakka kar dunga",

@@ -22,6 +22,8 @@ class RuleBasedCommitmentDetector(
         }
         val phrase = phrases.firstOrNull { normalized.contains(normalize(it)) }
             ?: SELF_TODO.find(normalized)?.value?.trim()
+            // Hinglish uses the present for the near future: "kal karta hu", "shaam ko bhejti hu".
+            ?: FIRST_PERSON_PRESENT.find(normalized)?.takeIf { TIME_WORD.containsMatchIn(normalized) }?.value
             ?: return null
         return CommitmentMatch(message, phrase)
     }
@@ -109,7 +111,7 @@ class RuleBasedCommitmentDetector(
             Regex("\\b(maybe|might|probably|shayad|shyd|not sure|no promises|pakka nahi|pata nahi|pta ni|try karunga|try karungi)\\b"),
             Regex("\\b(won't|wont|can't|cant|cannot|couldn't|should|would have) "),
             Regex("\\b(nahi|nhi|ni) (ho|bhej|kar|kr|de|aa) ?(paunga|paungi|payega|payegi|pauga|sakta|sakti|saka)\\b"),
-            Regex("\\b(nahi|nhi) (karunga|karungi|bhejunga|bhejungi|dunga|dungi)\\b"),
+            Regex("\\b(nahi|nhi|ni) (karunga|karungi|krunga|krungi|bhejunga|bhejungi|dunga|dungi)\\b"),
             // "I'll think and tell you", "if I get time": not a commitment yet
             Regex("\\b(soch ke|soch kar|sochta hu|sochti hu|agar|if i get time|if i find time)\\b")
         )
@@ -141,6 +143,11 @@ class RuleBasedCommitmentDetector(
         val DEVANAGARI_FUTURE = listOf("ूंगा", "ूंगी", "ूँगा", "ूँगी", "ऊंगा", "ऊंगी", "ऊँगा", "ऊँगी")
         // "abhi bhejta hu", "karti hoon": in Hinglish this is often "I'll do it now".
         val FIRST_PERSON_PRESENT = Regex("\\b\\w+(ta|ti) (hu|hoon|hun)\\b")
+        // One-off times only: "subah"/"shaam"/"raat" with -ta hu are often habits ("subah chai peeta hu").
+        val TIME_WORD = Regex(
+            "\\b(kal|kl|tomorrow|tom|tmrw|aaj|abhi|parso|baad mein|baad me|baad mai|thodi der|thodi der mein|" +
+                "monday|tuesday|wednesday|thursday|friday|saturday|sunday|\\d+\\s*(min|mins|minute|minutes|ghante|hours?|baje|bje))\\b"
+        )
         val HABIT = Regex("\\b(roz|rozana|daily|har din|har roz|hamesha|humesha|usually|always|generally|aksar|jab bhi|every day|everyday|every morning|every night)\\b")
         // First-person future verbs: "bhej dunga", "karungi", "le aaunga", "krunga".
         val HINGLISH_OWN_FUTURE = Regex("\\b\\w*(unga|ungi|oonga|oongi|ungaa)\\b")

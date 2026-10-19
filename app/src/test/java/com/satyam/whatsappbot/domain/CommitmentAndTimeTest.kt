@@ -170,6 +170,15 @@ class CommitmentAndTimeTest {
     }
 
     @Test
+    fun presentTenseWithATimeIsAPromiseInAnyCapitalisation() {
+        val rules = RuleBasedCommitmentDetector()
+        listOf("kal karta hu", "Kal karta hu", "KAL KARTA HU", "kal shaam ko karti hu", "parso bhejta hoon", "10 min mein karta hu")
+            .forEach { assertNotNull("Expected match: $it", rules.detect(it)) }
+        listOf("office mein main laptop use karta hu", "main roz office jaata hu", "Kal karta hu kya?", "mai subah chai peeta hu", "nhi krunga")
+            .forEach { assertNull("Expected no match: $it", rules.detect(it)) }
+    }
+
+    @Test
     fun pastStoriesAndHabitsAreRejectedUnlessTheyAlsoPromise() {
         val rules = RuleBasedCommitmentDetector()
         listOf(

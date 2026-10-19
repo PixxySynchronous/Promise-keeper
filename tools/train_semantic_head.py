@@ -54,7 +54,8 @@ session = ort.InferenceSession(str(assets / "model_qint8_arm64.onnx"), providers
 
 
 def hidden_states(text):
-    ids = np.array([tokenizer.encode(text).ids], dtype=np.int64)
+    # Lowercased, matching the app (SemanticCommitmentDetector.hiddenStates): "Kal" and "kal" must score the same.
+    ids = np.array([tokenizer.encode(text.lower()).ids], dtype=np.int64)
     return session.run(None, {"input_ids": ids, "attention_mask": np.ones_like(ids), "token_type_ids": np.zeros_like(ids)})[0][0]
 
 
