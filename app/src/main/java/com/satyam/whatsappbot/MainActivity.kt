@@ -1,12 +1,8 @@
 package com.satyam.whatsappbot
 
-import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.provider.Settings
-import android.Manifest
-import android.content.pm.PackageManager
-import android.net.Uri
 import androidx.core.app.NotificationManagerCompat
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.BackHandler
@@ -39,34 +35,28 @@ import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TimeInput
 import androidx.compose.material3.rememberTimePickerState
 import androidx.compose.material3.Surface
-import androidx.compose.material3.lightColorScheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
-import androidx.compose.material3.Divider
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.satyam.whatsappbot.data.ReminderRepository
 import com.satyam.whatsappbot.data.ReminderEntity
@@ -88,7 +78,6 @@ import java.util.Locale
 class MainActivity : ComponentActivity() {
     private val repository by lazy { ReminderRepository(this) }
     private var reminders by mutableStateOf<List<ReminderEntity>>(emptyList())
-    private var resumeCount by mutableStateOf(0)
     private var timeEditing by mutableStateOf<ReminderEntity?>(null)
     private val setupPrefs by lazy { getSharedPreferences("setup", MODE_PRIVATE) }
     private var setupStatus by mutableStateOf(SetupStatus(notifications = true, accessibility = true, exactAlarms = true, battery = true))
@@ -605,30 +594,4 @@ private fun EmptyState() {
     }
 }
 
-@androidx.compose.runtime.Composable
-private fun PastRow(reminder: ReminderEntity) {
-    Column(modifier = Modifier.fillMaxWidth().padding(vertical = 4.dp), verticalArrangement = Arrangement.spacedBy(2.dp)) {
-        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-            Text(reminder.title, style = MaterialTheme.typography.titleSmall)
-            Text(reminder.status.lowercase(Locale.ROOT), style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
-        }
-        Text("${reminder.message} · ${reminder.contact}", style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
-    }
-}
-
 private fun formatReminderTime(epochMillis: Long): String = DateTimeFormatter.ofPattern("EEE, d MMM yyyy, h:mm a", Locale.getDefault()).format(Instant.ofEpochMilli(epochMillis).atZone(ZoneId.systemDefault()))
-
-@androidx.compose.runtime.Composable
-private fun DebugTools(context: Context) {
-    var filter by androidx.compose.runtime.remember { mutableStateOf("") }
-    DebugLogStore.loggingEnabled = true
-    val logs = DebugLogStore.logs
-    Column(verticalArrangement = Arrangement.spacedBy(6.dp)) {
-        Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-            Button(onClick = { context.startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)) }) { Text("Accessibility") }
-            OutlinedButton(onClick = { WhatsappAccessibilityService.requestNodeDump() }) { Text("Dump") }
-        }
-        TextField(value = filter, onValueChange = { filter = it }, modifier = Modifier.fillMaxWidth(), label = { Text("Filter debug log") }, singleLine = true)
-        LazyColumn(modifier = Modifier.fillMaxWidth().weight(0.6f)) { items(logs.filter { filter.isBlank() || it.contains(filter, true) }) { Text(it) } }
-    }
-}

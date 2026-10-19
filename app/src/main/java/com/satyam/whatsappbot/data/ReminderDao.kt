@@ -3,15 +3,11 @@ package com.satyam.whatsappbot.data
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import androidx.room.Update
 
 @Dao
 interface ReminderDao {
     @Insert
     fun insert(reminder: ReminderEntity): Long
-
-    @Update
-    fun update(reminder: ReminderEntity)
 
     @Query("SELECT * FROM reminders WHERE id = :id LIMIT 1")
     fun findById(id: Long): ReminderEntity?
