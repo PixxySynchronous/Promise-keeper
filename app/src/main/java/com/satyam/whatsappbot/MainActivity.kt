@@ -306,7 +306,14 @@ private fun HomeScreen(
     val toReview = reminders.filter { it.status == ReminderEntity.STATUS_PENDING_CONFIRMATION }
     val active = reminders.filter { it.status == ReminderEntity.STATUS_SCHEDULED || it.status == ReminderEntity.STATUS_SNOOZED }
     val falseAlarms = reminders.filter { it.status == ReminderEntity.STATUS_FALSE_ALARM }.sortedByDescending { it.createdAtEpochMillis }
-    var tab by androidx.compose.runtime.remember { mutableStateOf(0) }
+    // Tabs: 0 To review, 1 Active, 2 False alarms. Opens on To review when there's something to review,
+    // until the user picks a tab themselves.
+    var tab by androidx.compose.runtime.remember { mutableStateOf(TAB_ACTIVE) }
+    var tabChosen by androidx.compose.runtime.remember { mutableStateOf(false) }
+    androidx.compose.runtime.LaunchedEffect(toReview.isNotEmpty()) {
+        if (!tabChosen && toReview.isNotEmpty()) tab = TAB_REVIEW
+    }
+    val selectTab: (Int) -> Unit = { tab = it; tabChosen = true }
     var skipping by androidx.compose.runtime.remember { mutableStateOf<ReminderEntity?>(null) }
 
     Scaffold(
@@ -332,31 +339,23 @@ private fun HomeScreen(
         }
     ) { insets ->
         Column(modifier = Modifier.fillMaxSize().padding(insets).padding(horizontal = 16.dp), verticalArrangement = Arrangement.spacedBy(14.dp)) {
-            SummaryStrip(active.size, toReview.size)
+            SummaryStrip(active.size, toReview.size, onActive = { selectTab(TAB_ACTIVE) }, onReview = { selectTab(TAB_REVIEW) })
             SetupBanner(setupStatus, openSetup)
             TabRow(selectedTabIndex = tab, containerColor = MaterialTheme.colorScheme.background) {
-                Tab(selected = tab == 0, onClick = { tab = 0 }, text = { Text("Reminders") })
-                Tab(selected = tab == 1, onClick = { tab = 1 }, text = { Text(if (falseAlarms.isEmpty()) "False alarms" else "False alarms (${falseAlarms.size})") })
+                Tab(selected = tab == TAB_REVIEW, onClick = { selectTab(TAB_REVIEW) }, text = { TabLabel("To review", toReview.size) })
+                Tab(selected = tab == TAB_ACTIVE, onClick = { selectTab(TAB_ACTIVE) }, text = { TabLabel("Active", active.size) })
+                Tab(selected = tab == TAB_FALSE, onClick = { selectTab(TAB_FALSE) }, text = { TabLabel("False alarms", falseAlarms.size) })
             }
-            if (tab == 0) {
-                SectionHeading("Reminders", "${active.size} set · ${toReview.size} to review", refresh)
-                if (active.isEmpty() && toReview.isEmpty()) EmptyState()
-                LazyColumn(modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(10.dp), contentPadding = androidx.compose.foundation.layout.PaddingValues(bottom = 20.dp)) {
-                    if (toReview.isNotEmpty()) {
-                        item(key = "header-review") { ListHeader("Needs review") }
-                        items(toReview, key = { it.id }) { reminder ->
-                            ReminderRow(reminder, confirm, editTime, { editingTitle = reminder }, { pendingDelete = reminder }, { skipping = it }, toggleAlarm)
-                        }
-                    }
-                    if (active.isNotEmpty()) {
-                        item(key = "header-upcoming") { ListHeader("Upcoming") }
-                        items(active, key = { it.id }) { reminder ->
-                            ReminderRow(reminder, confirm, editTime, { editingTitle = reminder }, { pendingDelete = reminder }, { skipping = it }, toggleAlarm)
-                        }
-                    }
-                }
-            } else {
-                FalseAlarmsTab(falseAlarms, restoreFalseAlarm, { pendingDelete = it }, deleteAllFalseAlarms, exportFalseAlarms, Modifier.weight(1f))
+            when (tab) {
+                TAB_REVIEW -> ReminderList(
+                    toReview, "Nothing to review", "When a promise is detected, it appears here. Tap Set reminder or Skip.",
+                    refresh, Modifier.weight(1f)
+                ) { reminder -> ReminderRow(reminder, confirm, editTime, { editingTitle = reminder }, { pendingDelete = reminder }, { skipping = it }, toggleAlarm) }
+                TAB_ACTIVE -> ReminderList(
+                    active, "No reminders set", "Reminders you set appear here, soonest first.",
+                    refresh, Modifier.weight(1f)
+                ) { reminder -> ReminderRow(reminder, confirm, editTime, { editingTitle = reminder }, { pendingDelete = reminder }, { skipping = it }, toggleAlarm) }
+                else -> FalseAlarmsTab(falseAlarms, restoreFalseAlarm, { pendingDelete = it }, deleteAllFalseAlarms, exportFalseAlarms, Modifier.weight(1f))
             }
         }
     }
@@ -608,45 +607,53 @@ private fun FalseAlarmsTab(
 }
 
 @androidx.compose.runtime.Composable
-private fun ListHeader(text: String) {
-    Text(text, style = MaterialTheme.typography.titleSmall, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.padding(top = 4.dp))
+private fun TabLabel(text: String, count: Int) {
+    Text(if (count == 0) text else "$text ($count)", maxLines = 2, textAlign = androidx.compose.ui.text.style.TextAlign.Center, style = MaterialTheme.typography.labelLarge)
 }
 
 @androidx.compose.runtime.Composable
-private fun SummaryStrip(upcoming: Int, pending: Int) {
+private fun ReminderList(
+    items: List<ReminderEntity>,
+    emptyTitle: String,
+    emptyText: String,
+    refresh: () -> Unit,
+    modifier: Modifier,
+    row: @androidx.compose.runtime.Composable (ReminderEntity) -> Unit
+) {
+    LazyColumn(modifier = modifier, verticalArrangement = Arrangement.spacedBy(10.dp), contentPadding = androidx.compose.foundation.layout.PaddingValues(bottom = 20.dp)) {
+        if (items.isEmpty()) {
+            item {
+                Surface(modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(16.dp), color = MaterialTheme.colorScheme.surface) {
+                    Column(modifier = Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                        Text(emptyTitle, style = MaterialTheme.typography.titleMedium)
+                        Text(emptyText, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                        TextButton(onClick = refresh) { Text("Refresh") }
+                    }
+                }
+            }
+        }
+        items(items, key = { it.id }) { row(it) }
+    }
+}
+
+private const val TAB_REVIEW = 0
+private const val TAB_ACTIVE = 1
+private const val TAB_FALSE = 2
+
+@androidx.compose.runtime.Composable
+private fun SummaryStrip(active: Int, toReview: Int, onActive: () -> Unit, onReview: () -> Unit) {
     Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-        SummaryCell("ACTIVE", upcoming.toString(), Modifier.weight(1f))
-        SummaryCell("TO REVIEW", pending.toString(), Modifier.weight(1f))
+        SummaryCell("ACTIVE", active.toString(), Modifier.weight(1f), onActive)
+        SummaryCell("TO REVIEW", toReview.toString(), Modifier.weight(1f), onReview)
     }
 }
 
 @androidx.compose.runtime.Composable
-private fun SummaryCell(label: String, value: String, modifier: Modifier) {
-    Surface(modifier = modifier, shape = RoundedCornerShape(12.dp), color = MaterialTheme.colorScheme.surfaceVariant) {
+private fun SummaryCell(label: String, value: String, modifier: Modifier, onClick: () -> Unit) {
+    Surface(onClick = onClick, modifier = modifier, shape = RoundedCornerShape(12.dp), color = MaterialTheme.colorScheme.surfaceVariant) {
         Column(modifier = Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(2.dp)) {
             Text(value, style = MaterialTheme.typography.headlineSmall, color = MaterialTheme.colorScheme.primary)
             Text(label, style = MaterialTheme.typography.labelSmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
-        }
-    }
-}
-
-@androidx.compose.runtime.Composable
-private fun SectionHeading(title: String, meta: String, onRefresh: (() -> Unit)?) {
-    Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
-        Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
-            Text(title, style = MaterialTheme.typography.titleLarge)
-            Text(meta, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
-        }
-        if (onRefresh != null) TextButton(onClick = onRefresh) { Text("Refresh") }
-    }
-}
-
-@androidx.compose.runtime.Composable
-private fun EmptyState() {
-    Surface(modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(16.dp), color = MaterialTheme.colorScheme.surface) {
-        Column(modifier = Modifier.padding(18.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
-            Text("Nothing waiting on you", style = MaterialTheme.typography.titleMedium)
-            Text("When a promise is detected, it will appear here for your approval.", color = MaterialTheme.colorScheme.onSurfaceVariant)
         }
     }
 }
