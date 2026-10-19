@@ -158,6 +158,15 @@ class CommitmentAndTimeTest {
     }
 
     @Test
+    fun questionsWithoutAQuestionMarkAreRejected() {
+        val rules = RuleBasedCommitmentDetector()
+        listOf("hi is gym open today or tomorrow", "kya kal office hai", "hey are you free tomorrow", "bro when is the class tomorrow", "do you have the file")
+            .forEach { assertEquals("Expected rejected: $it", true, rules.rejects(it)) }
+        listOf("do minute mein kar dunga", "hi, will send it tomorrow", "hey ill call you tomorrow", "kal bhej dunga")
+            .forEach { assertEquals("Expected allowed: $it", false, rules.rejects(it)) }
+    }
+
+    @Test
     fun splitVerbEndingsStillMatch() {
         listOf("kal bhej ta hu", "abhi bhej ti hu", "bata ta hu", "kal bhej unga", "bhej ta hoon")
             .forEach { assertNotNull("Expected match: $it", detector.detect(it)) }

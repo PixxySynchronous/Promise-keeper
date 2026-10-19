@@ -36,6 +36,9 @@ COMMITMENTS = {
         "I'll tell you more about it next week", "will tell you the details tomorrow", "ill tell u later tonight",
         "I'll inform you once it's confirmed", "will tell you after the meeting", "I'll tell you what he said",
         "I'll tell you the plan by evening", "will inform you by Monday",
+        # greeting first, still a promise
+        "hi, will send it tomorrow", "hey ill call you tomorrow morning", "hello sir, I will submit the report today",
+        "bro I'll be there by 7 tomorrow", "hi I'll check and tell you by evening",
     ],
     "english_casual": [
         "ok will send", "sure, will do", "yes will do it", "yup sending in 5", "ya ya will share tmrw",
@@ -146,6 +149,11 @@ NON_COMMITMENTS = {
         "remind me to call mom", "don't forget to bring the charger", "make sure you submit it by Sunday",
         "you have to finish this today", "please do it by tomorrow", "can u call me", "send asap",
         "tell me more", "can you tell me the address?", "did she tell you?", "tell him to call me", "let me know next week",
+        # questions typed without a question mark
+        "hi is gym open today or tomorrow", "is the office open tomorrow", "hey are you free tomorrow evening",
+        "is it raining there today", "when is the exam next week", "what time is the meeting tomorrow",
+        "are we meeting today or tomorrow", "hello is the shop open on sunday", "bro is class cancelled tomorrow",
+        "which day works for you this week", "how was the trip", "did the parcel come today",
     ],
     "already_done": [
         "I sent it already", "I already shared it", "I already let you know", "sent", "done", "received",
@@ -206,6 +214,8 @@ NON_COMMITMENTS = {
         "bad me baat krte", "tu bhej de", "tu kr de", "usko bol de", "woh bhejega", "didi bhej degi", "papa call karenge",
         "kl class nhi h", "aaj chutti h", "yaad rakhna", "bhool mat jana", "charger le aana", "time pe aana",
         "soch ke btata hu", "dekhte hai kya hota h", "agar time mila toh krdunga", "nhi krunga", "mai nhi bhejunga",
+        "kya kal office hai", "gym aaj khula hai kya", "kal chutti hai kya", "bhai kab aa raha hai", "kitne baje milna hai kal",
+        "kahan hai party kal", "kaise jaana hai kal", "kal class hai ya nahi",
     ],
     "hindi": [
         "कल क्या हुआ था", "कल मौसम कैसा था", "तुम भेज सकते हो?", "क्या तुम शेयर करोगे?", "मैंने भेज दिया",

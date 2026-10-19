@@ -65,6 +65,13 @@ class RuleBasedCommitmentDetector(
             Regex("^(did|do|does|have|has) (you|u|he|she|they)\\b"),
             Regex("^(please|pls|plz) (send|share|forward|call|reply|confirm|do|let)\\b"),
             Regex("\\b(when|what time|where|why|how) (will|would|can|do|did) (you|u)\\b"),
+            // Questions typed without "?": "hi is gym open today", "kya kal office hai". Bare "do" is excluded because in
+            // Hinglish it also means "two" ("do minute mein kar dunga").
+            Regex(
+                "^((hi+|hey+|hello|helo|yo|bro|bhai|yaar|yr|dude|ok|okay|acha|achha|sir|maam|ma'am|good morning|gm)\\s+)*" +
+                    "(is|are|am|was|were|has|what|when|where|why|how|which|who|whose|kya|kab|kahan|kaha|kyu|kyun|kyon|kaise|kitna|kitne|kitni|kaun|kidhar" +
+                    "|(do|does|did|can|could|would|should|shall) (you|u|we|i|he|she|they|it))\\b"
+            ),
             // already done
             Regex("\\balready\\b"),
             // maybes and refusals, English and Hinglish
