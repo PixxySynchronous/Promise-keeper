@@ -302,8 +302,9 @@ private fun HomeScreen(
 ) {
     var editingTitle by androidx.compose.runtime.remember { mutableStateOf<ReminderEntity?>(null) }
     var pendingDelete by androidx.compose.runtime.remember { mutableStateOf<ReminderEntity?>(null) }
-    val upcoming = reminders.filter { it.status == ReminderEntity.STATUS_SCHEDULED || it.status == ReminderEntity.STATUS_SNOOZED || it.status == ReminderEntity.STATUS_PENDING_CONFIRMATION }
-    val pending = upcoming.count { it.status == ReminderEntity.STATUS_PENDING_CONFIRMATION }
+    // Suggestions waiting for Set / Skip are not active reminders yet; keep the two groups apart.
+    val toReview = reminders.filter { it.status == ReminderEntity.STATUS_PENDING_CONFIRMATION }
+    val active = reminders.filter { it.status == ReminderEntity.STATUS_SCHEDULED || it.status == ReminderEntity.STATUS_SNOOZED }
     val falseAlarms = reminders.filter { it.status == ReminderEntity.STATUS_FALSE_ALARM }.sortedByDescending { it.createdAtEpochMillis }
     var tab by androidx.compose.runtime.remember { mutableStateOf(0) }
     var skipping by androidx.compose.runtime.remember { mutableStateOf<ReminderEntity?>(null) }
@@ -331,18 +332,27 @@ private fun HomeScreen(
         }
     ) { insets ->
         Column(modifier = Modifier.fillMaxSize().padding(insets).padding(horizontal = 16.dp), verticalArrangement = Arrangement.spacedBy(14.dp)) {
-            SummaryStrip(upcoming.size, pending)
+            SummaryStrip(active.size, toReview.size)
             SetupBanner(setupStatus, openSetup)
             TabRow(selectedTabIndex = tab, containerColor = MaterialTheme.colorScheme.background) {
                 Tab(selected = tab == 0, onClick = { tab = 0 }, text = { Text("Reminders") })
                 Tab(selected = tab == 1, onClick = { tab = 1 }, text = { Text(if (falseAlarms.isEmpty()) "False alarms" else "False alarms (${falseAlarms.size})") })
             }
             if (tab == 0) {
-                SectionHeading("Upcoming reminders", "${upcoming.size} active", refresh)
-                if (upcoming.isEmpty()) EmptyState()
+                SectionHeading("Reminders", "${active.size} set · ${toReview.size} to review", refresh)
+                if (active.isEmpty() && toReview.isEmpty()) EmptyState()
                 LazyColumn(modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(10.dp), contentPadding = androidx.compose.foundation.layout.PaddingValues(bottom = 20.dp)) {
-                    items(upcoming, key = { it.id }) { reminder ->
-                        ReminderRow(reminder, confirm, editTime, { editingTitle = reminder }, { pendingDelete = reminder }, { skipping = it }, toggleAlarm)
+                    if (toReview.isNotEmpty()) {
+                        item(key = "header-review") { ListHeader("Needs review") }
+                        items(toReview, key = { it.id }) { reminder ->
+                            ReminderRow(reminder, confirm, editTime, { editingTitle = reminder }, { pendingDelete = reminder }, { skipping = it }, toggleAlarm)
+                        }
+                    }
+                    if (active.isNotEmpty()) {
+                        item(key = "header-upcoming") { ListHeader("Upcoming") }
+                        items(active, key = { it.id }) { reminder ->
+                            ReminderRow(reminder, confirm, editTime, { editingTitle = reminder }, { pendingDelete = reminder }, { skipping = it }, toggleAlarm)
+                        }
                     }
                 }
             } else {
@@ -595,6 +605,11 @@ private fun FalseAlarmsTab(
             dismissButton = { TextButton(onClick = { confirmDeleteAll = false }) { Text("Cancel") } }
         )
     }
+}
+
+@androidx.compose.runtime.Composable
+private fun ListHeader(text: String) {
+    Text(text, style = MaterialTheme.typography.titleSmall, color = MaterialTheme.colorScheme.onSurfaceVariant, modifier = Modifier.padding(top = 4.dp))
 }
 
 @androidx.compose.runtime.Composable
