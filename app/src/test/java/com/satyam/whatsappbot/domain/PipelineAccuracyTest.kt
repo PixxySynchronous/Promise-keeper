@@ -20,7 +20,12 @@ class PipelineAccuracyTest {
         .map { Case(it.get("text").asString, it.get("label").asInt, it.get("group").asString, it.get("probability").asDouble) }
 
     // Mirrors WhatsappAccessibilityService.detectAndSuggest.
-    private fun flagged(case: Case) = rules.detect(case.text) != null || (!rules.rejects(case.text) && case.probability >= threshold)
+    private val now = java.time.LocalDateTime.of(2026, 10, 19, 12, 0)
+    private fun flagged(case: Case) = rules.detect(case.text) != null || (
+        !rules.rejects(case.text) &&
+            (rules.hasCommitmentCue(case.text) || TimeParser().parse(case.text, now) != null) &&
+            case.probability >= threshold
+        )
 
     @Test
     fun catchesMostPromisesWithFewFalseAlarms() {

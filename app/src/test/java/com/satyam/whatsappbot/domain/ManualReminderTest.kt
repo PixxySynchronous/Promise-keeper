@@ -69,6 +69,19 @@ class ManualReminderTest {
     }
 
     @Test
+    fun raatAndDopaharAndCommitmentCues() {
+        val parser = TimeParser()
+        val afternoon = LocalDateTime.of(2026, 10, 19, 16, 10)
+        assertEquals(LocalDateTime.of(2026, 10, 19, 21, 0), parser.parseOrDefault("4 ki ill send, 5 ko raat mai", afternoon).dateTime)
+        assertEquals(LocalDateTime.of(2026, 10, 20, 14, 0), parser.parseOrDefault("dopahar tak kar dunga", afternoon).dateTime)
+        assertEquals(LocalDateTime.of(2026, 10, 20, 21, 0), parser.parseOrDefault("kal raat bhej dunga", afternoon).dateTime)
+        val rules = RuleBasedCommitmentDetector()
+        listOf("ok fatty", "haha sahi hai", "ok boss").forEach { assertEquals("no cue: $it", false, rules.hasCommitmentCue(it)) }
+        listOf("tabhi jaldi aane ko bolra hu", "kal bhej dunga", "मैं कल भेज दूंगा", "will see", "sending rn")
+            .forEach { assertEquals("cue: $it", true, rules.hasCommitmentCue(it)) }
+    }
+
+    @Test
     fun chosenDefaultTimeAppliesWheneverADayHasNoTime() {
         val parser = TimeParser(DefaultTimes(day = java.time.LocalTime.of(8, 30)))
         val monday = LocalDateTime.of(2026, 10, 19, 11, 0)

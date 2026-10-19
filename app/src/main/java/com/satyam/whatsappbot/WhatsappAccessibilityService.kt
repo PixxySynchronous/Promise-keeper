@@ -67,7 +67,9 @@ class WhatsappAccessibilityService : AccessibilityService() {
 
         // Phrase list first; the on-device model only sees messages without a clear "not a promise" signal.
         val match = detector.detect(message)
-            ?: semanticClassifier.takeUnless { detector.rejects(message) }?.classify(message)
+            ?: semanticClassifier
+                .takeIf { !detector.rejects(message) && (detector.hasCommitmentCue(message) || timeParser().parse(message, LocalDateTime.now()) != null) }
+                ?.classify(message)
                 ?.takeIf { it.isCommitment }
                 ?.let { CommitmentMatch(message, "semantic AI (${"%.2f".format(it.confidence)})") }
         if (match == null) {

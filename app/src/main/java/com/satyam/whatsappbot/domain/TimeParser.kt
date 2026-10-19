@@ -14,6 +14,7 @@ data class DefaultTimes(
     val tonight: LocalTime = LocalTime.of(21, 0),
     val morning: LocalTime = LocalTime.of(9, 30),
     val evening: LocalTime = LocalTime.of(18, 0),
+    val afternoon: LocalTime = LocalTime.of(14, 0),
     val noTimeDelayHours: Long = 2
 )
 
@@ -172,12 +173,13 @@ class TimeParser(private val defaults: DefaultTimes = DefaultTimes()) {
                 Regex("\\b(eod|end of day)\\b").containsMatchIn(text) -> defaults.eod
                 Regex("\\b(morning|subah|subha)\\b").containsMatchIn(text) -> defaults.morning
                 Regex("\\b(evening|shaam|sham)\\b").containsMatchIn(text) -> defaults.evening
+                Regex("\\b(afternoon|dopahar|dopeher|dophar|dupahar|dopher)\\b").containsMatchIn(text) -> defaults.afternoon
                 else -> null
             }
             return ParsedTime(LocalDateTime.of(now.toLocalDate().plusDays(offset), partOfDay ?: defaults.day), if (offset == 2L) "parso" else "tomorrow", true)
         }
         // Checked before "today" so "aaj raat" is not read as plain "aaj".
-        val tonight = Regex("\\b(tonight|aaj raat)\\b").find(text)
+        val tonight = Regex("\\b(tonight|aaj raat|raat)\\b").find(text)
         if (tonight != null) return ParsedTime(todayOrTomorrow(now, defaults.tonight), tonight.value, true)
         val eod = Regex("\\b(eod|end of day)\\b").find(text)
         if (eod != null) return ParsedTime(todayOrTomorrow(now, defaults.eod), eod.value, true)
@@ -185,6 +187,8 @@ class TimeParser(private val defaults: DefaultTimes = DefaultTimes()) {
         if (morning != null) return ParsedTime(todayOrTomorrow(now, defaults.morning), morning.value, true)
         val evening = Regex("\\b(evening|shaam)\\b").find(text)
         if (evening != null) return ParsedTime(todayOrTomorrow(now, defaults.evening), evening.value, true)
+        val afternoon = Regex("\\b(afternoon|dopahar|dopeher|dophar|dupahar|dopher)\\b").find(text)
+        if (afternoon != null) return ParsedTime(todayOrTomorrow(now, defaults.afternoon), afternoon.value, true)
         val today = Regex("\\b(today|aaj)\\b").find(text)
         if (today != null) return ParsedTime(laterToday(now), today.value, true)
         return null

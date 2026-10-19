@@ -102,6 +102,9 @@ COMMITMENTS = {
         "dkhta hu fir btata hu", "abhi bhjti hu", "kal tk krdungi", "ha krdunga", "thik h kr dunga",
         "ok kal de dunga", "aata hu 10 min me", "call krti hu", "send krta hu", "share krta hu abhi",
         "paise bhj dunga", "kal le aunga", "ghar jake krdungi", "pakka krunga", "krunga kal",
+        # real chat
+        "4 ki ill send, 5 ko raat mai", "5 sending raat mein", "2 abhi bhej raha hu baaki raat ko", "ek abhi bhejta hu ek kal",
+        "raat ko bhej dunga", "dopahar tak kar dunga", "raat mai call karta hu",
         # split verb endings, a common typing habit
         "kal bhej ta hu", "abhi bhej ti hu", "bata ta hu thodi der me", "kal kar ta hu pakka", "send kar unga kal",
         "shaam ko bhej unga", "dekh ke bata ti hu", "5 min me bhej ta hoon",
@@ -222,6 +225,11 @@ NON_COMMITMENTS = {
         "bad me baat krte", "tu bhej de", "tu kr de", "usko bol de", "woh bhejega", "didi bhej degi", "papa call karenge",
         "kl class nhi h", "aaj chutti h", "yaad rakhna", "bhool mat jana", "charger le aana", "time pe aana",
         "soch ke btata hu", "dekhte hai kya hota h", "agar time mila toh krdunga", "nhi krunga", "mai nhi bhejunga",
+        # real chat: banter, explanations of what I'm saying, plans for the other person
+        "ok fatty", "haa toh dopeher gk aajao", "tabhi jaldi aane ko bolra hu", "isliye bol raha hu", "bas bata raha hu",
+        "main bas puch raha tha", "mai bol rha tha na", "maine pehle hi bola tha", "main soch raha tha", "hu bhai ghar pe",
+        "ok pagal", "ok motu", "haa haa thik hai", "ok boss", "ok ji", "hn bhai", "ok cool", "acha ok", "ok fine",
+        "chal theek hai fir", "haan wahi toh bol raha hu", "main aa gaya hu", "main office mein hu", "abhi free hu",
         # requests to the other person, often conditional
         "collar mic use nahi karrahe tph le ana", "agar free ho toh charger le aana", "use nahi kar rahe toh mujhe de dena",
         "jaate hue doodh le aana", "kal file bhej dena", "time mile toh call kar lena", "aate waqt bread le aao",

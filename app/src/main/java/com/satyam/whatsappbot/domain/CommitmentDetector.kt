@@ -36,6 +36,16 @@ class RuleBasedCommitmentDetector(
         return hasClearNegativeSignal(message, normalized) || START_QUESTION_OR_UNCERTAINTY.containsMatchIn(normalized)
     }
 
+    /**
+     * Whether a message has any sign of the sender committing to something, so the model is worth asking. Without
+     * one ("ok fatty", "haha sahi hai") the model over-fires on short chatter. Time expressions are checked by the
+     * caller with [TimeParser], so a cue-less "kal tak" still reaches the model.
+     */
+    fun hasCommitmentCue(message: String): Boolean {
+        val normalized = normalize(message)
+        return COMMITMENT_CUE.containsMatchIn(normalized) || DEVANAGARI_CUES.any { normalized.contains(it) }
+    }
+
     private fun hasClearNegativeSignal(message: String, normalized: String): Boolean =
         message.trimEnd().endsWith("?") || NEGATIVE_SIGNALS.any { it.containsMatchIn(normalized) } ||
             HINDI_NEGATIVE_SIGNALS.any { normalized.contains(it) } || hasOtherSubjectWill(message) ||
@@ -102,8 +112,16 @@ class RuleBasedCommitmentDetector(
         val HINGLISH_REQUEST = Regex(
             "\\b(le aana|le ana|le aao|le ao|lete aana|leke aana|lekar aana|bhej dena|bhej dijiye|kar dena|kr dena|" +
                 "kar dijiye|de dena|de dijiye|bata dena|bta dena|bata do|bta do|yaad dila dena|dila dena|bhej do|bhj do|" +
-                "kar do|kr do|de do|le lo|lao|laana|bhejo|bhejna|batao|btao|karo|kro|dedo|krdo|kardo|bhejdo)\\b"
+                "kar do|kr do|de do|le lo|lao|laana|bhejo|bhejna|batao|btao|karo|kro|dedo|krdo|kardo|bhejdo|" +
+                "aajao|aa jao|aaja|aa ja|aa jana|aajana|chale aao|chale aana|aao|jao|chale jao)\\b"
         )
+        val COMMITMENT_CUE = Regex(
+            // English: first person, future, sending
+            "\\b(i|i'll|ill|i'm|im|i've|ive|i'd|we'll|will|wil|gonna|going to|on it|let me|lemme|sending|send|need to|have to|must|gotta)\\b" +
+                // Hinglish: first-person future (-unga/-ungi) or present ("bhejta hu"), and main/mai
+                "|\\b\\w*(unga|ungi|oonga|oongi|lunga|lungi)\\b|\\b(hu|hoon|hun|main|mai)\\b"
+        )
+        val DEVANAGARI_CUES = listOf("ूंगा", "ूंगी", "ूँगा", "ूँगी", "ऊंगा", "ऊंगी", "ऊँगा", "ऊँगी", "हूं", "हूँ", "मैं")
         // First-person future verbs: "bhej dunga", "karungi", "le aaunga", "krunga".
         val HINGLISH_OWN_FUTURE = Regex("\\b\\w*(unga|ungi|oonga|oongi|ungaa)\\b")
         // Plain substrings: Java's \b treats Devanagari vowel signs as non-word characters.
