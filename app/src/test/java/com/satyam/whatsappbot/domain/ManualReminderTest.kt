@@ -82,6 +82,35 @@ class ManualReminderTest {
     }
 
     @Test
+    fun daysWeeksMonthsAndNumberWords() {
+        val parser = TimeParser()
+        val night = LocalDateTime.of(2026, 10, 19, 23, 45)
+        fun at(text: String) = parser.parseOrDefault(text, night).dateTime
+        assertEquals(LocalDateTime.of(2026, 10, 22, 10, 0), at("ill do it in 3 days"))
+        assertEquals(LocalDateTime.of(2026, 11, 2, 10, 0), at("will send in 2 weeks"))
+        assertEquals(LocalDateTime.of(2026, 10, 22, 10, 0), at("3 din mein kar dunga"))
+        assertEquals(LocalDateTime.of(2026, 10, 21, 10, 0), at("do din me kar dunga"))
+        assertEquals(LocalDateTime.of(2026, 10, 26, 10, 0), at("ek hafte mein bhej dunga"))
+        assertEquals(LocalDateTime.of(2026, 11, 19, 10, 0), at("will pay in a month"))
+        assertEquals(LocalDateTime.of(2026, 10, 20, 10, 0), at("will call in a day or two"))
+        assertEquals(LocalDateTime.of(2026, 10, 22, 17, 0), at("will send in 3 days by 5"))
+        assertEquals(night.plusHours(1), at("will call in an hour"))
+        assertEquals(night.plusHours(2), at("do ghante mein bhej dunga"))
+        assertEquals(night.plusMinutes(30), at("half an hour mein karta hu"))
+        // "9 am me" is a clock time, not "a minute".
+        assertEquals(LocalDateTime.of(2026, 10, 20, 9, 0), at("kal 9 am me call karta hu"))
+    }
+
+    @Test
+    fun noTimeFallbackSkipsTheNight() {
+        val parser = TimeParser()
+        // 11:45 PM + 2 hours would be 1:45 AM: use the default time the next morning instead.
+        assertEquals(LocalDateTime.of(2026, 10, 20, 10, 0), parser.parseOrDefault("ill do it", LocalDateTime.of(2026, 10, 19, 23, 45)).dateTime)
+        assertEquals(LocalDateTime.of(2026, 10, 20, 10, 0), parser.parseOrDefault("ill do it", LocalDateTime.of(2026, 10, 19, 20, 30)).dateTime)
+        assertEquals(LocalDateTime.of(2026, 10, 19, 16, 0), parser.parseOrDefault("ill do it", LocalDateTime.of(2026, 10, 19, 14, 0)).dateTime)
+    }
+
+    @Test
     fun chosenDefaultTimeAppliesWheneverADayHasNoTime() {
         val parser = TimeParser(DefaultTimes(day = java.time.LocalTime.of(8, 30)))
         val monday = LocalDateTime.of(2026, 10, 19, 11, 0)

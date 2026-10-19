@@ -28,6 +28,7 @@ class TimeParser(private val defaults: DefaultTimes = DefaultTimes()) {
     fun parse(message: String, now: LocalDateTime): ParsedTime? {
         val text = canonicalDayWords(message)
         parseRelativeDuration(text, now)?.let { return it }
+        parseRelativeDays(text, now)?.let { return it }
         parseExplicitDate(text, now)?.let { return it }
         parseNextWeek(text, now)?.let { return it }
         parseWeekday(text, now)?.let { return it }
@@ -63,21 +64,51 @@ class TimeParser(private val defaults: DefaultTimes = DefaultTimes()) {
     }
 
     fun parseOrDefault(message: String, now: LocalDateTime): ParsedTime =
-        parse(message, now) ?: ParsedTime(
-            now.plusHours(defaults.noTimeDelayHours),
-            "no explicit time",
-            usedDefault = true
-        )
+        parse(message, now) ?: ParsedTime(laterOrNextMorning(now), "no explicit time", usedDefault = true)
 
+    /**
+     * The no-time fallback: a couple of hours from now, unless that lands between 10 PM and 8 AM, in which case the
+     * user's default time the next morning ("ill do it" sent at 11:45 PM should not ring at 1:45 AM).
+     */
+    private fun laterOrNextMorning(now: LocalDateTime): LocalDateTime {
+        val later = now.plusHours(defaults.noTimeDelayHours)
+        return when {
+            later.hour >= 22 -> LocalDateTime.of(later.toLocalDate().plusDays(1), defaults.day)
+            later.hour < 8 -> LocalDateTime.of(later.toLocalDate(), defaults.day)
+            else -> later
+        }
+    }
+
+    // "in 10 mins", "after an hour", "do ghante mein", "half an hour", "aadha ghanta".
     private fun parseRelativeDuration(text: String, now: LocalDateTime): ParsedTime? {
-        val match = Regex("\\b(?:in|after)\\s+(\\d+)\\s*(m|mins?|minutes?|h|hrs?|hours?)\\b").find(text)
-            ?: Regex("\\b(\\d+)\\s*(m|mins?|minutes?|h|hrs?|hours?)\\s*(?:mein|me|ma)\\b").find(text)
+        HALF_HOUR.find(text)?.let { return ParsedTime(now.plusMinutes(30), it.value, usedDefault = false) }
+        val match = Regex("\\b(?:in|after|within)\\s+$NUMBER\\s*$SHORT_UNIT\\b").find(text)
+            // No "a"/"an" here: "9 am me" must not read as "a minute".
+            ?: Regex("\\b$NUMBER_NO_ARTICLE\\s*$SHORT_UNIT\\s*(?:mein|me|mai|mei|ma|baad|bad)\\b").find(text)
             ?: return null
-        val amount = (match.groupValues[1].ifEmpty { match.groupValues[2] }).toLong()
-        val unit = if (match.groupValues[1].isNotEmpty()) match.groupValues[2] else match.groupValues[3]
+        val amount = numberValue(match.groupValues[1]) ?: return null
+        val unit = match.groupValues[2]
         val target = if (unit == "m" || unit.startsWith("min")) now.plusMinutes(amount) else now.plusHours(amount)
         return ParsedTime(target, match.value, usedDefault = false)
     }
+
+    // "in 3 days", "after 2 weeks", "in a month", "3 din mein", "ek hafte mein", "do mahine baad", at the default time.
+    private fun parseRelativeDays(text: String, now: LocalDateTime): ParsedTime? {
+        val match = Regex("\\b(?:in|after|within)\\s+(?:the next\\s+)?$NUMBER\\s+$DAY_UNIT\\b").find(text)
+            ?: Regex("\\b$NUMBER\\s+$DAY_UNIT\\s+(?:mein|me|mai|mei|ma|baad|bad|tak|tk)\\b").find(text)
+            ?: return null
+        val amount = numberValue(match.groupValues[1]) ?: return null
+        val unit = match.groupValues[2]
+        val date = when {
+            unit.startsWith("week") || unit.startsWith("wk") || unit.startsWith("haft") -> now.toLocalDate().plusWeeks(amount)
+            unit.startsWith("month") || unit.startsWith("mahin") -> now.toLocalDate().plusMonths(amount)
+            else -> now.toLocalDate().plusDays(amount)
+        }
+        val clock = extractClock(text.replaceRange(match.range, " "))
+        return ParsedTime(LocalDateTime.of(date, clock?.let(::futureDayTime) ?: defaults.day), match.value, clock == null)
+    }
+
+    private fun numberValue(word: String): Long? = word.toLongOrNull() ?: NUMBER_WORDS[word]
 
     private fun parseExplicitDate(text: String, now: LocalDateTime): ParsedTime? {
         val match = Regex("\\b(\\d{1,2})[/-](\\d{1,2})(?:[/-](\\d{2,4}))?\\b").find(text) ?: return null
@@ -126,7 +157,7 @@ class TimeParser(private val defaults: DefaultTimes = DefaultTimes()) {
             ?: Regex("${Regex.escape(matched)}\\s+(\\d{1,2}(?::\\d{2})?)\\b").find(text)?.let { extractClock("at ${it.groupValues[1]}") }
         val dateTime = LocalDateTime.of(date, clock?.let(::futureDayTime) ?: defaults.day)
         // "this mon" said on Monday afternoon: the default time has passed, so fall back to later today.
-        if (!dateTime.isAfter(now)) return ParsedTime(now.plusHours(defaults.noTimeDelayHours), matched, usedDefault = true)
+        if (!dateTime.isAfter(now)) return ParsedTime(laterOrNextMorning(now), matched, usedDefault = true)
         return ParsedTime(dateTime, matched, clock == null)
     }
 
@@ -228,6 +259,17 @@ class TimeParser(private val defaults: DefaultTimes = DefaultTimes()) {
         )
         val NEXT_WEEK = Regex("\\b(next week|next wk|agle hafte|agle week|agle hafta)\\b")
         val NEXT_WEEK_DEVANAGARI = listOf("अगले हफ्ते", "अगले हफ़्ते", "अगले सप्ताह")
+        val NUMBER_WORDS = mapOf(
+            "a" to 1L, "an" to 1L, "one" to 1L, "two" to 2L, "three" to 3L, "four" to 4L, "five" to 5L, "six" to 6L,
+            "seven" to 7L, "eight" to 8L, "nine" to 9L, "ten" to 10L, "ek" to 1L, "do" to 2L, "teen" to 3L, "char" to 4L,
+            "chaar" to 4L, "paanch" to 5L, "panch" to 5L, "chhe" to 6L, "che" to 6L, "saat" to 7L, "aath" to 8L,
+            "nau" to 9L, "das" to 10L
+        )
+        private val NUMBER = "(\\d+|${NUMBER_WORDS.keys.joinToString("|")})"
+        private val NUMBER_NO_ARTICLE = "(\\d+|${(NUMBER_WORDS.keys - setOf("a", "an")).joinToString("|")})"
+        private const val SHORT_UNIT = "(m|mins?|minutes?|h|hrs?|hours?|ghante|ghanta|ghnte|ghnta)"
+        private const val DAY_UNIT = "(days?|din|weeks?|wks?|hafte|hafta|haftey|months?|mahine|mahina|mahino)"
+        val HALF_HOUR = Regex("\\b(half an hour|half hour|aadha ghanta|adha ghanta|aadhe ghante|adhe ghante)\\b")
         val TOMORROW_VARIANTS = Regex(
             "\\b(tmrw|tmr|tmw|tmrow|tmrrw|tmmrw|tommrw|2mrw|2mro|2moro|2morow|2morrow|tomo|tomm|tomorow|tommorow|tommorrow|tomorrw|tomoro|tomorro|tmorrow)\\b"
         )
@@ -251,7 +293,7 @@ class TimeParser(private val defaults: DefaultTimes = DefaultTimes()) {
         listOf(defaults.morning, defaults.eod)
             .map { LocalDateTime.of(now.toLocalDate(), it) }
             .firstOrNull { it.isAfter(now) }
-            ?: now.plusHours(defaults.noTimeDelayHours)
+            ?: laterOrNextMorning(now)
 
     private fun extractClock(text: String): Pair<LocalTime, String>? {
         // A bare number ("send 2 files") is not a time; require by/at, a colon, am/pm or baje.
