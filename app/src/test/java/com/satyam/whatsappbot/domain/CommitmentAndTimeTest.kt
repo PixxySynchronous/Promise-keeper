@@ -170,6 +170,15 @@ class CommitmentAndTimeTest {
     }
 
     @Test
+    fun hinglishRequestsToOthersAreRejected() {
+        val rules = RuleBasedCommitmentDetector()
+        listOf("collar mic use nahi karrahe tph le ana", "kal file bhej dena", "notes bhej do", "charger le aao", "bread lao")
+            .forEach { assertEquals("Expected rejected: $it", true, rules.rejects(it)) }
+        listOf("kal bhej dunga", "main kar dunga", "de dunga kal", "le aaunga shaam ko", "bata dunga", "thoda wait karo main bhej dunga")
+            .forEach { assertEquals("Expected allowed: $it", false, rules.rejects(it)) }
+    }
+
+    @Test
     fun questionsWithoutAQuestionMarkAreRejected() {
         val rules = RuleBasedCommitmentDetector()
         listOf("hi is gym open today or tomorrow", "kya kal office hai", "hey are you free tomorrow", "bro when is the class tomorrow", "do you have the file")

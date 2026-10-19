@@ -222,6 +222,10 @@ NON_COMMITMENTS = {
         "bad me baat krte", "tu bhej de", "tu kr de", "usko bol de", "woh bhejega", "didi bhej degi", "papa call karenge",
         "kl class nhi h", "aaj chutti h", "yaad rakhna", "bhool mat jana", "charger le aana", "time pe aana",
         "soch ke btata hu", "dekhte hai kya hota h", "agar time mila toh krdunga", "nhi krunga", "mai nhi bhejunga",
+        # requests to the other person, often conditional
+        "collar mic use nahi karrahe tph le ana", "agar free ho toh charger le aana", "use nahi kar rahe toh mujhe de dena",
+        "jaate hue doodh le aana", "kal file bhej dena", "time mile toh call kar lena", "aate waqt bread le aao",
+        "khatam ho gaya ho toh notes bhej do", "laptop free hai toh de do na", "agar ja rahe ho toh mera parcel le aana",
         "kya kal office hai", "gym aaj khula hai kya", "kal chutti hai kya", "bhai kab aa raha hai", "kitne baje milna hai kal",
         "kahan hai party kal", "kaise jaana hai kal", "kal class hai ya nahi",
     ],

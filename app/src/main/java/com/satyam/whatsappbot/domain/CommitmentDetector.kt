@@ -38,7 +38,9 @@ class RuleBasedCommitmentDetector(
 
     private fun hasClearNegativeSignal(message: String, normalized: String): Boolean =
         message.trimEnd().endsWith("?") || NEGATIVE_SIGNALS.any { it.containsMatchIn(normalized) } ||
-            HINDI_NEGATIVE_SIGNALS.any { normalized.contains(it) } || hasOtherSubjectWill(message)
+            HINDI_NEGATIVE_SIGNALS.any { normalized.contains(it) } || hasOtherSubjectWill(message) ||
+            // A request ("wait karo") only rejects when the sender isn't also promising ("main bhej dunga").
+            (HINGLISH_REQUEST.containsMatchIn(normalized) && !HINGLISH_OWN_FUTURE.containsMatchIn(normalized))
 
     // "Priya will send", "the bank will call": a word directly before "will" (no punctuation between) that is not
     // the sender or a filler like "ok"/"sure" means someone else is promising. "on it, will update" still counts.
@@ -95,6 +97,15 @@ class RuleBasedCommitmentDetector(
             "np", "bro", "bhai", "yaar", "yr", "brb", "haan", "han", "ha", "hn", "pakka", "and", "then", "also", "so",
             "definitely", "surely", "really", "just", "def", "defo", "totally", "promise"
         )
+        // Hinglish requests to the other person ("le aana", "bhej dena", "kar do"). Whole words, so the sender's
+        // own "bhej dunga" / "kar dunga" never match.
+        val HINGLISH_REQUEST = Regex(
+            "\\b(le aana|le ana|le aao|le ao|lete aana|leke aana|lekar aana|bhej dena|bhej dijiye|kar dena|kr dena|" +
+                "kar dijiye|de dena|de dijiye|bata dena|bta dena|bata do|bta do|yaad dila dena|dila dena|bhej do|bhj do|" +
+                "kar do|kr do|de do|le lo|lao|laana|bhejo|bhejna|batao|btao|karo|kro|dedo|krdo|kardo|bhejdo)\\b"
+        )
+        // First-person future verbs: "bhej dunga", "karungi", "le aaunga", "krunga".
+        val HINGLISH_OWN_FUTURE = Regex("\\b\\w*(unga|ungi|oonga|oongi|ungaa)\\b")
         // Plain substrings: Java's \b treats Devanagari vowel signs as non-word characters.
         val HINDI_NEGATIVE_SIGNALS = listOf("शायद", "नहीं", "पता नहीं", "सोच", "अगर", "मैंने", "सकते", "सकती")
     }
