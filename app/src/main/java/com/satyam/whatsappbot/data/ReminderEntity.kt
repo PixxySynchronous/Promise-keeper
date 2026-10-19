@@ -20,5 +20,7 @@ data class ReminderEntity(
         const val STATUS_IGNORED = "IGNORED"
         const val STATUS_DONE = "DONE"
         const val STATUS_SNOOZED = "SNOOZED"
+        /** The user marked the suggestion as "not a promise"; kept for review and optional export. */
+        const val STATUS_FALSE_ALARM = "FALSE_ALARM"
     }
 }

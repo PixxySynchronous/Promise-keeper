@@ -27,6 +27,16 @@ spec.loader.exec_module(examples)
 
 rows = [(text, 1, group) for group, texts in examples.COMMITMENTS.items() for text in texts]
 rows += [(text, 0, group) for group, texts in examples.NON_COMMITMENTS.items() for text in texts]
+
+# False alarms exported from the app ("False alarms" tab -> Export) and contributed via GitHub.
+for path in sorted((root / "tools/contributed").glob("*.json")):
+    data = json.loads(path.read_text(encoding="utf-8"))
+    if data.get("format") != "promise-keeper-false-alarms":
+        print(f"skipping {path.name}: not a Promise Keeper export")
+        continue
+    texts = [m["text"].strip() for m in data.get("messages", []) if m.get("text", "").strip()]
+    print(f"contributed: {len(texts)} false alarms from {path.name}")
+    rows += [(text, 0, "contributed") for text in texts]
 seen, unique = set(), []
 for row in rows:
     if row[0] in seen:

@@ -37,6 +37,13 @@ class ReminderRepository(context: Context) {
 
     fun markDone(id: Long) = executor.execute { dao.updateStatus(id, ReminderEntity.STATUS_DONE) }
 
+    fun markFalseAlarm(id: Long) = executor.execute { dao.updateStatus(id, ReminderEntity.STATUS_FALSE_ALARM) }
+
+    /** "It was a promise after all": back to the review list. */
+    fun restoreFromFalseAlarm(id: Long) = executor.execute { dao.updateStatus(id, ReminderEntity.STATUS_PENDING_CONFIRMATION) }
+
+    fun deleteFalseAlarms(onComplete: () -> Unit = {}) = executor.execute { dao.deleteFalseAlarms(); onComplete() }
+
     fun markSnoozed(id: Long, timeMillis: Long) = executor.execute {
         dao.updateTimeAndSchedule(id, timeMillis)
         dao.updateStatus(id, ReminderEntity.STATUS_SNOOZED)

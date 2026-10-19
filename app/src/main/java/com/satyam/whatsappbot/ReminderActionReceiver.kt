@@ -26,6 +26,12 @@ class ReminderActionReceiver : BroadcastReceiver() {
                 cancelConfirmation(context, id)
                 pendingResult.finish()
             }
+            ReminderNotifications.ACTION_NOT_PROMISE -> {
+                repository.markFalseAlarm(id)
+                ReminderNotifications.cancel(context, id)
+                cancelConfirmation(context, id)
+                pendingResult.finish()
+            }
             ReminderNotifications.ACTION_FIRE -> repository.get(id) { reminder ->
                 if (reminder != null) ReminderNotifications.showReminder(context, reminder)
                 pendingResult.finish()

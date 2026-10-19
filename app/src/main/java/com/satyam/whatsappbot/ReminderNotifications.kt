@@ -22,6 +22,7 @@ object ReminderNotifications {
     const val ACTION_SET = "com.satyam.whatsappbot.action.SET"
     const val ACTION_EDIT = "com.satyam.whatsappbot.action.EDIT"
     const val ACTION_IGNORE = "com.satyam.whatsappbot.action.IGNORE"
+    const val ACTION_NOT_PROMISE = "com.satyam.whatsappbot.action.NOT_PROMISE"
     const val ACTION_FIRE = "com.satyam.whatsappbot.action.FIRE"
     const val ACTION_DONE = "com.satyam.whatsappbot.action.DONE"
     const val ACTION_SNOOZE = "com.satyam.whatsappbot.action.SNOOZE"
@@ -53,7 +54,12 @@ object ReminderNotifications {
             .setOnlyAlertOnce(true)
             .addAction(action(context, ACTION_SET, reminder.id, "Set"))
             .addAction(editAction(context, reminder.id))
-            .addAction(action(context, ACTION_IGNORE, reminder.id, "Ignore"))
+            // Android shows at most three buttons. Detected suggestions get "Not a promise" so false alarms can be
+            // collected; reminders the user asked for with the "reminder" keyword keep "Ignore".
+            .addAction(
+                if (manual) action(context, ACTION_IGNORE, reminder.id, "Ignore")
+                else action(context, ACTION_NOT_PROMISE, reminder.id, "Not a promise")
+            )
             .build()
         NotificationManagerCompat.from(context).notify(confirmationNotificationId(reminder.id), notification)
     }

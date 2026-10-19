@@ -13,6 +13,12 @@ import androidx.activity.compose.BackHandler
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.compose.setContent
 import androidx.activity.SystemBarStyle
+import androidx.compose.material3.Tab
+import androidx.compose.material3.TabRow
+import androidx.core.content.FileProvider
+import com.satyam.whatsappbot.domain.FalseAlarmExport
+import com.satyam.whatsappbot.domain.ManualReminder
+import java.io.File
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.ExperimentalLayoutApi
 import androidx.compose.foundation.layout.FlowRow
@@ -116,7 +122,11 @@ class MainActivity : ComponentActivity() {
                         cancelTimeEdit = { timeEditing = null },
                         editTitle = ::editTitle,
                         delete = ::deleteReminder,
-                        confirm = ::confirmReminder
+                        confirm = ::confirmReminder,
+                        notPromise = ::markNotPromise,
+                        restoreFalseAlarm = ::restoreFalseAlarm,
+                        deleteAllFalseAlarms = ::deleteAllFalseAlarms,
+                        exportFalseAlarms = ::exportFalseAlarms
                     )
                 }
             }
@@ -162,6 +172,51 @@ class MainActivity : ComponentActivity() {
             NotificationManagerCompat.from(this).cancel(ReminderNotifications.confirmationNotificationId(reminder.id))
             refreshReminders()
         }
+    }
+
+    private fun markNotPromise(reminder: ReminderEntity) {
+        ReminderNotifications.cancel(this, reminder.id)
+        NotificationManagerCompat.from(this).cancel(ReminderNotifications.confirmationNotificationId(reminder.id))
+        repository.markFalseAlarm(reminder.id)
+        refreshReminders()
+    }
+
+    private fun restoreFalseAlarm(reminder: ReminderEntity) {
+        repository.restoreFromFalseAlarm(reminder.id)
+        refreshReminders()
+    }
+
+    private fun deleteAllFalseAlarms() = repository.deleteFalseAlarms { runOnUiThread { refreshReminders() } }
+
+    /**
+     * Shares the false alarms as a JSON file through the system share sheet (the app itself has no internet access).
+     * Only message text and what flagged it are included, never contact names.
+     */
+    private fun exportFalseAlarms(items: List<ReminderEntity>) {
+        val zone = ZoneId.systemDefault()
+        val format = DateTimeFormatter.ISO_LOCAL_DATE_TIME
+        val json = FalseAlarmExport.toJson(
+            items.map {
+                FalseAlarmExport.Item(it.message, it.matchedPhrase, Instant.ofEpochMilli(it.createdAtEpochMillis).atZone(zone).toLocalDateTime().withNano(0).format(format))
+            },
+            appVersion = packageManager.getPackageInfo(packageName, 0).versionName.orEmpty(),
+            exportedAt = LocalDateTime.now().withNano(0).format(format)
+        )
+        val directory = File(cacheDir, "exports").apply { mkdirs(); listFiles()?.forEach { it.delete() } }
+        val file = File(directory, "promise-keeper-false-alarms-${LocalDate.now()}.json").apply { writeText(json) }
+        val uri = FileProvider.getUriForFile(this, "$packageName.exports", file)
+        val send = Intent(Intent.ACTION_SEND).apply {
+            type = "application/json"
+            putExtra(Intent.EXTRA_STREAM, uri)
+            putExtra(Intent.EXTRA_SUBJECT, "Promise Keeper false alarms")
+            putExtra(
+                Intent.EXTRA_TEXT,
+                "${items.size} messages Promise Keeper wrongly flagged as promises. To help improve it, add this file to " +
+                    "tools/contributed/ in https://github.com/PixxySynchronous/Promise-keeper or send it to the maintainer."
+            )
+            addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION)
+        }
+        startActivity(Intent.createChooser(send, "Share false alarms"))
     }
 
     // Same as the notification's "Set". If the suggested time has already passed, ask for a new one instead.
@@ -228,12 +283,18 @@ private fun HomeScreen(
     cancelTimeEdit: () -> Unit,
     editTitle: (ReminderEntity, String) -> Unit,
     delete: (ReminderEntity) -> Unit,
-    confirm: (ReminderEntity) -> Unit
+    confirm: (ReminderEntity) -> Unit,
+    notPromise: (ReminderEntity) -> Unit,
+    restoreFalseAlarm: (ReminderEntity) -> Unit,
+    deleteAllFalseAlarms: () -> Unit,
+    exportFalseAlarms: (List<ReminderEntity>) -> Unit
 ) {
     var editingTitle by androidx.compose.runtime.remember { mutableStateOf<ReminderEntity?>(null) }
     var pendingDelete by androidx.compose.runtime.remember { mutableStateOf<ReminderEntity?>(null) }
     val upcoming = reminders.filter { it.status == ReminderEntity.STATUS_SCHEDULED || it.status == ReminderEntity.STATUS_SNOOZED || it.status == ReminderEntity.STATUS_PENDING_CONFIRMATION }
     val pending = upcoming.count { it.status == ReminderEntity.STATUS_PENDING_CONFIRMATION }
+    val falseAlarms = reminders.filter { it.status == ReminderEntity.STATUS_FALSE_ALARM }.sortedByDescending { it.createdAtEpochMillis }
+    var tab by androidx.compose.runtime.remember { mutableStateOf(0) }
 
     Scaffold(
         containerColor = MaterialTheme.colorScheme.background,
@@ -260,12 +321,20 @@ private fun HomeScreen(
         Column(modifier = Modifier.fillMaxSize().padding(insets).padding(horizontal = 16.dp), verticalArrangement = Arrangement.spacedBy(14.dp)) {
             SummaryStrip(upcoming.size, pending)
             SetupBanner(setupStatus, openSetup)
-            SectionHeading("Upcoming reminders", "${upcoming.size} active", refresh)
-            if (upcoming.isEmpty()) EmptyState()
-            LazyColumn(modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(10.dp), contentPadding = androidx.compose.foundation.layout.PaddingValues(bottom = 20.dp)) {
-                items(upcoming, key = { it.id }) { reminder ->
-                    ReminderRow(reminder, confirm, editTime, { editingTitle = reminder }, { pendingDelete = reminder })
+            TabRow(selectedTabIndex = tab, containerColor = MaterialTheme.colorScheme.background) {
+                Tab(selected = tab == 0, onClick = { tab = 0 }, text = { Text("Reminders") })
+                Tab(selected = tab == 1, onClick = { tab = 1 }, text = { Text(if (falseAlarms.isEmpty()) "False alarms" else "False alarms (${falseAlarms.size})") })
+            }
+            if (tab == 0) {
+                SectionHeading("Upcoming reminders", "${upcoming.size} active", refresh)
+                if (upcoming.isEmpty()) EmptyState()
+                LazyColumn(modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(10.dp), contentPadding = androidx.compose.foundation.layout.PaddingValues(bottom = 20.dp)) {
+                    items(upcoming, key = { it.id }) { reminder ->
+                        ReminderRow(reminder, confirm, editTime, { editingTitle = reminder }, { pendingDelete = reminder }, notPromise)
+                    }
                 }
+            } else {
+                FalseAlarmsTab(falseAlarms, restoreFalseAlarm, { pendingDelete = it }, deleteAllFalseAlarms, exportFalseAlarms, Modifier.weight(1f))
             }
         }
     }
@@ -358,7 +427,7 @@ private fun DateTimeDialog(reminder: ReminderEntity, applyTime: (ReminderEntity,
 
 @androidx.compose.runtime.Composable
 @OptIn(ExperimentalLayoutApi::class)
-private fun ReminderRow(reminder: ReminderEntity, confirm: (ReminderEntity) -> Unit, editTime: (ReminderEntity) -> Unit, editTitle: () -> Unit, delete: (ReminderEntity) -> Unit) {
+private fun ReminderRow(reminder: ReminderEntity, confirm: (ReminderEntity) -> Unit, editTime: (ReminderEntity) -> Unit, editTitle: () -> Unit, delete: (ReminderEntity) -> Unit, notPromise: (ReminderEntity) -> Unit) {
     val pending = reminder.status == ReminderEntity.STATUS_PENDING_CONFIRMATION
     // The title starts as the message itself; only show the message separately once it has been renamed.
     val renamed = reminder.title.isNotBlank() && reminder.title != reminder.message
@@ -407,8 +476,93 @@ private fun ReminderRow(reminder: ReminderEntity, confirm: (ReminderEntity) -> U
                 TextButton(onClick = { editTime(reminder) }) { Text("Change time") }
                 TextButton(onClick = editTitle) { Text("Rename") }
                 TextButton(onClick = { delete(reminder) }) { Text("Delete", color = MaterialTheme.colorScheme.error) }
+                if (pending && reminder.matchedPhrase != ManualReminder.MATCHED_PHRASE) {
+                    TextButton(onClick = { notPromise(reminder) }) { Text("Not a promise", color = MaterialTheme.colorScheme.onSurfaceVariant) }
+                }
             }
         }
+    }
+}
+
+@androidx.compose.runtime.Composable
+private fun FalseAlarmsTab(
+    items: List<ReminderEntity>,
+    restore: (ReminderEntity) -> Unit,
+    delete: (ReminderEntity) -> Unit,
+    deleteAll: () -> Unit,
+    export: (List<ReminderEntity>) -> Unit,
+    modifier: Modifier
+) {
+    var confirmExport by androidx.compose.runtime.remember { mutableStateOf(false) }
+    var confirmDeleteAll by androidx.compose.runtime.remember { mutableStateOf(false) }
+    LazyColumn(modifier = modifier, verticalArrangement = Arrangement.spacedBy(10.dp), contentPadding = androidx.compose.foundation.layout.PaddingValues(bottom = 20.dp)) {
+        item {
+            Surface(shape = RoundedCornerShape(12.dp), color = MaterialTheme.colorScheme.surfaceVariant) {
+                Column(modifier = Modifier.padding(12.dp), verticalArrangement = Arrangement.spacedBy(8.dp)) {
+                    Text(
+                        "Messages you marked \"Not a promise\". They stay on this phone. Export them to help make detection better for everyone.",
+                        style = MaterialTheme.typography.bodySmall
+                    )
+                    Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
+                        Button(onClick = { confirmExport = true }, enabled = items.isNotEmpty()) { Text("Export") }
+                        OutlinedButton(onClick = { confirmDeleteAll = true }, enabled = items.isNotEmpty()) { Text("Delete all") }
+                    }
+                }
+            }
+        }
+        if (items.isEmpty()) {
+            item {
+                Text(
+                    "No false alarms yet. When a suggestion isn't really a promise, tap \"Not a promise\" on the notification or the reminder.",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+        }
+        items(items, key = { it.id }) { reminder ->
+            Card(
+                modifier = Modifier.fillMaxWidth(),
+                shape = RoundedCornerShape(16.dp),
+                colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
+            ) {
+                Column(modifier = Modifier.fillMaxWidth().padding(16.dp), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                    Text(reminder.message, style = MaterialTheme.typography.titleSmall)
+                    Text(
+                        "Flagged by " + if (reminder.matchedPhrase.startsWith("semantic AI")) "the AI model ${reminder.matchedPhrase.substringAfter("semantic AI").trim()}" else "the phrase \"${reminder.matchedPhrase}\"",
+                        style = MaterialTheme.typography.labelMedium,
+                        color = MaterialTheme.colorScheme.onSurfaceVariant
+                    )
+                    Row(horizontalArrangement = Arrangement.spacedBy(4.dp)) {
+                        TextButton(onClick = { restore(reminder) }) { Text("It was a promise") }
+                        TextButton(onClick = { delete(reminder) }) { Text("Delete", color = MaterialTheme.colorScheme.error) }
+                    }
+                }
+            }
+        }
+    }
+    if (confirmExport) {
+        AlertDialog(
+            onDismissRequest = { confirmExport = false },
+            title = { Text("Export ${items.size} false alarms?") },
+            text = {
+                Text(
+                    "The file contains the text of these messages, without contact names. Check them for anything private " +
+                        "(names, numbers, addresses) and delete those first.\n\nYou choose where it goes: send it to the developer, " +
+                        "or add it to tools/contributed/ on the Promise Keeper GitHub page."
+                )
+            },
+            confirmButton = { TextButton(onClick = { confirmExport = false; export(items) }) { Text("Share") } },
+            dismissButton = { TextButton(onClick = { confirmExport = false }) { Text("Cancel") } }
+        )
+    }
+    if (confirmDeleteAll) {
+        AlertDialog(
+            onDismissRequest = { confirmDeleteAll = false },
+            title = { Text("Delete all false alarms?") },
+            text = { Text("This permanently removes these ${items.size} messages from your phone.") },
+            confirmButton = { TextButton(onClick = { confirmDeleteAll = false; deleteAll() }) { Text("Delete all", color = MaterialTheme.colorScheme.error) } },
+            dismissButton = { TextButton(onClick = { confirmDeleteAll = false }) { Text("Cancel") } }
+        )
     }
 }
 

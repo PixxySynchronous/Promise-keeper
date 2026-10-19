@@ -57,6 +57,20 @@ Measured on 761 labelled example messages, scoring each with a model that had no
 
 These examples were written by hand, not taken from real chats, so real-world results will differ. Very short or unusual messages are the most likely to be missed.
 
+## Help improve detection
+
+When a suggestion isn't really a promise, tap **Not a promise** on the notification or the reminder card. It moves to the **False alarms** tab, where you can:
+- tap **It was a promise** to move it back
+- delete it
+- tap **Export** to share all your false alarms as a file
+
+Exported files help train the model for everyone:
+- add the file to [`tools/contributed/`](tools/contributed/) with a pull request,
+- attach it to an issue,
+- or send it to the maintainer.
+
+The file contains only the message text and what flagged it, never contact names. Check it for anything private before sharing. The app has no internet access, so nothing is sent unless you share it yourself.
+
 ## Known limitations
 
 - **Contact names are guessed** from the WhatsApp screen and are sometimes wrong.
