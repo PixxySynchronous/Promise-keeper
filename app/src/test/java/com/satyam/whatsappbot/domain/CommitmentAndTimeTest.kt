@@ -179,7 +179,7 @@ class CommitmentAndTimeTest {
 
     @Test
     fun defaultsAreConfigurable() {
-        val custom = DefaultTimes(tomorrow = LocalTime.of(11, 15), noTimeDelayHours = 3)
+        val custom = DefaultTimes(day = LocalTime.of(11, 15), noTimeDelayHours = 3)
         val parser = TimeParser(custom)
         assertEquals(LocalTime.of(11, 15), parser.parse("tomorrow", now)!!.dateTime.toLocalTime())
         assertEquals(now.plusHours(3), parser.parseOrDefault("I'll send it", now).dateTime)

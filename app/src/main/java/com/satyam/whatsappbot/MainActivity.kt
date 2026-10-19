@@ -252,7 +252,7 @@ private fun HomeScreen(
                         maxLines = 1
                     )
                 },
-                actions = { TextButton(onClick = openSetup) { Text("Setup") } },
+                actions = { TextButton(onClick = openSetup) { Text("Settings") } },
                 colors = TopAppBarDefaults.topAppBarColors(containerColor = MaterialTheme.colorScheme.background)
             )
         }

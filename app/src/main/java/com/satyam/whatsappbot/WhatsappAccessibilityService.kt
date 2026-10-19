@@ -12,6 +12,7 @@ import com.satyam.whatsappbot.domain.OnDeviceSemanticClassifier
 import com.satyam.whatsappbot.domain.CommitmentMatch
 import com.satyam.whatsappbot.domain.ManualReminder
 import com.satyam.whatsappbot.domain.TimeParser
+import com.satyam.whatsappbot.domain.DefaultTimes
 import java.time.LocalDateTime
 import java.util.concurrent.Executors
 
@@ -34,7 +35,8 @@ class WhatsappAccessibilityService : AccessibilityService() {
     private var fallbackContact = ""
     private val detector = RuleBasedCommitmentDetector()
     private val semanticClassifier by lazy { OnDeviceSemanticClassifier(this) }
-    private val timeParser = TimeParser()
+    // Built per message so a changed default time applies immediately.
+    private fun timeParser() = TimeParser(DefaultTimes(day = ReminderSettings.defaultTime(this)))
     // Detection may load the ONNX model and tokenizer, so keep it off the main thread.
     private val detectionExecutor = Executors.newSingleThreadExecutor()
     private lateinit var reminderRepository: ReminderRepository
@@ -54,7 +56,7 @@ class WhatsappAccessibilityService : AccessibilityService() {
 
     private fun detectAndSuggest(message: String, contact: String) {
         ManualReminder.extract(message)?.let { text ->
-            val parsedTime = timeParser.parseOrDefault(text, LocalDateTime.now())
+            val parsedTime = timeParser().parseOrDefault(text, LocalDateTime.now())
             val safeContact = contact.ifBlank { "Unknown contact" }
             reminderRepository.insertPending(message, safeContact, ManualReminder.MATCHED_PHRASE, parsedTime.dateTime, title = text) { reminder ->
                 ReminderNotifications.showConfirmation(this, reminder)
@@ -72,7 +74,7 @@ class WhatsappAccessibilityService : AccessibilityService() {
             DebugLogStore.add("COMMITMENT_UNMATCHED text=${DebugLogStore.safeText(message)}")
             return
         }
-        val parsedTime = timeParser.parseOrDefault(message, LocalDateTime.now())
+        val parsedTime = timeParser().parseOrDefault(message, LocalDateTime.now())
         val safeContact = contact.ifBlank { "Unknown contact" }
         reminderRepository.insertPending(message, safeContact, match.matchedPhrase, parsedTime.dateTime) { reminder ->
             ReminderNotifications.showConfirmation(this, reminder)

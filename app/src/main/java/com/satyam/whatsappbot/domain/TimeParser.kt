@@ -8,12 +8,12 @@ import java.time.temporal.TemporalAdjusters
 import java.util.Locale
 
 data class DefaultTimes(
-    val tomorrow: LocalTime = LocalTime.of(10, 0),
+    /** Used when a message names a day but no time: "kal bhej dunga", "by fri", "next week", "21/10". User-adjustable. */
+    val day: LocalTime = LocalTime.of(10, 0),
     val eod: LocalTime = LocalTime.of(18, 0),
     val tonight: LocalTime = LocalTime.of(21, 0),
     val morning: LocalTime = LocalTime.of(9, 30),
     val evening: LocalTime = LocalTime.of(18, 0),
-    val nextWeek: LocalTime = LocalTime.of(10, 0),
     val noTimeDelayHours: Long = 2
 )
 
@@ -61,7 +61,7 @@ class TimeParser(private val defaults: DefaultTimes = DefaultTimes()) {
         val futureDate = if (date.isBefore(now.toLocalDate())) date.plusYears(1) else date
         val withoutDate = text.replaceRange(match.range, " ")
         val clock = extractClock(withoutDate)
-        val time = clock?.let(::futureDayTime) ?: LocalTime.of(10, 0)
+        val time = clock?.let(::futureDayTime) ?: defaults.day
         return ParsedTime(LocalDateTime.of(futureDate, time), match.value, clock == null)
     }
 
@@ -78,7 +78,7 @@ class TimeParser(private val defaults: DefaultTimes = DefaultTimes()) {
             now.toLocalDate().with(TemporalAdjusters.next(DayOfWeek.MONDAY)).with(TemporalAdjusters.nextOrSame(weekday))
         }
         val clock = extractClock(text.replace(marker, " "))
-        return ParsedTime(LocalDateTime.of(date, clock?.let(::futureDayTime) ?: defaults.nextWeek), marker, usedDefault = clock == null)
+        return ParsedTime(LocalDateTime.of(date, clock?.let(::futureDayTime) ?: defaults.day), marker, usedDefault = clock == null)
     }
 
     // On another day, "by 5" with no am/pm almost always means the afternoon or evening: read 1-7 as PM.
@@ -97,7 +97,7 @@ class TimeParser(private val defaults: DefaultTimes = DefaultTimes()) {
         // A number straight after the day ("fri 5", "wed 10:30") is a time even without "at"/"by".
         val clock = extractClock(text)
             ?: Regex("${Regex.escape(matched)}\\s+(\\d{1,2}(?::\\d{2})?)\\b").find(text)?.let { extractClock("at ${it.groupValues[1]}") }
-        val dateTime = LocalDateTime.of(date, clock?.let(::futureDayTime) ?: LocalTime.of(10, 0))
+        val dateTime = LocalDateTime.of(date, clock?.let(::futureDayTime) ?: defaults.day)
         // "this mon" said on Monday afternoon: the default time has passed, so fall back to later today.
         if (!dateTime.isAfter(now)) return ParsedTime(now.plusHours(defaults.noTimeDelayHours), matched, usedDefault = true)
         return ParsedTime(dateTime, matched, clock == null)
@@ -141,7 +141,7 @@ class TimeParser(private val defaults: DefaultTimes = DefaultTimes()) {
 
     private fun parseNamedDefault(text: String, now: LocalDateTime): ParsedTime? {
         val tomorrow = Regex("\\b(tomorrow|kal)\\b").find(text)
-        if (tomorrow != null && isFutureKal(text)) return ParsedTime(LocalDateTime.of(now.toLocalDate().plusDays(1), defaults.tomorrow), tomorrow.value, true)
+        if (tomorrow != null && isFutureKal(text)) return ParsedTime(LocalDateTime.of(now.toLocalDate().plusDays(1), defaults.day), tomorrow.value, true)
         // Checked before "today" so "aaj raat" is not read as plain "aaj".
         val tonight = Regex("\\b(tonight|aaj raat)\\b").find(text)
         if (tonight != null) return ParsedTime(todayOrTomorrow(now, defaults.tonight), tonight.value, true)

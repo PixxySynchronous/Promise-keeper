@@ -20,7 +20,14 @@ import androidx.compose.foundation.layout.systemBarsPadding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.TimeInput
+import androidx.compose.material3.rememberTimePickerState
+import java.time.LocalTime
+import java.time.format.DateTimeFormatter
+import java.util.Locale
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.MaterialTheme
@@ -152,7 +159,9 @@ fun SetupGuide(status: SetupStatus, onFinish: () -> Unit) {
             OutlinedButton(onClick = { context.startActivity(appInfoIntent(context)) }) { Text("Open app info") }
         }
 
-        SetupStep(number = 5, title = "Try it", done = null, required = false, why = "Check that everything works.") {
+        DefaultTimeStep(number = 5)
+
+        SetupStep(number = 6, title = "Try it", done = null, required = false, why = "Check that everything works.") {
             Instructions(
                 "Open WhatsApp and send a promise to any chat, for example to yourself: kal bhej dunga",
                 "Within a few seconds, a \"Reminder suggestion\" notification appears.",
@@ -173,6 +182,48 @@ fun SetupGuide(status: SetupStatus, onFinish: () -> Unit) {
         if (!status.requiredDone) {
             TextButton(onClick = onFinish, modifier = Modifier.fillMaxWidth()) { Text("I'll do it later") }
         }
+    }
+}
+
+@Composable
+@OptIn(ExperimentalMaterial3Api::class)
+private fun DefaultTimeStep(number: Int) {
+    val context = LocalContext.current
+    var time by remember { mutableStateOf(ReminderSettings.defaultTime(context)) }
+    var editing by remember { mutableStateOf(false) }
+    SetupStep(
+        number = number, title = "Default reminder time", done = null, required = false,
+        why = "If a promise mentions a day but no time, like \"kal bhej dunga\", \"by fri\" or \"next week\", the reminder is set for this time."
+    ) {
+        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.SpaceBetween) {
+            Text(
+                time.format(DateTimeFormatter.ofPattern("h:mm a", Locale.getDefault())),
+                style = MaterialTheme.typography.headlineSmall,
+                color = MaterialTheme.colorScheme.primary
+            )
+            OutlinedButton(onClick = { editing = true }) { Text("Change") }
+        }
+    }
+    if (editing) {
+        val state = rememberTimePickerState(initialHour = time.hour, initialMinute = time.minute, is24Hour = false)
+        AlertDialog(
+            onDismissRequest = { editing = false },
+            title = { Text("Default reminder time") },
+            text = {
+                Column(verticalArrangement = Arrangement.spacedBy(12.dp)) {
+                    Text("When a message has a day but no time, remind me at:", style = MaterialTheme.typography.bodyMedium)
+                    TimeInput(state = state)
+                }
+            },
+            confirmButton = {
+                TextButton(onClick = {
+                    time = LocalTime.of(state.hour, state.minute)
+                    ReminderSettings.setDefaultTime(context, time)
+                    editing = false
+                }) { Text("Save") }
+            },
+            dismissButton = { TextButton(onClick = { editing = false }) { Text("Cancel") } }
+        )
     }
 }
 

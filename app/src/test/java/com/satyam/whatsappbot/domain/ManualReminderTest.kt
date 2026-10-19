@@ -45,6 +45,18 @@ class ManualReminderTest {
     }
 
     @Test
+    fun chosenDefaultTimeAppliesWheneverADayHasNoTime() {
+        val parser = TimeParser(DefaultTimes(day = java.time.LocalTime.of(8, 30)))
+        val monday = LocalDateTime.of(2026, 10, 19, 11, 0)
+        assertEquals(LocalDateTime.of(2026, 10, 20, 8, 30), parser.parseOrDefault("kal bhej dunga", monday).dateTime)
+        assertEquals(LocalDateTime.of(2026, 10, 23, 8, 30), parser.parseOrDefault("will send by fri", monday).dateTime)
+        assertEquals(LocalDateTime.of(2026, 10, 26, 8, 30), parser.parseOrDefault("will share next week", monday).dateTime)
+        assertEquals(LocalDateTime.of(2026, 10, 25, 8, 30), parser.parseOrDefault("send it on 25/10", monday).dateTime)
+        // An explicit time still wins.
+        assertEquals(LocalDateTime.of(2026, 10, 23, 17, 0), parser.parseOrDefault("will send by fri 5", monday).dateTime)
+    }
+
+    @Test
     fun timeIsReadFromTheTextAfterTheKeyword() {
         val sunday = LocalDateTime.of(2026, 10, 18, 17, 30)
         val text = ManualReminder.extract("Reminder: submit form next week by 4")!!
