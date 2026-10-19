@@ -9,11 +9,11 @@ class ReminderRepository(context: Context) {
     private val dao = ReminderDatabase.get(context).reminderDao()
     private val executor = Executors.newSingleThreadExecutor()
 
-    fun insertPending(message: String, contact: String, matchedPhrase: String, reminderAt: LocalDateTime, onComplete: (ReminderEntity) -> Unit) {
+    fun insertPending(message: String, contact: String, matchedPhrase: String, reminderAt: LocalDateTime, title: String = message, onComplete: (ReminderEntity) -> Unit) {
         executor.execute {
             val reminder = ReminderEntity(
                 message = message,
-                title = message,
+                title = title,
                 contact = contact,
                 matchedPhrase = matchedPhrase,
                 reminderAtEpochMillis = reminderAt.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli()

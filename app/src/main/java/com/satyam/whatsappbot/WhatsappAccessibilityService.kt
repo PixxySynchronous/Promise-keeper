@@ -10,6 +10,7 @@ import com.satyam.whatsappbot.data.ReminderRepository
 import com.satyam.whatsappbot.domain.RuleBasedCommitmentDetector
 import com.satyam.whatsappbot.domain.OnDeviceSemanticClassifier
 import com.satyam.whatsappbot.domain.CommitmentMatch
+import com.satyam.whatsappbot.domain.ManualReminder
 import com.satyam.whatsappbot.domain.TimeParser
 import java.time.LocalDateTime
 import java.util.concurrent.Executors
@@ -52,6 +53,16 @@ class WhatsappAccessibilityService : AccessibilityService() {
     }
 
     private fun detectAndSuggest(message: String, contact: String) {
+        ManualReminder.extract(message)?.let { text ->
+            val parsedTime = timeParser.parseOrDefault(text, LocalDateTime.now())
+            val safeContact = contact.ifBlank { "Unknown contact" }
+            reminderRepository.insertPending(message, safeContact, ManualReminder.MATCHED_PHRASE, parsedTime.dateTime, title = text) { reminder ->
+                ReminderNotifications.showConfirmation(this, reminder)
+            }
+            DebugLogStore.add("MANUAL_REMINDER time=${parsedTime.dateTime} contact=$safeContact")
+            return
+        }
+
         // Phrase list first; the on-device model only sees messages without a clear "not a promise" signal.
         val match = detector.detect(message)
             ?: semanticClassifier.takeUnless { detector.rejects(message) }?.classify(message)

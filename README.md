@@ -6,6 +6,8 @@ Send *"kal bhej dunga"*, *"I'll call you at 5"* or *"मैं कल भेज 
 
 It understands **English, Hinglish and Hindi (Devanagari)**.
 
+**Set a reminder on purpose:** start any message with the word **reminder**, for example *"Reminder: pay rent on 1/11"* or *"reminder call mom at 5"*. You always get a reminder for it, with no detection involved. Send it to yourself (WhatsApp → *Message yourself*) to keep it private.
+
 ## Privacy
 
 - **No internet access.** The app does not request Android's `INTERNET` permission, so Android itself blocks it from connecting to anything. Your messages cannot leave the phone.

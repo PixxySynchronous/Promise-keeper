@@ -159,6 +159,12 @@ fun SetupGuide(status: SetupStatus, onFinish: () -> Unit) {
                 "Tap Set to keep the reminder, Edit time to change when it rings, or Ignore.",
                 "Right after the phone restarts, the first suggestion can take about 15 seconds while the app gets ready."
             )
+            HelpBox(
+                "Tip: set a reminder on purpose",
+                "Start any message with the word reminder and you always get one, for example:\n" +
+                    "Reminder: pay rent on 1/11\nreminder call mom at 5\n" +
+                    "Send it to yourself (WhatsApp → Message yourself) to keep it private."
+            )
         }
 
         Button(onClick = onFinish, enabled = status.requiredDone, modifier = Modifier.fillMaxWidth()) {

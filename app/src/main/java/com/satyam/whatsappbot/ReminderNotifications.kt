@@ -12,6 +12,7 @@ import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import com.satyam.whatsappbot.data.ReminderEntity
+import com.satyam.whatsappbot.domain.ManualReminder
 import java.time.Instant
 import java.time.ZoneId
 import java.time.format.DateTimeFormatter
@@ -37,11 +38,17 @@ object ReminderNotifications {
 
     fun showConfirmation(context: Context, reminder: ReminderEntity) {
         createChannels(context)
+        val manual = reminder.matchedPhrase == ManualReminder.MATCHED_PHRASE
+        val text = if (manual) {
+            "Remind you ${formatTime(reminder.reminderAtEpochMillis)}: ${reminder.title}?"
+        } else {
+            "Remind you ${formatTime(reminder.reminderAtEpochMillis)}: ${reminder.message} (to ${reminder.contact})?"
+        }
         val notification = NotificationCompat.Builder(context, CHANNEL_CONFIRMATION)
             .setSmallIcon(android.R.drawable.ic_popup_reminder)
-            .setContentTitle("Reminder suggestion")
-            .setContentText("Remind you ${formatTime(reminder.reminderAtEpochMillis)}: ${reminder.message} (to ${reminder.contact})?")
-            .setStyle(NotificationCompat.BigTextStyle().bigText("Remind you ${formatTime(reminder.reminderAtEpochMillis)}: ${reminder.message} (to ${reminder.contact})?"))
+            .setContentTitle(if (manual) "Your reminder" else "Reminder suggestion")
+            .setContentText(text)
+            .setStyle(NotificationCompat.BigTextStyle().bigText(text))
             .setAutoCancel(false)
             .setOnlyAlertOnce(true)
             .addAction(action(context, ACTION_SET, reminder.id, "Set"))
