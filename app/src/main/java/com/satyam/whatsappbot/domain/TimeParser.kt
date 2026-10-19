@@ -71,7 +71,7 @@ class TimeParser(private val defaults: DefaultTimes = DefaultTimes()) {
      */
     private fun parseNextWeek(text: String, now: LocalDateTime): ParsedTime? {
         val marker = NEXT_WEEK.find(text)?.value ?: NEXT_WEEK_DEVANAGARI.firstOrNull { text.contains(it) } ?: return null
-        val weekday = WEEKDAY.find(text)?.let { WEEKDAYS.getValue(it.groupValues[1]) }
+        val weekday = findWeekday(text)?.first
         val date = if (weekday == null) {
             now.toLocalDate().plusWeeks(1)
         } else {
@@ -88,13 +88,32 @@ class TimeParser(private val defaults: DefaultTimes = DefaultTimes()) {
     }
 
     private fun parseWeekday(text: String, now: LocalDateTime): ParsedTime? {
-        val match = WEEKDAY.find(text) ?: return null
-        val day = WEEKDAYS.getValue(match.groupValues[1])
+        val (day, matched) = findWeekday(text) ?: return null
+        // The coming occurrence; on that same day it means next week, unless the message says "today" or "this <day>".
+        val sameDayMeansToday = text.contains("today") || Regex("\\bthis\\s+${Regex.escape(matched.substringAfterLast(' '))}").containsMatchIn(text)
         val date = now.toLocalDate().with(TemporalAdjusters.nextOrSame(day)).let {
-            if (it == now.toLocalDate() && !text.contains("today")) it.plusWeeks(1) else it
+            if (it == now.toLocalDate() && !sameDayMeansToday) it.plusWeeks(1) else it
         }
+        // A number straight after the day ("fri 5", "wed 10:30") is a time even without "at"/"by".
         val clock = extractClock(text)
-        return ParsedTime(LocalDateTime.of(date, clock?.let(::futureDayTime) ?: LocalTime.of(10, 0)), match.value, clock == null)
+            ?: Regex("${Regex.escape(matched)}\\s+(\\d{1,2}(?::\\d{2})?)\\b").find(text)?.let { extractClock("at ${it.groupValues[1]}") }
+        val dateTime = LocalDateTime.of(date, clock?.let(::futureDayTime) ?: LocalTime.of(10, 0))
+        // "this mon" said on Monday afternoon: the default time has passed, so fall back to later today.
+        if (!dateTime.isAfter(now)) return ParsedTime(now.plusHours(defaults.noTimeDelayHours), matched, usedDefault = true)
+        return ParsedTime(dateTime, matched, clock == null)
+    }
+
+    /**
+     * Full English names anywhere; Hindi names (romanised or Devanagari) anywhere; short forms ("wed", "sat", "sun")
+     * only next to a date word ("this wed", "by fri", "mon tak"), because "sat", "sun" and "wed" are also ordinary words.
+     */
+    private fun findWeekday(text: String): Pair<DayOfWeek, String>? {
+        WEEKDAY.find(text)?.let { return WEEKDAYS.getValue(it.groupValues[1]) to it.value }
+        HINDI_WEEKDAY.find(text)?.let { return HINDI_WEEKDAYS.getValue(it.groupValues[1]) to it.value }
+        DEVANAGARI_WEEKDAYS.entries.firstOrNull { text.contains(it.key) }?.let { return it.value to it.key }
+        SHORT_WEEKDAY_AFTER_WORD.find(text)?.let { return SHORT_WEEKDAYS.getValue(it.groupValues[2]) to it.value }
+        SHORT_WEEKDAY_BEFORE_WORD.find(text)?.let { return SHORT_WEEKDAYS.getValue(it.groupValues[1]) to it.value }
+        return null
     }
 
     private fun parseClock(text: String, now: LocalDateTime): ParsedTime? {
@@ -144,6 +163,31 @@ class TimeParser(private val defaults: DefaultTimes = DefaultTimes()) {
             "sunday" to DayOfWeek.SUNDAY
         )
         val WEEKDAY = Regex("\\b(monday|tuesday|wednesday|thursday|friday|saturday|sunday)\\b")
+        val SHORT_WEEKDAYS = mapOf(
+            "mon" to DayOfWeek.MONDAY, "tue" to DayOfWeek.TUESDAY, "tues" to DayOfWeek.TUESDAY,
+            "wed" to DayOfWeek.WEDNESDAY, "weds" to DayOfWeek.WEDNESDAY, "thu" to DayOfWeek.THURSDAY,
+            "thur" to DayOfWeek.THURSDAY, "thurs" to DayOfWeek.THURSDAY, "fri" to DayOfWeek.FRIDAY,
+            "sat" to DayOfWeek.SATURDAY, "sun" to DayOfWeek.SUNDAY
+        )
+        private const val SHORT = "(mon|tues|tue|weds|wed|thurs|thur|thu|fri|sat|sun)"
+        val SHORT_WEEKDAY_AFTER_WORD = Regex("\\b(this|by|on|next|till|until|before|coming|upto)\\s+$SHORT\\b")
+        val SHORT_WEEKDAY_BEFORE_WORD = Regex("\\b$SHORT\\s+(tak|ko|tk)\\b")
+        val HINDI_WEEKDAYS = mapOf(
+            "somvar" to DayOfWeek.MONDAY, "somwar" to DayOfWeek.MONDAY,
+            "mangalvar" to DayOfWeek.TUESDAY, "mangalwar" to DayOfWeek.TUESDAY,
+            "budhvar" to DayOfWeek.WEDNESDAY, "budhwar" to DayOfWeek.WEDNESDAY,
+            "guruvar" to DayOfWeek.THURSDAY, "guruwar" to DayOfWeek.THURSDAY, "brihaspativar" to DayOfWeek.THURSDAY,
+            "shukravar" to DayOfWeek.FRIDAY, "shukrawar" to DayOfWeek.FRIDAY,
+            "shanivar" to DayOfWeek.SATURDAY, "shaniwar" to DayOfWeek.SATURDAY,
+            "ravivar" to DayOfWeek.SUNDAY, "raviwar" to DayOfWeek.SUNDAY, "itwar" to DayOfWeek.SUNDAY,
+            "itvaar" to DayOfWeek.SUNDAY, "etwar" to DayOfWeek.SUNDAY, "itvar" to DayOfWeek.SUNDAY
+        )
+        val HINDI_WEEKDAY = Regex("\\b(${HINDI_WEEKDAYS.keys.joinToString("|")})\\b")
+        val DEVANAGARI_WEEKDAYS = mapOf(
+            "सोमवार" to DayOfWeek.MONDAY, "मंगलवार" to DayOfWeek.TUESDAY, "बुधवार" to DayOfWeek.WEDNESDAY,
+            "गुरुवार" to DayOfWeek.THURSDAY, "बृहस्पतिवार" to DayOfWeek.THURSDAY, "शुक्रवार" to DayOfWeek.FRIDAY,
+            "शनिवार" to DayOfWeek.SATURDAY, "रविवार" to DayOfWeek.SUNDAY, "इतवार" to DayOfWeek.SUNDAY
+        )
         val NEXT_WEEK = Regex("\\b(next week|next wk|agle hafte|agle week|agle hafta)\\b")
         val NEXT_WEEK_DEVANAGARI = listOf("अगले हफ्ते", "अगले हफ़्ते", "अगले सप्ताह")
     }
