@@ -33,6 +33,9 @@ interface ReminderDao {
     @Query("DELETE FROM reminders WHERE id = :id")
     fun delete(id: Long)
 
+    @Query("DELETE FROM reminders WHERE id IN (:ids)")
+    fun deleteAll(ids: List<Long>)
+
     @Query("DELETE FROM reminders WHERE status = 'FALSE_ALARM'")
     fun deleteFalseAlarms()
 }

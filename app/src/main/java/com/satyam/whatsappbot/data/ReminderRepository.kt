@@ -34,6 +34,8 @@ class ReminderRepository(context: Context) {
 
     fun delete(id: Long) = executor.execute { dao.delete(id) }
 
+    fun deleteAll(ids: List<Long>, onComplete: () -> Unit = {}) = executor.execute { dao.deleteAll(ids); onComplete() }
+
     fun markScheduled(id: Long) = executor.execute { dao.updateStatus(id, ReminderEntity.STATUS_SCHEDULED) }
 
     fun markIgnored(id: Long) = executor.execute { dao.updateStatus(id, ReminderEntity.STATUS_IGNORED) }

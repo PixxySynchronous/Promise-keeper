@@ -118,6 +118,7 @@ class MainActivity : ComponentActivity() {
                         toggleAlarm = ::setAlarm,
                         restoreFalseAlarm = ::restoreFalseAlarm,
                         deleteAllFalseAlarms = ::deleteAllFalseAlarms,
+                        deleteReminders = ::deleteReminders,
                         exportFalseAlarms = ::exportFalseAlarms
                     )
                 }
@@ -193,6 +194,17 @@ class MainActivity : ComponentActivity() {
     private fun restoreFalseAlarm(reminder: ReminderEntity) {
         repository.restoreFromFalseAlarm(reminder.id)
         refreshReminders()
+    }
+
+    /** Delete all reminders in a tab: cancels their alarms and notifications, then removes them. */
+    private fun deleteReminders(reminders: List<ReminderEntity>) {
+        val notifications = NotificationManagerCompat.from(this)
+        reminders.forEach {
+            ReminderNotifications.cancel(this, it.id)
+            notifications.cancel(ReminderNotifications.confirmationNotificationId(it.id))
+            notifications.cancel(ReminderNotifications.reminderNotificationId(it.id))
+        }
+        repository.deleteAll(reminders.map { it.id }) { runOnUiThread { refreshReminders() } }
     }
 
     private fun deleteAllFalseAlarms() = repository.deleteFalseAlarms { runOnUiThread { refreshReminders() } }
@@ -298,6 +310,7 @@ private fun HomeScreen(
     toggleAlarm: (ReminderEntity, Boolean) -> Unit,
     restoreFalseAlarm: (ReminderEntity) -> Unit,
     deleteAllFalseAlarms: () -> Unit,
+    deleteReminders: (List<ReminderEntity>) -> Unit,
     exportFalseAlarms: (List<ReminderEntity>) -> Unit
 ) {
     var editingTitle by androidx.compose.runtime.remember { mutableStateOf<ReminderEntity?>(null) }
@@ -349,11 +362,15 @@ private fun HomeScreen(
             when (tab) {
                 TAB_REVIEW -> ReminderList(
                     toReview, "Nothing to review", "When a promise is detected, it appears here. Tap Set reminder or Skip.",
-                    refresh, Modifier.weight(1f)
+                    refresh, Modifier.weight(1f),
+                    deleteAllTitle = "Delete all ${toReview.size} suggestions to review?",
+                    onDeleteAll = { deleteReminders(toReview) }
                 ) { reminder -> ReminderRow(reminder, confirm, editTime, { editingTitle = reminder }, { pendingDelete = reminder }, { skipping = it }, toggleAlarm) }
                 TAB_ACTIVE -> ReminderList(
                     active, "No reminders set", "Reminders you set appear here, soonest first.",
-                    refresh, Modifier.weight(1f)
+                    refresh, Modifier.weight(1f),
+                    deleteAllTitle = "Delete all ${active.size} active reminders?",
+                    onDeleteAll = { deleteReminders(active) }
                 ) { reminder -> ReminderRow(reminder, confirm, editTime, { editingTitle = reminder }, { pendingDelete = reminder }, { skipping = it }, toggleAlarm) }
                 else -> FalseAlarmsTab(falseAlarms, restoreFalseAlarm, { pendingDelete = it }, deleteAllFalseAlarms, exportFalseAlarms, Modifier.weight(1f))
             }
@@ -618,9 +635,19 @@ private fun ReminderList(
     emptyText: String,
     refresh: () -> Unit,
     modifier: Modifier,
+    deleteAllTitle: String,
+    onDeleteAll: () -> Unit,
     row: @androidx.compose.runtime.Composable (ReminderEntity) -> Unit
 ) {
+    var confirmDeleteAll by androidx.compose.runtime.remember { mutableStateOf(false) }
     LazyColumn(modifier = modifier, verticalArrangement = Arrangement.spacedBy(10.dp), contentPadding = androidx.compose.foundation.layout.PaddingValues(bottom = 20.dp)) {
+        if (items.isNotEmpty()) {
+            item(key = "delete-all") {
+                Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.End) {
+                    OutlinedButton(onClick = { confirmDeleteAll = true }) { Text("Delete all", color = MaterialTheme.colorScheme.error) }
+                }
+            }
+        }
         if (items.isEmpty()) {
             item {
                 Surface(modifier = Modifier.fillMaxWidth(), shape = RoundedCornerShape(16.dp), color = MaterialTheme.colorScheme.surface) {
@@ -633,6 +660,15 @@ private fun ReminderList(
             }
         }
         items(items, key = { it.id }) { row(it) }
+    }
+    if (confirmDeleteAll) {
+        AlertDialog(
+            onDismissRequest = { confirmDeleteAll = false },
+            title = { Text(deleteAllTitle) },
+            text = { Text("This cancels their alarms and permanently removes them and their messages from your phone.") },
+            confirmButton = { TextButton(onClick = { confirmDeleteAll = false; onDeleteAll() }) { Text("Delete all", color = MaterialTheme.colorScheme.error) } },
+            dismissButton = { TextButton(onClick = { confirmDeleteAll = false }) { Text("Cancel") } }
+        )
     }
 }
 
