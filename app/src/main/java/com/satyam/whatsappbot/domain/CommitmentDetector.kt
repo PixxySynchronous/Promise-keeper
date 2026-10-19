@@ -21,6 +21,7 @@ class RuleBasedCommitmentDetector(
             return null
         }
         val phrase = phrases.firstOrNull { normalized.contains(normalize(it)) }
+            ?: SELF_TODO.find(normalized)?.value?.trim()
             ?: return null
         return CommitmentMatch(message, phrase)
     }
@@ -56,6 +57,12 @@ class RuleBasedCommitmentDetector(
     private companion object {
         // Rejoins Hinglish verbs typed with a split ending: "bhej ta hu" -> "bhejta hu", "kar unga" -> "karunga".
         val SPLIT_VERB_ENDING = Regex("\\b(bhej|bhj|bata|bta|kar|kr|dekh|bol) (ta|ti|unga|ungi)\\b")
+        // The sender's own to-dos: "need to order paneer by 5", "I have to submit it tomorrow". Only at the start
+        // (after an optional greeting/filler) or with "I" as the subject, so "you have to try this" does not match.
+        val SELF_TODO = Regex(
+            "^((hi+|hey+|hello|ok|okay|ugh|oh|bro|bhai|yaar|yr|so|also|btw)\\s+)*(need to|have to|must|gotta|got to)\\b" +
+                "|\\bi (really |still |also |just )?(need to|have to|must|gotta|got to)\\b|\\bi'?ve (got )?to\\b"
+        )
         val START_QUESTION_OR_UNCERTAINTY = Regex("^(can you|will you|could you|would you|maybe|i was going to)\\b")
         val NEGATIVE_SIGNALS = listOf(
             // someone else's promise: "he will", "she said she'll send"

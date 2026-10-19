@@ -158,6 +158,18 @@ class CommitmentAndTimeTest {
     }
 
     @Test
+    fun ownToDosAreDetectedButNotOtherPeoples() {
+        val rules = RuleBasedCommitmentDetector()
+        listOf("Need to order paneer by 5", "I have to submit the form tomorrow", "must pay the bill by friday",
+            "ugh need to finish the slides tonight", "I've got to renew my passport", "ok gotta call mom at 6")
+            .forEach { assertNotNull("Expected match: $it", rules.detect(it)) }
+        listOf("you have to try this place", "he needs to call me back", "do I need to bring anything",
+            "you must watch this movie", "they have to approve it first")
+            .forEach { assertNull("Expected no match: $it", rules.detect(it)) }
+        assertEquals(java.time.LocalTime.of(17, 0), TimeParser().parse("Need to order paneer by 5", now)!!.dateTime.toLocalTime())
+    }
+
+    @Test
     fun questionsWithoutAQuestionMarkAreRejected() {
         val rules = RuleBasedCommitmentDetector()
         listOf("hi is gym open today or tomorrow", "kya kal office hai", "hey are you free tomorrow", "bro when is the class tomorrow", "do you have the file")

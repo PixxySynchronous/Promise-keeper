@@ -36,6 +36,11 @@ COMMITMENTS = {
         "I'll tell you more about it next week", "will tell you the details tomorrow", "ill tell u later tonight",
         "I'll inform you once it's confirmed", "will tell you after the meeting", "I'll tell you what he said",
         "I'll tell you the plan by evening", "will inform you by Monday",
+        # the sender's own to-dos
+        "need to order paneer by 5", "have to submit the form tomorrow", "I need to call the bank today",
+        "must pay the electricity bill by friday", "gotta pick up the laundry at 6", "I have to book tickets tonight",
+        "need to buy milk on the way home", "I've got to renew my passport this week", "ugh need to finish the slides tonight",
+        "I must reply to that mail tomorrow", "need to recharge the phone today", "I have to drop the car for service on monday",
         # greeting first, still a promise
         "hi, will send it tomorrow", "hey ill call you tomorrow morning", "hello sir, I will submit the report today",
         "bro I'll be there by 7 tomorrow", "hi I'll check and tell you by evening",
@@ -149,6 +154,9 @@ NON_COMMITMENTS = {
         "remind me to call mom", "don't forget to bring the charger", "make sure you submit it by Sunday",
         "you have to finish this today", "please do it by tomorrow", "can u call me", "send asap",
         "tell me more", "can you tell me the address?", "did she tell you?", "tell him to call me", "let me know next week",
+        # obligations of other people, and questions about them
+        "you need to rest", "you have to try this place", "he needs to call me back", "they have to approve it first",
+        "do I need to bring anything", "you must watch this movie", "she has to leave early today", "we need to talk sometime",
         # questions typed without a question mark
         "hi is gym open today or tomorrow", "is the office open tomorrow", "hey are you free tomorrow evening",
         "is it raining there today", "when is the exam next week", "what time is the meeting tomorrow",
