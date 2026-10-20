@@ -44,6 +44,8 @@ Requires **Android 13 or newer**.
    If the accessibility switch is greyed out ("Restricted setting"), the guide explains how to allow it.
 6. Test it: send yourself `kal bhej dunga` in WhatsApp. A *Reminder suggestion* notification should appear.
 
+**Bank or UPI app says Promise Keeper is suspicious?** Some payment apps refuse to run while an accessibility service from a downloaded app is on. Before paying, open Promise Keeper → **Settings** → **Turn off for now**. Afterwards, turn it back on from step 2 of the same screen. Promises you send while it's off aren't noticed.
+
 The app is about 130 MB, mostly the language model.
 
 ## How well it works
