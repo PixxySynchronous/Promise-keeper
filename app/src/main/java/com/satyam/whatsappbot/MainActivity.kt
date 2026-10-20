@@ -101,7 +101,7 @@ class MainActivity : ComponentActivity() {
                     // Back returns to the reminders once setup has been finished before; on first run it leaves the app.
                     BackHandler(enabled = setupPrefs.getBoolean(KEY_SETUP_FINISHED, false)) { showSetup = false }
                     Surface(color = MaterialTheme.colorScheme.background, modifier = Modifier.fillMaxSize()) {
-                        SetupGuide(setupStatus, onFinish = ::finishSetup)
+                        SetupGuide(setupStatus, onFinish = ::finishSetup, refreshStatus = { setupStatus = readSetupStatus(this) })
                     }
                 } else {
                     HomeScreen(

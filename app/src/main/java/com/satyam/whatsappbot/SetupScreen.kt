@@ -6,6 +6,8 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
+import android.os.Handler
+import android.os.Looper
 import android.os.PowerManager
 import android.provider.Settings
 import androidx.activity.compose.rememberLauncherForActivityResult
@@ -76,7 +78,7 @@ private fun appInfoIntent(context: Context) =
 
 /** Step-by-step setup shown on first launch and from the "Setup" button. Statuses refresh on every resume. */
 @Composable
-fun SetupGuide(status: SetupStatus, onFinish: () -> Unit) {
+fun SetupGuide(status: SetupStatus, onFinish: () -> Unit, refreshStatus: () -> Unit = {}) {
     val context = LocalContext.current
     var notificationAsked by remember { mutableStateOf(false) }
     val notificationLauncher = rememberLauncherForActivityResult(ActivityResultContracts.RequestPermission()) { notificationAsked = true }
@@ -141,6 +143,8 @@ fun SetupGuide(status: SetupStatus, onFinish: () -> Unit) {
             OutlinedButton(onClick = { context.startActivity(appInfoIntent(context)) }) { Text("Open app info") }
         }
 
+        if (status.accessibility) PauseForPaymentsCard(refreshStatus)
+
         SetupStep(
             number = 3, title = "Allow alarms & reminders", done = status.exactAlarms, required = false,
             why = "Lets reminders ring at exactly the time you chose instead of several minutes late."
@@ -187,6 +191,37 @@ fun SetupGuide(status: SetupStatus, onFinish: () -> Unit) {
         }
         if (!status.requiredDone) {
             TextButton(onClick = onFinish, modifier = Modifier.fillMaxWidth()) { Text("I'll do it later") }
+        }
+    }
+}
+
+/**
+ * Many banking and UPI apps refuse to open while an accessibility service from a downloaded app is on. This turns
+ * Promise Keeper's service off for real; step 2 then shows how to turn it back on after paying.
+ */
+@Composable
+private fun PauseForPaymentsCard(refreshStatus: () -> Unit) {
+    val context = LocalContext.current
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
+    ) {
+        Column(modifier = Modifier.padding(16.dp), verticalArrangement = Arrangement.spacedBy(10.dp)) {
+            Text("Bank or UPI app won't open?", style = MaterialTheme.typography.titleMedium)
+            Text(
+                "Some payment apps call Promise Keeper suspicious because it uses Accessibility. Turn it off while you pay, then turn it back on in step 2. Promises sent while it's off are not noticed.",
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onSurfaceVariant
+            )
+            Button(onClick = {
+                if (WhatsappAccessibilityService.turnOff()) {
+                    // Android updates the enabled-services setting just after the service unbinds.
+                    Handler(Looper.getMainLooper()).postDelayed(refreshStatus, 500)
+                } else {
+                    context.startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))
+                }
+            }) { Text("Turn off for now") }
         }
     }
 }

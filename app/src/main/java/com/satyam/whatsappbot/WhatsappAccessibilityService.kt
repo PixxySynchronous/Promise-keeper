@@ -44,6 +44,7 @@ class WhatsappAccessibilityService : AccessibilityService() {
     override fun onServiceConnected() {
         super.onServiceConnected()
         reminderRepository = ReminderRepository(this)
+        running = this
         // Loading the model takes ~15 s on a phone; do it now so the first message is not delayed.
         detectionExecutor.execute { semanticClassifier.warmUp() }
     }
@@ -82,6 +83,7 @@ class WhatsappAccessibilityService : AccessibilityService() {
     }
 
     override fun onDestroy() {
+        if (running === this) running = null
         detectionExecutor.shutdown()
         super.onDestroy()
     }
@@ -175,7 +177,20 @@ class WhatsappAccessibilityService : AccessibilityService() {
 
     override fun onInterrupt() = Unit
 
-    private companion object {
-        const val DUPLICATE_WINDOW_MS = 10 * 60 * 1000L
+    companion object {
+        private const val DUPLICATE_WINDOW_MS = 10 * 60 * 1000L
+
+        @Volatile private var running: WhatsappAccessibilityService? = null
+
+        /**
+         * Really switches the service off in Android's Accessibility settings, so banking and UPI apps that refuse to
+         * run next to an enabled accessibility service stop complaining. The user turns it back on in Accessibility.
+         * Returns false if the service isn't connected right now.
+         */
+        fun turnOff(): Boolean {
+            val service = running ?: return false
+            service.disableSelf()
+            return true
+        }
     }
 }
