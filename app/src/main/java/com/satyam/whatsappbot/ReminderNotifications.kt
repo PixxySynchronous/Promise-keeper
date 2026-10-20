@@ -61,16 +61,14 @@ object ReminderNotifications {
      * The suggestion notification. Android shows at most three buttons, so a detected suggestion offers Set / Edit time /
      * Skip; with [askWhy] the same notification instead asks why it was skipped, because only "Not a promise" should
      * count as a false alarm ("No reminder needed" means it was a promise the user doesn't want reminding about).
-     * Reminders asked for with the "reminder" keyword have Ignore instead of Skip.
+     * Reminders asked for with the "reminder" keyword look the same, but their Skip dismisses straight away: the user
+     * asked for them, so there is no false alarm to learn from.
      */
     fun showConfirmation(context: Context, reminder: ReminderEntity, askWhy: Boolean = false) {
         createChannels(context)
         val manual = reminder.matchedPhrase == ManualReminder.MATCHED_PHRASE
-        val text = if (manual) {
-            "Remind you ${formatTime(reminder.reminderAtEpochMillis)}: ${reminder.title}?"
-        } else {
-            "Remind you ${formatTime(reminder.reminderAtEpochMillis)}: ${reminder.message} (to ${reminder.contact})?"
-        }
+        // The title is the message itself, or for keyword reminders the text after "reminder".
+        val text = "Remind you ${formatTime(reminder.reminderAtEpochMillis)}: ${reminder.title} (to ${reminder.contact})?"
         val builder = NotificationCompat.Builder(context, CHANNEL_CONFIRMATION)
             .setSmallIcon(android.R.drawable.ic_popup_reminder)
             .setAutoCancel(false)
@@ -84,15 +82,12 @@ object ReminderNotifications {
                 .addAction(action(context, ACTION_IGNORE, reminder.id, "No reminder needed"))
                 .addAction(action(context, ACTION_BACK, reminder.id, "Back"))
         } else {
-            builder.setContentTitle(if (manual) "Your reminder" else "Reminder suggestion")
+            builder.setContentTitle("Reminder suggestion")
                 .setContentText(text)
                 .setStyle(NotificationCompat.BigTextStyle().bigText(text))
                 .addAction(action(context, ACTION_SET, reminder.id, "Set"))
                 .addAction(editAction(context, reminder.id))
-                .addAction(
-                    if (manual) action(context, ACTION_IGNORE, reminder.id, "Ignore")
-                    else action(context, ACTION_SKIP, reminder.id, "Skip")
-                )
+                .addAction(action(context, if (manual) ACTION_IGNORE else ACTION_SKIP, reminder.id, "Skip"))
         }
         NotificationManagerCompat.from(context).notify(confirmationNotificationId(reminder.id), builder.build())
     }
