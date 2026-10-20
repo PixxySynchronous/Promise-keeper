@@ -24,6 +24,9 @@ class RuleBasedCommitmentDetector(
             ?: SELF_TODO.find(normalized)?.value?.trim()
             // Hinglish uses the present for the near future: "kal karta hu", "shaam ko bhejti hu".
             ?: FIRST_PERSON_PRESENT.find(normalized)?.takeIf { TIME_WORD.containsMatchIn(normalized) }?.value
+            // Any first-person future verb with a time: "subah rakhlunga", "shaam ko le jaungi", "kal nikalunga".
+            ?: HINGLISH_OWN_FUTURE.find(normalized)
+                ?.takeIf { TIME_WORD.containsMatchIn(normalized) || PART_OF_DAY.containsMatchIn(normalized) }?.value
             ?: return null
         return CommitmentMatch(message, phrase)
     }
@@ -80,11 +83,14 @@ class RuleBasedCommitmentDetector(
         .replace("’", "'")
         .replace(Regex("[^a-z0-9'\\u0900-\\u097F]+"), " ")
         .replace(SPLIT_VERB_ENDING, "$1$2")
+        .replace(JOINED_HELPER_VERB, "$1 $2")
         .trim()
 
     private companion object {
         // Rejoins Hinglish verbs typed with a split ending: "bhej ta hu" -> "bhejta hu", "kar unga" -> "karunga".
         val SPLIT_VERB_ENDING = Regex("\\b(bhej|bhj|bata|bta|kar|kr|dekh|bol) (ta|ti|unga|ungi)\\b")
+        // Splits helper verbs typed as one word: "kardunga" -> "kar dunga", "bhejdungi" -> "bhej dungi", "karlunga".
+        val JOINED_HELPER_VERB = Regex("\\b(bhej|bhj|bata|bta|kar|kr|de|rakh|sambhal)(dunga|dungi|doonga|doongi|lunga|lungi)\\b")
         // The sender's own to-dos: "need to order paneer by 5", "I have to submit it tomorrow". Only at the start
         // (after an optional greeting/filler) or with "I" as the subject, so "you have to try this" does not match.
         val SELF_TODO = Regex(
@@ -113,7 +119,8 @@ class RuleBasedCommitmentDetector(
             Regex("\\b(maybe|might|probably|shayad|shyd|not sure|no promises|pakka nahi|pata nahi|pta ni|try karunga|try karungi)\\b"),
             Regex("\\b(won't|wont|can't|cant|cannot|couldn't|should|would have) "),
             Regex("\\b(nahi|nhi|ni) (ho|bhej|kar|kr|de|aa) ?(paunga|paungi|payega|payegi|pauga|sakta|sakti|saka)\\b"),
-            Regex("\\b(nahi|nhi|ni) (karunga|karungi|krunga|krungi|bhejunga|bhejungi|dunga|dungi)\\b"),
+            // "nahi aaunga", "nhi kar dunga": a refusal with any first-person future verb.
+            Regex("\\b(nahi|nhi|ni) (\\w+ )?\\w*(unga|ungi|oonga|oongi)\\b"),
             // "I'll think and tell you", "if I get time": not a commitment yet
             Regex("\\b(soch ke|soch kar|sochta hu|sochti hu|agar|if i get time|if i find time)\\b")
         )
@@ -150,6 +157,8 @@ class RuleBasedCommitmentDetector(
             "\\b(kal|kl|tomorrow|tom|tmrw|aaj|abhi|parso|baad mein|baad me|baad mai|thodi der|thodi der mein|" +
                 "monday|tuesday|wednesday|thursday|friday|saturday|sunday|\\d+\\s*(min|mins|minute|minutes|ghante|hours?|baje|bje))\\b"
         )
+        // Safe with a future verb: "subah karunga" is a plan, unlike the habit "subah karta hu".
+        val PART_OF_DAY = Regex("\\b(subah|subha|shaam|sham|raat|dopahar|dopehar|morning|evening|tonight)\\b")
         val ENGLISH_NEGATION = Regex("\\b(don't|dont|do not|didn't|didnt|doesn't|doesnt|haven't|havent|hasn't|hasnt|never)\\b")
         val HABIT = Regex("\\b(roz|rozana|daily|har din|har roz|hamesha|humesha|usually|always|generally|aksar|jab bhi|every day|everyday|every morning|every night)\\b")
         // First-person future verbs: "bhej dunga", "karungi", "le aaunga", "krunga".

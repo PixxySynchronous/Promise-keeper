@@ -225,6 +225,24 @@ class CommitmentAndTimeTest {
     }
 
     @Test
+    fun joinedHelperVerbsStillMatch() {
+        val rules = RuleBasedCommitmentDetector()
+        listOf("kal subah kardunga", "kal bhejdunga", "shaam ko batadungi", "kal dedunga", "main karlunga")
+            .forEach { assertNotNull("Expected match: $it", rules.detect(it)) }
+        listOf("nahi kardunga", "main nahi kar dunga", "nhi bhejdungi")
+            .forEach { assertNull("Expected no match: $it", rules.detect(it)) }
+    }
+
+    @Test
+    fun anyFutureVerbWithATimeMatches() {
+        val rules = RuleBasedCommitmentDetector()
+        listOf("subah rakhlunga", "kal subah rakh lunga", "shaam ko le jaungi", "kal nikalunga", "raat ko dhoondhunga")
+            .forEach { assertNotNull("Expected match: $it", rules.detect(it)) }
+        listOf("shayad subah rakhlunga", "subah nahi aaunga", "kya kal aaunga")
+            .forEach { assertNull("Expected no match: $it", rules.detect(it)) }
+    }
+
+    @Test
     fun maybesRefusalsAndOtherPeoplesPromisesAreRejected() {
         val rules = RuleBasedCommitmentDetector()
         listOf(
