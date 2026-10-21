@@ -1,0 +1,281 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Promise Keeper</title>
+<meta name="description" content="Download Promise Keeper for Android: it notices when you promise something in WhatsApp and offers to remind you. Step-by-step install help.">
+<style>
+  :root {
+    --bg: #f6f7f9;
+    --card: #ffffff;
+    --text: #15181d;
+    --muted: #5b6370;
+    --line: #e2e5ea;
+    --accent: #1f7a4d;
+    --accent-text: #ffffff;
+    --warn-bg: #fff6e0;
+    --warn-line: #f0cf7a;
+    --warn-text: #5c4300;
+    --phone-bg: #eef0f3;
+    --phone-card: #ffffff;
+    --danger: #b3261e;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --bg: #101215;
+      --card: #1a1d22;
+      --text: #eceef1;
+      --muted: #a2a9b4;
+      --line: #2c3139;
+      --accent: #3fbf7f;
+      --accent-text: #0b1a12;
+      --warn-bg: #2b2310;
+      --warn-line: #6b5520;
+      --warn-text: #f3dc9c;
+      --phone-bg: #23272d;
+      --phone-card: #2e333a;
+      --danger: #f2867e;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #101215;
+    --card: #1a1d22;
+    --text: #eceef1;
+    --muted: #a2a9b4;
+    --line: #2c3139;
+    --accent: #3fbf7f;
+    --accent-text: #0b1a12;
+    --warn-bg: #2b2310;
+    --warn-line: #6b5520;
+    --warn-text: #f3dc9c;
+    --phone-bg: #23272d;
+    --phone-card: #2e333a;
+    --danger: #f2867e;
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 17px/1.55 system-ui, -apple-system, "Segoe UI", Roboto, "Noto Sans", sans-serif;
+  }
+  main { max-width: 640px; margin: 0 auto; padding: 28px 16px 48px; }
+  h1 { font-size: 30px; line-height: 1.2; margin: 0 0 8px; }
+  h2 { font-size: 22px; margin: 40px 0 12px; }
+  h3 { font-size: 18px; margin: 0 0 6px; }
+  p { margin: 0 0 12px; }
+  .lead { color: var(--muted); font-size: 18px; }
+  .examples { color: var(--text); font-style: italic; }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 18px;
+    margin: 0 0 14px;
+  }
+  .warn {
+    background: var(--warn-bg);
+    border: 1px solid var(--warn-line);
+    color: var(--warn-text);
+    border-radius: 14px;
+    padding: 14px 16px;
+    margin: 20px 0 16px;
+  }
+  .warn strong { display: block; font-size: 18px; margin-bottom: 4px; }
+  .download {
+    display: block;
+    text-align: center;
+    background: var(--accent);
+    color: var(--accent-text);
+    text-decoration: none;
+    font-weight: 700;
+    font-size: 20px;
+    padding: 18px 20px;
+    border-radius: 14px;
+  }
+  .download small { display: block; font-weight: 400; font-size: 14px; opacity: .85; margin-top: 2px; }
+  .meta { color: var(--muted); font-size: 14px; text-align: center; margin: 10px 0 0; }
+  .step { display: flex; gap: 14px; }
+  .num {
+    flex: 0 0 34px; height: 34px; border-radius: 50%;
+    background: var(--accent); color: var(--accent-text);
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 700;
+  }
+  .step-body { flex: 1; min-width: 0; }
+  .step-body p:last-child { margin-bottom: 0; }
+  .path { font-weight: 600; }
+  ol.sub { margin: 8px 0 12px; padding-left: 22px; }
+  ol.sub li { margin-bottom: 6px; }
+  .tag { display: inline-block; font-size: 13px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: .04em; margin-bottom: 4px; }
+  /* Drawings of the phone screens people will see. */
+  .phone {
+    background: var(--phone-bg);
+    border-radius: 14px;
+    padding: 14px;
+    margin: 10px 0 12px;
+    font-size: 15px;
+  }
+  .phone .dialog {
+    background: var(--phone-card);
+    border-radius: 12px;
+    padding: 14px 16px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.12);
+  }
+  .phone .dialog-title { font-weight: 700; margin-bottom: 4px; }
+  .phone .dialog-text { color: var(--muted); font-size: 14px; }
+  .phone .buttons { display: flex; justify-content: flex-end; gap: 18px; margin-top: 12px; font-weight: 600; color: var(--accent); }
+  .phone .row {
+    background: var(--phone-card);
+    border-radius: 12px;
+    padding: 12px 14px;
+    display: flex; align-items: center; justify-content: space-between; gap: 12px;
+  }
+  .switch { flex: 0 0 auto; width: 40px; height: 22px; border-radius: 11px; background: var(--line); position: relative; }
+  .switch::after { content: ""; position: absolute; top: 3px; left: 3px; width: 16px; height: 16px; border-radius: 50%; background: var(--muted); }
+  .switch.on { background: var(--accent); }
+  .switch.on::after { left: 21px; background: var(--accent-text); }
+  .caption { color: var(--muted); font-size: 13px; margin-top: 8px; }
+  .hl { outline: 2px solid var(--danger); outline-offset: 3px; border-radius: 4px; }
+  details { border-top: 1px solid var(--line); padding: 12px 0; }
+  details:last-of-type { border-bottom: 1px solid var(--line); }
+  summary { cursor: pointer; font-weight: 600; }
+  details p { margin: 8px 0 0; color: var(--muted); }
+  a { color: var(--accent); }
+  .qr { display: none; }
+  @media (min-width: 900px) {
+    .qr { display: flex; gap: 16px; align-items: center; }
+    .qr-code { background: #fff; padding: 8px; border-radius: 8px; flex: 0 0 auto; }
+  }
+  footer { color: var(--muted); font-size: 14px; margin-top: 40px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Promise Keeper</h1>
+  <p class="lead">Notices when you promise something in WhatsApp and offers to remind you.</p>
+  <p class="examples">"kal bhej dunga" · "I'll call you at 5" · "मैं कल भेज दूंगी"</p>
+  <p>Works in English, Hinglish and Hindi. Everything stays on your phone: the app has no internet access.</p>
+
+  <div class="warn">
+    <strong>⚠️ Your phone will probably try to stop the install.</strong>
+    That's normal for apps that aren't from the Play Store. The app is safe. Follow the steps below, it takes about 2 minutes.
+  </div>
+
+  <a class="download" href="https://github.com/PixxySynchronous/Promise-keeper/releases/latest/download/PromiseKeeper.apk">
+    ⬇ Download Promise Keeper
+    <small>For Android 13 or newer · about 130 MB, use Wi-Fi</small>
+  </a>
+  <p class="meta">Keep this page open. You'll need the steps below.</p>
+
+  <div class="card qr">
+    <div class="qr-code" id="qr"></div>
+    <p style="margin:0">On a computer? Scan this with your phone's camera to open this page there.</p>
+  </div>
+
+  <h2>How to install</h2>
+
+  <div class="card step">
+    <div class="num">1</div>
+    <div class="step-body">
+      <h3>Download the file</h3>
+      <p>Tap the green <span class="path">Download</span> button above. If your browser asks whether to keep the file, tap <span class="path">Download anyway</span>.</p>
+    </div>
+  </div>
+
+  <div class="card step">
+    <div class="num">2</div>
+    <div class="step-body">
+      <h3>Open it</h3>
+      <p>When the download finishes, tap <span class="path">Open</span> (or find <span class="path">PromiseKeeper.apk</span> in your Downloads).</p>
+      <p>If your phone says it can't install unknown apps, tap <span class="path">Settings</span>, turn on <span class="path">Allow from this source</span>, then go back.</p>
+      <div class="phone">
+        <div class="row"><span>Allow from this source</span><span class="switch on hl"></span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="card step">
+    <div class="num">3</div>
+    <div class="step-body">
+      <h3>If Play Protect warns you</h3>
+      <span class="tag">If you see "Install anyway"</span>
+      <p>Tap <span class="path">More details</span> if needed, then <span class="path">Install anyway</span>. Skip to step 5.</p>
+      <div class="phone">
+        <div class="dialog">
+          <div class="dialog-title">Unsafe app blocked</div>
+          <div class="dialog-text">Play Protect doesn't recognise this app's developer…</div>
+          <div class="buttons"><span>OK</span><span class="hl">Install anyway</span></div>
+        </div>
+        <div class="caption">Your screen may look a little different.</div>
+      </div>
+      <span class="tag">If there's no "Install anyway"</span>
+      <p>Common in India. The message says something like <em>"This app requests access to sensitive data"</em> and only has an OK button. Go to step 4.</p>
+    </div>
+  </div>
+
+  <div class="card step">
+    <div class="num">4</div>
+    <div class="step-body">
+      <h3>Blocked? Pause Play Protect for a minute</h3>
+      <ol class="sub">
+        <li>Open the <span class="path">Play Store</span> app.</li>
+        <li>Tap your <span class="path">profile picture</span> (top right), then <span class="path">Play Protect</span>.</li>
+        <li>Tap the <span class="path">⚙️ gear</span> (top right) and turn off <span class="path">Scan apps with Play Protect</span>.</li>
+      </ol>
+      <div class="phone">
+        <div class="row"><span>Scan apps with Play Protect</span><span class="switch hl"></span></div>
+      </div>
+      <ol class="sub" start="4">
+        <li>Open <span class="path">PromiseKeeper.apk</span> from your Downloads again and tap <span class="path">Install</span>.</li>
+        <li><strong>Turn Play Protect back on</strong> the same way. If it later asks about Promise Keeper, choose <span class="path">Keep app</span>.</li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="card step">
+    <div class="num">5</div>
+    <div class="step-body">
+      <h3>Open Promise Keeper</h3>
+      <p>The app walks you through the rest. If it's greyed out in Accessibility ("Restricted setting"), the app shows you how to fix that too.</p>
+      <p>Then test it: send yourself <span class="path">kal bhej dunga</span> in WhatsApp. A <em>Reminder suggestion</em> notification should appear.</p>
+    </div>
+  </div>
+
+  <h2>Questions</h2>
+
+  <details>
+    <summary>Why does my phone say it's unsafe?</summary>
+    <p>Google warns about any app downloaded outside the Play Store that uses Accessibility. Promise Keeper needs Accessibility to see the WhatsApp messages you send. The warning is about that permission, not about anything the app does.</p>
+  </details>
+  <details>
+    <summary>Can it send my messages anywhere?</summary>
+    <p>No. The app doesn't have Android's internet permission, so Android itself blocks it from going online. It only looks at WhatsApp, only at messages you send, and everything is processed on your phone.</p>
+  </details>
+  <details>
+    <summary>My bank or UPI app won't open</summary>
+    <p>Some payment apps refuse to run while an Accessibility app from outside the Play Store is on. Before paying, open Promise Keeper → Settings → Turn off for now. Turn it back on afterwards from step 2 of the same screen.</p>
+  </details>
+  <details>
+    <summary>How do I update?</summary>
+    <p>Download and install the new version from this page the same way. It installs over the old one and keeps your reminders.</p>
+  </details>
+  <details>
+    <summary>Is the code public?</summary>
+    <p>Yes, all of it is on <a href="https://github.com/PixxySynchronous/Promise-keeper">GitHub</a>, where you can also check each release's SHA-256.</p>
+  </details>
+
+  <footer>
+    <p><a href="https://github.com/PixxySynchronous/Promise-keeper">Source code</a> · <a href="https://github.com/PixxySynchronous/Promise-keeper/releases">All versions</a></p>
+    <p>WhatsApp is a trademark of Meta. Promise Keeper is not affiliated with or endorsed by WhatsApp or Meta.</p>
+  </footer>
+</main>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<script>
+  if (window.QRCode && window.matchMedia("(min-width: 900px)").matches) {
+    new QRCode(document.getElementById("qr"), { text: location.href, width: 120, height: 120 });
+  }
+</script>
+</body>
+</html>

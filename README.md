@@ -21,6 +21,10 @@ It understands **English, Hinglish and Hindi (Devanagari)**.
 
 Requires **Android 13 or newer**.
 
+**Easiest:** open **[pixxysynchronous.github.io/Promise-keeper](https://pixxysynchronous.github.io/Promise-keeper/)** on your phone. It has the download button and the install steps on one page. Share that link with friends.
+
+Or install by hand:
+
 1. Download `PromiseKeeper-1.3.3.apk` from the [Releases](../../releases) page.
 2. Open it. If asked, allow your browser or file manager to install unknown apps.
 3. **Google Play Protect may block or warn about the app.** Play Protect does this for apps downloaded outside the Play Store that use the accessibility service, which this app needs to see the messages you send.
