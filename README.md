@@ -81,6 +81,10 @@ The file contains only the message text and what flagged it, never contact names
 - **Some brands kill background apps aggressively**, including Xiaomi, Oppo, Vivo, Realme and Huawei. Follow the battery step in the setup guide.
 - **Only messages you send are checked.** Messages you receive are not.
 
+## Contributing
+
+Help is welcome with app size, detection, an app icon and the UI. See [CONTRIBUTING.md](CONTRIBUTING.md). Everything must keep running on the phone: privacy comes first.
+
 ## Building from source
 
 The model file is stored with [Git LFS](https://git-lfs.com). Install it before cloning:
