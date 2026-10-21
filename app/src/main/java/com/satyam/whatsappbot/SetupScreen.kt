@@ -100,6 +100,11 @@ fun SetupGuide(status: SetupStatus, onFinish: () -> Unit, refreshStatus: () -> U
                 style = MaterialTheme.typography.bodySmall
             )
         }
+        HelpBox(
+            "Turned off Play Protect to install?",
+            "Turn it back on now: Play Store → your profile picture → Play Protect → ⚙️ gear → Scan apps with Play Protect. " +
+                "If it later flags Promise Keeper, choose Keep app."
+        )
 
         SetupStep(
             number = 1, title = "Allow notifications", done = status.notifications, required = true,
@@ -117,8 +122,19 @@ fun SetupGuide(status: SetupStatus, onFinish: () -> Unit, refreshStatus: () -> U
 
         SetupStep(
             number = 2, title = "Turn on Promise Keeper in Accessibility", done = status.accessibility, required = true,
-            why = "This lets the app notice the messages you send in WhatsApp. It only works inside WhatsApp and WhatsApp Business, and ignores every other app."
+            why = "This lets the app notice the messages you send in WhatsApp. It reads only the messages you type and send, plus the chat name. It only works inside WhatsApp and WhatsApp Business, and ignores every other app."
         ) {
+            // Shown first: on most phones the switch is greyed out for downloaded apps, so the fix is needed up front.
+            HelpBox(
+                "Promise Keeper greyed out or \"Restricted setting\"?",
+                "This is normal: Android locks Accessibility for apps installed from a downloaded file. Unlock it once:\n" +
+                    "1. Tap Open Accessibility settings below. In Installed apps, tap the greyed-out Promise Keeper, then tap OK on the popup. " +
+                    "(This first try is needed, or the option in step 3 doesn't appear.)\n" +
+                    "2. Come back here and tap Open app info.\n" +
+                    "3. Tap ⋮ (top-right corner) → Allow restricted settings, and confirm with your PIN or fingerprint.\n" +
+                    "4. Open Accessibility settings again and turn Promise Keeper on."
+            )
+            OutlinedButton(onClick = { context.startActivity(appInfoIntent(context)) }) { Text("Open app info") }
             Instructions(
                 "Tap Open Accessibility settings below.",
                 when (manufacturer) {
@@ -131,16 +147,6 @@ fun SetupGuide(status: SetupStatus, onFinish: () -> Unit, refreshStatus: () -> U
                 "Come back to this app. Step 2 shows ✓ Done."
             )
             Button(onClick = { context.startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS)) }) { Text("Open Accessibility settings") }
-            HelpBox(
-                "Promise Keeper greyed out or \"Restricted setting\"?",
-                "Android locks this for apps installed from a downloaded file. Unlock it once:\n" +
-                    "1. In Accessibility → Installed apps, tap the greyed-out Promise Keeper and tap OK on the popup. " +
-                    "(This first try is needed, or the option in step 3 doesn't appear.)\n" +
-                    "2. Come back here and tap Open app info below.\n" +
-                    "3. Tap ⋮ (top-right corner) → Allow restricted settings, and confirm with your PIN or fingerprint.\n" +
-                    "4. Open Accessibility settings again and turn Promise Keeper on."
-            )
-            OutlinedButton(onClick = { context.startActivity(appInfoIntent(context)) }) { Text("Open app info") }
         }
 
         if (status.accessibility) PauseForPaymentsCard(refreshStatus)
@@ -157,14 +163,14 @@ fun SetupGuide(status: SetupStatus, onFinish: () -> Unit, refreshStatus: () -> U
 
         SetupStep(
             number = 4, title = "Let it run in the background", done = status.battery, required = false,
-            why = "Many phones stop background apps to save battery. If that happens, promises are missed and reminders don't ring."
+            why = "Many phones stop background apps to save battery, especially Xiaomi, Oppo, Vivo, Realme and Huawei. If that happens, promises are missed and reminders don't ring."
         ) {
+            HelpBox("Still stopped in the background? Extra step for your phone (${Build.MANUFACTURER})", brandBatteryTip())
+            OutlinedButton(onClick = { context.startActivity(appInfoIntent(context)) }) { Text("Open app info") }
             Instructions("Tap Remove battery limits, then choose Allow.")
             Button(onClick = {
                 context.startActivity(Intent(Settings.ACTION_REQUEST_IGNORE_BATTERY_OPTIMIZATIONS, Uri.parse("package:${context.packageName}")))
             }) { Text("Remove battery limits") }
-            HelpBox("Extra step for your phone (${Build.MANUFACTURER})", brandBatteryTip())
-            OutlinedButton(onClick = { context.startActivity(appInfoIntent(context)) }) { Text("Open app info") }
         }
 
         DefaultTimeStep(number = 5)
@@ -172,11 +178,21 @@ fun SetupGuide(status: SetupStatus, onFinish: () -> Unit, refreshStatus: () -> U
         ReminderTypeStep(number = 6, fullScreenAllowed = status.fullScreenAlarms)
 
         SetupStep(number = 7, title = "Try it", done = null, required = false, why = "Check that everything works.") {
+            HelpBox(
+                "No suggestion?",
+                "Only messages you send are checked, not ones you receive. Very short or unusual messages are the most likely to be missed. " +
+                    "Check that step 2 shows ✓ Done, and on Xiaomi, Oppo, Vivo, Realme or Huawei phones, do the extra battery step in step 4."
+            )
             Instructions(
                 "Open WhatsApp and send a promise to any chat, for example to yourself: kal bhej dunga",
                 "Within a few seconds, a \"Reminder suggestion\" notification appears.",
                 "Tap Set to keep the reminder, Edit time to change when it rings, or Skip if it wasn't a promise or you don't need a reminder.",
                 "Right after the phone restarts, the first suggestion can take about 15 seconds while the app gets ready."
+            )
+            HelpBox(
+                "Suggestion wasn't a promise?",
+                "Tap Skip → Not a promise on the notification or the reminder card. It moves to the False alarms tab, where you can move it back, delete it, or Export all false alarms to help improve detection. " +
+                    "If it was a promise you just don't need reminding about, choose No reminder needed instead."
             )
             HelpBox(
                 "Tip: set a reminder on purpose",
@@ -239,7 +255,7 @@ private fun ReminderTypeStep(number: Int, fullScreenAllowed: Boolean) {
             FilterChip(selected = alarm, onClick = { alarm = true; ReminderSettings.setAlarmByDefault(context, true) }, label = { Text("⏰ Alarm") })
         }
         Text(
-            if (alarm) "Alarms ring at alarm volume and keep ringing until you tap Stop or Snooze (up to 10 minutes)."
+            if (alarm) "Alarms ring at alarm volume, even on a locked phone, and keep ringing until you tap Stop or Snooze (up to 10 minutes)."
             else "A normal notification with Done and Snooze buttons.",
             style = MaterialTheme.typography.bodySmall,
             color = MaterialTheme.colorScheme.onSurfaceVariant
