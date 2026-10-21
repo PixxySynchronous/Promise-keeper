@@ -28,8 +28,8 @@ android {
         applicationId = "com.satyam.whatsappbot"
         minSdk = 33
         targetSdk = 36
-        versionCode = 8
-        versionName = "1.3.2"
+        versionCode = 9
+        versionName = "1.3.3"
     }
 
     signingConfigs {
