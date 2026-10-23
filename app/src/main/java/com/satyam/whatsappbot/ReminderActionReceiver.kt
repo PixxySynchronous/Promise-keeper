@@ -4,6 +4,7 @@ import android.content.BroadcastReceiver
 import android.content.Context
 import android.content.Intent
 import androidx.core.app.NotificationManagerCompat
+import com.satyam.whatsappbot.data.ReminderEntity
 import com.satyam.whatsappbot.data.ReminderRepository
 
 class ReminderActionReceiver : BroadcastReceiver() {
@@ -13,9 +14,13 @@ class ReminderActionReceiver : BroadcastReceiver() {
         val pendingResult = goAsync()
         val repository = ReminderRepository(context)
         when (intent.action) {
-            ReminderNotifications.ACTION_SET -> repository.get(id) { reminder ->
+            ReminderNotifications.ACTION_SET -> repository.get(id) { found ->
+                // A repeating suggestion left waiting past its first time starts from the next occurrence.
+                val reminder = found?.let { r ->
+                    if (r.repeat != null && r.reminderAtEpochMillis <= System.currentTimeMillis()) r.copy(reminderAtEpochMillis = ReminderNotifications.nextOccurrence(r)!!) else r
+                }
                 if (reminder != null && ReminderNotifications.schedule(context, reminder)) {
-                    repository.markScheduled(id)
+                    repository.updateTimeAndSchedule(id, reminder.reminderAtEpochMillis)
                     cancelConfirmation(context, id)
                 }
                 pendingResult.finish()
@@ -37,12 +42,24 @@ class ReminderActionReceiver : BroadcastReceiver() {
                 pendingResult.finish()
             }
             ReminderNotifications.ACTION_FIRE -> repository.get(id) { reminder ->
-                if (reminder != null) ReminderNotifications.showReminder(context, reminder)
+                if (reminder != null) {
+                    ReminderNotifications.showReminder(context, reminder)
+                    // A repeating reminder books its next occurrence as soon as this one rings.
+                    val next = ReminderNotifications.nextOccurrence(reminder)
+                    if (next != null && reminder.status != ReminderEntity.STATUS_PAUSED &&
+                        ReminderNotifications.schedule(context, reminder.copy(reminderAtEpochMillis = next))
+                    ) {
+                        repository.updateTimeAndSchedule(id, next)
+                    }
+                }
                 pendingResult.finish()
             }
-            ReminderNotifications.ACTION_DONE -> {
-                repository.markDone(id)
-                ReminderNotifications.cancel(context, id)
+            // Done/Stop on a repeating reminder only dismisses this ring; its next occurrence is already booked.
+            ReminderNotifications.ACTION_DONE -> repository.get(id) { reminder ->
+                if (reminder?.repeat == null) {
+                    repository.markDone(id)
+                    ReminderNotifications.cancel(context, id)
+                }
                 NotificationManagerCompat.from(context).cancel(ReminderNotifications.reminderNotificationId(id))
                 pendingResult.finish()
             }

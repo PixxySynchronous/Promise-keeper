@@ -45,6 +45,7 @@ class WhatsappAccessibilityService : AccessibilityService() {
         super.onServiceConnected()
         reminderRepository = ReminderRepository(this)
         running = this
+        AccessibilityNudge.clear(this)
         // Loading the model takes ~15 s on a phone; do it now so the first message is not delayed.
         detectionExecutor.execute { semanticClassifier.warmUp() }
     }
@@ -61,8 +62,8 @@ class WhatsappAccessibilityService : AccessibilityService() {
     private fun detectAndSuggest(message: String, contact: String) {
         val safeContact = contact.ifBlank { "Unknown contact" }
         ManualReminder.extract(message)?.let { text ->
-            val parsedTime = timeParser().parseOrDefault(text, LocalDateTime.now())
-            reminderRepository.insertPending(message, safeContact, ManualReminder.MATCHED_PHRASE, parsedTime.dateTime, title = text, alarm = ReminderSettings.alarmByDefault(this)) { reminder ->
+            val (time, repeat) = whenToRemind(text)
+            reminderRepository.insertPending(message, safeContact, ManualReminder.MATCHED_PHRASE, time, title = text, alarm = ReminderSettings.alarmByDefault(this), recurrence = repeat) { reminder ->
                 ReminderNotifications.showConfirmation(this, reminder)
             }
             return
@@ -76,10 +77,18 @@ class WhatsappAccessibilityService : AccessibilityService() {
                 ?.takeIf { it.isCommitment }
                 ?.let { CommitmentMatch(message, "semantic AI (${"%.2f".format(it.confidence)})") }
             ?: return
-        val parsedTime = timeParser().parseOrDefault(message, LocalDateTime.now())
-        reminderRepository.insertPending(message, safeContact, match.matchedPhrase, parsedTime.dateTime, alarm = ReminderSettings.alarmByDefault(this)) { reminder ->
+        val (time, repeat) = whenToRemind(message)
+        reminderRepository.insertPending(message, safeContact, match.matchedPhrase, time, alarm = ReminderSettings.alarmByDefault(this), recurrence = repeat) { reminder ->
             ReminderNotifications.showConfirmation(this, reminder)
         }
+    }
+
+    /** The first reminder time, and the encoded repeat ("every monday", "roz subah") or empty for a one-time reminder. */
+    private fun whenToRemind(text: String): Pair<LocalDateTime, String> {
+        val now = LocalDateTime.now()
+        val parser = timeParser()
+        val repeat = parser.parseRecurrence(text, now)
+        return (repeat?.next(now) ?: parser.parseOrDefault(text, now).dateTime) to repeat?.encode().orEmpty()
     }
 
     override fun onDestroy() {

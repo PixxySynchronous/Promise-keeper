@@ -177,6 +177,14 @@ NON_COMMITMENTS = {
         "I've transferred the money", "just sent you the file", "I called him yesterday", "I booked the tickets",
         "already paid", "I submitted it last night", "I told you yesterday", "I forwarded the mail", "check your inbox, sent",
         "I did it in the morning", "I've already informed everyone", "finished the slides", "uploaded it to the drive",
+        # Reported false alarm and variations: English past tense with "I" was flagged by the model.
+        "I completed all latest ep of Vision Quest", "i completed all the latest episodes", "I finished watching Vision Quest",
+        "finished all eps of vision quest", "I watched the whole season last night", "just completed the series",
+        "I binged the entire show yesterday", "I completed the course", "I finished the assignment", "I submitted the form",
+        "we finished the movie", "I completed level 5", "I wrapped up the report", "I cleared the exam", "I fixed the bug",
+        "I cooked dinner", "I watched it twice", "I read the whole book", "I paid the bill this morning", "I went to the gym today",
+        "I got the parcel", "I met him yesterday", "I bought the tickets", "I finally finished it", "i just completed it",
+        "I recently started the show", "we completed the project", "I replied to the mail", "I cancelled the order",
     ],
     "others_and_reported": [
         "he will do it", "he said he will send", "she will call you", "they will handle it", "he will let you know",
@@ -207,6 +215,10 @@ NON_COMMITMENTS = {
         "I'm at home", "reached", "on my way", "I'm in a meeting", "just woke up", "busy rn", "talk later",
         "don't forget to bring the charger", "remember to call grandma", "don't be late", "keep me posted",
         "finished the slides", "all done here", "it's working now", "the report looks good", "I'm free after 6",
+        # Reported false alarm and variations: short "I'm ..." replies that state something now.
+        "K I'm in", "ok I'm in", "I'm in", "im in bro", "k im in", "sure I'm in", "count me in", "ya im in", "I'm down",
+        "im down for it", "I'm game", "I'm home", "I'm here", "I'm in class", "im in office", "I'm outside", "I'm ready",
+        "I'm good", "I'm okay", "I'm awake", "I'm done", "im free now", "I'm in the car", "I'm at the gym",
     ],
     "hinglish": [
         "kal kya hua tha", "aaj kya plan hai", "kal ka weather kaisa tha", "send kar do", "share kar na", "kya bhejna hai",
@@ -252,6 +264,9 @@ NON_COMMITMENTS = {
         "collar mic use nahi karrahe tph le ana", "agar free ho toh charger le aana", "use nahi kar rahe toh mujhe de dena",
         "jaate hue doodh le aana", "kal file bhej dena", "time mile toh call kar lena", "aate waqt bread le aao",
         "khatam ho gaya ho toh notes bhej do", "laptop free hai toh de do na", "agar ja rahe ho toh mera parcel le aana",
+        # Reported false alarm, Hinglish variations: finished something already.
+        "maine vision quest ke saare episode dekh liye", "saare ep khatam kar diye", "series complete kar li",
+        "maine poori series dekh li", "course complete ho gaya", "assignment submit kar diya", "main in hu", "haan main in hu",
         "kya kal office hai", "gym aaj khula hai kya", "kal chutti hai kya", "bhai kab aa raha hai", "kitne baje milna hai kal",
         "kahan hai party kal", "kaise jaana hai kal", "kal class hai ya nahi",
     ],

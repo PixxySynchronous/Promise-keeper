@@ -40,6 +40,15 @@ class PipelineAccuracyTest {
             val o = inLanguage.filter { it.label == 0 }
             println("  %-9s caught %3.0f%%  flagged %3.0f%%".format(language, 100.0 * p.count(::flagged) / p.size, 100.0 * o.count(::flagged) / o.size))
         }
+        // How much each part contributes: the rules alone, the model alone, and both (what the app does).
+        val variants = listOf<Pair<String, (Case) -> Boolean>>(
+            "rules only" to { rules.detect(it.text) != null },
+            "model only" to { it.probability >= threshold },
+            "rules + model" to ::flagged
+        )
+        for ((name, rule) in variants) {
+            println("  %-13s caught %5.1f%%  flagged %4.1f%%".format(name, 100.0 * promises.count(rule) / promises.size, 100.0 * ordinary.count(rule) / ordinary.size))
+        }
         println("missed: " + promises.filterNot(::flagged).map { it.text })
         println("false alarms: " + ordinary.filter(::flagged).map { it.text })
         assertTrue("caught only ${caught * 100}%", caught >= 0.85)

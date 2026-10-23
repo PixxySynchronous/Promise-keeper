@@ -68,7 +68,8 @@ object ReminderNotifications {
         createChannels(context)
         val manual = reminder.matchedPhrase == ManualReminder.MATCHED_PHRASE
         // The title is the message itself, or for keyword reminders the text after "reminder".
-        val text = "Remind you ${formatTime(reminder.reminderAtEpochMillis)}: ${reminder.title} (to ${reminder.contact})?"
+        val whenText = reminder.repeat?.describe()?.replaceFirstChar { it.lowercase() } ?: formatTime(reminder.reminderAtEpochMillis)
+        val text = "Remind you $whenText: ${reminder.title}${reminder.toContact}?"
         val builder = NotificationCompat.Builder(context, CHANNEL_CONFIRMATION)
             .setSmallIcon(android.R.drawable.ic_popup_reminder)
             .setAutoCancel(false)
@@ -95,7 +96,7 @@ object ReminderNotifications {
     fun showReminder(context: Context, reminder: ReminderEntity) {
         createChannels(context)
         if (reminder.alarm) return showAlarm(context, reminder)
-        val body = "${reminder.message} (to ${reminder.contact})"
+        val body = reminder.message + reminder.toContact
         val notification = NotificationCompat.Builder(context, CHANNEL_REMINDER)
             .setSmallIcon(android.R.drawable.ic_popup_reminder)
             .setContentTitle(reminder.title)
@@ -123,7 +124,7 @@ object ReminderNotifications {
             .setSmallIcon(android.R.drawable.ic_lock_idle_alarm)
             .setContentTitle(reminder.title)
             .setContentText(reminder.message)
-            .setStyle(NotificationCompat.BigTextStyle().bigText("${reminder.message} (to ${reminder.contact})"))
+            .setStyle(NotificationCompat.BigTextStyle().bigText(reminder.message + reminder.toContact))
             .setCategory(NotificationCompat.CATEGORY_ALARM)
             .setPriority(NotificationCompat.PRIORITY_MAX)
             .setFullScreenIntent(fullScreen, true)
@@ -158,6 +159,17 @@ object ReminderNotifications {
         val pendingIntent = PendingIntent.getBroadcast(context, alarmRequestCode(reminder.id), intent, pendingFlags())
         alarmManager.setExactAndAllowWhileIdle(AlarmManager.RTC_WAKEUP, reminder.reminderAtEpochMillis, pendingIntent)
         return true
+    }
+
+    /**
+     * A repeating reminder's next occurrence after now, or after its current time if that is later, so an alarm that
+     * fires a moment early is not booked for the same occurrence again. Null for one-time reminders.
+     */
+    fun nextOccurrence(reminder: ReminderEntity, nowMillis: Long = System.currentTimeMillis()): Long? {
+        val repeat = reminder.repeat ?: return null
+        val zone = ZoneId.systemDefault()
+        val after = Instant.ofEpochMilli(maxOf(nowMillis, reminder.reminderAtEpochMillis)).atZone(zone).toLocalDateTime()
+        return repeat.next(after).atZone(zone).toInstant().toEpochMilli()
     }
 
     fun cancel(context: Context, reminderId: Long) {

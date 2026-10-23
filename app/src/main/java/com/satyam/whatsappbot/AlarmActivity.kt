@@ -57,7 +57,7 @@ class AlarmActivity : ComponentActivity() {
                         reminder?.takeIf { it.title != it.message }?.let {
                             Text(it.message, style = MaterialTheme.typography.bodyLarge, textAlign = TextAlign.Center, color = MaterialTheme.colorScheme.onSurfaceVariant)
                         }
-                        reminder?.let { Text("To ${it.contact}", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.onSurfaceVariant) }
+                        reminder?.takeIf { it.contact.isNotBlank() }?.let { Text("To ${it.contact}", style = MaterialTheme.typography.labelLarge, color = MaterialTheme.colorScheme.onSurfaceVariant) }
                         Button(onClick = { send(ReminderNotifications.ACTION_DONE) }, modifier = Modifier.fillMaxWidth().padding(top = 24.dp)) {
                             Text("Stop", style = MaterialTheme.typography.titleLarge)
                         }

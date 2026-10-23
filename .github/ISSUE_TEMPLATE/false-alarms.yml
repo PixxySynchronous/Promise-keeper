@@ -1,0 +1,26 @@
+name: Share false alarms
+description: Messages Promise Keeper wrongly flagged as promises, exported from the app. They help train detection for everyone.
+title: "False alarms from the app"
+labels: ["false-alarms"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thank you! Every message here is used to teach Promise Keeper what is *not* a promise.
+
+        **Before you submit, check for anything private**: names, phone numbers, addresses. Delete those messages in the app's False alarms tab before exporting, or remove them below. Everything you post here is public.
+  - type: textarea
+    id: export
+    attributes:
+      label: Exported false alarms
+      description: |
+        In the app: False alarms tab → Export → **Copy & open GitHub form**, then paste here (long-press → Paste).
+        Or attach the exported .json file by dragging it into this box.
+      placeholder: Paste here
+    validations:
+      required: true
+  - type: textarea
+    id: notes
+    attributes:
+      label: Anything else? (optional)
+      description: For example, which language you mostly chat in, or messages that were missed instead of wrongly flagged.

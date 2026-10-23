@@ -28,8 +28,8 @@ android {
         applicationId = "com.satyam.whatsappbot"
         minSdk = 33
         targetSdk = 36
-        versionCode = 9
-        versionName = "1.3.3"
+        versionCode = 10
+        versionName = "1.4.0"
     }
 
     signingConfigs {
@@ -61,6 +61,8 @@ dependencies {
     implementation("androidx.core:core-ktx:1.15.0")
     implementation("androidx.compose.ui:ui")
     implementation("androidx.compose.material3:material3")
+    // The Settings gear on the home screen.
+    implementation("androidx.compose.material:material-icons-core")
     testImplementation("junit:junit:4.13.2")
     // Test-only JSON reader for the tokenizer fixtures; not packaged into the app.
     testImplementation("com.google.code.gson:gson:2.10.1")

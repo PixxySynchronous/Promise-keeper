@@ -9,7 +9,10 @@ class ReminderRepository(context: Context) {
     private val dao = ReminderDatabase.get(context).reminderDao()
     private val executor = Executors.newSingleThreadExecutor()
 
-    fun insertPending(message: String, contact: String, matchedPhrase: String, reminderAt: LocalDateTime, title: String = message, alarm: Boolean = false, onComplete: (ReminderEntity) -> Unit) {
+    fun insertPending(
+        message: String, contact: String, matchedPhrase: String, reminderAt: LocalDateTime, title: String = message, alarm: Boolean = false,
+        recurrence: String = "", status: String = ReminderEntity.STATUS_PENDING_CONFIRMATION, onComplete: (ReminderEntity) -> Unit
+    ) {
         executor.execute {
             val reminder = ReminderEntity(
                 message = message,
@@ -17,7 +20,9 @@ class ReminderRepository(context: Context) {
                 contact = contact,
                 matchedPhrase = matchedPhrase,
                 reminderAtEpochMillis = reminderAt.atZone(ZoneId.systemDefault()).toInstant().toEpochMilli(),
-                alarm = alarm
+                alarm = alarm,
+                recurrence = recurrence,
+                status = status
             )
             val saved = reminder.copy(id = dao.insert(reminder))
             onComplete(saved)
@@ -41,6 +46,12 @@ class ReminderRepository(context: Context) {
     fun markIgnored(id: Long) = executor.execute { dao.updateStatus(id, ReminderEntity.STATUS_IGNORED) }
 
     fun markDone(id: Long) = executor.execute { dao.updateStatus(id, ReminderEntity.STATUS_DONE) }
+
+    fun markPaused(id: Long) = executor.execute { dao.updateStatus(id, ReminderEntity.STATUS_PAUSED) }
+
+    /** Saves an edit from the reminder form and marks the reminder scheduled at [timeMillis]. */
+    fun updateAndSchedule(id: Long, title: String, alarm: Boolean, recurrence: String, timeMillis: Long, onComplete: () -> Unit = {}) =
+        executor.execute { dao.updateAndSchedule(id, title, alarm, recurrence, timeMillis); onComplete() }
 
     fun markFalseAlarm(id: Long) = executor.execute { dao.updateStatus(id, ReminderEntity.STATUS_FALSE_ALARM) }
 

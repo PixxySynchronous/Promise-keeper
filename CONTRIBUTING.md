@@ -31,7 +31,9 @@ Right now detection relies mostly on keywords. A phrase list catches most promis
 
 This is limited by the same constraint as above: the model must run locally on an ordinary phone and stay small. Ideas that improve real understanding within those limits are welcome, such as a better classifier, a small model fine-tuned for this task, or smarter rules. Include accuracy numbers from the test suite or `tools/train_semantic_head.py`. See [How detection works](README.md#how-detection-works) and [Retraining](README.md#retraining) in the README.
 
-Adding labelled example messages to [tools/commitment_examples.py](tools/commitment_examples.py) also helps, especially Hinglish and Hindi ones. Users can also share false alarms they export from the app; see [tools/contributed/](tools/contributed/README.md).
+Adding labelled example messages to [tools/commitment_examples.py](tools/commitment_examples.py) also helps, especially Hinglish and Hindi ones.
+
+**No coding needed: share your false alarms.** In the app, open **False alarms → Export → Copy & open GitHub form**, paste into the [Share false alarms](https://github.com/PixxySynchronous/Promise-keeper/issues/new?template=false-alarms.yml) form and submit. Check for anything private first; it's public. Each form is collected into [tools/contributed/](tools/contributed/README.md) and used the next time the model is retrained.
 
 ### 3. An app icon
 

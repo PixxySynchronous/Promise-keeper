@@ -1,6 +1,7 @@
 package com.satyam.whatsappbot.domain
 
 import java.text.Normalizer
+import java.time.LocalDateTime
 
 interface CommitmentDetector {
     fun detect(message: String): CommitmentMatch?
@@ -20,16 +21,25 @@ class RuleBasedCommitmentDetector(
         if (hasClearNegativeSignal(message, normalized) || (startsAsQuestionOrUncertainty && phrases.none { normalized.contains(normalize(it)) && normalized.indexOf(normalize(it)) > 20 })) {
             return null
         }
+        // Computed once, only if a rule below needs it. A part of the day or "weekend" alone parses with a default time;
+        // with "-ta hu" that is usually a habit ("subah chai peeta hu"), so the present tense needs a clock time, a
+        // duration or a date.
+        val parsed by lazy { timeParser.parse(message, LocalDateTime.now()) }
+        val hasClockOrDate by lazy { TIME_WORD.containsMatchIn(normalized) || parsed?.usedDefault == false }
         val phrase = phrases.firstOrNull { normalized.contains(normalize(it)) }
             ?: SELF_TODO.find(normalized)?.value?.trim()
-            // Hinglish uses the present for the near future: "kal karta hu", "shaam ko bhejti hu".
-            ?: FIRST_PERSON_PRESENT.find(normalized)?.takeIf { TIME_WORD.containsMatchIn(normalized) }?.value
-            // Any first-person future verb with a time: "subah rakhlunga", "shaam ko le jaungi", "kal nikalunga".
+            // Hinglish uses the present for the near future: "kal karta hu", "5 baje bhejti hu".
+            ?: FIRST_PERSON_PRESENT.find(normalized)?.takeIf { hasClockOrDate }?.value
+            // Any first-person future verb with any time: "subah rakhlunga", "shaam ko le jaungi", "kal nikalunga",
+            // "1 o clock call karunga", or a repeat or Hindi weekday: "har somvar mandir jaunga".
             ?: HINGLISH_OWN_FUTURE.find(normalized)
-                ?.takeIf { TIME_WORD.containsMatchIn(normalized) || PART_OF_DAY.containsMatchIn(normalized) }?.value
+                ?.takeIf { hasClockOrDate || parsed != null || PART_OF_DAY.containsMatchIn(normalized) || REPEAT_OR_HINDI_DAY.containsMatchIn(normalized) }?.value
             ?: return null
         return CommitmentMatch(message, phrase)
     }
+
+    // Any time the parser understands counts as a time here too, so new time formats need no change in this class.
+    private val timeParser = TimeParser()
 
     /**
      * True when the message is clearly not the sender's own promise: a question or request, something already done,
@@ -65,7 +75,8 @@ class RuleBasedCommitmentDetector(
             (ENGLISH_NEGATION.containsMatchIn(normalized) && !hasFuture(normalized))
 
     private fun isPastTense(normalized: String) =
-        HINGLISH_PAST.containsMatchIn(normalized) || DEVANAGARI_PAST.any { normalized.contains(it) }
+        HINGLISH_PAST.containsMatchIn(normalized) || DEVANAGARI_PAST.any { normalized.contains(it) } ||
+            ENGLISH_PAST.find(normalized)?.let { it.groupValues[3] !in NOT_PAST_ED } == true
 
     private fun hasFuture(normalized: String) =
         HINGLISH_OWN_FUTURE.containsMatchIn(normalized) || ENGLISH_FUTURE.containsMatchIn(normalized) ||
@@ -139,27 +150,44 @@ class RuleBasedCommitmentDetector(
                 "aajao|aa jao|aaja|aa ja|aa jana|aajana|chale aao|chale aana|aao|jao|chale jao)\\b"
         )
         val COMMITMENT_CUE = Regex(
-            // English: first person, future, sending
-            "\\b(i|i'll|ill|i'm|im|i've|ive|i'd|we'll|will|wil|gonna|going to|on it|let me|lemme|sending|send|need to|have to|must|gotta)\\b" +
+            // English: first person, future, sending. Not "let me"/"lemme": without a time it is usually about right
+            // now ("k lemme play"); with one, the time already sends the message to the model.
+            "\\b(i|i'll|ill|i'm|im|i've|ive|i'd|we'll|will|wil|gonna|going to|on it|sending|send|need to|have to|must|gotta)\\b" +
                 // Hinglish: first-person future (-unga/-ungi) or present ("bhejta hu"), and main/mai
                 "|\\b\\w*(unga|ungi|oonga|oongi|lunga|lungi)\\b|\\b(hu|hoon|hun|main|mai)\\b"
         )
         val DEVANAGARI_CUES = listOf("ूंगा", "ूंगी", "ूँगा", "ूँगी", "ऊंगा", "ऊंगी", "ऊँगा", "ऊँगी", "हूं", "हूँ", "मैं")
         // Hinglish past tense: "gaya tha", "nahi hui", "bacha liya", "kar diya".
         val HINGLISH_PAST = Regex("\\b(tha|thi|thhe|hua|hui|huyi|huye|liya|liye|diya|diye|kiya|kiye|gaya|gayi|gaye|chuka|chuki|bachaliya)\\b")
+        // English past with the sender as subject: "i completed", "we just finished", "i already sent". Any "-ed" verb
+        // or a common irregular one; "-ed" words that aren't past tense are in NOT_PAST_ED.
+        val ENGLISH_PAST = Regex(
+            "\\b(i|we)\\s+((?:just|already|also|finally|actually|literally|totally|even|never|recently)\\s+)?" +
+                "(\\w+ed|did|went|sent|got|saw|made|took|gave|told|bought|brought|paid|ate|came|left|wrote|forgot|thought|" +
+                "met|had|was|were|found|kept|put|said|spoke|slept|won|lost|heard|understood|caught|began|drank|drove|felt|" +
+                "knew|ran|sat|sold|spent|taught|woke|wore|binged)\\b"
+        )
+        val NOT_PAST_ED = setOf("need", "feed", "proceed", "exceed", "succeed", "bleed", "seed", "breed", "speed", "heed", "weed", "red", "bed", "shed", "embed")
         val DEVANAGARI_PAST = listOf("था", "थी", "हुआ", "हुई", "लिया", "दिया", "किया", "गया", "गई", "चुका", "चुकी")
         val ENGLISH_FUTURE = Regex("\\b(will|wil|i'll|ill|gonna|going to|i'm going to)\\b")
         val DEVANAGARI_FUTURE = listOf("ूंगा", "ूंगी", "ूँगा", "ूँगी", "ऊंगा", "ऊंगी", "ऊँगा", "ऊँगी")
         // "abhi bhejta hu", "karti hoon": in Hinglish this is often "I'll do it now".
         val FIRST_PERSON_PRESENT = Regex("\\b\\w+(ta|ti) (hu|hoon|hun)\\b")
-        // One-off times only: "subah"/"shaam"/"raat" with -ta hu are often habits ("subah chai peeta hu").
+        // Time words the parser doesn't read as a time ("abhi", "baad mein", "5 min" without "mein"); everything it
+        // does read counts too (see hasTime in detect). One-off times only: "subah"/"shaam"/"raat" with -ta hu are
+        // often habits ("subah chai peeta hu").
         val TIME_WORD = Regex(
             "\\b(kal|kl|tomorrow|tom|tmrw|aaj|abhi|parso|baad mein|baad me|baad mai|thodi der|thodi der mein|" +
                 "monday|tuesday|wednesday|thursday|friday|saturday|sunday|\\d+\\s*(min|mins|minute|minutes|ghante|hours?|baje|bje))\\b"
         )
         // Safe with a future verb: "subah karunga" is a plan, unlike the habit "subah karta hu".
         val PART_OF_DAY = Regex("\\b(subah|subha|shaam|sham|raat|dopahar|dopehar|morning|evening|tonight)\\b")
-        val ENGLISH_NEGATION = Regex("\\b(don't|dont|do not|didn't|didnt|doesn't|doesnt|haven't|havent|hasn't|hasnt|never)\\b")
+        // Only with a future verb: with "-ta hu" these describe habits ("har hafte jaata hu").
+        val REPEAT_OR_HINDI_DAY = Regex(
+            "\\b(har|every|each|daily|weekly|monthly|yearly|roz|rozana|somvar|somwar|mangalvar|mangalwar|budhvar|budhwar|" +
+                "guruvar|guruwar|shukravar|shukrawar|shanivar|shaniwar|ravivar|raviwar|itwar|itvar)\\b"
+        )
+        val ENGLISH_NEGATION =Regex("\\b(don't|dont|do not|didn't|didnt|doesn't|doesnt|haven't|havent|hasn't|hasnt|never)\\b")
         val HABIT = Regex("\\b(roz|rozana|daily|har din|har roz|hamesha|humesha|usually|always|generally|aksar|jab bhi|every day|everyday|every morning|every night)\\b")
         // First-person future verbs: "bhej dunga", "karungi", "le aaunga", "krunga".
         val HINGLISH_OWN_FUTURE = Regex("\\b\\w*(unga|ungi|oonga|oongi|ungaa)\\b")

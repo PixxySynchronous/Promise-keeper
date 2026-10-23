@@ -263,4 +263,70 @@ class CommitmentAndTimeTest {
         assertEquals(LocalTime.of(11, 15), parser.parse("tomorrow", now)!!.dateTime.toLocalTime())
         assertEquals(now.plusHours(3), parser.parseOrDefault("I'll send it", now).dateTime)
     }
+
+    @Test
+    fun oClockIsATime() {
+        val parser = TimeParser()
+        val morning = LocalDateTime.of(2026, 10, 24, 10, 2)
+        assertEquals(LocalDateTime.of(2026, 10, 24, 12, 0), parser.parse("12 o'clock karunga fir se", morning)!!.dateTime)
+        assertEquals(LocalDateTime.of(2026, 10, 24, 12, 0), parser.parse("12 o’clock karunga", morning)!!.dateTime)
+        assertEquals(LocalDateTime.of(2026, 10, 18, 22, 0), parser.parse("10 o'clock call karunga", now)!!.dateTime)
+        assertEquals(LocalDateTime.of(2026, 10, 24, 10, 0), parser.parse("10 oclock call karunga", LocalDateTime.of(2026, 10, 24, 8, 0))!!.dateTime)
+        assertEquals(LocalDateTime.of(2026, 10, 19, 10, 0), parser.parse("kal 10 o clock bhej dunga", now)!!.dateTime)
+    }
+
+    @Test
+    fun spacingDotsAndShortFormsInTimesDoNotMatter() {
+        val parser = TimeParser()
+        val noon = LocalDateTime.of(2026, 10, 24, 12, 55)
+        listOf("1 o clock", "1oclock", "1 o'clock", "1 o’clock", "1 O Clock", "1 o-clock", "1 oclk", "1 o clk", "1 o' clock", "1 p m", "1 P.M.", "1pm")
+            .forEach { assertEquals("Wrong time: $it", LocalDateTime.of(2026, 10, 24, 13, 0), parser.parse("$it call karunga", noon)?.dateTime) }
+        listOf("1 a.m.", "1 a m", "1AM").forEach { assertEquals("Wrong time: $it", LocalDateTime.of(2026, 10, 25, 1, 0), parser.parse("$it call karunga", noon)?.dateTime) }
+        listOf("5 bje", "5 bajey", "5 baje", "5 बजे").forEach { assertEquals("Wrong time: $it", LocalTime.of(17, 0), parser.parse("$it call karunga", noon)?.dateTime?.toLocalTime()) }
+        assertEquals(LocalTime.of(20, 30), parser.parse("will buy medicines at 8.30pm", noon)!!.dateTime.toLocalTime())
+        assertEquals(LocalTime.of(20, 30), parser.parse("will buy medicines at 8.30 p.m.", noon)!!.dateTime.toLocalTime())
+        // Detection uses the same parser, so every spelling is also caught as a promise.
+        listOf("1 o clock call karunga", "1 oclk call karunga", "5 bje bhej dunga").forEach { assertNotNull("Expected match: $it", detector.detect(it)) }
+        // A habit with a part of the day is still not a promise.
+        assertNull(detector.detect("mai subah chai peeta hu"))
+    }
+
+    @Test
+    fun pmWithoutASpaceStaysPm() {
+        val parser = TimeParser()
+        val evening = LocalDateTime.of(2026, 10, 24, 19, 0)
+        assertEquals(LocalDateTime.of(2026, 10, 24, 20, 30), parser.parse("I'll buy medicines at 8:30PM", evening)!!.dateTime)
+        assertEquals(LocalDateTime.of(2026, 10, 24, 20, 30), parser.parse("I'll buy medicines at 8:30 PM", evening)!!.dateTime)
+        assertEquals(LocalDateTime.of(2026, 10, 25, 9, 0), parser.parse("will call at 9am", evening)!!.dateTime)
+        assertEquals(LocalTime.of(17, 0), parser.parse("kal 5pm bhej dunga", now)!!.dateTime.toLocalTime())
+    }
+
+    @Test
+    fun letMeWithoutATimeIsNotAPromise() {
+        val rules = RuleBasedCommitmentDetector()
+        listOf("k lemme play", "let me eat first", "lemme sleep").forEach {
+            assertNull("Expected no match: $it", rules.detect(it))
+            assertEquals("Expected model to be skipped: $it", false, rules.hasCommitmentCue(it) || TimeParser().parse(it, now) != null)
+        }
+        assertNotNull(TimeParser().parse("lemme call you at 5", now))
+    }
+
+    @Test
+    fun englishPastTenseIsNotAPromiseUnlessItAlsoPromises() {
+        val rules = RuleBasedCommitmentDetector()
+        listOf("I completed all latest ep of Vision Quest", "I finished the report", "we just watched it", "I sent it yesterday", "I went to the gym", "I already paid")
+            .forEach {
+                assertNull("Expected no match: $it", rules.detect(it))
+                assertEquals("Expected model to be skipped: $it", true, rules.rejects(it))
+            }
+        listOf("I finished part 1, will send the rest tomorrow", "I need to send it", "I'll send it tomorrow")
+            .forEach { assertEquals("Expected model to be consulted: $it", false, rules.rejects(it)) }
+    }
+
+    @Test
+    fun repeatingHinglishPromisesAreDetectedButHabitsAreNot() {
+        listOf("har somvar mandir jaunga", "every monday call karunga", "har mahine rent bhejunga", "roz subah 7 baje walk karunga")
+            .forEach { assertNotNull("Expected match: $it", detector.detect(it)) }
+        listOf("main roz gym jaata hu", "har din chai peeta hu").forEach { assertNull("Expected no match: $it", detector.detect(it)) }
+    }
 }

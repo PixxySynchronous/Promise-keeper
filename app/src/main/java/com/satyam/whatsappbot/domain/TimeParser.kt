@@ -45,7 +45,7 @@ class TimeParser(private val defaults: DefaultTimes = DefaultTimes()) {
      */
     private fun canonicalDayWords(message: String): String {
         val withTom = message.replace(Regex("\\btom\\b"), "tomorrow")
-        return withTom.lowercase(Locale.ROOT).replace("’", "'").trim()
+        return canonicalTimeWords(withTom.lowercase(Locale.ROOT).replace("’", "'").trim())
             .replace(TOMORROW_VARIANTS, "tomorrow")
             .replace(Regex("\\bday after (tomorrow|kal)\\b"), "parso")
             .replace(Regex("\\b(parson|parsoon)\\b"), "parso")
@@ -55,6 +55,18 @@ class TimeParser(private val defaults: DefaultTimes = DefaultTimes()) {
             .replace(devanagariWord("आज"), "aaj")
     }
 
+    /**
+     * Rewrites how a clock time is typed into one form, so the parser only handles one spelling: spacing, dots and
+     * short forms after a number don't matter. "1 o clock" / "1o'clock" / "1 o-clk" -> "1 oclock"; "1 a.m." / "1 p m" /
+     * "1AM" -> "1 am" / "1 pm"; "5 bje" / "5 bajey" / "5 बजे" -> "5 baje"; "8.30pm" -> "8:30 pm". Expects lowercase.
+     */
+    private fun canonicalTimeWords(text: String): String = text
+        .replace(Regex("\\b(\\d{1,2})[.](\\d{2})(?=\\s*(?:[ap]\\s*\\.?\\s*m\\b|baje|bje|baj|o\\b|o'|o-|oc))"), "$1:$2")
+        .replace(Regex("\\b(\\d{1,2}(?::\\d{2})?)\\s*o\\s*['-]?\\s*(?:clock|clk|klock|klok)\\b"), "$1 oclock")
+        .replace(Regex("\\b(\\d{1,2}(?::\\d{2})?)\\s*([ap])\\s*\\.?\\s*m\\b\\.?"), "$1 $2m")
+        .replace(Regex("\\b(\\d{1,2}(?::\\d{2})?)\\s*(?:baje|bje|baj|bajey|bajay|baaje|bajje)\\b"), "$1 baje")
+        .replace(Regex("\\b(\\d{1,2}(?::\\d{2})?)\\s*बजे"), "$1 baje")
+
     /** 1 for tomorrow/kal (unless kal is about the past), 2 for parso, 0 for today/aaj, null if no day word. */
     private fun dayOffset(text: String): Long? = when {
         Regex("\\bparso\\b").containsMatchIn(text) -> 2
@@ -63,6 +75,104 @@ class TimeParser(private val defaults: DefaultTimes = DefaultTimes()) {
         Regex("\\b(today|aaj)\\b").containsMatchIn(text) -> 0
         else -> null
     }
+
+    /**
+     * A repeating reminder in the message, or null: "every monday", "har somvar", "mondays", "every mon and thu",
+     * "weekdays", "every day", "roz subah", "every week", "every month on the 15th", "every year on 25/12". Weekly with
+     * no day named, and monthly or yearly with no date, repeat from today.
+     */
+    fun parseRecurrence(message: String, now: LocalDateTime): Recurrence? {
+        val text = canonicalDayWords(message)
+        val time = timeOfDay(text)
+        val today = now.toLocalDate()
+        if (YEARLY.containsMatchIn(text) || YEARLY_DEVANAGARI.any { text.contains(it) }) {
+            val (month, day) = yearlyDate(text) ?: (today.monthValue to today.dayOfMonth)
+            return Recurrence(Recurrence.Frequency.YEARLY, time, month = month, dayOfMonth = day)
+        }
+        if (MONTHLY.containsMatchIn(text) || MONTHLY_DEVANAGARI.any { text.contains(it) }) {
+            return Recurrence(Recurrence.Frequency.MONTHLY, time, dayOfMonth = monthlyDay(text) ?: today.dayOfMonth)
+        }
+        val days = repeatingWeekdays(text)
+        return when {
+            days.isNotEmpty() -> Recurrence(Recurrence.Frequency.WEEKLY, time, weekdays = days)
+            // "weekly on monday", "har hafte somvar ko": the day named, else today's.
+            WEEKLY.containsMatchIn(text) || WEEKLY_DEVANAGARI.any { text.contains(it) } ->
+                Recurrence(Recurrence.Frequency.WEEKLY, time, weekdays = setOf(findWeekday(text)?.first ?: today.dayOfWeek))
+            DAILY.containsMatchIn(text) || DAILY_DEVANAGARI.any { text.contains(it) } -> Recurrence(Recurrence.Frequency.DAILY, time)
+            else -> repeatsByNature(message, text, time, now)
+        }
+    }
+
+    /**
+     * Reminders that repeat without saying "every". A birthday or anniversary is yearly, on the date it names
+     * ("piyush birthday 28 may") or the day it names ("mom's birthday kal hai"); without any date or day it stays
+     * one-time, since the date is unknown. Rent, EMI, salary, fees and bills are monthly when a day of the month is
+     * named ("pay rent on the 1st"); "pay rent tomorrow" stays one-time.
+     */
+    private fun repeatsByNature(message: String, text: String, time: LocalTime, now: LocalDateTime): Recurrence? {
+        val yearly = (YEARLY_BY_NATURE.containsMatchIn(text) || YEARLY_BY_NATURE_DEVANAGARI.any { text.contains(it) }) && !ONE_OFF_TASK.containsMatchIn(text)
+        if (yearly) {
+            val date = findDate(text)?.let { it.month to it.day }
+                ?: parse(message, now)?.dateTime?.toLocalDate()?.let { it.monthValue to it.dayOfMonth }
+                ?: return null
+            return Recurrence(Recurrence.Frequency.YEARLY, time, month = date.first, dayOfMonth = date.second)
+        }
+        if (MONTHLY_BY_NATURE.containsMatchIn(text)) {
+            return monthlyDay(text)?.let { Recurrence(Recurrence.Frequency.MONTHLY, time, dayOfMonth = it) }
+        }
+        return null
+    }
+
+    /**
+     * The time of day for a repeating reminder. A clock time without am/pm follows the part of the day named with it
+     * ("subah 7 baje" is 7 AM, "shaam 7 baje" 7 PM), else the future-day rule. No clock: the part of the day's default,
+     * else the default day time.
+     */
+    private fun timeOfDay(text: String): LocalTime {
+        val morning = Regex("\\b(morning|subah|subha)\\b").containsMatchIn(text) || text.contains("सुबह")
+        val later = Regex("\\b(evening|shaam|sham|afternoon|dopahar|dopeher|dophar|dupahar|dopher|night|tonight|nightly|raat)\\b").containsMatchIn(text) ||
+            listOf("शाम", "दोपहर", "रात").any { text.contains(it) }
+        val clock = extractClock(text)
+        if (clock != null) {
+            val time = clock.first
+            return when {
+                hasMeridiem(clock) || time.hour == 0 || time.hour >= 12 || morning -> time
+                // "raat 1 baje" is after midnight, "raat 10 baje" is 10 PM.
+                later -> if (time.hour < 5) time else time.plusHours(12)
+                else -> futureDayTime(clock)
+            }
+        }
+        return when {
+            Regex("\\b(night|tonight|nightly|raat)\\b").containsMatchIn(text) || text.contains("रात") -> defaults.tonight
+            morning -> defaults.morning
+            Regex("\\b(evening|shaam|sham)\\b").containsMatchIn(text) || text.contains("शाम") -> defaults.evening
+            later -> defaults.afternoon
+            else -> defaults.day
+        }
+    }
+
+    private fun repeatingWeekdays(text: String): Set<DayOfWeek> {
+        if (EVERY_WEEKDAY.containsMatchIn(text)) return Recurrence.WEEKDAYS
+        if (EVERY_WEEKEND.containsMatchIn(text)) return Recurrence.WEEKEND
+        val days = mutableSetOf<DayOfWeek>()
+        EVERY_DAY_LIST.findAll(text).forEach { list -> DAY_TOKEN.findAll(list.groupValues[2]).forEach { days += ANY_WEEKDAY.getValue(it.value) } }
+        PLURAL_WEEKDAY.findAll(text).forEach { days += WEEKDAYS.getValue(it.groupValues[1]) }
+        DEVANAGARI_WEEKDAYS.forEach { (name, day) -> if (text.contains("हर $name")) days += day }
+        return days
+    }
+
+    // "on the 15th", "15 tareekh", "1st of every month", or the day of a date like 15/11 or 15 nov.
+    private fun monthlyDay(text: String): Int? {
+        findDate(text)?.let { return it.day }
+        val match = Regex("\\b(\\d{1,2})(?:st|nd|rd|th)?\\s*(?:tareekh|tarikh|tarik|date)\\b").find(text)
+            ?: Regex("\\bon\\s+(?:the\\s+)?(\\d{1,2})(?:st|nd|rd|th)?\\b").find(text)
+            ?: Regex("\\b(\\d{1,2})(?:st|nd|rd|th)\\b").find(text)
+            ?: return null
+        return match.groupValues[1].toInt().takeIf { it in 1..31 }
+    }
+
+    // (month, day) of the date in the text.
+    private fun yearlyDate(text: String): Pair<Int, Int>? = findDate(text)?.let { it.month to it.day }
 
     fun parseOrDefault(message: String, now: LocalDateTime): ParsedTime =
         parse(message, now) ?: ParsedTime(laterOrNextMorning(now), "no explicit time", usedDefault = true)
@@ -112,16 +222,36 @@ class TimeParser(private val defaults: DefaultTimes = DefaultTimes()) {
     private fun numberValue(word: String): Long? = word.toLongOrNull() ?: NUMBER_WORDS[word]
 
     private fun parseExplicitDate(text: String, now: LocalDateTime): ParsedTime? {
-        val match = Regex("\\b(\\d{1,2})[/-](\\d{1,2})(?:[/-](\\d{2,4}))?\\b").find(text) ?: return null
-        val day = match.groupValues[1].toInt()
-        val month = match.groupValues[2].toInt()
-        val year = match.groupValues[3].takeIf { it.isNotEmpty() }?.let { normalizeYear(it) } ?: now.year
-        val date = runCatching { LocalDate.of(year, month, day) }.getOrNull() ?: return null
-        val futureDate = if (date.isBefore(now.toLocalDate())) date.plusYears(1) else date
-        val withoutDate = text.replaceRange(match.range, " ")
-        val clock = extractClock(withoutDate)
+        val mention = findDate(text) ?: return null
+        val date = LocalDate.of(mention.year ?: now.year, mention.month, mention.day)
+        // Without a year, a date already past this year means next year ("28 may" said in October).
+        val futureDate = if (mention.year == null && date.isBefore(now.toLocalDate())) date.plusYears(1) else date
+        val clock = extractClock(text.replaceRange(mention.range, " "))
         val time = clock?.let(::futureDayTime) ?: defaults.day
-        return ParsedTime(LocalDateTime.of(futureDate, time), match.value, clock == null)
+        return ParsedTime(LocalDateTime.of(futureDate, time), text.substring(mention.range), clock == null)
+    }
+
+    private data class DateMention(val day: Int, val month: Int, val year: Int?, val range: IntRange)
+
+    /**
+     * The first valid calendar date in the text, written as numbers (day first: "28/5", "28-05-2027") or with a month
+     * name ("28 may", "28th of may", "may 28", "may 28, 2027", "28 dec 2026"). One date finder for one-time and
+     * repeating reminders, so both understand the same dates.
+     */
+    private fun findDate(text: String): DateMention? {
+        val numeric = Regex("\\b(\\d{1,2})[/-](\\d{1,2})(?:[/-](\\d{2,4}))?\\b").findAll(text).map {
+            DateMention(it.groupValues[1].toInt(), it.groupValues[2].toInt(), it.groupValues[3].ifEmpty { null }?.let(::normalizeYear), it.range)
+        }
+        val dayMonth = Regex("\\b(\\d{1,2})(?:st|nd|rd|th)?\\s+(?:of\\s+)?$MONTH_NAME(?:,?\\s+(\\d{4}))?\\b").findAll(text).map {
+            DateMention(it.groupValues[1].toInt(), MONTHS.getValue(it.groupValues[2]), it.groupValues[3].ifEmpty { null }?.toInt(), it.range)
+        }
+        val monthDay = Regex("\\b$MONTH_NAME\\s+(\\d{1,2})(?:st|nd|rd|th)?(?:,?\\s+(\\d{4}))?\\b").findAll(text).map {
+            DateMention(it.groupValues[2].toInt(), MONTHS.getValue(it.groupValues[1]), it.groupValues[3].ifEmpty { null }?.toInt(), it.range)
+        }
+        // 29 Feb without a year is valid (2024 is a leap year).
+        return (numeric + dayMonth + monthDay)
+            .filter { runCatching { LocalDate.of(it.year ?: 2024, it.month, it.day) }.isSuccess }
+            .minByOrNull { it.range.first }
     }
 
     /**
@@ -162,10 +292,11 @@ class TimeParser(private val defaults: DefaultTimes = DefaultTimes()) {
     }
 
     // On another day, "by 5" with no am/pm almost always means the afternoon or evening: read 1-7 as PM.
-    private fun futureDayTime(clock: Pair<LocalTime, String>): LocalTime {
-        val hasMeridiem = Regex("(?i)\\b(am|pm)\\b").containsMatchIn(clock.second)
-        return if (!hasMeridiem && clock.first.hour in 1..7) clock.first.plusHours(12) else clock.first
-    }
+    private fun futureDayTime(clock: Pair<LocalTime, String>): LocalTime =
+        if (!hasMeridiem(clock) && clock.first.hour in 1..7) clock.first.plusHours(12) else clock.first
+
+    // Also when typed without a space ("8:30pm"), which a word-boundary check would miss.
+    private fun hasMeridiem(clock: Pair<LocalTime, String>) = Regex("\\d\\s*(am|pm)$").containsMatchIn(clock.second)
 
     private fun parseWeekday(text: String, now: LocalDateTime): ParsedTime? {
         val (day, matched) = findWeekday(text) ?: return null
@@ -208,9 +339,8 @@ class TimeParser(private val defaults: DefaultTimes = DefaultTimes()) {
 
     private fun adjustAmbiguousClock(clock: Pair<LocalTime, String>, now: LocalDateTime): Pair<LocalTime, String> {
         val hourText = Regex("\\d{1,2}").find(clock.second)?.value ?: return clock
-        val hasMeridiem = Regex("(?i)\\b(am|pm)\\b").containsMatchIn(clock.second)
         val hour = hourText.toInt()
-        return if (!hasMeridiem && hour in 1..11 && hour < now.hour) {
+        return if (!hasMeridiem(clock) && hour in 1..11 && hour < now.hour) {
             clock.copy(first = clock.first.plusHours(12))
         } else {
             clock
@@ -303,6 +433,42 @@ class TimeParser(private val defaults: DefaultTimes = DefaultTimes()) {
             "\\b(tmrw|tmr|tmw|tmrow|tmrrw|tmmrw|tommrw|2mrw|2mro|2moro|2morow|2morrow|tomo|tomm|tomorow|tommorow|tommorrow|tomorrw|tomoro|tomorro|tmorrow)\\b"
         )
 
+        // Repeating reminders.
+        val ANY_WEEKDAY = WEEKDAYS + SHORT_WEEKDAYS + HINDI_WEEKDAYS
+        // Longest first, so "thursday" is not read as "thu".
+        private val DAY_TOKENS = ANY_WEEKDAY.keys.sortedByDescending { it.length }.joinToString("|")
+        val DAY_TOKEN = Regex("\\b($DAY_TOKENS)\\b")
+        // "every monday", "har somvar", "every mon, wed and fri", "each tuesday & thursday".
+        val EVERY_DAY_LIST = Regex("\\b(every|each|har|hr)\\s+((?:$DAY_TOKENS)(?:\\s*(?:,|and|&|aur|or|n)\\s*(?:$DAY_TOKENS))*)\\b")
+        val PLURAL_WEEKDAY = Regex("\\b(monday|tuesday|wednesday|thursday|friday|saturday|sunday)s\\b")
+        val EVERY_WEEKDAY = Regex("\\b(every weekday|each weekday|weekdays|har weekday|monday to friday|mon to fri|monday-friday|mon-fri)\\b")
+        val EVERY_WEEKEND = Regex("\\b(every weekend|each weekend|weekends|har weekend)\\b")
+        val DAILY = Regex(
+            "\\b(every ?day|each day|every single day|daily|har din|har roz|har roj|roz|rozana|rozaana|roj|nightly|" +
+                "(every|each|har)\\s+(morning|evening|night|afternoon|subah|subha|shaam|sham|raat))\\b"
+        )
+        val DAILY_DEVANAGARI = listOf("रोज़", "रोज", "हर दिन", "प्रतिदिन", "हर सुबह", "हर शाम", "हर रात")
+        val WEEKLY = Regex("\\b(every week|each week|every wk|weekly|once a week|har hafte|har hafta|har week)\\b")
+        val WEEKLY_DEVANAGARI = listOf("हर हफ्ते", "हर हफ़्ते", "हर सप्ताह")
+        val MONTHLY = Regex("\\b(every month|each month|monthly|once a month|har mahine|har mahina|har month)\\b")
+        val MONTHLY_DEVANAGARI = listOf("हर महीने", "हर माह")
+        val YEARLY = Regex("\\b(every year|each year|yearly|annually|once a year|har saal|har sal|har year)\\b")
+        val YEARLY_DEVANAGARI = listOf("हर साल", "हर वर्ष")
+        val MONTHS = mapOf(
+            "jan" to 1, "january" to 1, "feb" to 2, "february" to 2, "mar" to 3, "march" to 3, "apr" to 4, "april" to 4,
+            "may" to 5, "jun" to 6, "june" to 6, "jul" to 7, "july" to 7, "aug" to 8, "august" to 8, "sep" to 9,
+            "sept" to 9, "september" to 9, "oct" to 10, "october" to 10, "nov" to 11, "november" to 11, "dec" to 12,
+            "december" to 12
+        )
+        private val MONTH_NAME = "(${MONTHS.keys.sortedByDescending { it.length }.joinToString("|")})"
+        // Things that repeat by nature, said without "every". Yearly: birthdays and anniversaries, unless the message
+        // is about a one-off task for it (buying the cake, booking the dinner).
+        val YEARLY_BY_NATURE = Regex("\\b(birthday|bday|b'day|bdy|budday|anniversary|anniv|janamdin|janmdin|janmadin|saalgirah|salgirah|barsi)\\b")
+        val YEARLY_BY_NATURE_DEVANAGARI = listOf("जन्मदिन", "सालगिरह", "वर्षगांठ", "बरसी")
+        val ONE_OFF_TASK = Regex("\\b(party|gift|cake|present|plan|planning|celebration|dinner|lunch|treat|order|book|buy|card|surprise|decorat\\w*)\\b")
+        // Monthly: payments and bills that come every month, when a day of the month is named ("rent on the 1st").
+        val MONTHLY_BY_NATURE = Regex("\\b(rent|emi|sip|kiraya|kiraaya|salary|credit card bill|card bill|maintenance|school fees?|tuition fees?|insurance premium|premium)\\b")
+
         // Whole Devanagari word only, so "कल" does not match inside "कलम".
         fun devanagariWord(word: String) = Regex("(?<![\\u0900-\\u097F])$word(?![\\u0900-\\u097F])")
     }
@@ -325,8 +491,9 @@ class TimeParser(private val defaults: DefaultTimes = DefaultTimes()) {
             ?: laterOrNextMorning(now)
 
     private fun extractClock(text: String): Pair<LocalTime, String>? {
-        // A bare number ("send 2 files") is not a time; require by/at, a colon, am/pm or baje.
-        return Regex("\\b(by\\s+|at\\s+)?(\\d{1,2})(?::(\\d{2}))?\\s*(am|pm|baje)?\\b").findAll(text).firstNotNullOfOrNull { match ->
+        // A bare number ("send 2 files") is not a time; require by/at, a colon, am/pm, baje or oclock. Other spellings
+        // were rewritten to these by canonicalTimeWords.
+        return Regex("\\b(by\\s+|at\\s+)?(\\d{1,2})(?::(\\d{2}))?\\s*(am|pm|baje|oclock)?\\b").findAll(text).firstNotNullOfOrNull { match ->
             val prefix = match.groupValues[1]
             val hour = match.groupValues[2].toInt()
             val minuteText = match.groupValues[3]

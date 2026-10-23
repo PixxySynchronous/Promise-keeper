@@ -4,12 +4,20 @@ These files are messages that Promise Keeper wrongly flagged as promises, export
 
 ## How to contribute
 
-1. In the app, open the **False alarms** tab and check the messages. **Delete any message that contains something private**, like a name, phone number or address. You can also edit the file after exporting.
-2. Tap **Export** and save or share the file.
-3. Either:
-   - **Pull request:** add the file to this folder. Name it something like `false-alarms-<your-github-name>-<date>.json`.
-   - **Issue:** open an issue on the repository and attach the file.
-   - **Direct:** send it to the maintainer.
+1. In the app, open the **False alarms** tab and check the messages. **Delete any message that contains something private**, like a name, phone number or address. Whatever you post on GitHub is public.
+2. Tap **Export → Copy & open GitHub form**. Your browser opens the [Share false alarms](https://github.com/PixxySynchronous/Promise-keeper/issues/new?template=false-alarms.yml) form (sign in to GitHub, or make a free account).
+3. Long-press the big box, tap **Paste**, then **Submit new issue**. That's it.
+
+Prefer a file? Tap **Export → Share file** instead and attach it to the same form, or, if you know git, add it to this folder in a pull request (name it like `false-alarms-<your-github-name>-<date>.json`).
+
+## For the maintainer: collecting them
+
+```sh
+python3 -I tools/fetch_contributed.py                 # saves each form as github-issue-<number>.json here
+.venv/bin/python -I tools/train_semantic_head.py      # retrains with them
+```
+
+The fetch script reads every issue made from the form (label `false-alarms`), takes the pasted or attached export, keeps only the message texts, and skips issues it already saved. Read the new files for anything private before committing them. Set `GITHUB_TOKEN` if GitHub's hourly limit for anonymous requests is reached.
 
 The file contains only the message text and what flagged it (a phrase, or the AI model with its score). It never includes contact names.
 

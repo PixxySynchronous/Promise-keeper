@@ -62,10 +62,13 @@ data class SetupStatus(
     val allDone get() = requiredDone && exactAlarms && battery
 }
 
+fun isAccessibilityOn(context: Context) =
+    Settings.Secure.getString(context.contentResolver, Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES)
+        .orEmpty().contains("${context.packageName}/", ignoreCase = true)
+
 fun readSetupStatus(context: Context) = SetupStatus(
     notifications = NotificationManagerCompat.from(context).areNotificationsEnabled(),
-    accessibility = Settings.Secure.getString(context.contentResolver, Settings.Secure.ENABLED_ACCESSIBILITY_SERVICES)
-        .orEmpty().contains("${context.packageName}/", ignoreCase = true),
+    accessibility = isAccessibilityOn(context),
     exactAlarms = Build.VERSION.SDK_INT < 31 || context.getSystemService(AlarmManager::class.java).canScheduleExactAlarms(),
     battery = context.getSystemService(PowerManager::class.java).isIgnoringBatteryOptimizations(context.packageName),
     fullScreenAlarms = ReminderNotifications.canShowFullScreenAlarms(context)
@@ -132,7 +135,11 @@ fun SetupGuide(status: SetupStatus, onFinish: () -> Unit, refreshStatus: () -> U
                     "(This first try is needed, or the option in step 3 doesn't appear.)\n" +
                     "2. Come back here and tap Open app info.\n" +
                     "3. Tap ⋮ (top-right corner) → Allow restricted settings, and confirm with your PIN or fingerprint.\n" +
-                    "4. Open Accessibility settings again and turn Promise Keeper on."
+                    "4. Open Accessibility settings again and turn Promise Keeper on.\n\n" +
+                    "Can't find these options? Every phone puts them in a slightly different place. Use the search bar at the " +
+                    "top of your phone's Settings app and type \"restricted settings\". Or search online for " +
+                    // The brand comes from the phone itself, e.g. "Samsung", "Xiaomi".
+                    "\"allow restricted settings ${Build.MANUFACTURER.replaceFirstChar { it.uppercase() }}\": the steps are the same for any app downloaded as a file."
             )
             OutlinedButton(onClick = { context.startActivity(appInfoIntent(context)) }) { Text("Open app info") }
             Instructions(
@@ -306,6 +313,8 @@ private fun DefaultTimeStep(number: Int) {
                 TextButton(onClick = {
                     time = LocalTime.of(state.hour, state.minute)
                     ReminderSettings.setDefaultTime(context, time)
+                    // The daily "switched off" check runs at this time too.
+                    AccessibilityNudge.schedule(context)
                     editing = false
                 }) { Text("Save") }
             },
