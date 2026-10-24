@@ -10,6 +10,8 @@ It understands **English, Hinglish and Hindi (Devanagari)**.
 
 **Set a reminder on purpose:** start any message with the word **reminder**, for example *"Reminder: pay rent on 1/11"* or *"reminder call mom at 5"*. You always get a reminder for it, with no detection involved. Send it to yourself (WhatsApp → *Message yourself*) to keep it private.
 
+**Notes to yourself:** in your own chat (WhatsApp → *Message yourself*), you don't even need the word reminder. Any note with a time or a repeat becomes a reminder, for example *"wish her good morning every day at 10 am"*. In other chats, the same words are telling someone else, so they need your own promise ("I'll…", "…karunga") to count.
+
 **Repeating reminders:** say how often and the reminder repeats, for example *"I'll call mom every Sunday"*, *"har somvar mandir jaunga"*, *"roz subah 7 baje walk karunga"*, *"Reminder: pay rent on the 1st of every month"* or *"reminder every year on 25/12 wish him"*. It understands every day, every morning or night, given weekdays, weekdays and weekends, every week, every month and every year. Each repeating reminder has an on/off switch on its card. **Done** only dismisses that one ring.
 
 **Birthdays and bills repeat by themselves:** birthdays and anniversaries repeat every year (*"Piyush birthday 28 May"*), and rent, EMI, salary or bills with a day of the month repeat every month (*"pay rent on the 1st"*), without saying "every".
@@ -34,7 +36,7 @@ Requires **Android 13 or newer**.
 
 Or install by hand:
 
-1. Download `PromiseKeeper-1.4.0.apk` from the [Releases](../../releases) page.
+1. Download `PromiseKeeper-1.4.1.apk` from the [Releases](../../releases) page.
 2. Open it. If asked, allow your browser or file manager to install unknown apps.
 3. **Google Play Protect may block or warn about the app.** Play Protect does this for apps downloaded outside the Play Store that use the accessibility service, which this app needs to see the messages you send.
    - If you see **Install anyway**, tap it.
@@ -43,7 +45,7 @@ Or install by hand:
      2. Tap the **⚙️ gear** and turn off **Scan apps with Play Protect**.
      3. Install the APK.
      4. **Turn Play Protect back on.** If it later flags Promise Keeper, choose **Keep app**.
-   - Alternatively, installing from a computer with `adb install PromiseKeeper-1.4.0.apk` is not blocked.
+   - Alternatively, installing from a computer with `adb install PromiseKeeper-1.4.1.apk` is not blocked.
 4. **If Promise Keeper is greyed out in Accessibility** ("Restricted setting"), Android has locked it because it came from a downloaded file. Unlock it once:
    1. In **Settings → Accessibility → Installed apps**, tap the greyed-out **Promise Keeper**, then tap **OK** on the popup. This first try is needed, or the option below doesn't appear.
    2. Go to **Settings → Apps → Promise Keeper → ⋮ (top right) → Allow restricted settings**, and confirm with your PIN or fingerprint.
@@ -65,16 +67,16 @@ The app is about 130 MB, mostly the language model.
 
 ## How well it works
 
-Measured on 968 labelled example messages, scoring each with a model that had not been trained on that message:
+Measured on 981 labelled example messages, scoring each with a model that had not been trained on that message:
 
 | | Promises caught | Ordinary messages wrongly flagged |
 |---|---|---|
-| English | 87% | 1% |
-| Hinglish | 98% | 2% |
+| English | 89% | 1% |
+| Hinglish | 98% | 1% |
 | Hindi | 100% | 0% |
-| Overall | 95% | 1% |
+| Overall | 95% | 0.8% |
 
-Detection uses phrase rules first and the AI model for what they miss. On their own, the rules catch 81% of promises and the model 70%; together, 95%.
+Detection uses phrase rules first and the AI model for what they miss. On their own, the rules catch 87% of promises and the model 76%; together, 95%.
 
 These examples were written by hand, not taken from real chats, and the phrase rules were written using them, so real-world results will be lower. Very short or unusual messages are the most likely to be missed.
 
