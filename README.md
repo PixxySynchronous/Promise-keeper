@@ -32,11 +32,13 @@ It understands **English, Hinglish and Hindi (Devanagari)**.
 
 Requires **Android 13 or newer**.
 
+**Hear about new versions:** the app reminds you about once a month (turn it off in its Settings). On GitHub, use **Watch → Custom → Releases** at the top of this page to get an email for each release (GitHub sends it; nobody else sees your address). Or add [the releases feed](https://github.com/PixxySynchronous/Promise-keeper/releases.atom) to any feed reader. The app itself never checks online: it has no internet access.
+
 **Easiest:** open **[pixxysynchronous.github.io/Promise-keeper](https://pixxysynchronous.github.io/Promise-keeper/)** on your phone. It has the download button and the install steps on one page. Share that link with friends.
 
 Or install by hand:
 
-1. Download `PromiseKeeper-1.4.2.apk` from the [Releases](../../releases) page.
+1. Download `PromiseKeeper-1.4.3.apk` from the [Releases](../../releases) page.
 2. Open it. If asked, allow your browser or file manager to install unknown apps.
 3. **Google Play Protect may block or warn about the app.** Play Protect does this for apps downloaded outside the Play Store that use the accessibility service, which this app needs to see the messages you send.
    - If you see **Install anyway**, tap it.
@@ -45,7 +47,7 @@ Or install by hand:
      2. Tap the **⚙️ gear** and turn off **Scan apps with Play Protect**.
      3. Install the APK.
      4. **Turn Play Protect back on.** If it later flags Promise Keeper, choose **Keep app**.
-   - Alternatively, installing from a computer with `adb install PromiseKeeper-1.4.2.apk` is not blocked.
+   - Alternatively, installing from a computer with `adb install PromiseKeeper-1.4.3.apk` is not blocked.
 4. **If Promise Keeper is greyed out in Accessibility** ("Restricted setting"), Android has locked it because it came from a downloaded file. Unlock it once:
    1. In **Settings → Accessibility → Installed apps**, tap the greyed-out **Promise Keeper**, then tap **OK** on the popup. This first try is needed, or the option below doesn't appear.
    2. Go to **Settings → Apps → Promise Keeper → ⋮ (top right) → Allow restricted settings**, and confirm with your PIN or fingerprint.
