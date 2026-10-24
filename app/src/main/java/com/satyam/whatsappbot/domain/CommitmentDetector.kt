@@ -34,6 +34,10 @@ class RuleBasedCommitmentDetector(
             // "1 o clock call karunga", or a repeat or Hindi weekday: "har somvar mandir jaunga".
             ?: HINGLISH_OWN_FUTURE.find(normalized)
                 ?.takeIf { hasClockOrDate || parsed != null || PART_OF_DAY.containsMatchIn(normalized) || REPEAT_OR_HINDI_DAY.containsMatchIn(normalized) }?.value
+            // The same in English: the sender's own future with any time or repeat, "I'll wish her good morning every
+            // day at 10 am", "I'm going to call you at 5". Someone else's "will" was already rejected above.
+            ?: ENGLISH_OWN_FUTURE.find(normalized)
+                ?.takeIf { hasClockOrDate || parsed != null || REPEAT_OR_HINDI_DAY.containsMatchIn(normalized) }?.value
             ?: return null
         return CommitmentMatch(message, phrase)
     }
@@ -133,7 +137,9 @@ class RuleBasedCommitmentDetector(
             // "nahi aaunga", "nhi kar dunga": a refusal with any first-person future verb.
             Regex("\\b(nahi|nhi|ni) (\\w+ )?\\w*(unga|ungi|oonga|oongi)\\b"),
             // "I'll think and tell you", "if I get time": not a commitment yet
-            Regex("\\b(soch ke|soch kar|sochta hu|sochti hu|agar|if i get time|if i find time)\\b")
+            Regex("\\b(soch ke|soch kar|sochta hu|sochti hu|agar|if i get time|if i find time)\\b"),
+            // The English equivalent: "I'll think about it", "let me think", "will think it over".
+            Regex("\\b(think about it|think it over|think and tell|let me think|lemme think)\\b")
         )
         val WORD_BEFORE_WILL = Regex("([a-z']+) +will\\b")
         val SELF_OR_FILLER = setOf(
@@ -169,6 +175,8 @@ class RuleBasedCommitmentDetector(
         )
         val NOT_PAST_ED = setOf("need", "feed", "proceed", "exceed", "succeed", "bleed", "seed", "breed", "speed", "heed", "weed", "red", "bed", "shed", "embed")
         val DEVANAGARI_PAST = listOf("था", "थी", "हुआ", "हुई", "लिया", "दिया", "किया", "गया", "गई", "चुका", "चुकी")
+        // First person only; bare "will" is left out because "the shop will open at 10" isn't the sender's promise.
+        val ENGLISH_OWN_FUTURE = Regex("\\b(i'll|ill|i will|i wil|i'm going to|im going to|i am going to|i'm gonna|im gonna|we'll|we will)\\b")
         val ENGLISH_FUTURE = Regex("\\b(will|wil|i'll|ill|gonna|going to|i'm going to)\\b")
         val DEVANAGARI_FUTURE = listOf("ूंगा", "ूंगी", "ूँगा", "ूँगी", "ऊंगा", "ऊंगी", "ऊँगा", "ऊँगी")
         // "abhi bhejta hu", "karti hoon": in Hinglish this is often "I'll do it now".

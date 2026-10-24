@@ -12,6 +12,7 @@ import com.satyam.whatsappbot.domain.DefaultTimes
 import com.satyam.whatsappbot.domain.ManualReminder
 import com.satyam.whatsappbot.domain.OnDeviceSemanticClassifier
 import com.satyam.whatsappbot.domain.RuleBasedCommitmentDetector
+import com.satyam.whatsappbot.domain.SelfNote
 import com.satyam.whatsappbot.domain.TimeParser
 import java.time.LocalDateTime
 import java.util.concurrent.Executors
@@ -67,6 +68,19 @@ class WhatsappAccessibilityService : AccessibilityService() {
                 ReminderNotifications.showConfirmation(this, reminder)
             }
             return
+        }
+
+        // A note in your own chat with a time or a repeat is a reminder, whatever its wording.
+        if (SelfNote.isSelfChat(contact)) {
+            val now = LocalDateTime.now()
+            val parser = timeParser()
+            if (parser.parse(message, now) != null || parser.parseRecurrence(message, now) != null) {
+                val (time, repeat) = whenToRemind(message)
+                reminderRepository.insertPending(message, safeContact, SelfNote.MATCHED_PHRASE, time, alarm = ReminderSettings.alarmByDefault(this), recurrence = repeat) { reminder ->
+                    ReminderNotifications.showConfirmation(this, reminder)
+                }
+                return
+            }
         }
 
         // Phrase list first; the on-device model only sees messages without a clear "not a promise" signal.

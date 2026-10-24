@@ -324,6 +324,26 @@ class CommitmentAndTimeTest {
     }
 
     @Test
+    fun englishOwnFutureWithATimeIsAPromiseInAnyChat() {
+        listOf("I'll wish her good morning every day at 10 am", "I'm going to call you at 5", "we'll meet every saturday at 6", "i will pay rent on the 1st of every month")
+            .forEach { assertNotNull("Expected match: $it", detector.detect(it)) }
+        // Someone else's future, a maybe, or a note without "I'll" is not the sender's promise.
+        listOf("the shop will open at 10", "she will call you at 5", "I'll think about it lol", "let me think, will tell by 5")
+            .forEach { assertNull("Expected no match: $it", detector.detect(it)) }
+    }
+
+    @Test
+    fun notesInYourOwnChatAreRecognised() {
+        listOf("Piyush (You)", "Aditi (you)", "राहुल (आप)", "You", "Message yourself").forEach { assertEquals("Expected own chat: $it", true, SelfNote.isSelfChat(it)) }
+        listOf("Rahul", "Youth Club", "You & Me ❤️", "Team (Yours truly)").forEach { assertEquals("Expected other chat: $it", false, SelfNote.isSelfChat(it)) }
+        // In your own chat, a note's time and repeat are read as usual.
+        assertEquals(
+            Recurrence(Recurrence.Frequency.DAILY, LocalTime.of(10, 0)),
+            TimeParser().parseRecurrence("wish her good morning every day at 10 am", now)
+        )
+    }
+
+    @Test
     fun repeatingHinglishPromisesAreDetectedButHabitsAreNot() {
         listOf("har somvar mandir jaunga", "every monday call karunga", "har mahine rent bhejunga", "roz subah 7 baje walk karunga")
             .forEach { assertNotNull("Expected match: $it", detector.detect(it)) }

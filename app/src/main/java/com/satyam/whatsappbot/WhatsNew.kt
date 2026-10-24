@@ -29,6 +29,13 @@ object WhatsNew {
 
     val releases = listOf(
         Release(
+            11, "1.4.1", listOf(
+                "📝 Notes to yourself: in your own chat (Message yourself), any note with a time or repeat becomes a reminder, like \"wish her good morning every day at 10 am\".",
+                "🗣️ More English promises caught: \"I'll …\", \"I'm going to …\" or \"we'll …\" with a time, like \"I'll wish her good morning every day at 10 am\".",
+                "Fewer false alarms: \"I'll think about it\" is no longer taken as a promise."
+            )
+        ),
+        Release(
             10, "1.4.0", listOf(
                 "🔁 Repeating reminders: every day, every week (pick the days), every month or every year. Each has an on/off switch on its card.",
                 "From WhatsApp too: \"har somvar mandir jaunga\", \"roz subah 7 baje walk karunga\", \"Reminder: pay rent on the 1st of every month\".",

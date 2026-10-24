@@ -59,6 +59,12 @@ COMMITMENTS = {
         "ya ill come", "ok ill book it", "fine, will pay", "alright ill text him", "cool ill send the deck",
         "will fwd", "will rply in a bit", "ok will update", "yup will transfer", "ok bro will handle",
         "sure ill look into it", "ok ill ask her", "ill be there in 10", "ill grab it on the way", "will drop it off later",
+        # Missed by 1.4.0 (model scored it 0.34) and variations: own future + a repeat or time.
+        "I'll wish her good morning every day at 10 am", "i will wish her good morning daily at 10",
+        "ill text her good morning every morning", "will wish her gm every day at 10", "I'll call mom every sunday at 7",
+        "i'll water the plants every evening", "I'm going to call you at 5", "im gonna send it every friday",
+        "I will send the report every monday morning", "we'll meet every saturday at 6", "ill remind him every week",
+        "I'll pay the rent on the 1st of every month", "I'll wish him on his birthday at midnight",
     ],
     "hinglish": [
         "bhej dunga kal", "bhej dungi tomorrow", "bhej dungs in 2 mins", "bhejunga after lunch", "send kar dunga",
