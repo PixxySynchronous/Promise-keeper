@@ -333,6 +333,20 @@ class CommitmentAndTimeTest {
     }
 
     @Test
+    fun repeatingToDosAreNotTakenForHabits() {
+        listOf("Need to do leetcode daily", "I need to solve 2 leetcode problems daily", "have to go to the gym daily", "gotta study every night")
+            .forEach { assertNotNull("Expected match: $it", detector.detect(it)) }
+        assertEquals(Recurrence(Recurrence.Frequency.DAILY, LocalTime.of(10, 0)), TimeParser().parseRecurrence("Need to do leetcode daily", now))
+        // Hinglish to-dos with a repeat or time, but not questions or someone else's to-do.
+        listOf("daily leet karna hai", "daily leetcode karna hai", "roz leetcode karna hai", "kal bank jaana hai", "har sunday ghar call karna hai")
+            .forEach { assertNotNull("Expected match: $it", detector.detect(it)) }
+        listOf("kal kya karna hai", "tumhe daily leetcode karna hai", "kab jaana hai kal")
+            .forEach { assertNull("Expected no match: $it", detector.detect(it)) }
+        // A habit without a to-do is still not a promise.
+        listOf("main roz gym jaata hu", "I go to the gym daily").forEach { assertNull("Expected no match: $it", detector.detect(it)) }
+    }
+
+    @Test
     fun notesInYourOwnChatAreRecognised() {
         listOf("Piyush (You)", "Aditi (you)", "राहुल (आप)", "You", "Message yourself").forEach { assertEquals("Expected own chat: $it", true, SelfNote.isSelfChat(it)) }
         listOf("Rahul", "Youth Club", "You & Me ❤️", "Team (Yours truly)").forEach { assertEquals("Expected other chat: $it", false, SelfNote.isSelfChat(it)) }

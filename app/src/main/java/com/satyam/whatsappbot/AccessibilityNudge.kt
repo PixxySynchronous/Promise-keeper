@@ -35,6 +35,18 @@ object AccessibilityNudge {
         )
     }
 
+    /**
+     * Called when the service stops. Checks once, about 2 minutes later, and notifies if it's still off: an app update
+     * also stops the service briefly before Android restarts it, and that shouldn't cause a "switched off" alert.
+     * A separate request code keeps it from replacing the daily alarm.
+     */
+    fun checkSoon(context: Context) {
+        context.getSystemService(AlarmManager::class.java).set(
+            AlarmManager.RTC_WAKEUP, System.currentTimeMillis() + 2 * 60 * 1000L,
+            PendingIntent.getBroadcast(context, 1, Intent(context, AccessibilityNudgeReceiver::class.java), PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
+        )
+    }
+
     fun check(context: Context) {
         if (isAccessibilityOn(context)) return
         val manager = context.getSystemService(NotificationManager::class.java)

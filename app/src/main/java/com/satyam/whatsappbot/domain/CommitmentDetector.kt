@@ -38,6 +38,9 @@ class RuleBasedCommitmentDetector(
             // day at 10 am", "I'm going to call you at 5". Someone else's "will" was already rejected above.
             ?: ENGLISH_OWN_FUTURE.find(normalized)
                 ?.takeIf { hasClockOrDate || parsed != null || REPEAT_OR_HINDI_DAY.containsMatchIn(normalized) }?.value
+            // Hinglish to-dos with a time or repeat: "daily leetcode karna hai", "kal bank jaana hai".
+            ?: HINGLISH_TODO.find(normalized)
+                ?.takeIf { isHinglishToDo(normalized) && (hasClockOrDate || parsed != null || REPEAT_OR_HINDI_DAY.containsMatchIn(normalized)) }?.value
             ?: return null
         return CommitmentMatch(message, phrase)
     }
@@ -74,9 +77,15 @@ class RuleBasedCommitmentDetector(
             // ("aaj kaam tha isliye nahi kiya, kal bhej dunga").
             (isPastTense(normalized) && !hasFuture(normalized) && !FIRST_PERSON_PRESENT.containsMatchIn(normalized)) ||
             // A habit ("main roz gym jaata hu"): "-ta hu" here describes what usually happens, so only a real future counts.
-            (HABIT.containsMatchIn(normalized) && !hasFuture(normalized)) ||
+            // The sender's own to-do ("need to do leetcode daily", "daily leetcode karna hai") looks ahead, so it isn't a
+            // habit either.
+            (HABIT.containsMatchIn(normalized) && !hasFuture(normalized) && !SELF_TODO.containsMatchIn(normalized) && !isHinglishToDo(normalized)) ||
             // English negation ("i don't get aise messages") unless there's also a promise ("don't worry, I'll send it").
             (ENGLISH_NEGATION.containsMatchIn(normalized) && !hasFuture(normalized))
+
+    // "<verb>na hai" is "I have to", unless it's a question ("kya karna hai") or someone else's ("tumhe karna hai").
+    private fun isHinglishToDo(normalized: String) =
+        HINGLISH_TODO.containsMatchIn(normalized) && !HINGLISH_TODO_NOT_MINE.containsMatchIn(normalized)
 
     private fun isPastTense(normalized: String) =
         HINGLISH_PAST.containsMatchIn(normalized) || DEVANAGARI_PAST.any { normalized.contains(it) } ||
@@ -175,6 +184,11 @@ class RuleBasedCommitmentDetector(
         )
         val NOT_PAST_ED = setOf("need", "feed", "proceed", "exceed", "succeed", "bleed", "seed", "breed", "speed", "heed", "weed", "red", "bed", "shed", "embed")
         val DEVANAGARI_PAST = listOf("था", "थी", "हुआ", "हुई", "लिया", "दिया", "किया", "गया", "गई", "चुका", "चुकी")
+        // Hinglish "have to": an infinitive (-na/-ni) followed by hai, "karna hai", "jaana hai", "padhni hai".
+        val HINGLISH_TODO = Regex("\\b\\w+(na|ni)\\s+(hai|h|he|hain)\\b")
+        val HINGLISH_TODO_NOT_MINE = Regex(
+            "\\b(kya|kab|kaise|kahan|kaha|kyu|kyun|kitna|kitne|kaun|tumhe|tumhein|tujhe|aapko|apko|usko|use|unko|inko|isko|tumko|tuje)\\b"
+        )
         // First person only; bare "will" is left out because "the shop will open at 10" isn't the sender's promise.
         val ENGLISH_OWN_FUTURE = Regex("\\b(i'll|ill|i will|i wil|i'm going to|im going to|i am going to|i'm gonna|im gonna|we'll|we will)\\b")
         val ENGLISH_FUTURE = Regex("\\b(will|wil|i'll|ill|gonna|going to|i'm going to)\\b")

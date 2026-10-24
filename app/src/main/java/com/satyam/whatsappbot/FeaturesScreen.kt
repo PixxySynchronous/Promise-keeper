@@ -59,7 +59,7 @@ private val FEATURES = listOf(
     Feature("➕ Make your own reminders", "Tap New reminder, once or repeating. Edit on any reminder changes its time, makes it repeat, or renames it. Repeating reminders have an on/off switch."),
     Feature("⏰ Notification or alarm", "Each reminder can be a notification, or an alarm that rings until you tap Stop or Snooze, even on a locked phone. Set the default in Settings."),
     Feature("🗓️ Default reminder time", "When a message names a day but no time, like \"kal bhej dunga\", the reminder is set for your default time. Change it in Settings."),
-    Feature("🏦 Bank and UPI apps", "If a payment app complains, tap Settings → Turn off for now. While it's off, you get a reminder once a day to turn it back on."),
+    Feature("🏦 Bank and UPI apps", "If a payment app complains, tap Settings → Turn off for now. If it's switched off, you get a reminder a couple of minutes later, then once a day until it's back on."),
     Feature("🚫 Teach it", "Not a promise? Tap Skip → Not a promise. It goes to False alarms, which you can Export to improve detection for everyone. Was a promise you don't need? Tap No reminder needed.")
 )
 

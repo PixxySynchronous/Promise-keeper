@@ -107,6 +107,8 @@ class WhatsappAccessibilityService : AccessibilityService() {
 
     override fun onDestroy() {
         if (running === this) running = null
+        // Switched off (by the user, "Turn off for now", or Android): remind once shortly, then the daily check.
+        AccessibilityNudge.checkSoon(this)
         detectionExecutor.shutdown()
         super.onDestroy()
     }

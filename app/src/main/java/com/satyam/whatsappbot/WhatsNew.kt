@@ -29,6 +29,12 @@ object WhatsNew {
 
     val releases = listOf(
         Release(
+            12, "1.4.2", listOf(
+                "📋 Repeating to-dos are caught: \"Need to do leetcode daily\", \"daily leetcode karna hai\", \"har sunday ghar call karna hai\".",
+                "🔔 If Promise Keeper gets switched off, you're reminded a couple of minutes later, then once a day until it's back on."
+            )
+        ),
+        Release(
             11, "1.4.1", listOf(
                 "📝 Notes to yourself: in your own chat (Message yourself), any note with a time or repeat becomes a reminder, like \"wish her good morning every day at 10 am\".",
                 "🗣️ More English promises caught: \"I'll …\", \"I'm going to …\" or \"we'll …\" with a time, like \"I'll wish her good morning every day at 10 am\".",
