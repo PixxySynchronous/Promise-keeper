@@ -184,6 +184,8 @@ fun SetupGuide(status: SetupStatus, onFinish: () -> Unit, refreshStatus: () -> U
 
         ReminderTypeStep(number = 6, fullScreenAllowed = status.fullScreenAlarms)
 
+        UpdateReminderCard()
+
         SetupStep(number = 7, title = "Try it", done = null, required = false, why = "Check that everything works.") {
             HelpBox(
                 "No suggestion?",
@@ -245,6 +247,30 @@ private fun PauseForPaymentsCard(refreshStatus: () -> Unit) {
                     context.startActivity(Intent(Settings.ACTION_ACCESSIBILITY_SETTINGS))
                 }
             }) { Text("Turn off for now") }
+        }
+    }
+}
+
+/** On/off for the monthly "check for a new version" notification (UpdateReminder). */
+@Composable
+private fun UpdateReminderCard() {
+    val context = LocalContext.current
+    var on by remember { mutableStateOf(UpdateReminder.isOn(context)) }
+    Card(
+        modifier = Modifier.fillMaxWidth(),
+        shape = RoundedCornerShape(16.dp),
+        colors = CardDefaults.cardColors(containerColor = MaterialTheme.colorScheme.surface)
+    ) {
+        Row(modifier = Modifier.fillMaxWidth().padding(16.dp), verticalAlignment = androidx.compose.ui.Alignment.CenterVertically) {
+            Column(modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(4.dp)) {
+                Text("New version reminders", style = MaterialTheme.typography.titleMedium)
+                Text(
+                    "About once a month, a notification suggests checking for a new version. The app can't check by itself, since it has no internet access.",
+                    style = MaterialTheme.typography.bodySmall,
+                    color = MaterialTheme.colorScheme.onSurfaceVariant
+                )
+            }
+            androidx.compose.material3.Switch(checked = on, onCheckedChange = { on = it; UpdateReminder.setOn(context, it) })
         }
     }
 }

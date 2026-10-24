@@ -131,6 +131,17 @@ fun FeaturesScreen(back: () -> Unit) {
                 }
                 Button(onClick = { openReleasesPage(context) }) { Text("Open releases page") }
                 if (notes.isNotEmpty()) OutlinedButton(onClick = { showWhatsNew = true }) { Text("What's new in this version") }
+                Text("Get notified of new versions", style = MaterialTheme.typography.titleSmall, modifier = Modifier.padding(top = 6.dp))
+                Text(
+                    "• This app reminds you about once a month (you can turn it off in Settings).\n" +
+                        "• On GitHub, tap Watch → Custom → Releases to get an email for each new version (free account; " +
+                        "GitHub sends it, nobody else sees your email).\n" +
+                        "• Or add the releases feed to any feed reader:",
+                    style = MaterialTheme.typography.bodySmall
+                )
+                SelectionContainer {
+                    Text(WhatsNew.RELEASES_FEED_URL, style = MaterialTheme.typography.bodySmall, color = MaterialTheme.colorScheme.onSurfaceVariant)
+                }
             }
         }
         Surface(shape = RoundedCornerShape(12.dp), color = MaterialTheme.colorScheme.surfaceVariant, modifier = Modifier.fillMaxWidth()) {

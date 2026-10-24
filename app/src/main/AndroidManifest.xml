@@ -45,6 +45,10 @@
         <receiver
             android:name=".AccessibilityNudgeReceiver"
             android:exported="false" />
+        <!-- Monthly "check for a new version" reminder; local only, it opens the releases page in the browser. -->
+        <receiver
+            android:name=".UpdateReminderReceiver"
+            android:exported="false" />
         <!-- Lets the share sheet read an exported false-alarm file; nothing else is shared. -->
         <provider
             android:name="androidx.core.content.FileProvider"

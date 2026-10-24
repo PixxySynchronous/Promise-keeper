@@ -112,6 +112,7 @@ class MainActivity : ComponentActivity() {
         )
         ReminderNotifications.createChannels(this)
         AccessibilityNudge.schedule(this)
+        UpdateReminder.schedule(this)
         setupStatus = readSetupStatus(this)
         showSetup = !setupPrefs.getBoolean(KEY_SETUP_FINISHED, false)
         whatsNew = unseenReleases()

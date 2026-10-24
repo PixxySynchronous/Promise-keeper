@@ -10,6 +10,7 @@ class BootReceiver : BroadcastReceiver() {
         if (intent.action != Intent.ACTION_BOOT_COMPLETED) return
         // Android clears alarms on restart.
         AccessibilityNudge.schedule(context)
+        UpdateReminder.schedule(context)
         val repository = ReminderRepository(context)
         repository.scheduleAll { reminder ->
             // A repeating reminder whose time passed while the phone was off moves to its next occurrence.

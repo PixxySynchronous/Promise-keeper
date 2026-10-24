@@ -24,10 +24,19 @@ object WhatsNew {
     /** Opened in the phone's browser; the app itself still has no internet access. */
     const val RELEASES_URL = "https://github.com/PixxySynchronous/Promise-keeper/releases"
 
+    /** Atom feed of new releases, for feed readers; no account needed. */
+    const val RELEASES_FEED_URL = "https://github.com/PixxySynchronous/Promise-keeper/releases.atom"
+
     /** The "Share false alarms" form, .github/ISSUE_TEMPLATE/false-alarms.yml. */
     const val FALSE_ALARMS_FORM_URL = "https://github.com/PixxySynchronous/Promise-keeper/issues/new?template=false-alarms.yml"
 
     val releases = listOf(
+        Release(
+            13, "1.4.3", listOf(
+                "About once a month, a quiet notification suggests checking for a new version, so you don't miss fixes and features. Turn it off in Settings → New version reminders.",
+                "More ways to hear about new versions are on the Features page: email from GitHub (Watch → Releases) or the releases feed."
+            )
+        ),
         Release(
             12, "1.4.2", listOf(
                 "📋 Repeating to-dos are caught: \"Need to do leetcode daily\", \"daily leetcode karna hai\", \"har sunday ghar call karna hai\".",
