@@ -20,3 +20,22 @@ keystore.properties
 .DS_Store
 .idea/
 *.iml
+
+# Local reference material (capstone brief, Gnani docs notes, playbook notes): never commit
+reference/
+
+# Secrets and local runtime data
+.env
+.env.*
+!.env.example
+*.db
+*.sqlite3
+
+# Voice backend runtime data and generated demo audio
+voice-backend/data/
+voice-backend/demo_audio/
+.pytest_cache/
+
+# Web app
+node_modules/
+web/dist/

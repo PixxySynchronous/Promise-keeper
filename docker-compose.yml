@@ -1,0 +1,21 @@
+# docker compose up --build   then open http://127.0.0.1:8000
+# Demo login: demo@example.com / demo-password-123 (created at start-up, with demo audio).
+# Offline by design: mock speech-to-text, no key, no credits. This file never reads voice-backend/.env.
+services:
+  promise-keeper:
+    build: .
+    image: promise-keeper-voice
+    ports:
+      - "127.0.0.1:8000:8000"   # this computer only
+    environment:
+      STT_PROVIDER: mock
+      GNANI_LIVE_CALLS_ENABLED: "false"
+      GNANI_API_KEY: ""
+      APP_TIMEZONE: Asia/Kolkata
+    volumes:
+      - pk-data:/srv/voice-backend/data                         # reminders survive `docker compose down`
+      - ./voice-backend/demo_audio:/srv/voice-backend/demo_audio # demo voice notes appear here to upload
+    restart: unless-stopped
+
+volumes:
+  pk-data:
