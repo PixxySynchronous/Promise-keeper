@@ -31,8 +31,13 @@ What I have measured (run `voice-backend/scripts/measure.py`; Apple M5, Python 3
 | Server time from upload to saved reminder, excluding speech-to-text (median of 50) | **2.8 ms** |
 | Same audio uploaded again | served from the cache: **0 paid calls** (50 of 50) |
 | Weekly PDF, first build vs cached (100 voice notes) | 268 ms vs 1.4 ms |
+| First live Gnani run: 5 clips of my own voice (Hinglish, Hindi, English, Punjabi; 31 s of audio in total) | 5 of 5 transcribed and classified correctly; every clip came back with the words I said |
+| Gnani response time on those 5 calls | median **0.7 s** (0.4 to 7.1 s) |
+| Gnani cost of those 5 calls, from the Gnani usage page | 0.20 credits in total: **0.03 to 0.05 credits per voice note** of 5 to 8 seconds (about 0.39 credits per minute of audio) |
 
-What is **not measured yet**: the end-to-end time with real speech (it depends on Gnani's response time), the seconds saved against typing, and the credit cost per reminder. All three need live Gnani calls, which have not been made yet. I would rather leave them blank than estimate them.
+Those 5 clips also showed two gaps in the time rules ("four p m" and Punjabi "panj vaje" were not read as clock times). Both are fixed, and the transcripts are now a regression test.
+
+What is **not measured yet**: the seconds saved against typing a reminder. Five clips from one speaker is a smoke test, not an accuracy figure; I would rather leave those blank than estimate them.
 
 ## How it works
 
@@ -58,10 +63,11 @@ The upload returns at once with a job id; a single worker thread does the transc
 | Background jobs | `app/jobs.py` (queue + worker) and `app/scheduler.py` with `app/push.py` and `app/daily.py` (timed) |
 | Reporting (PDF) | `app/reports.py`: weekly report that renders all ten languages' scripts |
 | Caching | transcript cache in `app/jobs.py`; report cache in `app/reports.py` |
+| LLM integration (optional, untested against the real model) | `app/llm.py`: a second opinion from Gnani Evon v3.3 for starter-rule languages and missing times; strict JSON, timeout, daily cap, cache, cost log |
 | **Swap:** rate limiting and quotas | `app/guard.py`. *Reason: speech-to-text credits are finite, so limits at the boundary are core to this product, not an extra.* |
 | Stretch: test suite | `voice-backend/tests/` and `web/src/**/*.test.*`; one command, fully offline |
 
-Not built: LLM integration. Gnani's Evon model is not on their API and has to be self-hosted, so I left it out rather than ship a mock.
+LLM integration is built as an optional backup and is **off by default**: Gnani's Evon model is not on their API and has to be self-hosted, and I have not had a machine to run it on, so it is tested against a fake server only. I don't count it among the concepts above.
 
 ## Run it
 

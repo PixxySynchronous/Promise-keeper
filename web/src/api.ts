@@ -27,6 +27,8 @@ export interface Detection {
   matched: string | null;
   reasons: string[];
   verified_rules: boolean;
+  /** The optional LLM's opinion, when the server asked it (starter-rule languages, or no time found). */
+  llm?: { is_promise: boolean; task: string; time_text: string | null; confidence: number } | null;
 }
 
 export interface Reminder {

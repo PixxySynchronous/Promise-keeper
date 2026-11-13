@@ -89,6 +89,15 @@ export default function ResultCard({ result, onSaveTime }: Props) {
               <dd>“{detection.matched}”</dd>
             </div>
           )}
+          {detection.llm && (
+            <div>
+              <dt>Second opinion</dt>
+              <dd>
+                Evon model: {detection.llm.is_promise ? "a promise" : "not a promise"} (
+                {Math.round(detection.llm.confidence * 100)}% sure)
+              </dd>
+            </div>
+          )}
           {detection.reasons.length > 0 && (
             <div>
               <dt>{promise ? "Notes" : "Why not"}</dt>

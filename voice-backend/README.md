@@ -56,10 +56,23 @@ Paste the three printed lines into `.env` (the private key is a secret; set a re
 
 A scheduler thread checks once a minute and sends one push per due reminder; each reminder is marked before it is sent, so a restart never sends it twice. Tapping the notification opens the app on that reminder. Needs HTTPS (or `localhost`) and a browser with Web Push; on an iPhone the app must be added to the Home Screen first. If the host puts the server to sleep, pushes go out when it wakes (up to 12 hours late; older ones are skipped).
 
+## Optional: a second opinion from Gnani Evon (self-hosted LLM)
+Off by default, and the app works fully without it. Evon v3.3 (`gnani/gnani-evon-v3.3-30B-A3B`, a 30B-parameter text model with open weights) is not on Gnani's API, so Gnani credits don't cover it: you run it yourself behind an OpenAI-compatible server (vLLM, llama.cpp with a GGUF build, …), which needs a machine that can hold a 30B model, typically a GPU with 24 GB or more or a large-memory Mac. Then set in `.env`:
+```
+LLM_PROVIDER=openai_compat
+EVON_BASE_URL=http://127.0.0.1:8001/v1
+```
+The rules stay in charge. The model is asked only when they are on weak ground: the language has starter rules, or a promise was found with no time we could read. It must answer with exactly `{"is_promise", "task", "time_text", "confidence"}`; anything else is discarded. It can change the yes/no only for starter-rule languages and only above `LLM_MIN_CONFIDENCE`; for a missing time it supplies the words, and our own parser turns them into a time. Each call has a timeout, there is a daily cap (`LLM_DAILY_REQUESTS`), identical sentences are answered from a cache, and `python -m app.admin usage` shows tokens and errors. If the model is slow, down or wrong-shaped, the note is processed by the rules as usual.
+
+`LLM_PROVIDER=mock` runs the same path offline for a demo; it only repeats the rules' answer.
+
+**Status:** tested against a fake server only. It has not been run against a real Evon server yet.
+
 ## Use Gnani (spends credits)
 1. `cp .env.example .env` and set `STT_PROVIDER=gnani`, `GNANI_LIVE_CALLS_ENABLED=true`, `GNANI_API_KEY=…`, and **low budgets first** (`BUDGET_TOTAL_REQUESTS=5`).
-2. `set -a; source .env; set +a` and start the server.
-3. Check `python -m app.admin usage` against the dashboard at app.gnani.ai/voice.
+2. Check the file before spending anything: `.venv/bin/python scripts/check_env.py` prints the settings that matter (never the key) and says whether it is safe to start.
+3. `set -a; source .env; set +a` and start the server.
+4. Check `python -m app.admin usage` against the dashboard at app.gnani.ai/voice.
 
 All limits and how to tune them are in [docs/limits.md](docs/limits.md).
 
@@ -92,10 +105,10 @@ Interactive docs: http://127.0.0.1:8000/docs
 | Background jobs | `app/jobs.py` (queue + worker thread; upload returns 202) and `app/scheduler.py` with two timed tasks: `app/push.py` (every minute: push due reminders) and `app/daily.py` (08:00 daily: pre-build weekly reports, delete voice-note rows older than 30 days) |
 | Caching | `transcript_cache` in `app/jobs.py`: identical audio is never paid for twice. `report_cache` in `app/reports.py`: the weekly PDF is built once per user per day and rebuilt only when its data changes |
 | PDF / document generation | `app/reports.py`: weekly report with Noto fonts and text shaping, so all ten languages' scripts render |
+| LLM integration *(optional, off by default)* | `app/llm.py`: a second opinion from Gnani Evon v3.3 on your own server, for starter-rule languages and missing times. Strict JSON only; timeout, daily cap, cache and a cost log |
 | Rate limiting / quotas *(swap)* | `app/guard.py`. Speech-to-text credits are finite, so limits at the boundary are core here, not an extra. |
 | Test suite *(stretch)* | `tests/`, one command, fully offline |
 
-Not built: LLM integration. Gnani's Evon model has to be self-hosted.
 
 The overview and the measured numbers are in [`../My 10x Solution - Ishaan Rastogi.md`](../My%2010x%20Solution%20-%20Ishaan%20Rastogi.md). Reproduce the numbers with `.venv/bin/python scripts/measure.py` (offline).
 
@@ -109,7 +122,7 @@ Outbound network is blocked during tests, so they can never spend credits. Detec
 
 ## Limits of the current version
 - Rules for Bengali, Gujarati, Kannada, Malayalam, Marathi, Punjabi, Tamil and Telugu are **starter rules not yet checked by native speakers** (`verified_rules: false` in responses).
-- Gnani says its `transliterate` accuracy is not yet measured; real samples are being collected.
+- Gnani says its `transliterate` accuracy is not yet measured. Five real transcripts (one speaker) are kept as a regression test in `tests/fixtures/transliterate_samples.json`; that is a smoke test, not an accuracy figure.
 - Times: durations, today/tomorrow/day-after, clock times and parts of the day. No weekdays, dates or repeats yet.
 
 ## Credits

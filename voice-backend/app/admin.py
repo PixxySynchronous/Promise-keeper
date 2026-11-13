@@ -66,6 +66,10 @@ def usage() -> None:
     settings = load_settings()
     db = Database(settings.database_path)
     print(json.dumps(usage_summary(db, settings), indent=2))
+    from . import llm
+
+    print("\nLLM (optional second opinion):")
+    print(json.dumps(llm.usage_summary(db, settings), indent=2))
     print("\nlast 20 provider events:")
     for r in db.all("SELECT created_at, provider, outcome, billable, audio_seconds, latency_ms FROM usage_events "
                     "ORDER BY id DESC LIMIT 20"):

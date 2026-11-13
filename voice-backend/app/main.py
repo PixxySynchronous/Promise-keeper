@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import hashlib
+import json
 import logging
 import mimetypes
 import re
@@ -15,7 +16,7 @@ from fastapi import Depends, FastAPI, File, Form, Header, HTTPException, Request
 from fastapi.responses import FileResponse, JSONResponse, Response
 from pydantic import BaseModel, Field
 
-from . import auth, daily, detect, push, reports, timeparse
+from . import auth, daily, detect, llm as llm_mod, push, reports, timeparse
 from .audio import AudioRejected, validate
 from .auth import iso, utcnow
 from .config import LANGUAGE_HINTS, Settings, load_settings
@@ -73,7 +74,7 @@ REMINDER_COLUMNS = "id, job_id, text, matched_phrase, due_at, time_text, used_de
 
 
 def create_app(settings: Settings | None = None, provider=None, start_worker: bool | None = None,
-               push_sender: push.Sender | None = None) -> FastAPI:
+               push_sender: push.Sender | None = None, llm=None) -> FastAPI:
     settings = settings or load_settings()
 
     @asynccontextmanager
@@ -82,6 +83,7 @@ def create_app(settings: Settings | None = None, provider=None, start_worker: bo
         recover_interrupted(db)
         prov = provider if provider is not None else make_provider(settings)
         app.state.db, app.state.provider = db, prov
+        app.state.llm = llm if llm is not None else llm_mod.make_llm(settings)
         app.state.push_sender = push_sender if push_sender is not None else push.make_sender(settings)
         # Tests call app.state.scheduler.tick(now) themselves; the thread only runs alongside the worker.
         scheduler = app.state.scheduler = Scheduler(settings.timezone, settings.scheduler_interval_seconds)
@@ -90,11 +92,12 @@ def create_app(settings: Settings | None = None, provider=None, start_worker: bo
         worker = None
         background = settings.worker_enabled if start_worker is None else start_worker
         if background:
-            worker = Worker(db, settings, prov)
+            worker = Worker(db, settings, prov, app.state.llm)
             worker.start()
             scheduler.start()
         logging.getLogger("promise_keeper").info(
-            "STT provider=%s live_gnani=%s", settings.stt_provider, settings.live_gnani)
+            "STT provider=%s live_gnani=%s llm=%s", settings.stt_provider, settings.live_gnani,
+            app.state.llm.name if app.state.llm else "none")
         yield
         if worker:
             worker.stop()
@@ -200,10 +203,11 @@ def create_app(settings: Settings | None = None, provider=None, start_worker: bo
     def get_job(job_id: str, user_id: int = Depends(current_user), db: Database = Depends(db_dep)):
         row = db.one(
             "SELECT id, status, filename, audio_seconds, language, transcript, detected_language, cached, error, created_at, "
-            "finished_at FROM jobs WHERE id = ? AND user_id = ?", (job_id, user_id))
+            "finished_at, llm FROM jobs WHERE id = ? AND user_id = ?", (job_id, user_id))
         if not row:
             raise HTTPException(404, {"code": "NOT_FOUND", "message": "No such voice note."})
         out = dict(row)
+        verdict = out.pop("llm")
         out["cached"] = bool(out["cached"])
         rem = db.one("SELECT id, text, due_at, time_text, used_default_time, done_at FROM reminders WHERE job_id = ?",
                      (job_id,))
@@ -211,7 +215,9 @@ def create_app(settings: Settings | None = None, provider=None, start_worker: bo
         if row["transcript"]:
             d = detect.detect(row["transcript"], row["detected_language"] or row["language"])
             out["detection"] = {"is_promise": out["reminder"] is not None, "language": d.language, "tense": d.tense,
-                                "matched": d.matched, "reasons": d.reasons, "verified_rules": d.verified_rules}
+                                "matched": d.matched, "reasons": d.reasons, "verified_rules": d.verified_rules,
+                                # The optional model's opinion, if it was asked (None otherwise).
+                                "llm": json.loads(verdict) if verdict else None}
         return out
 
     @app.get("/voice-notes")

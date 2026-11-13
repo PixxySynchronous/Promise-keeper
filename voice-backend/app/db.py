@@ -33,7 +33,8 @@ CREATE TABLE IF NOT EXISTS jobs (
     cached INTEGER NOT NULL DEFAULT 0,
     error TEXT,
     created_at TEXT NOT NULL,
-    finished_at TEXT
+    finished_at TEXT,
+    llm TEXT                           -- the LLM's verdict as JSON, if it was asked about this note
 );
 CREATE INDEX IF NOT EXISTS jobs_user_created ON jobs(user_id, created_at);
 CREATE INDEX IF NOT EXISTS jobs_status ON jobs(status, created_at);
@@ -80,6 +81,25 @@ CREATE TABLE IF NOT EXISTS push_subscriptions (
     auth TEXT NOT NULL,
     created_at TEXT NOT NULL
 );
+-- LLM second opinions: same transcript + model -> stored verdict, no second call.
+CREATE TABLE IF NOT EXISTS llm_cache (
+    cache_key TEXT PRIMARY KEY,
+    verdict TEXT NOT NULL,
+    created_at TEXT NOT NULL
+);
+-- One row per LLM attempt. outcome: ok | cached | skipped:daily_cap | error:<code>
+CREATE TABLE IF NOT EXISTS llm_events (
+    id INTEGER PRIMARY KEY,
+    job_id TEXT,
+    user_id INTEGER,
+    provider TEXT NOT NULL,
+    outcome TEXT NOT NULL,
+    prompt_tokens INTEGER,
+    completion_tokens INTEGER,
+    latency_ms INTEGER,
+    created_at TEXT NOT NULL
+);
+CREATE INDEX IF NOT EXISTS llm_created ON llm_events(created_at);
 -- The latest weekly report per user. fingerprint = hash of the data it shows; a mismatch means rebuild.
 CREATE TABLE IF NOT EXISTS report_cache (
     user_id INTEGER PRIMARY KEY REFERENCES users(id) ON DELETE CASCADE,
@@ -114,6 +134,8 @@ class Database:
     def _migrate(self) -> None:
         """Add columns that older database files don't have yet (CREATE TABLE IF NOT EXISTS won't)."""
         columns = {row["name"] for row in self._conn.execute("PRAGMA table_info(reminders)")}
+        if "llm" not in {row["name"] for row in self._conn.execute("PRAGMA table_info(jobs)")}:
+            self._conn.execute("ALTER TABLE jobs ADD COLUMN llm TEXT")
         for column in ("done_at", "pushed_at"):
             if column not in columns:
                 self._conn.execute(f"ALTER TABLE reminders ADD COLUMN {column} TEXT")

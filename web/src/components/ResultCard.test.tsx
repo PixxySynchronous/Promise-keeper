@@ -92,4 +92,13 @@ describe("ResultCard", () => {
     expect(screen.getByText(/only checked, not saved/)).toBeInTheDocument();
     expect(screen.queryByRole("button", { name: "Save time" })).not.toBeInTheDocument();
   });
+
+  it("shows the model's second opinion only when there is one", () => {
+    const llm = { is_promise: true, task: "send it", time_text: "kal 5 baje", confidence: 0.87 };
+    const { rerender } = render(<ResultCard result={voice({ detection: detection({ llm }) })} onSaveTime={vi.fn()} />);
+    expect(screen.getByText("Second opinion")).toBeInTheDocument();
+    expect(screen.getByText(/Evon model: a promise \(\s*87% sure\)/)).toBeInTheDocument();
+    rerender(<ResultCard result={voice({ detection: detection({ llm: null }) })} onSaveTime={vi.fn()} />);
+    expect(screen.queryByText("Second opinion")).not.toBeInTheDocument();
+  });
 });

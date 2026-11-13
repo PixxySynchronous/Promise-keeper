@@ -100,6 +100,18 @@ class Settings:
     def live_gnani(self) -> bool:
         return self.stt_provider == "gnani" and self.gnani_live_calls_enabled and bool(self.gnani_api_key)
 
+    # --- Optional LLM second opinion (Gnani Evon v3.3, self-hosted) ---------------------------------
+    # none (default) | mock (offline, repeats the rules) | openai_compat (your own server at EVON_BASE_URL)
+    llm_provider: str = "none"
+    evon_base_url: str = ""
+    evon_api_key: str = field(default="", repr=False)  # only if your server asks for one
+    evon_model: str = "gnani/gnani-evon-v3.3-30B-A3B"
+    llm_timeout_seconds: float = 15.0
+    llm_daily_requests: int = 200
+    llm_max_tokens: int = 200
+    # Below this the model's yes/no is ignored and the rules' answer stands.
+    llm_min_confidence: float = 0.6
+
     @property
     def push_enabled(self) -> bool:
         return bool(self.vapid_private_key and self.vapid_public_key)
@@ -123,6 +135,9 @@ def load_settings() -> Settings:
     provider = os.environ.get("STT_PROVIDER", "mock").strip().lower()
     if provider not in ("mock", "gnani", "disabled"):
         raise ValueError(f"STT_PROVIDER must be mock, gnani or disabled, not {provider!r}")
+    llm = os.environ.get("LLM_PROVIDER", "none").strip().lower() or "none"
+    if llm not in ("none", "mock", "openai_compat"):
+        raise ValueError(f"LLM_PROVIDER must be none, mock or openai_compat, not {llm!r}")
     db = os.environ.get("DATABASE_PATH") or str(Path(__file__).resolve().parent.parent / "data" / "promise_keeper.db")
     web = os.environ.get("WEB_DIST_PATH") or str(Path(__file__).resolve().parents[2] / "web" / "dist")
     return Settings(
@@ -154,6 +169,14 @@ def load_settings() -> Settings:
         worker_enabled=_bool("WORKER_ENABLED", True),
         worker_poll_seconds=_float("WORKER_POLL_SECONDS", Settings.worker_poll_seconds),
         web_dist_path=web,
+        llm_provider=llm,
+        evon_base_url=os.environ.get("EVON_BASE_URL", "").strip(),
+        evon_api_key=os.environ.get("EVON_API_KEY", "").strip(),
+        evon_model=os.environ.get("EVON_MODEL", "").strip() or Settings.evon_model,
+        llm_timeout_seconds=_float("LLM_TIMEOUT_SECONDS", Settings.llm_timeout_seconds),
+        llm_daily_requests=_int("LLM_DAILY_REQUESTS", Settings.llm_daily_requests),
+        llm_max_tokens=_int("LLM_MAX_TOKENS", Settings.llm_max_tokens),
+        llm_min_confidence=_float("LLM_MIN_CONFIDENCE", Settings.llm_min_confidence),
         vapid_private_key=os.environ.get("VAPID_PRIVATE_KEY", "").strip(),
         vapid_public_key=os.environ.get("VAPID_PUBLIC_KEY", "").strip(),
         vapid_subject=os.environ.get("VAPID_SUBJECT", "").strip() or Settings.vapid_subject,

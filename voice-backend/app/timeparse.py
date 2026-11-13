@@ -36,16 +36,29 @@ NUMBER_WORDS = {
     "ek": 1, "do": 2, "teen": 3, "tin": 3, "char": 4, "chaar": 4, "paanch": 5, "panch": 5, "chhe": 6, "che": 6,
     "chhah": 6, "saat": 7, "sat": 7, "aath": 8, "aat": 8, "nau": 9, "no": 9, "das": 10, "dus": 10, "gyarah": 11,
     "gyara": 11, "barah": 12, "bara": 12, "pandrah": 15, "bees": 20, "tees": 30,
+    # Punjabi, as Gnani spelled it in a real transcript ("panj vaje") plus its close neighbours.
+    "ik": 1, "tinn": 3, "panj": 5, "satt": 7, "ath": 8, "atth": 8, "giarah": 11, "baran": 12,
 }
+# "o'clock" words. baje = Hindi; vaje = Punjabi (seen in a real Gnani transcript).
+_OCLOCK = r"baje|bje|vaje|vajje|waje"
 _NUMBER_BEFORE_UNIT = re.compile(
     r"\b(" + "|".join(sorted(NUMBER_WORDS, key=len, reverse=True)) + r")\s+"
-    r"(?=(baje|bje|o'?clock|am|pm|min|mins|minute|minutes|ghante|ghanta|hours?|hrs?)\b)",
+    r"(?=(" + _OCLOCK + r"|o'?clock|am|pm|min|mins|minute|minutes|ghante|ghanta|hours?|hrs?)\b)",
     re.I,
 )
 
 
+# Gnani writes "four p m." for "4 pm". Joined only right after a number, so "I am" is never touched.
+_SPLIT_MERIDIEM = re.compile(
+    r"\b(\d{1,2}|" + "|".join(sorted(NUMBER_WORDS, key=len, reverse=True)) + r")\s+([ap])\.?\s*m\b\.?", re.I)
+
+
 def numbers_to_digits(text: str) -> str:
+    text = _SPLIT_MERIDIEM.sub(lambda m: f"{m.group(1)} {m.group(2).lower()}m", text)
     return _NUMBER_BEFORE_UNIT.sub(lambda m: f"{NUMBER_WORDS[m.group(1).lower()]} ", text)
+
+
+
 PART_OF_DAY = {
     "morning": time(9, 30), "subah": time(9, 30), "सुबह": time(9, 30),
     "afternoon": time(14, 0), "dopahar": time(14, 0), "दोपहर": time(14, 0),
@@ -61,7 +74,7 @@ DURATION = re.compile(
     re.I,
 )
 CLOCK = re.compile(
-    r"(?:\bat\s+)?\b(\d{1,2})(?:[:.](\d{2}))?\s*(am|pm|a\.m\.|p\.m\.|baje|bje|बजे|o'?clock)?(?=\W|$)", re.I
+    r"(?:\bat\s+)?\b(\d{1,2})(?:[:.](\d{2}))?\s*(am|pm|a\.m\.|p\.m\.|" + _OCLOCK + r"|बजे|ਵਜੇ|o'?clock)?(?=\W|$)", re.I
 )
 PAST_HINT = re.compile(r"\b(tha|thi|gaya|gayi|kiya|hua|was|were|did)\b|था|थी|गया", re.I)
 
@@ -117,7 +130,9 @@ def parse(text: str, now: datetime) -> ParsedTime | None:
     if clock:
         t, matched, has_meridiem = clock
         # "shaam 7 baje" -> 19:00. A bare 1-7 with no am/pm is usually afternoon/evening in chat.
-        if not has_meridiem and t.hour < 12 and (part and part[1].hour >= 14 or 1 <= t.hour <= 7):
+        # ...unless the speaker said morning: "subah 7 baje" is 07:00.
+        morning = bool(part) and part[1].hour < 12
+        if not has_meridiem and t.hour < 12 and (part and part[1].hour >= 14 or (not morning and 1 <= t.hour <= 7)):
             t = time(t.hour + 12, t.minute)
         when, used_default = datetime.combine(base, t, now.tzinfo), False
     elif part:

@@ -67,10 +67,10 @@ def make_client(settings, tmp_path):
 
     clients = []
 
-    def factory(provider=None, push_sender=None, **overrides):
+    def factory(provider=None, push_sender=None, llm=None, **overrides):
         overrides.setdefault("database_path", str(tmp_path / f"client{len(clients)}.db"))  # fresh DB per client
         s = replace(settings, **overrides)
-        app = create_app(s, provider=provider, start_worker=False, push_sender=push_sender)
+        app = create_app(s, provider=provider, start_worker=False, push_sender=push_sender, llm=llm)
         client = TestClient(app)
         client.__enter__()
         clients.append(client)

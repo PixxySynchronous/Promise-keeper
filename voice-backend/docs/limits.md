@@ -23,8 +23,12 @@ Gnani credits are finite and the credit unit is not documented, so every speech-
 | Cache | same audio + model + format + language → no call | none | `transcript_cache` |
 | Sign-ups | open locally; set a code before going public | `REGISTRATION_CODE` | `/auth/register` |
 | Login guessing | 10 tries / 15 min per email | `LOGIN_ATTEMPTS_PER_15_MIN` | `auth.LoginLimiter` |
+| Optional LLM (Evon) | off; 200 calls a day, 15 s timeout, 200 output tokens | `LLM_PROVIDER`, `LLM_DAILY_REQUESTS`, `LLM_TIMEOUT_SECONDS`, `LLM_MAX_TOKENS` | `llm.consult` (cache by text hash; one `llm_events` row per attempt; failures fall back to the rules) |
 | Kill switch | none | `STT_PROVIDER=disabled` | 503 for every upload |
 | Crash safety | jobs stuck in `processing` after a restart are failed, not retried (they may already be billed) | none | `jobs.recover_interrupted` |
+
+## What a call costs (measured 13 Nov 2026)
+Five live calls (30.9 s of audio in total) cost 0.20 credits on the Gnani usage page: 0.03 to 0.05 credits each for clips of 5 to 8 seconds, or about 0.39 credits per minute of audio. The page rounds each charge to 0.01 and shows 1 credit as ₹1. Its request ids are the same as this server's job ids, so every charge can be matched to a row in the cost log. On those numbers the default lifetime budget (300 calls and 3,600 seconds) can spend at most about 23 credits. Five calls is a small sample: re-check after a larger run.
 
 ## Monitoring
 - `cd voice-backend && .venv/bin/python -m app.admin usage`: billable calls and seconds vs budget, cache hits, pause state, and the last 20 provider events.

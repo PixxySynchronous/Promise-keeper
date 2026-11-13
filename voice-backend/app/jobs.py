@@ -11,7 +11,7 @@ import time
 from datetime import datetime
 from zoneinfo import ZoneInfo
 
-from . import detect, timeparse
+from . import detect, llm as llm_mod, timeparse
 from .auth import iso, utcnow
 from .config import Settings
 from .db import Database
@@ -95,12 +95,24 @@ def _transcribe_with_retries(db, settings, provider, job) -> Transcript:
             _sleep(min(2.0 * attempts, 8.0))
 
 
-def _make_reminder(db, settings, job, transcript: str, language: str | None) -> None:
+def _make_reminder(db, settings, job, transcript: str, language: str | None, llm=None) -> None:
     now = datetime.now(ZoneInfo(settings.timezone))
     parsed = timeparse.parse(transcript, now)
     found = detect.detect(transcript, language, has_time=parsed is not None,
                           time_used_default=parsed.used_default if parsed else None)
-    if not found.is_promise:
+    is_promise = found.is_promise
+    # The optional model is asked only where the rules are weakest: unverified languages, or a promise with
+    # no time we could parse. Any failure gives None and the rules' answer stands.
+    if llm is not None and (not found.verified_rules or (is_promise and parsed is None)):
+        verdict = llm_mod.consult(db, settings, llm, job, transcript, language)
+        if verdict is not None:
+            db.execute("UPDATE jobs SET llm = ? WHERE id = ?", (verdict.model_dump_json(), job["id"]))
+            if not found.verified_rules and verdict.confidence >= settings.llm_min_confidence:
+                is_promise = verdict.is_promise  # checked rules are never overruled, only starter rules
+            if is_promise and parsed is None and verdict.time_text:
+                # The model only points at the words; our own parser turns them into a time.
+                parsed = timeparse.parse(verdict.time_text, now)
+    if not is_promise:
         return
     due = parsed or timeparse.due_time(transcript, now)
     db.execute(
@@ -111,7 +123,7 @@ def _make_reminder(db, settings, job, transcript: str, language: str | None) -> 
     )
 
 
-def process_next(db: Database, settings: Settings, provider: SttProvider | None) -> str | None:
+def process_next(db: Database, settings: Settings, provider: SttProvider | None, llm=None) -> str | None:
     """Process one queued job. Returns its id, or None if the queue is empty. Safe to call from tests."""
     job = _claim(db)
     if job is None:
@@ -134,7 +146,7 @@ def process_next(db: Database, settings: Settings, provider: SttProvider | None)
                     "VALUES (?, ?, ?, ?)", (key, transcript, language, iso(utcnow())),
                 )
         if transcript:
-            _make_reminder(db, settings, job, transcript, language or job["language"])
+            _make_reminder(db, settings, job, transcript, language or job["language"], llm)
         _finish(db, job, "done", transcript=transcript, language=language, cached=cached)
     except Refusal as ref:
         _finish(db, job, "failed", error=ref.code)
@@ -148,8 +160,8 @@ def process_next(db: Database, settings: Settings, provider: SttProvider | None)
 
 
 class Worker:
-    def __init__(self, db: Database, settings: Settings, provider: SttProvider | None):
-        self.db, self.settings, self.provider = db, settings, provider
+    def __init__(self, db: Database, settings: Settings, provider: SttProvider | None, llm=None):
+        self.db, self.settings, self.provider, self.llm = db, settings, provider, llm
         self._stop = threading.Event()
         self._thread = threading.Thread(target=self._run, name="stt-worker", daemon=True)
 
@@ -163,7 +175,7 @@ class Worker:
     def _run(self) -> None:
         while not self._stop.is_set():
             try:
-                if process_next(self.db, self.settings, self.provider) is None:
+                if process_next(self.db, self.settings, self.provider, self.llm) is None:
                     self._stop.wait(self.settings.worker_poll_seconds)
             except Exception:
                 log.exception("worker loop error")

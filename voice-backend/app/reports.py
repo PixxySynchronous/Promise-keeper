@@ -8,12 +8,16 @@ from __future__ import annotations
 
 import hashlib
 import json
+import logging
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 from .auth import iso
 from .db import Database
+
+# fontTools logs dozens of INFO lines per PDF while trimming fonts; they drown the server log.
+logging.getLogger("fontTools").setLevel(logging.WARNING)
 
 FONT_DIR = Path(__file__).resolve().parent / "fonts"
 BASE_FONT = "NotoSans"

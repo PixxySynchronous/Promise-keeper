@@ -33,6 +33,32 @@ export function encodeWav(chunks: Float32Array[], sampleRate: number): Blob {
   return new Blob([buffer], { type: "audio/wav" });
 }
 
+// Microphones record at 44.1 or 48 kHz, which is about 96 KB a second as 16-bit WAV: a 30 s note would be
+// 2.9 MB, over the server's 2 MB limit. Speech recognition needs no more than 16 kHz (32 KB a second).
+export const TARGET_SAMPLE_RATE = 16000;
+
+/** Joins the chunks and lowers the sample rate by averaging each group of input samples (never raises it). */
+export function downsample(chunks: Float32Array[], fromRate: number, toRate: number = TARGET_SAMPLE_RATE): Float32Array {
+  const length = chunks.reduce((n, c) => n + c.length, 0);
+  const all = new Float32Array(length);
+  let at = 0;
+  for (const chunk of chunks) {
+    all.set(chunk, at);
+    at += chunk.length;
+  }
+  if (!(fromRate > toRate)) return all;
+  const ratio = fromRate / toRate;
+  const out = new Float32Array(Math.floor(length / ratio));
+  for (let i = 0; i < out.length; i++) {
+    const start = Math.floor(i * ratio);
+    const end = Math.min(length, Math.max(start + 1, Math.floor((i + 1) * ratio)));
+    let sum = 0;
+    for (let j = start; j < end; j++) sum += all[j];
+    out[i] = sum / (end - start); // averaging is a simple low-pass filter, enough for speech
+  }
+  return out;
+}
+
 export interface Recording {
   /** Stops the microphone and returns the WAV. Safe to call more than once. */
   stop(): Promise<Blob>;
@@ -70,7 +96,7 @@ export async function startRecording(maxSeconds: number = MAX_RECORD_SECONDS): P
         stream.getTracks().forEach((track) => track.stop());
         const rate = ctx.sampleRate;
         await ctx.close();
-        return encodeWav(chunks, rate);
+        return encodeWav([downsample(chunks, rate)], Math.min(rate, TARGET_SAMPLE_RATE));
       })();
       return result;
     },
