@@ -4,7 +4,9 @@ Say a promise out loud, in your own language, and get a reminder. *"Kal paanch b
 
 Indian WhatsApp users speak Hindi, Tamil, Bengali and other languages, and type them in English letters. This service takes a voice note, transcribes it with **Gnani Prisma v3.0** in `transliterate` mode (Latin script for every language), checks whether it is the speaker's own promise (an explicit tense step: future vs past, habit, question, refusal, someone else's promise), works out the time, and stores a reminder.
 
-It is the backend companion to the offline [Promise Keeper Android app](../README.md). It reuses the app's phrase list directly (read from `CommitmentPhrases.kt`) and is evaluated on the app's 981-message test set. The app itself stays offline; nothing here changes it.
+**Where this fits:** the project's first half catches promises you *type* in WhatsApp, on the phone ([Promise Keeper Android app](../README.md), and its Evon-taught copy in [`evon-app/`](../evon-app)). This is the second half, for promises you *say*: it is built and running, and it is the base for the next stage, voice notes and calls. The two-page overview of both halves is [My 10x Solution - Ishaan Rastogi.md](../My%2010x%20Solution%20-%20Ishaan%20Rastogi.md).
+
+It is the backend companion to the offline Android app. It reuses the app's phrase list directly (read from `CommitmentPhrases.kt`) and is evaluated on the app's 981-message test set. The app itself stays offline; nothing here changes it.
 
 ## Run it (mock speech-to-text, no key, no credits)
 You need Python 3.12 or newer and Node 20 or newer. From the repository root:
@@ -66,7 +68,7 @@ The rules stay in charge. The model is asked only when they are on weak ground: 
 
 `LLM_PROVIDER=mock` runs the same path offline for a demo; it only repeats the rules' answer.
 
-**Status:** tested against a fake server only. It has not been run against a real Evon server yet.
+**Status:** this optional step is tested against a fake server only; it has not been run against a real Evon server yet. Evon itself has been run: a 4-bit copy under llama.cpp's `llama-server` on a 24 GB Mac labelled the training messages for the phone app (see [`evon-app/README.md`](../evon-app/README.md)), and that server speaks the same OpenAI-compatible protocol this step expects.
 
 ## Use Gnani (spends credits)
 1. `cp .env.example .env` and set `STT_PROVIDER=gnani`, `GNANI_LIVE_CALLS_ENABLED=true`, `GNANI_API_KEY=…`, and **low budgets first** (`BUDGET_TOTAL_REQUESTS=5`).
@@ -96,7 +98,7 @@ All limits and how to tune them are in [docs/limits.md](docs/limits.md).
 
 Interactive docs: http://127.0.0.1:8000/docs
 
-## FlyRank capstone concepts
+## Concepts implemented
 | Concept | Where it lives |
 |---|---|
 | API endpoints | `app/main.py` |
@@ -126,4 +128,4 @@ Outbound network is blocked during tests, so they can never spend credits. Detec
 - Times: durations, today/tomorrow/day-after, clock times and parts of the day. No weekdays, dates or repeats yet.
 
 ## Credits
-Android app and detection rules: Piyush S. Voice backend: Ishaan Rastogi. Speech-to-text: [Gnani.ai](https://docs.gnani.ai) Prisma v3.0.
+Android app and detection rules: Piyush S. Voice backend, web app and the Evon-taught copy of the app: Ishaan Rastogi. Speech-to-text: [Gnani.ai](https://docs.gnani.ai) Prisma v3.0.

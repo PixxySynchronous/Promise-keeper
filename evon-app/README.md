@@ -8,6 +8,20 @@ What is different here: the small on-device model is taught by **Gnani Evon v3.3
 (`gnani/gnani-evon-v3.3-30B-A3B`) instead of by hand labels. It has its own application id
 (`com.promisekeeper.evon`), so it installs next to the original app.
 
+This is the phone half of the project. The voice half, for spoken promises, is in
+[`voice-backend/`](../voice-backend) and [`web/`](../web); the two-page overview of both is
+[My 10x Solution - Ishaan Rastogi.md](../My%2010x%20Solution%20-%20Ishaan%20Rastogi.md).
+
+## Build and install
+
+Needs JDK 17, the Android SDK and Git LFS (`git lfs pull` fetches the 118 MB sentence model). From `evon-app/`:
+
+    ./gradlew :keeper:testDebugUnitTest :keeper:assembleDebug
+    adb install keeper/build/outputs/apk/debug/keeper-debug.apk
+
+The debug build needs no signing key and is for 64-bit ARM phones. Then follow the app's own setup screen
+(notification permission and the accessibility service that reads the messages you send).
+
 ## How a message is judged
 
 1. **Rules** (`CommitmentDetector.kt`): promise phrases plus tense checks. A first-person future
@@ -25,7 +39,7 @@ once as the **teacher**, on your own computer if it has about 24 GB of memory, o
 | Step | Where | Command / file |
 |---|---|---|
 | 1. Collect messages to label | your machine | `python3 evon-app/training/make_pool.py --chat my-chat.txt --me "My Name"` |
-| 2. Evon labels each one (promise or not, with a confidence) | your machine | `llama-server` + `python3 evon-app/training/label_local.py` → `results/labels-evon.jsonl` (the commands are at the top of that file) |
+| 2. Evon labels each one (promise or not, with a confidence) | your machine (or Kaggle, see below) | `llama-server` + `python3 evon-app/training/label_local.py` → `results/labels-evon.jsonl` (the commands are at the top of that file) |
 | 3. Distil into the phone's classifier | your machine | `evon-app/training/.venv/bin/python -I evon-app/training/train_evon_head.py results/labels-evon.jsonl` |
 | 4. Build the app | your machine | `./gradlew :keeper:assembleDebug` from `evon-app/` (JDK 17 and the Android SDK) |
 
@@ -39,7 +53,7 @@ new head scores against them, so a bad teacher run is visible before it ships. I
 
 A false-alarms export from the app (False alarms tab → Export) is used in step 3 as well:
 
-    .venv/bin/python -I evon-app/training/train_evon_head.py labels.jsonl --false-alarms my-export.json
+    evon-app/training/.venv/bin/python -I evon-app/training/train_evon_head.py results/labels-evon.jsonl --false-alarms my-export.json
 
 A person looked at each of those messages and said "not a promise", so they outrank the teacher's answer.
 Exports placed in `training/contributed/` (or the original app's `tools/contributed/`) are picked up without
@@ -82,10 +96,17 @@ never saw the message being scored:
 | Rules only | 87.4% | 0.0% |
 | Evon-taught model only | 58.9% | 3.1% |
 | **Rules + Evon-taught model (this app)** | **94.0%** | **0.4%** |
-| Rules + the original hand-labelled model | 95.1% | 0.8% |
+| Rules + the original hand-labelled model, set to the same 0.4% | 93.2% | 0.4% |
+| Rules + the original hand-labelled model, as it ships (threshold 0.77) | 95.1% | 0.8% |
 
-So the Evon-taught model halves the false alarms and catches slightly fewer promises. Of the 52 real false
-alarms, the new model alone would still flag 7 if it had not seen them; the rules reject some of those first.
+So at the same false-alarm rate the Evon-taught model catches more promises (94.0% against 93.2%), and it
+ships at half the original's false-alarm rate, where the original catches 1.1 points more. Both models were
+scored with this copy's rules.
+
+**Real false alarms.** The 52 reported messages were all raised by the original app on a phone. With the
+model scored on messages it has not seen, this version still raises 9 of them: the rules reject 9 outright,
+still raise 3, and the model lets 6 more through. Those 52 are by definition messages the original got
+wrong; this version's own false alarms on a phone have not been collected yet.
 
 - APK: 124 MB (debug build, 64-bit ARM only). The original's release APK is about 130 MB. Almost all of it is
   the sentence model.

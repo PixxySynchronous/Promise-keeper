@@ -2,6 +2,12 @@
 
 Promise Keeper is an Android app that notices when you promise something in WhatsApp and offers to remind you.
 
+**Also in this repository** (by Ishaan Rastogi, built on this app; the app itself is unchanged):
+
+- [`evon-app/`](evon-app/README.md): a copy of this app whose on-device model is taught by Gnani Evon v3.3, with extra rejection rules from real false alarms. Still fully offline.
+- [`voice-backend/`](voice-backend/README.md) and [`web/`](web/): a server and web app that turn a *spoken* promise into a reminder. They are separate from the Android app, which keeps no internet access.
+- [Overview of both](My%2010x%20Solution%20-%20Ishaan%20Rastogi.md), in two pages.
+
 Send *"kal bhej dunga"*, *"I'll call you at 5"* or *"मैं कल भेज दूंगी"*, and a notification asks whether to set a reminder. It suggests a time from what you wrote ("tomorrow", "by EOD", "in 10 mins", "5 baje", "1 o clock", "8.30pm", "28 May"). You can keep it, change the time or ignore it.
 
 It understands **English, Hinglish and Hindi (Devanagari)**.

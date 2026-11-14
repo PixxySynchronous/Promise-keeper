@@ -28,12 +28,14 @@ A message is judged in two steps: phrase and tense rules first (a first-person f
 | Measurement | Result |
 |---|---|
 | Evon's labels against 976 hand-labelled messages | agree on **95.1%** (the questions were tuned on these messages, so this is not an independent score) |
+| 52 real false alarms that the original app raised on a phone | this version still raises **9** of them when its model has not seen them |
 | Phone pipeline with the Evon-taught model, on messages the model had not seen | **94.0%** of promises caught, **0.4%** of other messages flagged |
-| Same pipeline with the earlier hand-labelled model | 95.1% caught, 0.8% flagged |
+| The earlier hand-labelled model, set to the same 0.4% false-alarm rate | 93.2% caught |
+| The earlier hand-labelled model as it ships | 95.1% caught, 0.8% flagged |
 | Voice: 5 live clips (Hinglish, Hindi, English, Punjabi) | 5 of 5 transcribed and classified correctly; median reply 0.7 s; about 0.04 credits per note |
 | Voice: same audio uploaded twice | second time served from the cache, 0 paid calls |
 
-So the Evon-taught model halves the false alarms and catches slightly fewer promises. Not measured: seconds saved against typing a reminder, and accuracy on speech beyond those five clips.
+So at the same false-alarm rate the Evon-taught model catches more promises, and it ships at half the original's false-alarm rate. The 52 real false alarms are by definition ones the original got wrong; this version's own false alarms on a phone are not collected yet. Not measured: seconds saved against typing a reminder, and accuracy on speech beyond those five clips.
 
 ## Concepts implemented (server, in `voice-backend/app/`)
 
