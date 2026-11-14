@@ -189,7 +189,8 @@ if args.dry_run or args.hand_labels:
 # Fixture for CommitmentHeadTest: token vectors with the probabilities scikit-learn gives them.
 resources = module / "src/test/resources"
 resources.mkdir(parents=True, exist_ok=True)
-sample = [0, 1, 2, len(texts) - 1, len(texts) - 2, len(texts) // 2]
+# Only the public example sentences go into the fixture: real false alarms are private chat text and stay out of the repository.
+sample = [both[0], both[1], both[2], both[-1], both[-2], both[len(both) // 2]]
 (resources / "commitment_head_reference.json").write_text(json.dumps([
     {"text": texts[i], "hidden": hidden[i].tolist(), "probability": float(final.predict_proba(features[i:i + 1])[0, 1])}
     for i in sample], ensure_ascii=False), encoding="utf-8")

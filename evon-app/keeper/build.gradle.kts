@@ -30,8 +30,8 @@ android {
         applicationId = "com.promisekeeper.evon"
         minSdk = 33
         targetSdk = 36
-        versionCode = 1
-        versionName = "0.1.0-evon"
+        versionCode = 2
+        versionName = "0.2.0-evon"
     }
 
     signingConfigs {
@@ -46,6 +46,11 @@ android {
     }
 
     buildTypes {
+        debug {
+            // The debug build is the one handed out for trying this copy (it needs no signing key).
+            // Current phones are 64-bit ARM; leaving out the other three native libraries saves ~50 MB.
+            ndk { abiFilters += listOf("arm64-v8a") }
+        }
         release {
             // Not debuggable (the default for release), so `adb run-as` cannot read reminders or messages.
             isDebuggable = false
