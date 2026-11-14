@@ -1,0 +1,20 @@
+# Start from nothing and allow only what the image needs. Secrets (.env), databases and the Android
+# project never reach the build.
+*
+!web/
+!voice-backend/
+!app/src/main/java/com/satyam/whatsappbot/domain/CommitmentPhrases.kt
+
+web/node_modules
+web/dist
+voice-backend/.venv
+voice-backend/.env
+voice-backend/.env.*
+voice-backend/data
+voice-backend/demo_audio
+voice-backend/tests
+voice-backend/scripts
+voice-backend/.pytest_cache
+**/__pycache__
+**/*.db
+**/*.sqlite3

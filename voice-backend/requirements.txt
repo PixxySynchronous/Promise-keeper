@@ -1,0 +1,12 @@
+# Runtime. Pinned so a stranger gets the same build.
+fastapi==0.115.12
+uvicorn==0.34.2
+python-multipart==0.0.20
+httpx==0.28.1
+mutagen==1.47.0
+tzdata==2025.2
+# Web Push (reminder notifications). Brings cryptography, py-vapid, http-ece, requests.
+pywebpush==2.5.0
+# Weekly PDF report. uharfbuzz shapes Indic text (conjuncts, vowel signs); without it fpdf2 draws it wrong.
+fpdf2==2.9.0
+uharfbuzz==0.57.0
