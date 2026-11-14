@@ -1,0 +1,632 @@
+{"text": "will send once I reach home", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "sure thing, i'll get it done", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "haa haa thik hai", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "I'll find out and let you know", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "tumhe baad mein call kar dunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "I've transferred the money", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "I'll update the sheet tonight", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "ek ghante mein call back karta hu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "aaj raat bhej dunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "ho gya bhai", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "pata karke batata hu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "ghr jake bhejta hu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "haan bhai krdunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "what happened today", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "let's see", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "मैं भेज दूंगी", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "sure, kal tak share kar dungi", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "didi bhej degi", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "कल पक्का भेजूंगा", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "सुप्रभात", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "miss you", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "will you share it?", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "she will kal bata degi", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "ghar pahunch ke bhej dunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "ill call u in 5", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "kr dungi", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "I must reply to that mail tomorrow", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "eod tak bhej dunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "abhi busy hu baad mein bhej dunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "I need this from you", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "haan main in hu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "pakka krunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "शायद मैं भेज दूंगा", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "ill handle it", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "thoda time de, share kar dunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "कल शेयर कर दूंगा", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "le aaungi", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "the report looks good", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "भूलना मत", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "Wednesday ko kya hai", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "agle hafte bhej dunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "Monday tak send karunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "khana khaya?", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "haa toh dopeher gk aajao", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "bas bata raha hu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "मैं संभाल लूंगा, चिंता मत करो", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "baad mein call kar dunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "when is the exam next week", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "kal mil rhe?", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "subah late utha toh bus chhoot gayi", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "share kar dunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "aaj chutti h", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "they will handle it", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "kal office mein de dunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "main share karungi", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "ok fine", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "ok will send", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "bta na", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "bhj dungi kal", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "ok fatty", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "I'll send the details", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "see you", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "ईओडी तक कर दूंगा", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "the delivery guy will call", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "Kal bhejti hu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "hi is gym open today or tomorrow", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "thoda ruk jao bhej dunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "10 min mein bhej dunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "bhj diya", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "kk will call", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "bhai kab aa raha hai", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "shyd kal", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "kal mausam kaisa tha", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "papa call karenge", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "gotta pick up the laundry at 6", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "main bhej dungi", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "मैं सोचूंगा", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "bro is class cancelled tomorrow", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "दुकान दस बजे खुलेगी", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "kar dungi evening", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "free hote hi call karta hu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "मैं इसे पूरा कर दूंगा", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "kab bhejega?", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "bhool mat jana", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "meeting ke baad bhej dunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "ho jayega bhai kal tk", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "Kal karta hu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "count me in", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "kar diya", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "share krdungi", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "mujhse nahi hoga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "sending rn", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "ok boss", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "मैं वापस कॉल करूंगा", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "मैं भेज दूंगा", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "I'll ping you once I'm free", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "main bhej dunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "I called him yesterday", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "im in bro", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "the teacher will upload the marks", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "confirm karke bataungi", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "bhai update de", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "kal le aunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "nikal rha hu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "ok motu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "मुझे नहीं पता", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "उन्होंने शेयर किया", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "kal chutti hai kya", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "main tumhe bata dunga Wednesday ko", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "अभी व्यस्त हूं", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "the bank will call you", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "lunch ke baad dekh leta hu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "she will call you", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "usko bol de", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "bhej ke batata hu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "5 min me bhej ta hoon", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "I've already informed everyone", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "see you tomorrow", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "bhj de yr", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "theek hai, will update you by kal", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "I'm here", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "will tell you after the meeting", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "मैं आपको लोकेशन भेज दूंगा", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "तुम भेज दो", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "मैं कर दूंगी", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "मैं आ जाऊंगा", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "kr diya", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "recharge kar deta hu abhi", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "kaise jaana hai kal", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "kr lunga kal tk", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "दस मिनट में कॉल करता हूं", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "busy rn", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "कूरियर कल आएगा", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "haan theek hai", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "aaj shaam ko bata dunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "chal kal milte", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "ठीक है कल कर दूंगा", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "5 min mein bhejta hu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "pkka bhejunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "आप कब भेजेंगे?", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "abhi krke bhejta hu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "will ping u l8r", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "टिकट आज रात बुक कर दूंगी", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "I already shared it", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "fine ill do it", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "भेज दिया, देख लो", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "I completed all latest ep of Vision Quest", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "kar ke bhejta hoon", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "bad me baat krte", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "agar ja rahe ho toh mera parcel le aana", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "bhejta hu ruk 2 min", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "do send the photos", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "dekh ke batata hoon", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "mujhe send karna", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "im down for it", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "kahan hai party kal", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "ok bhai", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "पक्का कर दूंगा", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "acha thik h kal bhejta hu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "ok cool", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "main baat karke batata hu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "notes scan karke bhejta hu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "धन्यवाद", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "kal subh tk bhej dunga 👍", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "the electrician will fix it tomorrow", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "mai krdungi", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "ok kal de dunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "मीटिंग के बाद शेयर कर दूंगा", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "ill tell u later tonight", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "aaj kya plan hai", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "unhone share kar diya", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "I'm okay", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "parso karta hu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "photos ghar jaake bhejti hu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "शेयर कर दो", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "ज़रूर भेज दूंगा", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "agar time mila toh krdunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "maine already send kar diya", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "will call after lunch", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "paise kal transfer kar dunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "he will let you know", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "मैं रास्ते में हूं", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "raat mai call karta hu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "I'll push the changes tonight", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "pakka bhejunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "send kar unga kal", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "kal milte hain office mein", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "woh bhej dega", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "check karke bataunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "पांच मिनट में कॉल करती हूं", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "kar ke send karta hu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "charger le aana", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "bas pooch raha tha", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "कल क्या हुआ था", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "haha sahi hai", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "it's raining here", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "रिपोर्ट आज ही भेज दूंगी", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "can someone send the report", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "main send karungi", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "सोमवार तक भेज दूंगा", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "2 abhi bhej raha hu baaki raat ko", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "he said woh kal bhej dega", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "kya kal office hai", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "kal tak report bhej dunga, promise", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "I finished the assignment", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "ok ill book it", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "uploaded it to the drive", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "राहुल कल भेज देगा", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "tum bhej sakte ho?", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "dekh ke batata hu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "mai aksar raat ko padhta hu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "send karna hai", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "ok ji", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "maybe I will send it", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "main office mein hu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "I'm done", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "call krta hu 5 min me", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "did she tell you?", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "will share by EOD", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "will send the pdf in a min", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "ya ya will share tmrw", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "ek abhi bhejta hu ek kal", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "just letting you know", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "main hamesha late sota hu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "woh kal aayega", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "kha h tu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "wil send by eve", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "I'll let you know by next week", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "मैंने file send कर दी", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "I submitted it last night", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "send krdunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "ok bro, will send it kal", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "ok main tomorrow tak complete kar dunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "will inform you by Monday", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "sent", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "share karke bata dunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "already bhej diya", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "main in hu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "क्या तुम शेयर करोगे?", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "the landlord will send the agreement", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "Shaam ko karta hu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "मैं उनसे बात करके बताऊंगा", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "you'll receive a confirmation mail", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "next week kya plan hai", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "pahunch gya", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "kitne baje milna hai kal", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "do minute mein kar dunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "which one?", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "ha krdunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "I will submit the assignment by Sunday", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "शाम को दे दूंगी", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "soch ke btata hu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "dkhte h", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "हां भेज दूँगा", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "text me when you're free", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "कर दिया", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "send krta hu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "agle week bata dungi", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "yup sending in 5", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "will send it tonite", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "keep me posted", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "kal krta hu pakka", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "are you coming tomorrow?", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "2 ghante mein bhej dunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "4 ki ill send, 5 ko raat mai", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "kal tera charger le aaunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "any update on this?", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "bta dunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "okay bhai", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "kal milte hain", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "मैं कर लूंगा", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "will revert tomorrow", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "mt kr", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "Please wait, I will do it", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "उसे बोल देना", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "send kar dungi by 5", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "i just completed it", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "Abhi call karta hu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "presentation raat tak ready kar dunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "im free now", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "cool ill send the deck", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "hn bhai", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "मैं कल आपके घर आ जाऊंगा", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "main dekhunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "main bike se office jaata hu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "mai subah chai peeta hu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "the party is on Saturday", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "acha ok", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "bhej dia", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "let you know once I confirm", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "please do it by tomorrow", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "abhi bhjti hu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "nhi krunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "bhej dungi tomorrow", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "it's working now", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "already paid", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "ill do it", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "btati hu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "call krti hu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "will do bro", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "kal aa rahe ho?", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "reached", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "भेजता हूं", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "I'm home", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "pta ni yr", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "shaam tk bhej dungaa", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "main sambhal lunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "monday tak kar dunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "I'll inform you once it's confirmed", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "अच्छा", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "main soch raha tha", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "you have to finish this today", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "I sent it already", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "let u know?", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "शायद कल कर दूंगा", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "okay thanks", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "ठीक है, मैं बता दूँगा", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "घर पहुंचकर फोन करूंगा", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "will do 👍", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "अगर समय मिला तो कर दूंगा", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "बिल कल भर दूंगा", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "I'll let u know soon", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "sure will send", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "ho gaya", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "he needs to call me back", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "kr de na", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "send the pdf pls", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "I'll handle the booking", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "aaj kya karna hai", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "kal pakka aa jaunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "ok will update", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "tension mat le main kar dunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "ill remind him every week", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "कल सुबह तक हो जाएगा, मैं कर दूंगा", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "maine pehle hi bola tha", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "ghar pahunchta hu toh bhejta hu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "rhne de", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "कल भेज दूंगी", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "jaate hue doodh le aana", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "free hota hu toh dekh leta hu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "मैं ले आऊंगा", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "फाइल 5 min में भेजता हूं", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "shayad bhej dunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "free hoke bhej dunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "kahan hai tu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "they have to approve it first", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "kb bhjega", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "let me know when you reach", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "abhi bhejta hu ruk", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "fine, will pay", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "update de do please", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "will drop it off later", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "bta dungi", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "ho gya", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "bas ek min, sending now", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "can't say for sure", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "series complete kar li", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "aata hu 10 min me", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "bhej diya bhai", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "lemme check n revert", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "मैं उनसे पूछकर बताता हूं", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "please send this now", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "main send kar dunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "mai bol rha tha na", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "I wrapped up the report", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "received", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "मैं घर पहुंच गया", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "you will get it by tomorrow", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "class is cancelled tomorrow", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "I already let you know", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "मम्मी शाम को फोन करेंगी", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "can you send it?", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "भेज दो", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "sure I'm in", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "did you let him know", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "yes will do it", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "btata hu thodi der me", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "chal theek hai", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "तुम भेज सकते हो?", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "कहां हो?", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "will send asap", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "she will let u know", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "I submitted the form", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "खाना खाया?", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "accha", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "ya ill come", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "send kar dunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "ok bro will handle", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "next week milte h", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "confirm kar dungi", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "will let you know tomorrow", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "I finished watching Vision Quest", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "time mile toh call kar lena", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "मुझे फाइल भेज दो", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "ill sort it", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "bhej diya check kar", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "check your inbox, sent", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "pls share the link", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "next week tak kar dunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "मैं नहीं कर पाऊंगा", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "kal aaja", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "ya im in", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "5 sending raat mein", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "I was going to send it", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "मैंने कर दिया है", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "how was the trip", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "le aunga kal", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "5 minute mein bhej dunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "I'm awake", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "will share rn", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "just completed the series", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "आज नहीं हो पाएगा", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "sending it shortly", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "ill pay u tmrw", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "I replied to the mail", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "karna hai kya", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "if I get time maybe", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "ok pagal", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "मैं भेजने वाला था", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "maybe tomorrow", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "ill text u when i'm free", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "bhej dungs in 2 mins", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "कल मौसम कैसा था", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "what's the update?", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "कर दूंगा", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "kal karti hu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "dekh kar bataunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "send asap", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "फोटो अभी भेजती हूं", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "ok ok ill send now", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "वह कर देगी", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "i dont think so", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "office mein main laptop use karta hu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "same here", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "let me know next week", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "main dekh ke bata dunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "main nikalta hu toh call karta hu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "haan kal bhejta hu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "I'm ready", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "usne bola woh karega", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "kal evening tak share kar dunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "मैं चेक करके बताऊंगा", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "shaam ko bhej unga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "did you send it", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "kal bhej ta hu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "main aapko next week bata dunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "chill kar main handle kar lunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "ok bhej dunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "I will transfer the money by evening", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "पता नहीं कर पाऊंगा या नहीं", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "is the office open tomorrow", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "thoda wait karo main bhej dunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "haan pakka karunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "ticket aaj raat book kar dunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "update milte hi bata dunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "Rahul will bhej dega", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "dopahar tak kar dunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "did the parcel come today", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "I got the parcel", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "याद रखना", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "थोड़ा समय दो, भेज दूंगा", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "will let u know by Wednesday", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "hi, will send it tomorrow", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "on my way", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "maine bhej diya", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "I bought the tickets", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "bhej do na", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "मैंने भेज दिया", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "chal theek hai fir", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "I forwarded the mail", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "dekh ke batati hu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "aate waqt bread le aao", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "maine kal hi bata diya tha", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "क्या चल रहा है?", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "kal tk krdungi", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "please confirm by tonight", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "do I need to bring anything", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "call kar mujhe", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "haan wahi toh bol raha hu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "aaj hi kar deta hu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "agar time mila toh dekhunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "yup will transfer", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "मैं पता करके बताती हूं", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "confirm karke bata dunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "I'll book the tickets tonight", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "मैं आपको शाम तक बता दूंगा", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "will send 2mrw pakka", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "tu bhej de", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "I'll send it tomorrow", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "k will call u back", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "not today sorry", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "ill send it tmrw", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "I'll share my location when I reach", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "dekh ke update karta hu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "कल बारिश होगी", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "अभी भेजती हूं", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "भेज दूंगा", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "कल बता दूंगी", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "हां, मैं कर दूंगा", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "my manager will send the offer letter", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "क्या भेजना है", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "yesterday I finished the whole thing", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "I'll confirm the venue by tonight", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "badhiya", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "send kar do please", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "brb will send", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "share krta hu abhi", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "समय पर आना", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "will fwd", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "hn kal tk ho jayega", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "main share kar dunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "reply kar dunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "kal tak update de dunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "k im in", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "main check kar leta hu phir revert karta hu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "woh bhejega", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "bata dunga after checking", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "must pay the electricity bill by friday", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "office kal band hai", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "main isko dekh leta hu aur batata hu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "कल तक कर दूंगी", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "पैसे शाम तक भेज दूंगी", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "kal bhjta hu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "he will do it", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "मैं कल send कर दूंगा", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "yes sending", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "dkh ke btata hu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "I cancelled the order", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "कल दे दूंगा", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "assignment submit kar diya", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "have to submit the form tomorrow", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "main roz gym jaata hu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "नोट्स क्लास के बाद भेज दूंगी", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "location bhej dunga pahunch ke", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "kya kar raha hai", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "ill get it", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "course complete ho gaya", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "shaam ko milte hain", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "aaj shaam tak kar dunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "मैं नहीं भेजूंगा", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "done deal, will transfer by eod 👍", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "agle hafte call karta hu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "when will you send it?", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "kal kar ta hu pakka", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "agar free ho toh charger le aana", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "आपका काम कल पक्का कर दूंगा", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "share karna hai", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "2 min me bhjta hu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "share this with me", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "send kar do", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "it will rain tomorrow", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "talk later", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "dkhta hu fir btata hu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "main soch ke batata hu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "Rahul bhej dega", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "main bhej chuka hu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "make sure you submit it by Sunday", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "bhej dunga yr", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "tabhi jaldi aane ko bolra hu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "आज क्या हुआ", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "probably not", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "dekh ke bata ti hu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "aaj kaam tha isliye reply nahi kiya, kal bhej dunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "वह भेज देगा", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "abhi free hu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "your order will arrive Monday", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "the courier will come tomorrow", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "kal milte h", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "im in office", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "I'll ask him and tell you", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "end of day tak kar dunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "ok ill ask her", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "late ho gaya sorry, abhi bhejta hu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "kuch ni", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "भेज चुका हूं", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "I booked the tickets", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "ठीक है", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "tu send kar de na", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "no idea bro", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "mai bhej dunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "what time will you share it", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "tu kar dega na?", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "meeting lambi chali, ab call karta hu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "is it raining there today", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "krta hu abhi", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "sir will take the class", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "uncle se pooch ke batati hu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "tu kr de", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "pehle hi send kar diya", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "forward kar dunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "mai nhi bhejunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "krdunga yr", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "मैं कर दूंगा", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "will you let me know?", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "पापा आपको फोन करेंगे", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "can you check once?", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "thik h kr dunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "busy hu abhi", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "I'll call tumhe after meeting", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "kal ka weather kaisa tha", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "check karke batata hu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "main bhejne wala tha", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "we completed the project", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "kal tak kar lunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "office is closed on Monday", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "my brother will drop it", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "share kar na", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "main aa gaya hu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "they said they'll fix it by Monday", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "kar lunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "HR will share the details", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "confirm hote hi let you know kar dunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "ruk ja bhejta hu", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "ill check n tell", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "saare ep khatam kar diye", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "monday ko bhej dunga", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "I'll renew the subscription today", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "कर दूंगी", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "the app will notify you", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "on it 👍", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "on it, will update in 30 mins", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "he said he will send", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "pakka, will transfer tonight", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "will order the cake for tomorrow", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "done", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "हो गया", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "consider it done, will send by 6", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "will tell you the details tomorrow", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "all done here", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "भेज दूंगी", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}
+{"text": "already done bhai", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": false}"}
+{"text": "krunga kal", "error": "KeyError: 'is_promise'", "raw": "{\"is_p\": true}"}

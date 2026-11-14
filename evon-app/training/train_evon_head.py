@@ -34,7 +34,7 @@ TEACHER = "gnani/gnani-evon-v3.3-30B-A3B"
 root = Path(__file__).resolve().parents[2]
 
 parser = argparse.ArgumentParser(description=__doc__.split("\n")[0])
-parser.add_argument("labels", nargs="?", help="labels.jsonl from the Kaggle notebook")
+parser.add_argument("labels", nargs="*", help="labels.jsonl from the Kaggle notebook (and labels-unusable.jsonl, if any)")
 parser.add_argument("--hand-labels", action="store_true",
                     help="no Evon yet: use the app's hand labels as a stand-in teacher, to try the pipeline (implies --dry-run)")
 parser.add_argument("--false-alarms", action="append", default=[],
@@ -58,16 +58,27 @@ if args.hand_labels:
     target = {t: (0.95 if label else 0.05) for t, label in example_sentences()}
     print("STAND-IN TEACHER: the app's hand labels, not Evon. This run only proves the pipeline.")
 else:
-    for line in Path(args.labels).read_text(encoding="utf-8").splitlines():
-        if not line.strip():
-            continue
+    recovered = 0
+    lines = [line for path in args.labels for line in Path(path).read_text(encoding="utf-8").splitlines() if line.strip()]
+    for line in lines:
         row = json.loads(line)
         text = str(row.get("text", "")).strip()
-        if not text or text in target or not isinstance(row.get("is_promise"), bool):
+        answer, conf = row.get("is_promise"), row.get("confidence")
+        if not isinstance(answer, bool) and isinstance(row.get("raw"), str):
+            # labels-unusable.jsonl: Evon answered, but under another key name ({"is_p": true}). The answer is
+            # the one true/false in its reply; there is no token probability for these, so a flat 0.9.
+            try:
+                values = [v for v in json.loads(row["raw"]).values() if isinstance(v, bool)]
+            except (ValueError, AttributeError):
+                values = []
+            if len(values) == 1:
+                answer, conf, recovered = values[0], 0.9, recovered + 1
+        if not text or text in target or not isinstance(answer, bool):
             continue
-        conf = row.get("confidence")
         conf = min(1.0, max(0.5, float(conf))) if isinstance(conf, (int, float)) else 1.0
-        target[text] = conf if row["is_promise"] else 1.0 - conf   # according to Evon
+        target[text] = conf if answer else 1.0 - conf   # according to Evon
+    if recovered:
+        print(f"{recovered} answers recovered from replies with a misspelt key (flat confidence 0.9)")
 print(f"{len(target)} messages from the teacher")
 
 # --- real false alarms: a person looked at each and said "not a promise", which outranks the teacher ---------
