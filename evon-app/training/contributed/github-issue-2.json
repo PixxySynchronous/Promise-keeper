@@ -1,0 +1,20 @@
+{
+ "format": "promise-keeper-false-alarms",
+ "version": 1,
+ "source": "https://github.com/PixxySynchronous/Promise-keeper/issues/2",
+ "label": "not_a_promise",
+ "messages": [
+  {
+   "text": "I will suggest kuch titles rakhne chahiye the taaki log choose kr ske, aise to koi bhi kuch bhi daaldega 😂"
+  },
+  {
+   "text": "Haa, I will suggest use Dary instead of Kotlin"
+  },
+  {
+   "text": "Monday 3 baje khatam hota haina"
+  },
+  {
+   "text": "I completed all latest ep of Vision Quest"
+  }
+ ]
+}

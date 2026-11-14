@@ -1,0 +1,6 @@
+# Development-machine tools only (training the head). Nothing here ships in the app.
+# Same pins as the original app's tools/requirements.txt, so both heads are trained the same way.
+numpy==2.5.4
+onnxruntime==1.31.0
+tokenizers==0.23.3
+scikit-learn==1.9.1
