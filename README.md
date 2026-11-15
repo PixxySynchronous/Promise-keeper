@@ -6,7 +6,7 @@ Promise Keeper is an Android app that notices when you promise something in What
 
 This branch is our entry, by **Piyush S** and **Ishaan Rastogi**.
 
-**Project overview:** [Promise Keeper - Project Overview.docx](Promise%20Keeper%20-%20Project%20Overview.docx) (problem, privacy design, Gnani models, measurements, how to run it).
+**Project overview (one page):** [read it here (PDF)](Promise%20Keeper%20-%20Project%20Overview.pdf) · [download as Word](Promise%20Keeper%20-%20Project%20Overview.docx). The problem, the solution, privacy by design, the Gnani models used and who did what.
 
 ### Demo (2 minutes)
 
