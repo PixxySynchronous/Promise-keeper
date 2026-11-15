@@ -8,7 +8,10 @@ This branch is our entry, by **Piyush S** and **Ishaan Rastogi**.
 
 ### Demo (2 minutes)
 
-<!-- Demo video goes here: on GitHub, edit this file and drag the .mp4 onto this line. -->
+
+
+https://github.com/user-attachments/assets/50f1750a-a4a9-48b9-916d-fd1dab66d986
+
 
 ### How we use Gnani AI
 
