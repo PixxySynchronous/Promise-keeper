@@ -2,11 +2,43 @@
 
 Promise Keeper is an Android app that notices when you promise something in WhatsApp and offers to remind you.
 
-**Also in this repository** (by Ishaan Rastogi, built on this app; the app itself is unchanged):
+## Gnani AI · Great Indian AI Internship Challenge
 
-- [`evon-app/`](evon-app/README.md): a copy of this app whose on-device model is taught by Gnani Evon v3.3, with extra rejection rules from real false alarms. Still fully offline.
-- [`voice-backend/`](voice-backend/README.md) and [`web/`](web/): a server and web app that turn a *spoken* promise into a reminder. They are separate from the Android app, which keeps no internet access.
-- [Overview of both](My%2010x%20Solution%20-%20Ishaan%20Rastogi.md), in two pages.
+This branch is our entry, by **Piyush S** and **Ishaan Rastogi**.
+
+### Demo (2 minutes)
+
+<!-- Demo video goes here: on GitHub, edit this file and drag the .mp4 onto this line. -->
+
+### How we use Gnani AI
+
+| Gnani model | What it does here | Where |
+|---|---|---|
+| **Evon v3.3** (open weights) | **Teacher for the on-device promise detector.** Run locally (4-bit, llama.cpp) on a developer's laptop, Evon labelled ~1,000 example messages by answering two narrow questions: who acts, when, and how sure; then commit, request, plan, maybe or question. Its token probabilities became soft labels, and a small classifier (768 numbers) learned from them. Only that classifier ships in the app; Evon never does. | [`evon-app/`](evon-app/README.md) |
+| **Prisma v3.0** (API) | **Speech-to-text for the voice prototype.** Say a promise out loud ("kal paanch baje report bhej dunga"); Prisma transcribes it, with Hinglish in Latin script like WhatsApp typing, and it becomes a reminder. | [`voice-backend/`](voice-backend/README.md), [`web/`](web/) |
+
+**Results on our labelled test set** (each message scored by a model that never saw it):
+
+| Promise detector | Promises caught | Ordinary messages wrongly flagged |
+|---|---|---|
+| Evon-taught classifier | **94.0%** | **0.4%** |
+| Hand-labelled classifier, at the same false-alarm rate | 93.2% | 0.4% |
+
+The test messages were written by hand, and Evon's questions were tuned on them, so real-world numbers will be lower.
+
+### Privacy by design
+
+- **The phone app has no internet permission.** Android itself blocks it from going online, so chats never leave the phone. Detection, including the Evon-taught classifier, runs entirely on the device.
+- **The voice prototype is separate and opt-in.** Spoken audio is sent to Gnani for transcription, so it lives in its own web app and never in the phone app.
+
+### Who did what
+
+- **Piyush S:** the Android app: the on-device detection pipeline (phrase rules, multilingual sentence model, classifier), understanding of times and repeats, reminders and alarms, the UI, the privacy design, and the labelled dataset and accuracy tests.
+- **Ishaan Rastogi:** the Evon teacher pipeline and the Evon-taught classifier, seven rejection rules from real false alarms, and the voice backend and web app with Gnani Prisma. His two-page overview: [My 10x Solution](My%2010x%20Solution%20-%20Ishaan%20Rastogi.md).
+
+---
+
+*The rest of this README describes the Promise Keeper Android app itself.*
 
 Send *"kal bhej dunga"*, *"I'll call you at 5"* or *"मैं कल भेज दूंगी"*, and a notification asks whether to set a reminder. It suggests a time from what you wrote ("tomorrow", "by EOD", "in 10 mins", "5 baje", "1 o clock", "8.30pm", "28 May"). You can keep it, change the time or ignore it.
 
