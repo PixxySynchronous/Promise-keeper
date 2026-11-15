@@ -10,7 +10,7 @@ What is different here: the small on-device model is taught by **Gnani Evon v3.3
 
 This is the phone half of the project. The voice half, for spoken promises, is in
 [`voice-backend/`](../voice-backend) and [`web/`](../web); the two-page overview of both is
-[My 10x Solution - Ishaan Rastogi.md](../My%2010x%20Solution%20-%20Ishaan%20Rastogi.md).
+[Promise Keeper - Project Overview.docx](../Promise%20Keeper%20-%20Project%20Overview.docx).
 
 ## Build and install
 

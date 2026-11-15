@@ -6,12 +6,19 @@ Promise Keeper is an Android app that notices when you promise something in What
 
 This branch is our entry, by **Piyush S** and **Ishaan Rastogi**.
 
+**Project overview:** [Promise Keeper - Project Overview.docx](Promise%20Keeper%20-%20Project%20Overview.docx) (problem, privacy design, Gnani models, measurements, how to run it).
+
 ### Demo (2 minutes)
 
 
 
 https://github.com/user-attachments/assets/50f1750a-a4a9-48b9-916d-fd1dab66d986
 
+
+### Privacy by design
+
+- **The phone app has no internet permission.** Android itself blocks it from going online, so chats never leave the phone. Detection, including the Evon-taught classifier, runs entirely on the device.
+- **The voice prototype is separate and opt-in.** Spoken audio is sent to Gnani for transcription, so it lives in its own web app and never in the phone app.
 
 ### How we use Gnani AI
 
@@ -29,15 +36,10 @@ https://github.com/user-attachments/assets/50f1750a-a4a9-48b9-916d-fd1dab66d986
 
 The test messages were written by hand, and Evon's questions were tuned on them, so real-world numbers will be lower.
 
-### Privacy by design
-
-- **The phone app has no internet permission.** Android itself blocks it from going online, so chats never leave the phone. Detection, including the Evon-taught classifier, runs entirely on the device.
-- **The voice prototype is separate and opt-in.** Spoken audio is sent to Gnani for transcription, so it lives in its own web app and never in the phone app.
-
 ### Who did what
 
 - **Piyush S:** the Android app: the on-device detection pipeline (phrase rules, multilingual sentence model, classifier), understanding of times and repeats, reminders and alarms, the UI, the privacy design, and the labelled dataset and accuracy tests.
-- **Ishaan Rastogi:** the Evon teacher pipeline and the Evon-taught classifier, seven rejection rules from real false alarms, and the voice backend and web app with Gnani Prisma. His two-page overview: [My 10x Solution](My%2010x%20Solution%20-%20Ishaan%20Rastogi.md).
+- **Ishaan Rastogi:** the Evon teacher pipeline and the Evon-taught classifier, seven rejection rules from real false alarms, and the voice backend and web app with Gnani Prisma. 
 
 ---
 

@@ -4,7 +4,7 @@ Say a promise out loud, in your own language, and get a reminder. *"Kal paanch b
 
 Indian WhatsApp users speak Hindi, Tamil, Bengali and other languages, and type them in English letters. This service takes a voice note, transcribes it with **Gnani Prisma v3.0** in `transliterate` mode (Latin script for every language), checks whether it is the speaker's own promise (an explicit tense step: future vs past, habit, question, refusal, someone else's promise), works out the time, and stores a reminder.
 
-**Where this fits:** the project's first half catches promises you *type* in WhatsApp, on the phone ([Promise Keeper Android app](../README.md), and its Evon-taught copy in [`evon-app/`](../evon-app)). This is the second half, for promises you *say*: it is built and running, and it is the base for the next stage, voice notes and calls. The two-page overview of both halves is [My 10x Solution - Ishaan Rastogi.md](../My%2010x%20Solution%20-%20Ishaan%20Rastogi.md).
+**Where this fits:** the project's first half catches promises you *type* in WhatsApp, on the phone ([Promise Keeper Android app](../README.md), and its Evon-taught copy in [`evon-app/`](../evon-app)). This is the second half, for promises you *say*: it is built and running, and it is the base for the next stage, voice notes and calls. The overview of both halves is [Promise Keeper - Project Overview.docx](../Promise%20Keeper%20-%20Project%20Overview.docx).
 
 It is the backend companion to the offline Android app. It reuses the app's phrase list directly (read from `CommitmentPhrases.kt`) and is evaluated on the app's 981-message test set. The app itself stays offline; nothing here changes it.
 
@@ -112,7 +112,7 @@ Interactive docs: http://127.0.0.1:8000/docs
 | Test suite *(stretch)* | `tests/`, one command, fully offline |
 
 
-The overview and the measured numbers are in [`../My 10x Solution - Ishaan Rastogi.md`](../My%2010x%20Solution%20-%20Ishaan%20Rastogi.md). Reproduce the numbers with `.venv/bin/python scripts/measure.py` (offline).
+The overview and the measured numbers are in [Promise Keeper - Project Overview.docx](../Promise%20Keeper%20-%20Project%20Overview.docx). Reproduce the numbers with `.venv/bin/python scripts/measure.py` (offline).
 
 **Non-goal:** no mobile app changes and no network in the Android app.
 
