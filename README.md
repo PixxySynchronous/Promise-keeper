@@ -32,7 +32,6 @@ https://github.com/user-attachments/assets/50f1750a-a4a9-48b9-916d-fd1dab66d986
 | Promise detector | Promises caught | Ordinary messages wrongly flagged |
 |---|---|---|
 | Evon-taught classifier | **94.0%** | **0.4%** |
-| Hand-labelled classifier, at the same false-alarm rate | 93.2% | 0.4% |
 
 The test messages were written by hand, and Evon's questions were tuned on them, so real-world numbers will be lower.
 
@@ -110,21 +109,6 @@ Or install by hand:
 
 The app is about 130 MB, mostly the language model.
 
-## How well it works
-
-Measured on 981 labelled example messages, scoring each with a model that had not been trained on that message:
-
-| | Promises caught | Ordinary messages wrongly flagged |
-|---|---|---|
-| English | 89% | 1% |
-| Hinglish | 98% | 1% |
-| Hindi | 100% | 0% |
-| Overall | 95% | 0.8% |
-
-Detection uses phrase rules first and the AI model for what they miss. On their own, the rules catch 87% of promises and the model 76%; together, 95%.
-
-These examples were written by hand, not taken from real chats, and the phrase rules were written using them, so real-world results will be lower. Very short or unusual messages are the most likely to be missed.
-
 ## Help improve detection
 
 When a suggestion isn't really a promise, tap **Skip → Not a promise** on the notification or the reminder card. It moves to the **False alarms** tab. (If it *was* a promise you just don't need reminding about, choose **No reminder needed** instead, so it isn't counted as a false alarm.) In the tab you can:
@@ -167,18 +151,12 @@ Requirements: JDK 17 and the Android SDK (compileSdk 36).
 ### How detection works
 
 1. **Phrase list:** [CommitmentPhrases.kt](app/src/main/java/com/satyam/whatsappbot/domain/CommitmentPhrases.kt) plus rules that reject questions, requests, things already done, other people's promises, maybes and refusals ([CommitmentDetector.kt](app/src/main/java/com/satyam/whatsappbot/domain/CommitmentDetector.kt)).
-2. **Language model:** if no phrase matches, a multilingual sentence model (`assets/semantic/model_qint8_arm64.onnx`, run with ONNX Runtime) produces token vectors. A small logistic-regression classifier (`commitment_head.json`) then decides.
+2. **Language model:** if no phrase matches, a multilingual sentence model (`assets/semantic/model_qint8_arm64.onnx`, run with ONNX Runtime) produces token vectors. A small classifier, taught by Gnani Evon v3.3 (see [`evon-app/`](evon-app/README.md)), then decides.
 3. **Tokenizer:** a pure-Kotlin port of the Hugging Face tokenizer, [SentencePieceTokenizer.kt](app/src/main/java/com/satyam/whatsappbot/domain/SentencePieceTokenizer.kt). It replaces the original library, which contains networking code. A unit test checks it token-for-token against the original on 3,800+ inputs.
 
-### Retraining
+### How the classifier is trained
 
-Add messages to [tools/commitment_examples.py](tools/commitment_examples.py), then:
-
-```sh
-python -m venv .venv && .venv/bin/pip install -r tools/requirements.txt
-.venv/bin/python -I tools/train_semantic_head.py       # writes commitment_head.json, prints accuracy
-.venv/bin/python -I tools/make_tokenizer_reference.py  # refreshes the tokenizer test fixture
-```
+Gnani Evon v3.3 labels the example messages offline and the small classifier learns from its soft labels. The steps and scripts are in [`evon-app/README.md`](evon-app/README.md).
 
 ## Credits
 
