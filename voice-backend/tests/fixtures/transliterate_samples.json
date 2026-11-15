@@ -1,0 +1,53 @@
+{
+  "_about": "Real Gnani Prisma v3.0 transcripts (format=transliterate) of the project author's own voice reading made-up sentences, recorded 13 Nov 2026 at 22:51 IST. Text only; no audio is kept. 'said' is the script that was read aloud. due = [days from the recording day, HH:MM], or null when no reminder is expected.",
+  "recorded_at": "2026-11-13T22:51:00+05:30",
+  "samples": [
+    {
+      "language": "indic-auto",
+      "said": "Kal shaam paanch baje main Rohan ko report bhej dunga.",
+      "transcript": "Kal shaam paanch baje main Rohan ko report bhej dunga.",
+      "is_promise": true,
+      "due": [
+        1,
+        "17:00"
+      ]
+    },
+    {
+      "language": "hi-IN",
+      "said": "Main parson subah das baje bijli ka bill bhar dunga.",
+      "transcript": "Main parson subah das baje bijli ka bill bhar dunga.",
+      "is_promise": true,
+      "due": [
+        2,
+        "10:00"
+      ]
+    },
+    {
+      "language": "indic-auto",
+      "said": "Maine kal Rohan ko report bhej di thi.",
+      "transcript": "Maine kal Rohan ko report bhej di thi.",
+      "is_promise": false,
+      "due": null
+    },
+    {
+      "language": "en-IN",
+      "said": "I'll call the plumber tomorrow at four PM.",
+      "transcript": "I will call the plumber tomorrow at four p m.",
+      "is_promise": true,
+      "due": [
+        1,
+        "16:00"
+      ]
+    },
+    {
+      "language": "pa-IN",
+      "said": "Kal shaam panj vaje main Rohan nu report bhej devanga.",
+      "transcript": "kal shaam panj vaje main rohan nu report bhej devanga.",
+      "is_promise": true,
+      "due": [
+        1,
+        "17:00"
+      ]
+    }
+  ]
+}

@@ -20,3 +20,31 @@ keystore.properties
 .DS_Store
 .idea/
 *.iml
+
+# Local reference material (capstone brief, Gnani docs notes, playbook notes): never commit
+reference/
+
+# Secrets and local runtime data
+.env
+.env.*
+!.env.example
+*.db
+*.sqlite3
+
+# Voice backend runtime data and generated demo audio
+voice-backend/data/
+voice-backend/demo_audio/
+.pytest_cache/
+
+# Web app
+node_modules/
+web/dist/
+
+# Private or local-only files
+# False-alarm exports from the app hold real chat text: train with them, never commit them
+/promise-keeper-false-alarms-*.json
+# Draft notes for submitting the project
+voice-backend/gnani-submission.md
+# Labelling runs: replies that could not be read (the labels themselves are kept)
+results/*-unusable.jsonl
+!results/labels-unusable.jsonl

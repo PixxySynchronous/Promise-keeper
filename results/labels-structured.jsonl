@@ -1,0 +1,976 @@
+{"text": "I'll send it tomorrow", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I will send the file", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "will share by EOD", "is_promise": true, "confidence": 0.706, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I will do it tonight", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "let me check and revert", "is_promise": true, "confidence": 0.912, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I will get back to you", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I'll share it", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "will revert tomorrow", "is_promise": true, "confidence": 0.8818, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "revert back by EOD", "is_promise": true, "confidence": 0.8611, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "Please wait, I will do it", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "will send once I reach home", "is_promise": true, "confidence": 0.9182, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I'll update you soon", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I promise I'll do it", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I'll call you in 5 minutes", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "sending it shortly", "is_promise": true, "confidence": 0.9857, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I will take care of this", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "will complete this today", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I'll let you know by next week", "is_promise": true, "confidence": 0.9732, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I will let you know by Wednesday", "is_promise": true, "confidence": 0.9814, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "will let you know tomorrow", "is_promise": true, "confidence": 0.7641, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I'll let u know soon", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "let you know after checking", "is_promise": false, "confidence": 0.7855, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "let you know once I confirm", "is_promise": true, "confidence": 0.7465, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I will let you know by EOD", "is_promise": true, "confidence": 0.9834, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I'll send the details", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I will send the report tomorrow after I finish the call", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I'll book the tickets tonight", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I'll pay you back on Friday", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I will transfer the money by evening", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I'll drop the documents at your place tomorrow", "is_promise": true, "confidence": 0.9895, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I'll pick you up at 7", "is_promise": true, "confidence": 0.9859, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I'll bring the charger tomorrow", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I'll email the invoice first thing in the morning", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "will fix the bug before the standup", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I'll review your PR after lunch", "is_promise": true, "confidence": 0.9857, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I'll push the changes tonight", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I will submit the assignment by Sunday", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I'll call mom after the meeting", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "will order the cake for tomorrow", "is_promise": true, "confidence": 0.9134, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I'll check with HR and get back", "is_promise": true, "confidence": 0.9853, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I'll ask him and tell you", "is_promise": true, "confidence": 0.8104, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I'll find out and let you know", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I'll look into it today", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I'll have it ready by Monday", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I will finish the slides tonight", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I'll send the photos when I get home", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "will forward you the mail in a bit", "is_promise": false, "confidence": 0.6079, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "I'll text you when I leave", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I'll ping you once I'm free", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I'll recharge your phone in an hour", "is_promise": true, "confidence": 0.9612, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I'll renew the subscription today", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I'll get the groceries on my way back", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I'll return your book next week", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I will clear the dues by the 5th", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I'll share the notes after class", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I'll confirm the venue by tonight", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I'll message the group about it", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I'll handle the booking", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "leave it to me, I'll sort it out", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "consider it done, will send by 6", "is_promise": true, "confidence": 0.703, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "on it, will update in 30 mins", "is_promise": true, "confidence": 0.9607, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "will do it first thing tomorrow", "is_promise": true, "confidence": 0.9896, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I'll make the call tomorrow morning", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I'll come by around 8", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I'll get it signed and send a scan", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I'll arrange the cab for the airport", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I will water the plants tomorrow", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I'll send you the address", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I'll share my location when I reach", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I'll update the sheet tonight", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I'll send the money right after this call", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "will send the link in 10 mins", "is_promise": true, "confidence": 0.864, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I'll set up the meeting for Thursday", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I'll tell you more about it next week", "is_promise": true, "confidence": 0.9869, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "will tell you the details tomorrow", "is_promise": true, "confidence": 0.8661, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "ill tell u later tonight", "is_promise": true, "confidence": 0.93, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I'll inform you once it's confirmed", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "will tell you after the meeting", "is_promise": true, "confidence": 0.7177, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I'll tell you what he said", "is_promise": true, "confidence": 0.9437, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I'll tell you the plan by evening", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "will inform you by Monday", "is_promise": true, "confidence": 0.8725, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "need to order paneer by 5", "is_promise": true, "confidence": 0.9483, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "have to submit the form tomorrow", "is_promise": true, "confidence": 0.931, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I need to call the bank today", "is_promise": true, "confidence": 0.9815, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "must pay the electricity bill by friday", "is_promise": true, "confidence": 0.8491, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "gotta pick up the laundry at 6", "is_promise": true, "confidence": 0.9239, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I have to book tickets tonight", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "need to buy milk on the way home", "is_promise": true, "confidence": 0.9377, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I've got to renew my passport this week", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "ugh need to finish the slides tonight", "is_promise": true, "confidence": 0.9821, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I must reply to that mail tomorrow", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "need to recharge the phone today", "is_promise": true, "confidence": 0.9719, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I have to drop the car for service on monday", "is_promise": true, "confidence": 0.9681, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "hi, will send it tomorrow", "is_promise": true, "confidence": 0.8022, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "hey ill call you tomorrow morning", "is_promise": true, "confidence": 0.774, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "hello sir, I will submit the report today", "is_promise": true, "confidence": 0.8467, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "bro I'll be there by 7 tomorrow", "is_promise": true, "confidence": 0.7702, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "hi I'll check and tell you by evening", "is_promise": true, "confidence": 0.9737, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "ok will send", "is_promise": true, "confidence": 0.9558, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "sure, will do", "is_promise": true, "confidence": 0.9702, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "yes will do it", "is_promise": true, "confidence": 0.9883, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "yup sending in 5", "is_promise": true, "confidence": 0.9515, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "ya ya will share tmrw", "is_promise": true, "confidence": 0.7036, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "will send 2mrw pakka", "is_promise": true, "confidence": 0.9027, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "k will call u back", "is_promise": false, "confidence": 0.9807, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "gimme 10 min, will send", "is_promise": true, "confidence": 0.9269, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "will dm u the deets", "is_promise": true, "confidence": 0.94, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "omw, will call when i reach", "is_promise": true, "confidence": 0.9189, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "will send asap", "is_promise": true, "confidence": 0.9351, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "np will handle it", "is_promise": false, "confidence": 0.9388, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "will send it tonite", "is_promise": true, "confidence": 0.8492, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "wil send by eve", "is_promise": true, "confidence": 0.8638, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "ill send it tmrw", "is_promise": true, "confidence": 0.9816, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "ill do it", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "ill call u in 5", "is_promise": true, "confidence": 0.9202, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "will ping u l8r", "is_promise": true, "confidence": 0.8823, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "sure thing, i'll get it done", "is_promise": true, "confidence": 0.9739, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "yeah i'll be there by 8", "is_promise": true, "confidence": 0.9697, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "will share the pics once i'm home 📸", "is_promise": true, "confidence": 0.9866, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "done deal, will transfer by eod 👍", "is_promise": true, "confidence": 0.9011, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "haha ok ill bring it", "is_promise": true, "confidence": 0.9458, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "fine ill do it", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "ok ok ill send now", "is_promise": true, "confidence": 0.976, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "will get back 2 u", "is_promise": true, "confidence": 0.9355, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "lemme check n revert", "is_promise": true, "confidence": 0.9167, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "let me see and get back", "is_promise": true, "confidence": 0.8107, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "on it 👍", "is_promise": true, "confidence": 0.9103, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "will send the pdf in a min", "is_promise": true, "confidence": 0.9615, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "brb will send", "is_promise": true, "confidence": 0.8989, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "will call after lunch", "is_promise": true, "confidence": 0.9101, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "ill text u when i'm free", "is_promise": true, "confidence": 0.9395, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "ill handle it", "is_promise": true, "confidence": 0.9874, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "ill get it", "is_promise": true, "confidence": 0.9861, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "ill sort it", "is_promise": true, "confidence": 0.9782, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "ill pay u tmrw", "is_promise": true, "confidence": 0.9758, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "ill bring snacks", "is_promise": true, "confidence": 0.987, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "ill check n tell", "is_promise": true, "confidence": 0.9452, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "will do bro", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "will do 👍", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "sure will send", "is_promise": true, "confidence": 0.5344, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "yes sending", "is_promise": true, "confidence": 0.9446, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "sending rn", "is_promise": true, "confidence": 0.981, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "will share rn", "is_promise": true, "confidence": 0.948, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "kk will call", "is_promise": false, "confidence": 0.9577, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "ya ill come", "is_promise": true, "confidence": 0.8051, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "ok ill book it", "is_promise": true, "confidence": 0.9571, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "fine, will pay", "is_promise": true, "confidence": 0.973, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "alright ill text him", "is_promise": true, "confidence": 0.8469, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "cool ill send the deck", "is_promise": true, "confidence": 0.9838, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "will fwd", "is_promise": true, "confidence": 0.8827, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "will rply in a bit", "is_promise": true, "confidence": 0.9575, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "ok will update", "is_promise": true, "confidence": 0.9636, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "yup will transfer", "is_promise": true, "confidence": 0.9224, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "ok bro will handle", "is_promise": true, "confidence": 0.9531, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "sure ill look into it", "is_promise": true, "confidence": 0.9229, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "ok ill ask her", "is_promise": false, "confidence": 0.6387, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "ill be there in 10", "is_promise": true, "confidence": 0.9358, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "ill grab it on the way", "is_promise": true, "confidence": 0.9681, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "will drop it off later", "is_promise": true, "confidence": 0.9213, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I'll wish her good morning every day at 10 am", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "i will wish her good morning daily at 10", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "ill text her good morning every morning", "is_promise": true, "confidence": 0.6439, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "will wish her gm every day at 10", "is_promise": true, "confidence": 0.9508, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I'll call mom every sunday at 7", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "i'll water the plants every evening", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I'm going to call you at 5", "is_promise": true, "confidence": 0.9893, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "im gonna send it every friday", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I will send the report every monday morning", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "we'll meet every saturday at 6", "is_promise": true, "confidence": 0.6736, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "ill remind him every week", "is_promise": true, "confidence": 0.7564, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I'll pay the rent on the 1st of every month", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I'll wish him on his birthday at midnight", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "bhej dunga kal", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "bhej dungi tomorrow", "is_promise": true, "confidence": 0.8004, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "bhej dungs in 2 mins", "is_promise": true, "confidence": 0.9429, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "bhejunga after lunch", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "send kar dunga", "is_promise": true, "confidence": 0.9876, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "send kar dungi by 5", "is_promise": true, "confidence": 0.986, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "share kar dunga", "is_promise": true, "confidence": 0.988, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "kar dungi evening", "is_promise": true, "confidence": 0.9891, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "bata dunga after checking", "is_promise": true, "confidence": 0.8735, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "dekh ke batata hoon", "is_promise": true, "confidence": 0.7074, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "dekh kar bataunga", "is_promise": true, "confidence": 0.8876, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "karke bataungi", "is_promise": true, "confidence": 0.9322, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "forward kar dunga", "is_promise": true, "confidence": 0.9823, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "call kar dungi", "is_promise": true, "confidence": 0.9793, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "reply kar dunga", "is_promise": true, "confidence": 0.9866, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "confirm kar dungi", "is_promise": true, "confidence": 0.9806, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "meeting ke baad bhej dunga", "is_promise": true, "confidence": 0.87, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "thoda time de, share kar dunga", "is_promise": true, "confidence": 0.7293, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "10 min mein bhej dunga", "is_promise": true, "confidence": 0.9673, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "aaj shaam ko bata dunga", "is_promise": true, "confidence": 0.9818, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "kal tak kar lunga", "is_promise": true, "confidence": 0.9838, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "Monday tak send karunga", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "haan pakka bhej dunga", "is_promise": true, "confidence": 0.9398, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "dekh ke update karta hu", "is_promise": true, "confidence": 0.9726, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "kar ke bhejta hoon", "is_promise": true, "confidence": 0.983, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "main tumhe bata dunga Wednesday ko", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "main aapko next week bata dunga", "is_promise": true, "confidence": 0.9899, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "update milte hi bata dunga", "is_promise": true, "confidence": 0.9497, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "haan bhai kal bhej dunga", "is_promise": true, "confidence": 0.7782, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "haan kal bhejta hu", "is_promise": true, "confidence": 0.9761, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "abhi busy hu baad mein bhej dunga", "is_promise": true, "confidence": 0.9784, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "thoda ruk jao bhej dunga", "is_promise": true, "confidence": 0.7601, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "thoda wait karo main bhej dunga", "is_promise": true, "confidence": 0.9845, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "main bhej dunga", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "main bhej dungi", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "main send kar dunga", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "main share karungi", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "main dekh ke bata dunga", "is_promise": true, "confidence": 0.976, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "check karke batata hu", "is_promise": true, "confidence": 0.9719, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "check karke bataungi", "is_promise": true, "confidence": 0.8541, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "confirm karke bata dunga", "is_promise": true, "confidence": 0.9623, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "pata karke bata dunga", "is_promise": true, "confidence": 0.9569, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "pata karke batata hu", "is_promise": true, "confidence": 0.9688, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "baad mein call kar dunga", "is_promise": true, "confidence": 0.9781, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "thodi der mein call karungi", "is_promise": true, "confidence": 0.9513, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "5 minute mein bhej dunga", "is_promise": true, "confidence": 0.9624, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "5 min mein bhejta hu", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "10 mins mein send kar dunga", "is_promise": true, "confidence": 0.9651, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "do minute mein kar dunga", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "2 ghante mein bhej dunga", "is_promise": true, "confidence": 0.9699, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "aaj raat bhej dunga", "is_promise": true, "confidence": 0.9744, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "aaj shaam tak kar dunga", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "kal subah bhej dunga", "is_promise": true, "confidence": 0.7774, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "kal evening tak share kar dunga", "is_promise": true, "confidence": 0.9637, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "monday ko bhej dunga", "is_promise": true, "confidence": 0.9294, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "eod tak bhej dunga", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "jaldi bhej dunga", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "free hoke bhej dunga", "is_promise": true, "confidence": 0.8991, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "ghar pahunch ke bhej dunga", "is_promise": true, "confidence": 0.6068, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "meeting khatam hone ke baad bhej dunga", "is_promise": true, "confidence": 0.9249, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "haan pakka karunga", "is_promise": true, "confidence": 0.9794, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "pakka bhejunga", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "bhej ke batata hu", "is_promise": true, "confidence": 0.9511, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "share karke bata dunga", "is_promise": true, "confidence": 0.9007, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "main isko dekh leta hu aur batata hu", "is_promise": true, "confidence": 0.9518, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "main check kar leta hu phir revert karta hu", "is_promise": true, "confidence": 0.9869, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "kal tak update de dunga", "is_promise": true, "confidence": 0.9892, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "aapko kal bata dunga", "is_promise": false, "confidence": 0.8357, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "tumhe baad mein call kar dunga", "is_promise": true, "confidence": 0.7843, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "bas 10 min do bhej dunga", "is_promise": true, "confidence": 0.665, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "paise kal transfer kar dunga", "is_promise": true, "confidence": 0.9729, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "kal tera charger le aaunga", "is_promise": true, "confidence": 0.9565, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "main tujhe 7 baje pick kar lunga", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "ticket aaj raat book kar dunga", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "shaam ko groceries le aaunga", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "kal office mein de dunga", "is_promise": true, "confidence": 0.8245, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "main baat karke batata hu", "is_promise": true, "confidence": 0.9863, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "uncle se pooch ke batati hu", "is_promise": true, "confidence": 0.9107, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "fees kal bhar dungi", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "recharge kar deta hu abhi", "is_promise": true, "confidence": 0.9879, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "photos ghar jaake bhejti hu", "is_promise": true, "confidence": 0.9819, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "location bhej dunga pahunch ke", "is_promise": true, "confidence": 0.9854, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "kal milke de dunga", "is_promise": true, "confidence": 0.9031, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "notes scan karke bhejta hu", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "presentation raat tak ready kar dunga", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "bill kal pay kar dunga", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "aaj hi kar deta hu", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "abhi bhejta hu ruk", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "ek ghante mein call back karta hu", "is_promise": true, "confidence": 0.9716, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "lunch ke baad dekh leta hu", "is_promise": true, "confidence": 0.9606, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "kal pakka aa jaunga", "is_promise": true, "confidence": 0.9779, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "main sambhal lunga", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "tension mat le main kar dunga", "is_promise": true, "confidence": 0.9856, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "chill kar main handle kar lunga", "is_promise": true, "confidence": 0.9879, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "haan yaar kar dungi kal tak", "is_promise": true, "confidence": 0.9827, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "will let u know by Wednesday", "is_promise": true, "confidence": 0.9269, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "main send karungi", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "main share kar dunga", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "dekh ke batata hu", "is_promise": true, "confidence": 0.8842, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "dekh ke batati hu", "is_promise": true, "confidence": 0.8863, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "check karke bataunga", "is_promise": true, "confidence": 0.954, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "confirm karke bataungi", "is_promise": true, "confidence": 0.9357, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "monday tak kar dunga", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "thodi der mein bhej dunga", "is_promise": true, "confidence": 0.9818, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "bhej dunga yr", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "bhejta hu ruk 2 min", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "kr dunga kal", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "kal krta hu pakka", "is_promise": true, "confidence": 0.9828, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "send krdunga", "is_promise": true, "confidence": 0.9855, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "share krdungi", "is_promise": true, "confidence": 0.9826, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "bta dunga", "is_promise": true, "confidence": 0.9496, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "btata hu thodi der me", "is_promise": true, "confidence": 0.9817, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "dkh ke btata hu", "is_promise": true, "confidence": 0.8855, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "kal bhjta hu", "is_promise": true, "confidence": 0.9462, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "ok bhej dunga", "is_promise": true, "confidence": 0.9574, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "haan bhai krdunga", "is_promise": true, "confidence": 0.9723, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "hn kal tk ho jayega", "is_promise": true, "confidence": 0.5806, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "acha thik h kal bhejta hu", "is_promise": true, "confidence": 0.9651, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "abhi krke bhejta hu", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "2 min me bhjta hu", "is_promise": true, "confidence": 0.9854, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "shaam tk bhej dungaa", "is_promise": true, "confidence": 0.9592, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "pkka bhejunga", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "mai bhej dunga", "is_promise": true, "confidence": 0.5595, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "mai krdungi", "is_promise": true, "confidence": 0.9888, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "ruk ja bhejta hu", "is_promise": true, "confidence": 0.958, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "kal subh tk bhej dunga 👍", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "ho jayega bhai kal tk", "is_promise": false, "confidence": 0.5743, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "le aunga kal", "is_promise": true, "confidence": 0.981, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "call krta hu 5 min me", "is_promise": true, "confidence": 0.9878, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "kal pakka de dunga", "is_promise": true, "confidence": 0.9763, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "free hote hi call karta hu", "is_promise": true, "confidence": 0.987, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "ghr jake bhejta hu", "is_promise": true, "confidence": 0.9856, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "kr dungi", "is_promise": true, "confidence": 0.9886, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "kr dunga bhai", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "krdunga yr", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "krta hu abhi", "is_promise": true, "confidence": 0.9856, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "bhj dunga", "is_promise": true, "confidence": 0.9723, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "bhj dungi kal", "is_promise": true, "confidence": 0.9427, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "bta dungi", "is_promise": true, "confidence": 0.9613, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "btati hu", "is_promise": true, "confidence": 0.9089, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "de dunga kal", "is_promise": true, "confidence": 0.9654, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "de dungi shaam ko", "is_promise": true, "confidence": 0.9624, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "le aaungi", "is_promise": true, "confidence": 0.9407, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "kar lunga", "is_promise": true, "confidence": 0.9864, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "kr lunga kal tk", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "dkhta hu fir btata hu", "is_promise": true, "confidence": 0.9454, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "abhi bhjti hu", "is_promise": true, "confidence": 0.9454, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "kal tk krdungi", "is_promise": true, "confidence": 0.9882, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "ha krdunga", "is_promise": true, "confidence": 0.9628, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "thik h kr dunga", "is_promise": true, "confidence": 0.9891, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "ok kal de dunga", "is_promise": true, "confidence": 0.8628, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "aata hu 10 min me", "is_promise": true, "confidence": 0.9895, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "call krti hu", "is_promise": true, "confidence": 0.9495, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "send krta hu", "is_promise": true, "confidence": 0.9765, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "share krta hu abhi", "is_promise": true, "confidence": 0.9821, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "paise bhj dunga", "is_promise": true, "confidence": 0.9323, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "kal le aunga", "is_promise": true, "confidence": 0.9784, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "ghar jake krdungi", "is_promise": true, "confidence": 0.9796, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "pakka krunga", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "krunga kal", "is_promise": true, "confidence": 0.9865, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "4 ki ill send, 5 ko raat mai", "is_promise": true, "confidence": 0.7988, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "5 sending raat mein", "is_promise": true, "confidence": 0.8235, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "2 abhi bhej raha hu baaki raat ko", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "ek abhi bhejta hu ek kal", "is_promise": true, "confidence": 0.9764, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "raat ko bhej dunga", "is_promise": true, "confidence": 0.8945, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "dopahar tak kar dunga", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "raat mai call karta hu", "is_promise": true, "confidence": 0.9534, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "Kal karta hu", "is_promise": true, "confidence": 0.9833, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "kal karti hu", "is_promise": true, "confidence": 0.9541, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "Kal bhejti hu", "is_promise": true, "confidence": 0.9783, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "parso karta hu", "is_promise": true, "confidence": 0.9581, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "Shaam ko karta hu", "is_promise": true, "confidence": 0.969, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "Abhi call karta hu", "is_promise": true, "confidence": 0.9841, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "main nikalta hu toh call karta hu", "is_promise": true, "confidence": 0.9865, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "ghar pahunchta hu toh bhejta hu", "is_promise": true, "confidence": 0.986, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "free hota hu toh dekh leta hu", "is_promise": true, "confidence": 0.9318, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "aaj kaam tha isliye reply nahi kiya, kal bhej dunga", "is_promise": true, "confidence": 0.8719, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "kal bhool gaya tha, aaj pakka kar dunga", "is_promise": false, "confidence": 0.7333, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "late ho gaya sorry, abhi bhejta hu", "is_promise": true, "confidence": 0.9661, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "meeting lambi chali, ab call karta hu", "is_promise": true, "confidence": 0.945, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "kal bhej ta hu", "is_promise": true, "confidence": 0.9647, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "abhi bhej ti hu", "is_promise": true, "confidence": 0.9807, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "bata ta hu thodi der me", "is_promise": true, "confidence": 0.9566, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "kal kar ta hu pakka", "is_promise": true, "confidence": 0.9767, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "send kar unga kal", "is_promise": true, "confidence": 0.7766, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "shaam ko bhej unga", "is_promise": false, "confidence": 0.7627, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "dekh ke bata ti hu", "is_promise": true, "confidence": 0.927, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "5 min me bhej ta hoon", "is_promise": true, "confidence": 0.9827, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "agle hafte bhej dunga", "is_promise": true, "confidence": 0.7845, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "agle week bata dungi", "is_promise": true, "confidence": 0.9273, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "next week tak kar dunga", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "agle hafte call karta hu", "is_promise": true, "confidence": 0.9763, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "कल भेज दूंगा", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "कल भेज दूंगी", "is_promise": true, "confidence": 0.5545, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "कल तक कर दूंगा", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "कल तक कर दूंगी", "is_promise": true, "confidence": 0.9349, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "मैं भेज दूंगा", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "मैं भेज दूंगी", "is_promise": true, "confidence": 0.8053, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "मैं कर दूंगा", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "मैं कर दूंगी", "is_promise": true, "confidence": 0.9639, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "मैं आपको शाम तक बता दूंगा", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "मैं चेक करके बताऊंगा", "is_promise": true, "confidence": 0.9767, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "देखकर बता दूंगा", "is_promise": true, "confidence": 0.9684, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "थोड़ा समय दो, भेज दूंगा", "is_promise": true, "confidence": 0.9241, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "मीटिंग के बाद शेयर कर दूंगा", "is_promise": true, "confidence": 0.9674, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "आज रात तक भेज दूंगा", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "दो मिनट में भेज दूंगा", "is_promise": true, "confidence": 0.9826, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "मैं वापस कॉल करूंगा", "is_promise": true, "confidence": 0.981, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "मैं इसे पूरा कर दूंगा", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "फाइल थोड़ी देर में भेजता हूं", "is_promise": true, "confidence": 0.9668, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "पक्का कर दूंगा", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "कल शेयर कर दूंगा", "is_promise": true, "confidence": 0.98, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "सोमवार तक भेज दूंगा", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "मैं पता करके बताती हूं", "is_promise": true, "confidence": 0.8166, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "घर पहुंचकर फोन करूंगा", "is_promise": true, "confidence": 0.9859, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "पैसे कल ट्रांसफर कर दूंगा", "is_promise": true, "confidence": 0.9582, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "मैं कल आपके घर आ जाऊंगा", "is_promise": true, "confidence": 0.9675, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "शाम को सामान ले आऊंगा", "is_promise": true, "confidence": 0.9863, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "रिपोर्ट आज ही भेज दूंगी", "is_promise": true, "confidence": 0.8333, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "मैं संभाल लूंगा, चिंता मत करो", "is_promise": true, "confidence": 0.9879, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "दस मिनट में कॉल करता हूं", "is_promise": true, "confidence": 0.9621, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "कल सुबह तक हो जाएगा, मैं कर दूंगा", "is_promise": true, "confidence": 0.9897, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "मैं उनसे बात करके बताऊंगा", "is_promise": true, "confidence": 0.9783, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "आपका काम कल पक्का कर दूंगा", "is_promise": true, "confidence": 0.9276, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "टिकट आज रात बुक कर दूंगी", "is_promise": true, "confidence": 0.8422, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "फोटो अभी भेजती हूं", "is_promise": true, "confidence": 0.8429, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "बिल कल भर दूंगा", "is_promise": true, "confidence": 0.9888, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "मैं आपको लोकेशन भेज दूंगा", "is_promise": true, "confidence": 0.9537, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "नोट्स क्लास के बाद भेज दूंगी", "is_promise": true, "confidence": 0.6952, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "हां, मैं कर दूंगा", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "ईओडी तक कर दूंगा", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "भेज दूंगा", "is_promise": true, "confidence": 0.9899, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "भेज दूंगी", "is_promise": true, "confidence": 0.5704, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "कर दूंगा", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "कर दूंगी", "is_promise": true, "confidence": 0.9324, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "बता दूंगा", "is_promise": true, "confidence": 0.9534, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "कल बता दूंगी", "is_promise": true, "confidence": 0.6246, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "भेजता हूं", "is_promise": true, "confidence": 0.9857, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "अभी भेजती हूं", "is_promise": true, "confidence": 0.9239, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "कल दे दूंगा", "is_promise": true, "confidence": 0.9681, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "शाम को दे दूंगी", "is_promise": true, "confidence": 0.7005, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "मैं ले आऊंगा", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "कल ले आऊंगी", "is_promise": true, "confidence": 0.7079, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "मैं कर लूंगा", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "पांच मिनट में कॉल करती हूं", "is_promise": true, "confidence": 0.8203, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "हां भेज दूँगा", "is_promise": true, "confidence": 0.9561, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "कल तक कर दूँगी", "is_promise": true, "confidence": 0.9734, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "ठीक है, मैं बता दूँगा", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "मैं आ जाऊंगा", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "कल पक्का भेजूंगा", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "मैं देखकर बताऊंगी", "is_promise": true, "confidence": 0.912, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "ठीक है कल कर दूंगा", "is_promise": true, "confidence": 0.9772, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "ज़रूर भेज दूंगा", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "पैसे शाम तक भेज दूंगी", "is_promise": true, "confidence": 0.9663, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "मैं उनसे पूछकर बताता हूं", "is_promise": true, "confidence": 0.9342, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "will send kar dunga", "is_promise": true, "confidence": 0.8643, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I will bhej dunga", "is_promise": true, "confidence": 0.985, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "confirm hote hi let you know kar dunga", "is_promise": true, "confidence": 0.9476, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "kal morning mein bhej dunga", "is_promise": true, "confidence": 0.9232, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "end of day tak kar dunga", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "kar ke send karta hu", "is_promise": true, "confidence": 0.9875, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "ok bro, will send it kal", "is_promise": true, "confidence": 0.5682, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "haan I'll do it by shaam", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "sure, kal tak share kar dungi", "is_promise": true, "confidence": 0.9299, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "mai abhi send karta hu the file", "is_promise": true, "confidence": 0.9804, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I'll call tumhe after meeting", "is_promise": true, "confidence": 0.9011, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "bas ek min, sending now", "is_promise": true, "confidence": 0.9684, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "kal tak report bhej dunga, promise", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "मैं कल send कर दूंगा", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "फाइल 5 min में भेजता हूं", "is_promise": true, "confidence": 0.9509, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "ok main tomorrow tak complete kar dunga", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "theek hai, will update you by kal", "is_promise": true, "confidence": 0.76, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "pakka, will transfer tonight", "is_promise": true, "confidence": 0.6921, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "Hey, sorry I was stuck in meetings all day. I'll go through the doc tonight and send my comments by tomorrow morning.", "is_promise": true, "confidence": 0.969, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "Thanks for the reminder! I completely forgot. I'll transfer the money as soon as I reach home.", "is_promise": true, "confidence": 0.951, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "Bhai aaj bahut kaam tha isliye reply nahi kiya, kal subah pakka tujhe file bhej dunga.", "is_promise": false, "confidence": 0.531, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "Yes I saw your message. Let me talk to the landlord first and then I'll let you know what he says.", "is_promise": true, "confidence": 0.8736, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "अभी मैं बाहर हूं, घर पहुंचकर आपको सारे डॉक्यूमेंट्स भेज दूंगा।", "is_promise": true, "confidence": 0.986, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "Got it, thanks. I'll book the hotel for the 12th and share the confirmation with everyone.", "is_promise": true, "confidence": 0.9799, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "Ma'am I have noted the changes, I will make them and resend the assignment by tonight.", "is_promise": true, "confidence": 0.9442, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "Okay so the plan is fine, I'll get the cake and you get the decorations, I'll pick it up at 6.", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "can you send it?", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "will you share it?", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "send me the file", "is_promise": true, "confidence": 0.8284, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "share this with me", "is_promise": true, "confidence": 0.5203, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "did you send it", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "other", "when": "past", "sure": "yes"}
+{"text": "please send this now", "is_promise": true, "confidence": 0.7514, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "what time will you share it", "is_promise": false, "confidence": 0.9802, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "can someone send the report", "is_promise": false, "confidence": 0.9864, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "please remind me", "is_promise": true, "confidence": 0.7657, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I need this from you", "is_promise": false, "confidence": 0.647, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "did you let him know", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "other", "when": "past", "sure": "yes"}
+{"text": "will you let me know?", "is_promise": false, "confidence": 0.9842, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "let me know", "is_promise": true, "confidence": 0.8045, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "let u know?", "is_promise": true, "confidence": 0.5716, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "could you call me back?", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "would you mind sending the notes?", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "pls share the link", "is_promise": true, "confidence": 0.6117, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "send the pdf pls", "is_promise": true, "confidence": 0.9074, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "can you pick me up at 7?", "is_promise": false, "confidence": 0.9708, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "when will you send it?", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "are you coming tomorrow?", "is_promise": false, "confidence": 0.9529, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "what's the update?", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "nobody", "when": "none", "sure": "yes"}
+{"text": "any update on this?", "is_promise": false, "confidence": 0.962, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "can you check once?", "is_promise": false, "confidence": 0.9851, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "please confirm by tonight", "is_promise": true, "confidence": 0.5671, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "let me know when you reach", "is_promise": true, "confidence": 0.8094, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "text me when you're free", "is_promise": true, "confidence": 0.7914, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "do send the photos", "is_promise": true, "confidence": 0.6689, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "will you be there by 8?", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "can you pay me back today?", "is_promise": false, "confidence": 0.9758, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "remind me to call mom", "is_promise": true, "confidence": 0.9451, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "don't forget to bring the charger", "is_promise": true, "confidence": 0.7106, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "make sure you submit it by Sunday", "is_promise": true, "confidence": 0.7505, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "you have to finish this today", "is_promise": false, "confidence": 0.9351, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "please do it by tomorrow", "is_promise": true, "confidence": 0.9575, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "can u call me", "is_promise": false, "confidence": 0.6601, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "send asap", "is_promise": true, "confidence": 0.9587, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "tell me more", "is_promise": false, "confidence": 0.8778, "confidence_from": "tokens", "who": "sender", "when": "none", "sure": "yes"}
+{"text": "can you tell me the address?", "is_promise": false, "confidence": 0.9853, "confidence_from": "tokens", "who": "other", "when": "none", "sure": "yes"}
+{"text": "did she tell you?", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "other", "when": "none", "sure": "yes"}
+{"text": "tell him to call me", "is_promise": false, "confidence": 0.7824, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "let me know next week", "is_promise": true, "confidence": 0.9074, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "you need to rest", "is_promise": false, "confidence": 0.7761, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "you have to try this place", "is_promise": false, "confidence": 0.9624, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "he needs to call me back", "is_promise": false, "confidence": 0.9853, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "they have to approve it first", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "do I need to bring anything", "is_promise": false, "confidence": 0.8765, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "you must watch this movie", "is_promise": false, "confidence": 0.9616, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "she has to leave early today", "is_promise": false, "confidence": 0.9815, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "we need to talk sometime", "is_promise": true, "confidence": 0.5, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "hi is gym open today or tomorrow", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "nobody", "when": "none", "sure": "yes"}
+{"text": "is the office open tomorrow", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "nobody", "when": "none", "sure": "yes"}
+{"text": "hey are you free tomorrow evening", "is_promise": false, "confidence": 0.8273, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "is it raining there today", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "nobody", "when": "none", "sure": "yes"}
+{"text": "when is the exam next week", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "nobody", "when": "none", "sure": "yes"}
+{"text": "what time is the meeting tomorrow", "is_promise": false, "confidence": 0.9636, "confidence_from": "tokens", "who": "nobody", "when": "none", "sure": "yes"}
+{"text": "are we meeting today or tomorrow", "is_promise": false, "confidence": 0.7806, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "hello is the shop open on sunday", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "nobody", "when": "none", "sure": "yes"}
+{"text": "bro is class cancelled tomorrow", "is_promise": false, "confidence": 0.9436, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "which day works for you this week", "is_promise": false, "confidence": 0.8521, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "how was the trip", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "nobody", "when": "none", "sure": "yes"}
+{"text": "did the parcel come today", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "other", "when": "past", "sure": "yes"}
+{"text": "I sent it already", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "I already shared it", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "I already let you know", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "sent", "is_promise": false, "confidence": 0.8932, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "done", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "received", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "nobody", "when": "none", "sure": "yes"}
+{"text": "I've transferred the money", "is_promise": false, "confidence": 0.8975, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "just sent you the file", "is_promise": true, "confidence": 0.7603, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I called him yesterday", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "I booked the tickets", "is_promise": true, "confidence": 0.5439, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "already paid", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "I submitted it last night", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "I told you yesterday", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "I forwarded the mail", "is_promise": true, "confidence": 0.7532, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "check your inbox, sent", "is_promise": true, "confidence": 0.5, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I did it in the morning", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "I've already informed everyone", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "finished the slides", "is_promise": false, "confidence": 0.9834, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "uploaded it to the drive", "is_promise": true, "confidence": 0.7117, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I completed all latest ep of Vision Quest", "is_promise": false, "confidence": 0.7776, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "i completed all the latest episodes", "is_promise": false, "confidence": 0.915, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "I finished watching Vision Quest", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "finished all eps of vision quest", "is_promise": false, "confidence": 0.9869, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "I watched the whole season last night", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "just completed the series", "is_promise": false, "confidence": 0.981, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "I binged the entire show yesterday", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "I completed the course", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "I finished the assignment", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "I submitted the form", "is_promise": false, "confidence": 0.9303, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "we finished the movie", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "I completed level 5", "is_promise": false, "confidence": 0.9896, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "I wrapped up the report", "is_promise": false, "confidence": 0.9894, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "I cleared the exam", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "I fixed the bug", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "I cooked dinner", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "I watched it twice", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "I read the whole book", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "I paid the bill this morning", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "I went to the gym today", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "I got the parcel", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "I met him yesterday", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "I bought the tickets", "is_promise": false, "confidence": 0.9855, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "I finally finished it", "is_promise": false, "confidence": 0.9727, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "i just completed it", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "I recently started the show", "is_promise": true, "confidence": 0.5, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "we completed the project", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "I replied to the mail", "is_promise": true, "confidence": 0.5668, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I cancelled the order", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "he will do it", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "he said he will send", "is_promise": false, "confidence": 0.9879, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "she will call you", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "they will handle it", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "he will let you know", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "she will let u know", "is_promise": false, "confidence": 0.9899, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "Rahul will share the notes", "is_promise": false, "confidence": 0.9846, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "mom will call you later", "is_promise": false, "confidence": 0.9572, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "the courier will come tomorrow", "is_promise": false, "confidence": 0.9781, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "my manager will send the offer letter", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "they said they'll fix it by Monday", "is_promise": false, "confidence": 0.9816, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "you will get it by tomorrow", "is_promise": false, "confidence": 0.9759, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "you'll receive a confirmation mail", "is_promise": false, "confidence": 0.895, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "the bank will call you", "is_promise": false, "confidence": 0.975, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "she promised she'll pay", "is_promise": false, "confidence": 0.9802, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "he'll be late today", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "Priya will send the photos", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "Amit will call you tonight", "is_promise": false, "confidence": 0.9656, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "dad will pick you up", "is_promise": false, "confidence": 0.9681, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "the plumber will come at 5", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "the delivery guy will call", "is_promise": false, "confidence": 0.9775, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "HR will share the details", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "the teacher will upload the marks", "is_promise": false, "confidence": 0.973, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "your order will arrive Monday", "is_promise": false, "confidence": 0.7299, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "the electrician will fix it tomorrow", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "sir will take the class", "is_promise": false, "confidence": 0.9784, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "the landlord will send the agreement", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "the app will notify you", "is_promise": false, "confidence": 0.9618, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "it will rain tomorrow", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "nobody", "when": "future", "sure": "yes"}
+{"text": "the shop will open at 10", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "nobody", "when": "none", "sure": "yes"}
+{"text": "the train will be late", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "nobody", "when": "none", "sure": "yes"}
+{"text": "Neha said she'll bring the cake", "is_promise": false, "confidence": 0.8416, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "my brother will drop it", "is_promise": false, "confidence": 0.9527, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "the doctor will see you at 4", "is_promise": false, "confidence": 0.9028, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "I'll think about it lol", "is_promise": true, "confidence": 0.5, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "maybe I will send it", "is_promise": false, "confidence": 0.8469, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "no"}
+{"text": "I don't know", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "nobody", "when": "none", "sure": "yes"}
+{"text": "I was going to send it", "is_promise": true, "confidence": 0.5266, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I might do it", "is_promise": false, "confidence": 0.8948, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "no"}
+{"text": "not sure if I can", "is_promise": false, "confidence": 0.9801, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "no"}
+{"text": "I cannot promise", "is_promise": false, "confidence": 0.8184, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "no"}
+{"text": "maybe tomorrow", "is_promise": false, "confidence": 0.9324, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "no"}
+{"text": "I was thinking about it", "is_promise": false, "confidence": 0.9584, "confidence_from": "tokens", "who": "sender", "when": "none", "sure": "yes"}
+{"text": "I won't be able to send it today", "is_promise": false, "confidence": 0.7071, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "I can't make it tomorrow", "is_promise": false, "confidence": 0.7621, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "no"}
+{"text": "probably not", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "nobody", "when": "none", "sure": "yes"}
+{"text": "let's see", "is_promise": true, "confidence": 0.5, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "if I get time maybe", "is_promise": false, "confidence": 0.8459, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "no"}
+{"text": "no I won't do that", "is_promise": false, "confidence": 0.8912, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "no"}
+{"text": "I don't think I can finish it", "is_promise": false, "confidence": 0.8661, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "no"}
+{"text": "I'll try but no promises", "is_promise": false, "confidence": 0.6331, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "no"}
+{"text": "can't say for sure", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "nobody", "when": "none", "sure": "yes"}
+{"text": "not today sorry", "is_promise": false, "confidence": 0.9503, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "I wish I could", "is_promise": false, "confidence": 0.8612, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "no"}
+{"text": "I would have sent it but the internet was down", "is_promise": false, "confidence": 0.9676, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "I should send it but I'm lazy", "is_promise": true, "confidence": 0.6869, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I like this", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "none", "sure": "yes"}
+{"text": "okay thanks", "is_promise": false, "confidence": 0.9838, "confidence_from": "tokens", "who": "sender", "when": "none", "sure": "yes"}
+{"text": "lol", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "nobody", "when": "none", "sure": "yes"}
+{"text": "haha", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "nobody", "when": "none", "sure": "yes"}
+{"text": "no idea bro", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "nobody", "when": "none", "sure": "yes"}
+{"text": "what did you share yesterday?", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "other", "when": "past", "sure": "yes"}
+{"text": "good morning", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "nobody", "when": "none", "sure": "yes"}
+{"text": "happy birthday!! 🎉", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "nobody", "when": "none", "sure": "yes"}
+{"text": "how are you?", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "nobody", "when": "none", "sure": "yes"}
+{"text": "where are you?", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "other", "when": "none", "sure": "yes"}
+{"text": "nice pic", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "nobody", "when": "none", "sure": "yes"}
+{"text": "thank you so much", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "none", "sure": "yes"}
+{"text": "what are you doing?", "is_promise": false, "confidence": 0.9817, "confidence_from": "tokens", "who": "sender", "when": "none", "sure": "yes"}
+{"text": "the movie was great", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "nobody", "when": "none", "sure": "yes"}
+{"text": "traffic is crazy today", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "nobody", "when": "none", "sure": "yes"}
+{"text": "it's raining here", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "nobody", "when": "none", "sure": "yes"}
+{"text": "hmm", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "nobody", "when": "none", "sure": "yes"}
+{"text": "see you", "is_promise": false, "confidence": 0.8339, "confidence_from": "tokens", "who": "sender", "when": "none", "sure": "yes"}
+{"text": "congrats bro", "is_promise": false, "confidence": 0.9519, "confidence_from": "tokens", "who": "sender", "when": "none", "sure": "yes"}
+{"text": "miss you", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "nobody", "when": "none", "sure": "yes"}
+{"text": "same here", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "nobody", "when": "none", "sure": "yes"}
+{"text": "that's so funny", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "nobody", "when": "none", "sure": "yes"}
+{"text": "which one?", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "nobody", "when": "none", "sure": "yes"}
+{"text": "call me when you can?", "is_promise": false, "confidence": 0.659, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "did you eat?", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "other", "when": "none", "sure": "yes"}
+{"text": "I'm tired", "is_promise": false, "confidence": 0.9864, "confidence_from": "tokens", "who": "sender", "when": "none", "sure": "yes"}
+{"text": "weekend plans?", "is_promise": true, "confidence": 0.5, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "what happened today", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "nobody", "when": "none", "sure": "yes"}
+{"text": "just letting you know", "is_promise": false, "confidence": 0.9826, "confidence_from": "tokens", "who": "sender", "when": "none", "sure": "yes"}
+{"text": "see you tomorrow", "is_promise": true, "confidence": 0.6188, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "let's meet tomorrow", "is_promise": true, "confidence": 0.7712, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "let's catch up next week", "is_promise": true, "confidence": 0.8071, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "we should go out sometime", "is_promise": true, "confidence": 0.6721, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "meeting is at 4", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "nobody", "when": "none", "sure": "yes"}
+{"text": "class is cancelled tomorrow", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "nobody", "when": "none", "sure": "yes"}
+{"text": "office is closed on Monday", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "nobody", "when": "none", "sure": "yes"}
+{"text": "the party is on Saturday", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "nobody", "when": "none", "sure": "yes"}
+{"text": "I'm at home", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "none", "sure": "yes"}
+{"text": "reached", "is_promise": false, "confidence": 0.9147, "confidence_from": "tokens", "who": "sender", "when": "none", "sure": "yes"}
+{"text": "on my way", "is_promise": true, "confidence": 0.932, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I'm in a meeting", "is_promise": false, "confidence": 0.9255, "confidence_from": "tokens", "who": "sender", "when": "none", "sure": "yes"}
+{"text": "just woke up", "is_promise": true, "confidence": 0.5, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "busy rn", "is_promise": true, "confidence": 0.5036, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "talk later", "is_promise": true, "confidence": 0.5, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "remember to call grandma", "is_promise": true, "confidence": 0.8509, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "don't be late", "is_promise": true, "confidence": 0.5609, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "keep me posted", "is_promise": true, "confidence": 0.5, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "all done here", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "it's working now", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "nobody", "when": "none", "sure": "yes"}
+{"text": "the report looks good", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "nobody", "when": "none", "sure": "yes"}
+{"text": "I'm free after 6", "is_promise": true, "confidence": 0.9881, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "K I'm in", "is_promise": true, "confidence": 0.707, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "ok I'm in", "is_promise": true, "confidence": 0.7993, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I'm in", "is_promise": false, "confidence": 0.6261, "confidence_from": "tokens", "who": "sender", "when": "none", "sure": "yes"}
+{"text": "im in bro", "is_promise": false, "confidence": 0.7844, "confidence_from": "tokens", "who": "sender", "when": "none", "sure": "yes"}
+{"text": "k im in", "is_promise": true, "confidence": 0.5896, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "sure I'm in", "is_promise": true, "confidence": 0.8635, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "count me in", "is_promise": true, "confidence": 0.8648, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "ya im in", "is_promise": true, "confidence": 0.6313, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I'm down", "is_promise": true, "confidence": 0.7978, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "im down for it", "is_promise": true, "confidence": 0.9374, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I'm game", "is_promise": true, "confidence": 0.9527, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I'm home", "is_promise": false, "confidence": 0.9523, "confidence_from": "tokens", "who": "sender", "when": "none", "sure": "yes"}
+{"text": "I'm here", "is_promise": false, "confidence": 0.9283, "confidence_from": "tokens", "who": "sender", "when": "none", "sure": "yes"}
+{"text": "I'm in class", "is_promise": false, "confidence": 0.9707, "confidence_from": "tokens", "who": "sender", "when": "none", "sure": "yes"}
+{"text": "im in office", "is_promise": false, "confidence": 0.8842, "confidence_from": "tokens", "who": "sender", "when": "none", "sure": "yes"}
+{"text": "I'm outside", "is_promise": false, "confidence": 0.5834, "confidence_from": "tokens", "who": "sender", "when": "none", "sure": "yes"}
+{"text": "I'm ready", "is_promise": true, "confidence": 0.9135, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I'm good", "is_promise": false, "confidence": 0.9899, "confidence_from": "tokens", "who": "sender", "when": "none", "sure": "yes"}
+{"text": "I'm okay", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "nobody", "when": "none", "sure": "yes"}
+{"text": "I'm awake", "is_promise": true, "confidence": 0.5, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I'm done", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "im free now", "is_promise": true, "confidence": 0.8871, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "I'm in the car", "is_promise": false, "confidence": 0.917, "confidence_from": "tokens", "who": "sender", "when": "none", "sure": "yes"}
+{"text": "I'm at the gym", "is_promise": false, "confidence": 0.9882, "confidence_from": "tokens", "who": "sender", "when": "none", "sure": "yes"}
+{"text": "kal kya hua tha", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "nobody", "when": "none", "sure": "yes"}
+{"text": "aaj kya plan hai", "is_promise": false, "confidence": 0.8064, "confidence_from": "tokens", "who": "sender", "when": "none", "sure": "yes"}
+{"text": "kal ka weather kaisa tha", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "nobody", "when": "none", "sure": "yes"}
+{"text": "send kar do", "is_promise": true, "confidence": 0.9577, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "share kar na", "is_promise": true, "confidence": 0.8224, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "kya bhejna hai", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "no"}
+{"text": "kal milte hain", "is_promise": true, "confidence": 0.6716, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "kal kya hua tha bhai", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "nobody", "when": "none", "sure": "yes"}
+{"text": "kal mausam kaisa tha", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "nobody", "when": "none", "sure": "yes"}
+{"text": "kal aa rahe ho?", "is_promise": false, "confidence": 0.792, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "kya tum bhej doge?", "is_promise": false, "confidence": 0.9826, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "tum bhej sakte ho?", "is_promise": false, "confidence": 0.971, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "bhej do na", "is_promise": true, "confidence": 0.6456, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "send kar do please", "is_promise": true, "confidence": 0.9446, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "mujhe bhej do", "is_promise": true, "confidence": 0.8927, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "mujhe send karna", "is_promise": true, "confidence": 0.973, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "yeh share karo", "is_promise": true, "confidence": 0.7707, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "kya bhejna hai bhai", "is_promise": false, "confidence": 0.9891, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "no"}
+{"text": "maine bhej diya", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "main bhej chuka hu", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "already bhej diya", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "pehle hi send kar diya", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "shayad bhej dunga", "is_promise": false, "confidence": 0.9073, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "no"}
+{"text": "pata nahi bhej paunga ya nahi", "is_promise": false, "confidence": 0.9657, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "no"}
+{"text": "main soch ke batata hu", "is_promise": false, "confidence": 0.767, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "no"}
+{"text": "main dekhunga", "is_promise": true, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "woh bhej dega", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "usne bola woh karega", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "unhone share kar diya", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "other", "when": "past", "sure": "yes"}
+{"text": "kya tum kal bhejoge", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "no"}
+{"text": "kal tak bhej sakte ho", "is_promise": true, "confidence": 0.7254, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "mujhe yaad dila dena", "is_promise": true, "confidence": 0.89, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "aaj kya karna hai", "is_promise": true, "confidence": 0.5576, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "kal ka kya plan hai", "is_promise": true, "confidence": 0.5, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "bas pooch raha tha", "is_promise": false, "confidence": 0.957, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "main bhejne wala tha", "is_promise": true, "confidence": 0.5063, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "bhejne ka soch raha tha", "is_promise": false, "confidence": 0.9621, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "no"}
+{"text": "karna hai kya", "is_promise": true, "confidence": 0.8422, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "send karna hai", "is_promise": true, "confidence": 0.9299, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "share karna hai", "is_promise": true, "confidence": 0.8826, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "haan theek hai", "is_promise": true, "confidence": 0.5, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "okay bhai", "is_promise": false, "confidence": 0.9132, "confidence_from": "tokens", "who": "sender", "when": "none", "sure": "yes"}
+{"text": "next week kya plan hai", "is_promise": true, "confidence": 0.6569, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "Wednesday ko kya hai", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "nobody", "when": "none", "sure": "yes"}
+{"text": "nahi bhej paunga aaj", "is_promise": false, "confidence": 0.6028, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "aaj nahi ho payega", "is_promise": false, "confidence": 0.7418, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "mujhse nahi hoga", "is_promise": false, "confidence": 0.9334, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "no"}
+{"text": "kab bhejega?", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "no"}
+{"text": "bhai update de", "is_promise": false, "confidence": 0.8922, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "kya hua uska?", "is_promise": false, "confidence": 0.9807, "confidence_from": "tokens", "who": "other", "when": "none", "sure": "yes"}
+{"text": "call kar mujhe", "is_promise": true, "confidence": 0.8727, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "jaldi bhej", "is_promise": true, "confidence": 0.9289, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "tu kar dega na?", "is_promise": false, "confidence": 0.9596, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "mummy kal call karengi", "is_promise": false, "confidence": 0.7996, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "Rahul bhej dega", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "woh kal aayega", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "maine kal hi bata diya tha", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "ho gaya", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "bhej diya check kar", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "kar diya", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "khana khaya?", "is_promise": false, "confidence": 0.9828, "confidence_from": "tokens", "who": "other", "when": "none", "sure": "yes"}
+{"text": "kahan hai tu", "is_promise": false, "confidence": 0.8946, "confidence_from": "tokens", "who": "sender", "when": "none", "sure": "yes"}
+{"text": "kya kar raha hai", "is_promise": false, "confidence": 0.9113, "confidence_from": "tokens", "who": "sender", "when": "none", "sure": "yes"}
+{"text": "badhiya", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "nobody", "when": "none", "sure": "yes"}
+{"text": "haha sahi hai", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "nobody", "when": "none", "sure": "yes"}
+{"text": "chal theek hai", "is_promise": true, "confidence": 0.6352, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "accha", "is_promise": false, "confidence": 0.9281, "confidence_from": "tokens", "who": "sender", "when": "none", "sure": "yes"}
+{"text": "kal milte hai fir", "is_promise": true, "confidence": 0.6724, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "agar time mila toh dekhunga", "is_promise": true, "confidence": 0.8365, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "try karunga par pakka nahi", "is_promise": false, "confidence": 0.9702, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "no"}
+{"text": "bhj de yr", "is_promise": true, "confidence": 0.5, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "kr de na", "is_promise": true, "confidence": 0.8946, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "bta na", "is_promise": true, "confidence": 0.5, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "kb bhjega", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "no"}
+{"text": "bhej diya bhai", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "kr diya", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "ho gya", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "hn thik h", "is_promise": false, "confidence": 0.7589, "confidence_from": "tokens", "who": "sender", "when": "none", "sure": "yes"}
+{"text": "ok bhai", "is_promise": false, "confidence": 0.8758, "confidence_from": "tokens", "who": "sender", "when": "none", "sure": "yes"}
+{"text": "kya scene h", "is_promise": false, "confidence": 0.9764, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "no"}
+{"text": "kha h tu", "is_promise": false, "confidence": 0.8068, "confidence_from": "tokens", "who": "sender", "when": "none", "sure": "yes"}
+{"text": "kuch ni", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "nobody", "when": "none", "sure": "yes"}
+{"text": "pta ni yr", "is_promise": false, "confidence": 0.7745, "confidence_from": "tokens", "who": "sender", "when": "none", "sure": "yes"}
+{"text": "shyd kal", "is_promise": false, "confidence": 0.9769, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "no"}
+{"text": "dkhte h", "is_promise": true, "confidence": 0.5, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "mt kr", "is_promise": true, "confidence": 0.9476, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "rhne de", "is_promise": true, "confidence": 0.6141, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "nhi ho payega", "is_promise": false, "confidence": 0.9043, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "no"}
+{"text": "kal milte h", "is_promise": true, "confidence": 0.8394, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "chal kal milte", "is_promise": true, "confidence": 0.7233, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "kal mil rhe?", "is_promise": false, "confidence": 0.7406, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "kal aaja", "is_promise": true, "confidence": 0.7974, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "shaam ko milte hain", "is_promise": true, "confidence": 0.5, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "next week milte h", "is_promise": true, "confidence": 0.6273, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "bhj diya", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "bhej dia", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "krdiya", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "ho gya bhai", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "pahunch gya", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "nikal rha hu", "is_promise": true, "confidence": 0.9832, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "ghar pe hu", "is_promise": false, "confidence": 0.9602, "confidence_from": "tokens", "who": "sender", "when": "none", "sure": "yes"}
+{"text": "busy hu abhi", "is_promise": true, "confidence": 0.888, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "bad me baat krte", "is_promise": true, "confidence": 0.6568, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "tu bhej de", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "tu kr de", "is_promise": false, "confidence": 0.868, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "usko bol de", "is_promise": false, "confidence": 0.7048, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "woh bhejega", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "didi bhej degi", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "papa call karenge", "is_promise": false, "confidence": 0.9616, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "kl class nhi h", "is_promise": true, "confidence": 0.6469, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "aaj chutti h", "is_promise": false, "confidence": 0.9139, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "yaad rakhna", "is_promise": false, "confidence": 0.6902, "confidence_from": "tokens", "who": "sender", "when": "none", "sure": "yes"}
+{"text": "bhool mat jana", "is_promise": true, "confidence": 0.5881, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "charger le aana", "is_promise": true, "confidence": 0.8235, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "time pe aana", "is_promise": true, "confidence": 0.8111, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "soch ke btata hu", "is_promise": true, "confidence": 0.74, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "dekhte hai kya hota h", "is_promise": false, "confidence": 0.6578, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "no"}
+{"text": "agar time mila toh krdunga", "is_promise": true, "confidence": 0.9129, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "nhi krunga", "is_promise": false, "confidence": 0.9724, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "no"}
+{"text": "mai nhi bhejunga", "is_promise": false, "confidence": 0.8776, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "no"}
+{"text": "ok fatty", "is_promise": false, "confidence": 0.7752, "confidence_from": "tokens", "who": "sender", "when": "none", "sure": "yes"}
+{"text": "haa toh dopeher gk aajao", "is_promise": true, "confidence": 0.6068, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "tabhi jaldi aane ko bolra hu", "is_promise": true, "confidence": 0.9605, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "isliye bol raha hu", "is_promise": true, "confidence": 0.8224, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "bas bata raha hu", "is_promise": true, "confidence": 0.9057, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "main bas puch raha tha", "is_promise": false, "confidence": 0.6587, "confidence_from": "tokens", "who": "sender", "when": "none", "sure": "yes"}
+{"text": "mai bol rha tha na", "is_promise": false, "confidence": 0.81, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "maine pehle hi bola tha", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "main soch raha tha", "is_promise": false, "confidence": 0.8638, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "hu bhai ghar pe", "is_promise": false, "confidence": 0.9314, "confidence_from": "tokens", "who": "sender", "when": "none", "sure": "yes"}
+{"text": "ok pagal", "is_promise": false, "confidence": 0.7385, "confidence_from": "tokens", "who": "sender", "when": "none", "sure": "yes"}
+{"text": "ok motu", "is_promise": false, "confidence": 0.6509, "confidence_from": "tokens", "who": "sender", "when": "none", "sure": "yes"}
+{"text": "haa haa thik hai", "is_promise": false, "confidence": 0.7683, "confidence_from": "tokens", "who": "sender", "when": "none", "sure": "yes"}
+{"text": "ok boss", "is_promise": false, "confidence": 0.7834, "confidence_from": "tokens", "who": "sender", "when": "none", "sure": "yes"}
+{"text": "ok ji", "is_promise": false, "confidence": 0.9037, "confidence_from": "tokens", "who": "sender", "when": "none", "sure": "yes"}
+{"text": "hn bhai", "is_promise": false, "confidence": 0.9229, "confidence_from": "tokens", "who": "sender", "when": "none", "sure": "yes"}
+{"text": "ok cool", "is_promise": false, "confidence": 0.8039, "confidence_from": "tokens", "who": "sender", "when": "none", "sure": "yes"}
+{"text": "acha ok", "is_promise": true, "confidence": 0.5, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "ok fine", "is_promise": false, "confidence": 0.7394, "confidence_from": "tokens", "who": "sender", "when": "none", "sure": "yes"}
+{"text": "chal theek hai fir", "is_promise": true, "confidence": 0.6787, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "haan wahi toh bol raha hu", "is_promise": true, "confidence": 0.7639, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "main aa gaya hu", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "main office mein hu", "is_promise": false, "confidence": 0.9454, "confidence_from": "tokens", "who": "sender", "when": "none", "sure": "yes"}
+{"text": "abhi free hu", "is_promise": true, "confidence": 0.8736, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "Sadly, i don't get aise messages", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "nobody", "when": "none", "sure": "yes"}
+{"text": "i don't get it", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "none", "sure": "yes"}
+{"text": "i never said that", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "none", "sure": "yes"}
+{"text": "i didn't see your message", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "he doesn't reply on time", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "other", "when": "none", "sure": "yes"}
+{"text": "i haven't eaten yet", "is_promise": false, "confidence": 0.9163, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "i dont think so", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "nobody", "when": "none", "sure": "yes"}
+{"text": "Puri nahi hui cuz aaj mandir gaya tha toh bhagwan ne bachaliya", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "nobody", "when": "none", "sure": "yes"}
+{"text": "aaj office gaya tha bahut thak gaya", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "kal raat movie dekhi thi mast thi", "is_promise": false, "confidence": 0.9345, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "aaj gym nahi gaya", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "subah late utha toh bus chhoot gayi", "is_promise": false, "confidence": 0.9851, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "maine aaj khana bana liya tha", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "aaj bahut kaam tha", "is_promise": false, "confidence": 0.8245, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "wo aaya tha par main ghar pe nahi tha", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "other", "when": "past", "sure": "yes"}
+{"text": "I went to the temple today", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "yesterday I finished the whole thing", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "today I met him at the mall", "is_promise": false, "confidence": 0.9864, "confidence_from": "tokens", "who": "sender", "when": "none", "sure": "yes"}
+{"text": "Shorts mei belt pehenta hu toh shorts neeche amd belt kamar par", "is_promise": true, "confidence": 0.9638, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "main roz gym jaata hu", "is_promise": false, "confidence": 0.516, "confidence_from": "tokens", "who": "sender", "when": "none", "sure": "yes"}
+{"text": "mai subah chai peeta hu", "is_promise": false, "confidence": 0.6457, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "jab bhi bahar jaata hu toh mask pehenta hu", "is_promise": true, "confidence": 0.8851, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "main hamesha late sota hu", "is_promise": false, "confidence": 0.8836, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "weekend pe main ghar pe hi rehta hu", "is_promise": false, "confidence": 0.5894, "confidence_from": "tokens", "who": "sender", "when": "none", "sure": "yes"}
+{"text": "main bike se office jaata hu", "is_promise": true, "confidence": 0.9824, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "mai aksar raat ko padhta hu", "is_promise": false, "confidence": 0.8026, "confidence_from": "tokens", "who": "sender", "when": "none", "sure": "yes"}
+{"text": "i usually sleep at 2", "is_promise": false, "confidence": 0.9177, "confidence_from": "tokens", "who": "sender", "when": "none", "sure": "yes"}
+{"text": "i always forget my keys", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "none", "sure": "yes"}
+{"text": "main toh chai ke saath biscuit khata hu", "is_promise": false, "confidence": 0.7203, "confidence_from": "tokens", "who": "sender", "when": "none", "sure": "yes"}
+{"text": "office mein main laptop use karta hu", "is_promise": true, "confidence": 0.5, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "collar mic use nahi karrahe tph le ana", "is_promise": true, "confidence": 0.5604, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "agar free ho toh charger le aana", "is_promise": true, "confidence": 0.8713, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "use nahi kar rahe toh mujhe de dena", "is_promise": true, "confidence": 0.5745, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "jaate hue doodh le aana", "is_promise": true, "confidence": 0.9048, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "kal file bhej dena", "is_promise": false, "confidence": 0.9748, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "time mile toh call kar lena", "is_promise": true, "confidence": 0.8097, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "aate waqt bread le aao", "is_promise": true, "confidence": 0.8883, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "khatam ho gaya ho toh notes bhej do", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "laptop free hai toh de do na", "is_promise": true, "confidence": 0.6979, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "agar ja rahe ho toh mera parcel le aana", "is_promise": true, "confidence": 0.8068, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "maine vision quest ke saare episode dekh liye", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "saare ep khatam kar diye", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "series complete kar li", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "maine poori series dekh li", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "course complete ho gaya", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "assignment submit kar diya", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "main in hu", "is_promise": true, "confidence": 0.5354, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "haan main in hu", "is_promise": true, "confidence": 0.7875, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "kya kal office hai", "is_promise": false, "confidence": 0.9112, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "gym aaj khula hai kya", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "nobody", "when": "none", "sure": "yes"}
+{"text": "kal chutti hai kya", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "nobody", "when": "none", "sure": "yes"}
+{"text": "bhai kab aa raha hai", "is_promise": false, "confidence": 0.8432, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "kitne baje milna hai kal", "is_promise": true, "confidence": 0.5, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "kahan hai party kal", "is_promise": false, "confidence": 0.8058, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "kaise jaana hai kal", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "nobody", "when": "none", "sure": "yes"}
+{"text": "kal class hai ya nahi", "is_promise": true, "confidence": 0.5, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "कल क्या हुआ था", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "nobody", "when": "none", "sure": "yes"}
+{"text": "कल मौसम कैसा था", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "nobody", "when": "none", "sure": "yes"}
+{"text": "तुम भेज सकते हो?", "is_promise": false, "confidence": 0.8768, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "क्या तुम शेयर करोगे?", "is_promise": false, "confidence": 0.7036, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "मैंने भेज दिया", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "मैंने पहले ही कर दिया", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "शायद मैं भेज दूंगा", "is_promise": false, "confidence": 0.9667, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "no"}
+{"text": "मैं भेजने वाला था", "is_promise": false, "confidence": 0.8205, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "वह भेज देगा", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "वह कर देगी", "is_promise": false, "confidence": 0.9878, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "उन्होंने शेयर किया", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "other", "when": "past", "sure": "yes"}
+{"text": "मुझे फाइल भेज दो", "is_promise": true, "confidence": 0.8978, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "क्या भेजना है", "is_promise": true, "confidence": 0.6274, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "आज क्या हुआ", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "nobody", "when": "none", "sure": "yes"}
+{"text": "कल मिलते हैं", "is_promise": true, "confidence": 0.8439, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "मुझे नहीं पता", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "nobody", "when": "none", "sure": "yes"}
+{"text": "मैं सोचूंगा", "is_promise": false, "confidence": 0.7028, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "no"}
+{"text": "शायद कल", "is_promise": false, "confidence": 0.9784, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "no"}
+{"text": "भेज दो", "is_promise": true, "confidence": 0.8333, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "शेयर कर दो", "is_promise": true, "confidence": 0.7214, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "धन्यवाद", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "none", "sure": "yes"}
+{"text": "आप कब भेजेंगे?", "is_promise": false, "confidence": 0.9142, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "कृपया जल्दी भेजें", "is_promise": true, "confidence": 0.9675, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "मुझे याद दिला देना", "is_promise": true, "confidence": 0.9602, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "राहुल कल भेज देगा", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "मम्मी शाम को फोन करेंगी", "is_promise": false, "confidence": 0.8451, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "मैंने कल ही बता दिया था", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "आज नहीं हो पाएगा", "is_promise": false, "confidence": 0.9691, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "मुझसे नहीं होगा", "is_promise": false, "confidence": 0.9759, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "no"}
+{"text": "पता नहीं कर पाऊंगा या नहीं", "is_promise": false, "confidence": 0.9831, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "no"}
+{"text": "खाना खाया?", "is_promise": false, "confidence": 0.9846, "confidence_from": "tokens", "who": "other", "when": "past", "sure": "yes"}
+{"text": "कहां हो?", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "none", "sure": "yes"}
+{"text": "सुप्रभात", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "nobody", "when": "none", "sure": "yes"}
+{"text": "जन्मदिन की शुभकामनाएं", "is_promise": false, "confidence": 0.976, "confidence_from": "tokens", "who": "sender", "when": "none", "sure": "yes"}
+{"text": "ठीक है", "is_promise": false, "confidence": 0.9354, "confidence_from": "tokens", "who": "sender", "when": "none", "sure": "yes"}
+{"text": "अच्छा", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "nobody", "when": "none", "sure": "yes"}
+{"text": "क्या चल रहा है?", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "nobody", "when": "none", "sure": "yes"}
+{"text": "हो गया", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "भेज दिया, देख लो", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "कल मिलते हैं फिर", "is_promise": true, "confidence": 0.8699, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "शाम को मिलते हैं", "is_promise": true, "confidence": 0.7586, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "मैं घर पहुंच गया", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "मैं रास्ते में हूं", "is_promise": true, "confidence": 0.9432, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "अभी व्यस्त हूं", "is_promise": true, "confidence": 0.8329, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "बाद में बात करते हैं", "is_promise": true, "confidence": 0.594, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "प्रिया फोटो भेज देगी", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "पापा आपको फोन करेंगे", "is_promise": false, "confidence": 0.944, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "दुकान दस बजे खुलेगी", "is_promise": false, "confidence": 0.9194, "confidence_from": "tokens", "who": "nobody", "when": "none", "sure": "yes"}
+{"text": "कल बारिश होगी", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "nobody", "when": "none", "sure": "yes"}
+{"text": "कूरियर कल आएगा", "is_promise": false, "confidence": 0.8255, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "तुम भेज दो", "is_promise": true, "confidence": 0.664, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "उसे बोल देना", "is_promise": false, "confidence": 0.9694, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "याद रखना", "is_promise": false, "confidence": 0.728, "confidence_from": "tokens", "who": "sender", "when": "none", "sure": "yes"}
+{"text": "भूलना मत", "is_promise": true, "confidence": 0.7677, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "समय पर आना", "is_promise": true, "confidence": 0.7291, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "मैं नहीं कर पाऊंगा", "is_promise": false, "confidence": 0.9159, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "no"}
+{"text": "मैं नहीं भेजूंगा", "is_promise": false, "confidence": 0.9361, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "no"}
+{"text": "शायद कल कर दूंगा", "is_promise": false, "confidence": 0.9672, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "no"}
+{"text": "सोचकर बताऊंगा", "is_promise": false, "confidence": 0.5352, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "no"}
+{"text": "अगर समय मिला तो कर दूंगा", "is_promise": true, "confidence": 0.7996, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "मैंने कर दिया है", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "कर दिया", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "भेज चुका हूं", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "kya tum tomorrow tak send kar sakte ho?", "is_promise": false, "confidence": 0.9261, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "please kal tak bhej dena", "is_promise": false, "confidence": 0.8776, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "maine already send kar diya", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "he said woh kal bhej dega", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "send kar diya, check karo", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "can you bhej do the file?", "is_promise": false, "confidence": 0.9845, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "kal ka plan kya hai bro?", "is_promise": false, "confidence": 0.8896, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "मुझे file send कर दो", "is_promise": true, "confidence": 0.9639, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "update de do please", "is_promise": true, "confidence": 0.8111, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "maybe kal bhej dunga, not sure", "is_promise": false, "confidence": 0.9741, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "no"}
+{"text": "kal meeting hai 10 baje", "is_promise": false, "confidence": 0.7408, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "Rahul will bhej dega", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "tu send kar de na", "is_promise": false, "confidence": 0.9488, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "already done bhai", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "she will kal bata degi", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}
+{"text": "मैंने file send कर दी", "is_promise": false, "confidence": 0.9781, "confidence_from": "tokens", "who": "sender", "when": "past", "sure": "yes"}
+{"text": "office kal band hai", "is_promise": false, "confidence": 0.99, "confidence_from": "tokens", "who": "nobody", "when": "none", "sure": "yes"}
+{"text": "see you kal", "is_promise": true, "confidence": 0.5, "confidence_from": "tokens", "who": "sender", "when": "future", "sure": "yes"}
+{"text": "kal milte hain office mein", "is_promise": false, "confidence": 0.5212, "confidence_from": "tokens", "who": "other", "when": "future", "sure": "yes"}

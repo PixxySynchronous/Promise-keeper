@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Promise Keeper Voice</title>
+<style>
+  :root { --bg:#fff; --fg:#1a1a1a; --muted:#666; --line:#ddd; --accent:#0b7a4b; --bad:#b3261e; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#121212; --fg:#eee; --muted:#aaa; --line:#333; --accent:#4cc38a; --bad:#f2b8b5; } }
+  body { background:var(--bg); color:var(--fg); font:16px/1.5 system-ui, sans-serif; max-width:720px; margin:0 auto; padding:16px; }
+  section { border:1px solid var(--line); border-radius:8px; padding:12px 16px; margin:12px 0; }
+  input, button { font:inherit; padding:6px 10px; margin:4px 4px 4px 0; }
+  button { cursor:pointer; }
+  .muted { color:var(--muted); font-size:14px; } .ok { color:var(--accent); } .bad { color:var(--bad); }
+  pre { white-space:pre-wrap; word-break:break-word; font-size:13px; }
+  li { margin:4px 0; }
+</style>
+</head>
+<body>
+<h1>Promise Keeper Voice</h1>
+<p class="muted">Say a promise ("kal 5 baje report bhej dunga"). It is transcribed, checked for a promise and turned into a reminder.</p>
+
+<section id="auth">
+  <input id="email" type="email" placeholder="email" value="demo@example.com">
+  <input id="password" type="password" placeholder="password">
+  <button onclick="login()">Log in</button> <button onclick="register()">Register</button>
+  <div id="authMsg" class="muted"></div>
+</section>
+
+<section>
+  <strong>Voice note</strong> <span class="muted">(max 30 s; WAV, MP3, OGG, FLAC, AAC, M4A)</span><br>
+  <button id="rec" onclick="toggleRec()">● Record</button>
+  <input id="file" type="file" accept=".wav,.mp3,.ogg,.flac,.aac,.m4a">
+  <button onclick="uploadFile()">Upload</button>
+  <div id="status" class="muted"></div>
+  <pre id="result"></pre>
+</section>
+
+<section><strong>Reminders</strong> <button onclick="loadReminders()">Refresh</button><ul id="reminders"></ul></section>
+<section><strong>My usage</strong> <button onclick="loadUsage()">Refresh</button><pre id="usage"></pre></section>
+
+<script>
+let token = sessionStorageGet();
+function sessionStorageGet(){ try { return sessionStorage.getItem("pk_token"); } catch { return null; } }
+function sessionStorageSet(v){ try { sessionStorage.setItem("pk_token", v); } catch {} }
+const $ = id => document.getElementById(id);
+async function api(path, opts = {}) {
+  opts.headers = Object.assign({}, opts.headers, token ? { Authorization: "Bearer " + token } : {});
+  const r = await fetch(path, opts);
+  const body = r.status === 204 ? null : await r.json().catch(() => null);
+  if (!r.ok) {
+    const d = body && body.detail; const msg = (d && (d.message || JSON.stringify(d))) || r.statusText;
+    const wait = r.headers.get("Retry-After");
+    throw new Error(`${r.status}: ${msg}${wait ? ` (retry in ${wait}s)` : ""}`);
+  }
+  return body;
+}
+function creds(){ return JSON.stringify({ email: $("email").value, password: $("password").value }); }
+async function login() {
+  try { const b = await api("/auth/login", { method:"POST", headers:{ "Content-Type":"application/json" }, body: creds() });
+    token = b.token; sessionStorageSet(token); $("authMsg").textContent = "Logged in."; loadReminders(); loadUsage();
+  } catch (e) { $("authMsg").textContent = e.message; }
+}
+async function register() {
+  try { await api("/auth/register", { method:"POST", headers:{ "Content-Type":"application/json" }, body: creds() });
+    $("authMsg").textContent = "Registered. Now log in.";
+  } catch (e) { $("authMsg").textContent = e.message; }
+}
+
+async function send(blob, name) {
+  const fd = new FormData(); fd.append("audio_file", blob, name);
+  $("status").textContent = "Uploading…"; $("result").textContent = "";
+  try {
+    const job = await api("/voice-notes", { method:"POST", body: fd });
+    $("status").textContent = "Queued. Transcribing…";
+    for (let i = 0; i < 60; i++) {
+      await new Promise(r => setTimeout(r, 1000));
+      const j = await api(job.poll);
+      if (j.status === "done" || j.status === "failed") { show(j); loadReminders(); loadUsage(); return; }
+    }
+    $("status").textContent = "Still working; check back later.";
+  } catch (e) { $("status").innerHTML = `<span class="bad">${e.message}</span>`; }
+}
+function show(j) {
+  if (j.status === "failed") { $("status").innerHTML = `<span class="bad">Failed: ${j.error}</span>`; return; }
+  $("status").innerHTML = j.reminder ? `<span class="ok">Promise found → reminder at ${j.reminder.due_at}</span>` : "No promise found.";
+  $("result").textContent = JSON.stringify({ transcript: j.transcript, language: j.detected_language, cached: j.cached, detection: j.detection }, null, 2);
+}
+function uploadFile(){ const f = $("file").files[0]; if (f) send(f, f.name); }
+
+// Records 16-bit mono WAV in the browser (MediaRecorder gives WebM, which Gnani does not accept).
+let rec = null;
+async function toggleRec() {
+  if (rec) { const blob = await rec.stop(); rec = null; $("rec").textContent = "● Record"; send(blob, "voice-note.wav"); return; }
+  const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
+  const ctx = new AudioContext(); const src = ctx.createMediaStreamSource(stream);
+  const node = ctx.createScriptProcessor(4096, 1, 1); const chunks = []; const started = Date.now();
+  node.onaudioprocess = e => { chunks.push(new Float32Array(e.inputBuffer.getChannelData(0)));
+    if (Date.now() - started > 29000) toggleRec(); };
+  src.connect(node); node.connect(ctx.destination);
+  $("rec").textContent = "■ Stop";
+  rec = { stop: async () => { node.disconnect(); src.disconnect(); stream.getTracks().forEach(t => t.stop());
+    const rate = ctx.sampleRate; await ctx.close(); return wav(chunks, rate); } };
+}
+function wav(chunks, rate) {
+  const len = chunks.reduce((n, c) => n + c.length, 0), buf = new ArrayBuffer(44 + len * 2), v = new DataView(buf);
+  const w = (o, s) => [...s].forEach((ch, i) => v.setUint8(o + i, ch.charCodeAt(0)));
+  w(0,"RIFF"); v.setUint32(4, 36 + len*2, true); w(8,"WAVE"); w(12,"fmt "); v.setUint32(16,16,true); v.setUint16(20,1,true);
+  v.setUint16(22,1,true); v.setUint32(24,rate,true); v.setUint32(28,rate*2,true); v.setUint16(32,2,true); v.setUint16(34,16,true);
+  w(36,"data"); v.setUint32(40, len*2, true);
+  let o = 44; for (const c of chunks) for (const s of c) { v.setInt16(o, Math.max(-1, Math.min(1, s)) * 0x7fff, true); o += 2; }
+  return new Blob([buf], { type: "audio/wav" });
+}
+
+async function loadReminders() {
+  try { const rs = await api("/reminders");
+    $("reminders").innerHTML = rs.map(r => `<li><strong>${r.due_at.replace("T"," ")}</strong> — ${escapeHtml(r.text)}</li>`).join("") || "<li class=muted>None yet</li>";
+  } catch (e) { $("reminders").innerHTML = `<li class=bad>${e.message}</li>`; }
+}
+async function loadUsage() { try { $("usage").textContent = JSON.stringify(await api("/usage/me"), null, 2); } catch (e) { $("usage").textContent = e.message; } }
+function escapeHtml(s){ return s.replace(/[&<>"']/g, c => ({ "&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;" }[c])); }
+if (token) { loadReminders(); loadUsage(); }
+</script>
+</body>
+</html>
